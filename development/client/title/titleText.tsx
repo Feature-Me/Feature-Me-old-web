@@ -2,6 +2,7 @@ import * as React from "react";
 import style from './title.scss';
 import { FiSettings } from "react-icons/fi";
 import { useTranslation } from 'react-i18next';
+import  version  from "../global/versions.json";
 
 const TitleText: React.FC<{showSettingsWindow:boolean,setShowSettingsWindow:React.Dispatch<React.SetStateAction<boolean>>,showResourcesDownloadWindow:boolean,setShowDownloadsWindow:React.Dispatch<React.SetStateAction<boolean>>}> = (props) => {
     const [translation, i18n] = useTranslation();
@@ -17,7 +18,7 @@ const TitleText: React.FC<{showSettingsWindow:boolean,setShowSettingsWindow:Reac
                 <p onClick={()=>titleTextClicked("music room")} >Music Room</p>
             </div>
             <div className={style.footer}>
-                <p>Feature Me 1.0.0_00001  Mksk and Raetan The Feature Me Project  ©2022 Feature Me All rights reserved.</p>
+                <p>Feature Me {version.version} - {version.build} Mksk and Raetan The Feature Me Project  ©2022 Feature Me All rights reserved.</p>
                 <div className={style.setlang}>
                     {translation("title.language")}
                 </div>

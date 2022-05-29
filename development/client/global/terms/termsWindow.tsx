@@ -3,7 +3,7 @@ import style from './style.scss';
 import { VscClose } from 'react-icons/vsc';
 import { motion, useAnimation } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import version from "./termsVersion.json";
+import version from "../versions.json";
 import compareVersions from "compare-versions";
 import Window from "../window/window";
 import { deleteEnvironmentData } from "../cacheController/deleteData";
@@ -32,7 +32,7 @@ const TermsWindow: React.FC<{ showTermsWindow: boolean, setShowTermsWindow: Reac
     React.useEffect(() => {
             setTimeout(() => {
                 const { termsVersion, termsAccepted } = JSON.parse(localStorage.getItem("environment")!);
-                if (!termsAccepted || termsVersion == null || compareVersions(termsVersion, version.version) === -1) props.setShowTermsWindow(true);
+                if (!termsAccepted || termsVersion == null || compareVersions(termsVersion, version.TermsVersion) === -1) props.setShowTermsWindow(true);
             }, 350);
     }, []);
 
