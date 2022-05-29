@@ -1,0 +1,29 @@
+@import "../../../assets/mixin.scss";
+
+.terms_window {
+    pre {
+        @include font-body;
+        font-size: 1em;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+    }
+
+    button {
+        display: inline-block;
+        padding: 4px 64px!important;
+    }
+
+    button.redbtn {
+        color: rgb(202, 28, 28);
+
+        &:hover {
+            background-color: rgb(202, 28, 28);
+            color: whitesmoke;
+        }
+    }
+    .interaction{
+        display: flex;
+        justify-content: right;
+        align-items: center;
+    }
+}

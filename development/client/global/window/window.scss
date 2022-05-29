@@ -1,0 +1,99 @@
+@import "../../../assets/mixin.scss";
+
+.window {
+    position: absolute;
+    height: 80%;
+    width: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    @include font-body;
+
+    &[data-open="false"] {
+        display: none;
+    }
+
+    .animation_wrapper {
+        height: 100%;
+        width: 100%;
+    }
+
+    .wrapper {
+        height: 100%;
+        width: 100%;
+        background-color: #1189da;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .window_inner {
+        height: calc(100% - 4px);
+        width: calc(100% - 4px);
+        background-color: rgb(7, 8, 14);
+        clip-path: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 32px 100%, 0 calc(100% - 32px));
+        padding: 8px 16px;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        row-gap: 16px;
+        justify-content: center;
+        overflow: auto;
+
+        .titlebar {
+            display: grid;
+            grid-template-columns: 1fr 48px;
+            grid-template-rows: 1fr;
+            align-items: center;
+            @include font-header;
+
+            h1 {
+                margin: 0;
+            }
+
+            .closebtn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 4px;
+                margin: 4px;
+                clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+
+                &:hover {
+                    background-color: rgb(202, 28, 28);
+                }
+
+                .close_icon {
+                    height: auto;
+                    width: 100%;
+                }
+            }
+        }
+
+        .window_content {
+            height: 100%;
+            width: 100%;
+            overflow: auto;
+        }
+
+
+        button {
+            transition: 0.2s;
+            color: whitesmoke;
+            border: 1px solid whitesmoke;
+            border-radius: 4px;
+            background-color: #36393f;
+            margin: 4px;
+            box-sizing: border-box;
+            line-height: 24px;
+            padding: 4px;
+
+            &:hover {
+                background-color: #1189da;
+            }
+        }
+
+    }
+}
