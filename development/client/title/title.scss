@@ -216,6 +216,9 @@
         background-color: #424242;
         /*clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));*/
 
+        @media screen and (max-width: 960px) {
+            grid-template-columns: 1fr 160px;
+            }
 
         h3 {
             margin: 0;
