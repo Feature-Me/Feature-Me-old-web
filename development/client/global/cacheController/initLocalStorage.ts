@@ -7,7 +7,13 @@ function initLocalStorage(): void {
         }
         localStorage.setItem("environment", JSON.stringify(enviroment));
     }
-    if(!localStorage.getItem("cachedResource")) localStorage.setItem("cachedResource", "false");
+    if (!localStorage.getItem("ResourcesDownloded")) {
+        const resourcesDownloaded = {
+            model: false,
+            music: false
+        }
+        localStorage.setItem("ResourcesDownloded", JSON.stringify(resourcesDownloaded));
+    }
 }
 
 export default initLocalStorage;

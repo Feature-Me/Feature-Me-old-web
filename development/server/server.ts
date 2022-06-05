@@ -27,6 +27,8 @@ const db = {
 app.use(bodyParser.json());
 app.use("/scripts",express.static(scriptsdir));
 app.use("/styles",express.static(stylesdir));
+app.use("/resources/model",express.static(path.join(resourcesdir, "3DModels")));
+app.use("/resources/music",express.static(path.join(resourcesdir, "MusicResources")));
 console.log(`Views directory: ${scriptsdir}`);
 
 
@@ -39,9 +41,9 @@ server.listen(port, () => {
     
 });
 
-app.get("/api/resources/download", (req, res) => {
+app.get("/update/map",(req,res)=>{
     res.json({
-        size: fs.statSync(path.join(resourcesdir, "resources.fmrs")).size,
-        data: new Uint8Array(fs.readFileSync(path.join(resourcesdir, "resources.fmrs")))
+        model: JSON.parse(fs.readFileSync(path.join(resourcesdir, "3DModels/VersionMap.json"), "utf8")),
+        music: JSON.parse(fs.readFileSync(path.join(resourcesdir, "MusicResources/VersionMap.json"), "utf8"))
     })
 })

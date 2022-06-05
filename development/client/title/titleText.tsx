@@ -3,6 +3,7 @@ import style from './title.scss';
 import { FiSettings } from "react-icons/fi";
 import { useTranslation } from 'react-i18next';
 import  version  from "../global/versions.json";
+import jszip from 'jszip';
 
 const TitleText: React.FC<{showSettingsWindow:boolean,setShowSettingsWindow:React.Dispatch<React.SetStateAction<boolean>>,showResourcesDownloadWindow:boolean,setShowDownloadsWindow:React.Dispatch<React.SetStateAction<boolean>>}> = (props) => {
     const [translation, i18n] = useTranslation();
@@ -31,7 +32,8 @@ const TitleText: React.FC<{showSettingsWindow:boolean,setShowSettingsWindow:Reac
 }
 
 function titleTextClicked(name:string): void {
-    
+    const ResourcesDownloaded = JSON.parse(localStorage.getItem("ResourcesDownloaded")!);
+    if(!ResourcesDownloaded.model||!ResourcesDownloaded.music){}
 }
 
 

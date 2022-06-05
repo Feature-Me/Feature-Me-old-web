@@ -5,6 +5,8 @@ import style from './style.scss';
 import { getI18n, I18nextProvider, useTranslation } from 'react-i18next';
 import initLocalStorage from '../global/cacheController/initLocalStorage';
 
+import jszip from 'jszip';
+
 import "../global/i18n/i18n";
 import i18next from 'i18next';
 

@@ -1,5 +1,5 @@
 const ENUSTermsTranslation = {
-    "title": "Terms of Use",
+    "title": "Terms of Service",
     "content":`
     1. Acceptance of Terms of Use
     By agreeing to the Terms of Use, you agree to use the Service. Your continued use of the Service constitutes your agreement to these Terms of Use.

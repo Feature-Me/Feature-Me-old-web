@@ -10,7 +10,8 @@ const ENUKTitleTranslation = {
         "storageCache":{
             "config": "Game Config Data",
             "account": "Account Login Data",
-            "chart": "Uploaded or created charts",
+            "chart": "All charts",
+            "resources": "Resources Data",
             "environment": "Environment Data",
             "all": "Cached all Data(include config, account, chart)"
         }

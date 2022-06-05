@@ -28,6 +28,7 @@
     "express": "^4.18.1",
     "framer-motion": "^6.3.3",
     "i18next": "^21.8.2",
+    "jszip": "^3.10.0",
     "nedb": "^1.8.0",
     "pixi.js": "^6.3.2",
     "react-i18next": "^11.16.9",

@@ -53,6 +53,10 @@ const SettingsWindow: React.FC<{ showSettingsWindow: boolean, setShowSettingsWin
                     <button className={style.redbtn}>{translation("title.settingsWindow.delete")}</button>
                 </div>
                 <div className={style.content}>
+                    <h3>{translation("title.settingsWindow.storageCache.resources")}</h3>
+                    <button className={style.redbtn}>{translation("title.settingsWindow.delete")}</button>
+                </div>
+                <div className={style.content}>
                     <h3>{translation("title.settingsWindow.storageCache.environment")}</h3>
                     <button className={style.redbtn} onClick={deleteEnvironmentData}>{translation("title.settingsWindow.delete")}</button>
                 </div>

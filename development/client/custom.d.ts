@@ -8,4 +8,4 @@ declare module '*.scss' {
         [exportName: string]: string
     };
     export = exports
-}
+};

@@ -10,7 +10,8 @@ const JATitleTranslation = {
         "storageCache": {
             "config": "ゲーム設定",
             "account": "ログイン情報",
-            "chart": "アップロードまたは制作された譜面",
+            "chart": "すべての譜面",
+            "resources": "リソースデータ",
             "environment": "環境設定",
             "all": "すべてのデータ(設定、ログイン、譜面を含む)"
         }

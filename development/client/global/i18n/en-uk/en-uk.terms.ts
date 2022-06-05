@@ -1,5 +1,5 @@
 const ENUKTermsTranslation = {
-    "title": "Terms of Use",
+    "title": "Terms of Service",
     "content":`
     1. Agreement to the Terms of Use
     By agreeing to the Terms of Use, you agree to use the Service. If you continue to use the service, you are deemed to have agreed to these Terms of Use.

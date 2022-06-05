@@ -10,7 +10,8 @@ const ZHCNTitleTranslation = {
         "storageCache": {
             "config": "游戏设定",
             "account": "登录信息",
-            "chart": "上传或制作的乐谱",
+            "chart": "乐谱",
+            "resources": "资源",
             "environment": "环境设定",
             "all": "缓存所有数据(包括设定、登录、乐谱)"
         }
