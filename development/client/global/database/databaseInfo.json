@@ -1,0 +1,7 @@
+{
+    "DBName": "ResourcesDatabase",
+    "modelStore":"ModelDB",
+    "musicStore":"MusicDB",
+    "replayStore":"ReplayDB"
+
+}

@@ -1,8 +1,9 @@
 {
+    "version": "1.0.0",
     "background":[
         {
-            "name": "Tilted Hydro",
-            "src": "Tiletted Hydro.glb"
+            "name": "Hydro Flow",
+            "src": "HydroFlow.glb"
         }
     ]
 }
