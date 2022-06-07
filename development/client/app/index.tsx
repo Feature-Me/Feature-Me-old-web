@@ -10,6 +10,7 @@ import Title from '../title/title';
 import style from './style.scss';
 import { getI18n, I18nextProvider, useTranslation } from 'react-i18next';
 import initLocalStorage from '../global/cacheController/initLocalStorage';
+import initIndexedDB from '../global/database/initIndexedDB';
 
 
 
@@ -36,6 +37,7 @@ function render():void{
 
 function init():void{
     initLocalStorage();
+    if(!JSON.parse(localStorage.getItem("DBVersion")!).initialized) initIndexedDB();
     render();
     console.log("Feature Me initialized. the Game is Ready!");
     console.log("%c Hold up!","color:red;font-size:64px;border:4px solid black;");

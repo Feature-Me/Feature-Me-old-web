@@ -54,7 +54,7 @@
     grid-template-rows: 30% 1fr 1fr 64px;
 
     @media screen and (max-height: 540px) {
-        grid-template-rows: 16px 1fr 1fr 32px;
+        grid-template-rows: 16px 1fr 1fr 32px 4px;
     }
 
     .title {
