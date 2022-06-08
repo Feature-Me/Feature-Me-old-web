@@ -17,7 +17,7 @@ function initLocalStorage(): void {
             const resourcesDownloaded = {
                 model: {
                     initialized: false,
-                    verison: "0.0.0"
+                    version: "0.0.0"
                 },
                 music: {
                     initialized: false,

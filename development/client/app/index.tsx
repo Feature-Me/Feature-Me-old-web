@@ -1,20 +1,18 @@
 import * as React from 'react';
 import {createRoot} from 'react-dom/client';
-import jszip from 'jszip';
 import "../global/i18n/i18n";
-import i18next from 'i18next';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation } from 'react-i18next';
 
 import Title from '../title/title';
 import style from './style.scss';
-import { getI18n, I18nextProvider, useTranslation } from 'react-i18next';
 import initLocalStorage from '../global/cacheController/initLocalStorage';
 import initIndexedDB from '../global/database/initIndexedDB';
 
 
 
-function App(): JSX.Element {
+const App: React.FC = () => {
     const [translation, i18n] = useTranslation();
 
     return(
@@ -39,11 +37,9 @@ function init():void{
     initLocalStorage();
     if(!JSON.parse(localStorage.getItem("DBVersion")!).initialized) initIndexedDB();
     render();
-    console.log("Feature Me initialized. the Game is Ready!");
-    console.log("%c Hold up!","color:red;font-size:64px;border:4px solid black;");
-    console.log("%c  Do you know what you are supposed to do with this tool? If you do, how about contributing to this project?","color:#1189da;font-size:24px;");
-    
-    
+    console.log("%c Feature Me is started Rendering. the Game is Ready!","font-family: 'Julius Sans One'; font-size: 30px; color: whitesmoke");
+    console.log("%c Hold up!","color:red;font-size:64px");
+    console.log("%c Do you know what you are supposed to do with this tool? If you do, how about contributing to this project?","color:#1189da;font-size:24px;");
 }
 
 

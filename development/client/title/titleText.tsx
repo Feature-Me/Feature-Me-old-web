@@ -4,6 +4,7 @@ import { FiSettings } from "react-icons/fi";
 import { useTranslation } from 'react-i18next';
 import  version  from "../global/versions.json";
 import fetchResourcesUpdate from "../global/resourcesUpdater/fetchResourcesUpdate";
+import variables from "./variables";
 
 const TitleText: React.FC<{showSettingsWindow:boolean,setShowSettingsWindow:React.Dispatch<React.SetStateAction<boolean>>,showResourcesDownloadWindow:boolean,setShowDownloadsWindow:React.Dispatch<React.SetStateAction<boolean>>}> = (props) => {
     const [translation, i18n] = useTranslation();
@@ -31,8 +32,11 @@ const TitleText: React.FC<{showSettingsWindow:boolean,setShowSettingsWindow:Reac
     )
 }
 
-function titleTextClicked(name:string): void {
-    fetchResourcesUpdate();
+async function titleTextClicked(name:string): Promise<void> {
+    await fetchResourcesUpdate();
+    variables.titleBackgroundOpened = true;
+    console.log(variables.titleBackgroundOpened);
+    
 }
 
 

@@ -1,6 +1,8 @@
 import databaseInfo from "./databaseInfo.json";
 import { toast } from "react-toastify";
-let DBVersion = (localStorage.getItem("DBVersion") && Number(JSON.parse(localStorage.getItem("DBVersion")!).version) + 1) || 1;
+
+
+let DBVersion = (localStorage.getItem("DBVersion") && JSON.parse(localStorage.getItem("DBVersion")!).version + 1) || 1;
 function initIndexedDB() {
     const toastId = toast.info("Initializing indexedDB...");
     const databaseRequest = indexedDB.open(databaseInfo.DBName, DBVersion);
