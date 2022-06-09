@@ -2,11 +2,10 @@ import * as React from "react";
 import style from './title.scss';
 import { FiSettings } from "react-icons/fi";
 import { useTranslation } from 'react-i18next';
-import  version  from "../global/versions.json";
+import version from "../global/versions.json";
 import fetchResourcesUpdate from "../global/resourcesUpdater/fetchResourcesUpdate";
-import variables from "./variables";
 
-const TitleText: React.FC<{showSettingsWindow:boolean,setShowSettingsWindow:React.Dispatch<React.SetStateAction<boolean>>,showResourcesDownloadWindow:boolean,setShowDownloadsWindow:React.Dispatch<React.SetStateAction<boolean>>}> = (props) => {
+const TitleText: React.FC<{ showSettingsWindow: boolean, setShowSettingsWindow: React.Dispatch<React.SetStateAction<boolean>>, titleBackgroundOpened: boolean, setTitleBackgroundOpened: React.Dispatch<React.SetStateAction<boolean>> }> = (props) => {
     const [translation, i18n] = useTranslation();
     return (
         <div className={style.titletext}>
@@ -14,10 +13,10 @@ const TitleText: React.FC<{showSettingsWindow:boolean,setShowSettingsWindow:Reac
                 <h1>Feature Me</h1>
             </div>
             <div className={style.selectmode}>
-                <p onClick={()=>titleTextClicked("play")}>Play</p>
-                <p onClick={()=>titleTextClicked("chart editor")} >Chart Editor</p>
-                <p onClick={()=>titleTextClicked("leaderboards")}>Leaderboards</p>
-                <p onClick={()=>titleTextClicked("music room")} >Music Room</p>
+                <p onClick={() => titleTextClicked("play", props.setTitleBackgroundOpened)}>Play</p>
+                <p onClick={() => titleTextClicked("chart editor", props.setTitleBackgroundOpened)} >Chart Editor</p>
+                <p onClick={() => titleTextClicked("leaderboards", props.setTitleBackgroundOpened)}>Leaderboards</p>
+                <p onClick={() => titleTextClicked("music room", props.setTitleBackgroundOpened)} >Music Room</p>
             </div>
             <div className={style.footer}>
                 <p>Feature Me {version.version} - {version.build} Mksk and Raetan The Feature Me Project  ©2022 Feature Me All rights reserved.</p>
@@ -32,11 +31,9 @@ const TitleText: React.FC<{showSettingsWindow:boolean,setShowSettingsWindow:Reac
     )
 }
 
-async function titleTextClicked(name:string): Promise<void> {
+async function titleTextClicked(name: string, setTitleBackgroundOpened: React.Dispatch<React.SetStateAction<boolean>>): Promise<void> {
     await fetchResourcesUpdate();
-    variables.titleBackgroundOpened = true;
-    console.log(variables.titleBackgroundOpened);
-    
+    setTitleBackgroundOpened(true);
 }
 
 

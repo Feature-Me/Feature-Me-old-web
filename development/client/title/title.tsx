@@ -10,11 +10,11 @@ import TermsWindow from '../global/terms/termsWindow';
 const Title: React.FC = () => {
     const [showSettingsWindow, setShowSettingsWindow] = React.useState(false);
     const [showTermsWindow, setShowTermsWindow] = React.useState(false);
-    const [showResourcesDownloadWindow, setShowResourcesDownloadWindow] = React.useState(false);
+    const [titleBackgroundOpened, setTitleBackgroundOpened] = React.useState(false);
     return (
         <div className={style.titlepage} >
-            <Background />
-            <TitleText showSettingsWindow={showSettingsWindow} setShowSettingsWindow={setShowSettingsWindow}showResourcesDownloadWindow={showResourcesDownloadWindow} setShowDownloadsWindow={setShowResourcesDownloadWindow} />
+            <Background titleBackgroundOpened={titleBackgroundOpened} setTitleBackgroundOpened={setTitleBackgroundOpened} />
+            <TitleText showSettingsWindow={showSettingsWindow} setShowSettingsWindow={setShowSettingsWindow} titleBackgroundOpened={titleBackgroundOpened} setTitleBackgroundOpened={setTitleBackgroundOpened} />
             <SettingsWindow showSettingsWindow={showSettingsWindow} setShowSettingsWindow={setShowSettingsWindow} showTermsWindow={showTermsWindow} setShowTermsWindow={setShowTermsWindow} />
             <TermsWindow showTermsWindow={showTermsWindow} setShowTermsWindow={setShowTermsWindow} />
             <DisplayAspectCaution />

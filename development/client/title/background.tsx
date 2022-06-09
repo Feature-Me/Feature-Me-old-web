@@ -1,9 +1,9 @@
 import * as React from "react";
 import style from './title.scss';
 import { motion, useAnimation } from 'framer-motion';
-import variables from "./variables";
 
-const Background: React.FC = () => {
+
+const Background: React.FC<{ titleBackgroundOpened: boolean, setTitleBackgroundOpened: React.Dispatch<React.SetStateAction<boolean>> }> = (props) => {
     const BlueAnimationController = useAnimation();
     const GreenAnimationController = useAnimation();
 
@@ -23,13 +23,13 @@ const Background: React.FC = () => {
     }
 
     React.useEffect(() => {
-        console.log(variables.titleBackgroundOpened);
+        console.log(props.titleBackgroundOpened);
         
-        if(variables.titleBackgroundOpened){
+        if(props.titleBackgroundOpened){
             BlueAnimationController.start(BlueAnimation);
             GreenAnimationController.start(GreenAnimation);
         }
-    }, [variables.titleBackgroundOpened]);
+    }, [props.titleBackgroundOpened]);
 
 
 
