@@ -1,11 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const TrranslateText: React.FC<{key:string,defaultValue?:string}> = (props):JSX.Element => {
+const TrranslateText: React.FC<{contentData:string,defaultValue?:string,start?:string|JSX.Element,end?:string|JSX.Element}> = (props):JSX.Element => {
     const [translation,i18n] = useTranslation();
-    console.log(props,props.key,translation(props.key, { defaultValue: props.defaultValue }));
-    
-    return <>{translation(props.key,{defaultValue:props.defaultValue})}</>;
+    return <>{props.start||""}{translation(props.contentData,{defaultValue:props.defaultValue})}{props.end||""}</>;
 }
 
 export default TrranslateText;

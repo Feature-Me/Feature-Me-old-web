@@ -5,7 +5,7 @@ import React from "react";
 
 let DBVersion = (localStorage.getItem("DBVersion") && JSON.parse(localStorage.getItem("DBVersion")!).version + 1) || 1;
 function initIndexedDB() {
-    const toastId = toast.info(<TranslateText key={ "resourcesManager.database.notifications.initializing" }/>);
+    const toastId = toast.info(<TranslateText contentData={ "resourcesManager.database.notifications.initializing" }/>);
     const databaseRequest = indexedDB.open(databaseInfo.DBName, DBVersion);
     databaseRequest.onupgradeneeded = () => {
         console.log("Database Upgraded");
@@ -16,10 +16,10 @@ function initIndexedDB() {
             const ReplayStore = db.createObjectStore(databaseInfo.replayStore, { keyPath: "id",autoIncrement: true });
             db.close();
             localStorage.setItem("DBVersion", JSON.stringify({ version: DBVersion, initialized: true, updated: new Date().getDate() }));
-            toast.success(<TranslateText key={"resourcesManager.database.notifications.initialized"} />);
+            toast.success(<TranslateText contentData={"resourcesManager.database.notifications.initialized"} />);
         } catch (error) {
             console.error(error);
-            toast.error(`${<TranslateText key={"resourcesManager.database.notifications.initializingFailed"} />} : ${error}`);
+            toast.error(`${<TranslateText contentData={"resourcesManager.database.notifications.initializingFailed"} />} : ${error}`);
         }
     }
 }

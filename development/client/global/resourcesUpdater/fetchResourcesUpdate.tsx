@@ -19,7 +19,7 @@ type contentsData = {
 
 function fetchResourcesUpdate() {
     return new Promise<string>((resolve, reject) => {
-        toast.info(<TranslateText key={ "resourcesManager.resources.notifications.downloading" } />);
+        toast.info(<TranslateText contentData={ "resourcesManager.resources.notifications.downloading" } />);
         fetch("/update/map", {
             method: "GET",
             headers: {
@@ -27,12 +27,12 @@ function fetchResourcesUpdate() {
             }
         }).then(res => res.json()).then(res => {
             Promise.all([fetchModelUpdate(res.model), fetchMusicUpdate(res.music)]).then(() => {
-                toast.success(<TranslateText key={"resourcesManager.resources.notifications.initialized"} />);
+                toast.success(<TranslateText contentData={"resourcesManager.resources.notifications.initialized"} />);
                 resolve();
             })
         }).catch(err => {
             console.log(err);
-            toast.error(`${<TranslateText key={"resourcesManager.resources.notifications.downloadingFailed"} />}: ${err.message}`);
+            toast.error(`${<TranslateText contentData={"resourcesManager.resources.notifications.downloadingFailed"} />}: ${err.message}`);
             reject(err);
         })
     })
@@ -42,9 +42,9 @@ function fetchResourcesUpdate() {
 function fetchModelUpdate(versionMap: object) {
    return new Promise((resolve, reject) => {
 
-       toast.info(<TranslateText key={"resourcesManager.resources.notifications.model.downloading"} />);
+       toast.info(<TranslateText contentData={"resourcesManager.resources.notifications.model.downloading"} />);
        if (!versionMap) {
-           toast.error(<TranslateText key={"resourcesManager.resources.notifications.noMap"} />);
+           toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.noMap"} />);
            reject();
            return;
        }
@@ -55,7 +55,7 @@ function fetchModelUpdate(versionMap: object) {
            if (compareVersions(versionMap[version], JSON.parse(localStorage.getItem("ResourcesDownloaded")!).model.version) == 1) fetchUrl.push(`resources/model/${versionMap[version]}.fm3d`);
        }
          if (fetchUrl.length == 0) {
-             toast.success(<TranslateText key={"resourcesManager.resources.notifications.noupdate"} />);
+             toast.success(<TranslateText contentData={"resourcesManager.resources.notifications.model.noupdate"} />);
                 resolve();
                 return;
          }
@@ -99,7 +99,7 @@ function fetchModelUpdate(versionMap: object) {
                                        }
                                    }
                                    db.close();
-                                   toast.success(<TranslateText key={"resourcesManager.resources.notifications.model.updated"} />);
+                                   toast.success(<TranslateText contentData={"resourcesManager.resources.notifications.model.updated"} />);
                                    const ResourcesDownloaded = JSON.parse(localStorage.getItem("ResourcesDownloaded")!);
                                    
                                    const newVersion = compareVersions(map.version, ResourcesDownloaded.model.version) == 1 ? map.version : ResourcesDownloaded.model.version;
@@ -111,23 +111,23 @@ function fetchModelUpdate(versionMap: object) {
                                    resolve();
                                } catch (error) {
                                    console.error(error);
-                                   toast.error(`${<TranslateText key={"resourcesManager.resources.notifications.model.savingFailed"} />} : ${error}`);
+                                   toast.error(`${<TranslateText contentData={"resourcesManager.resources.notifications.model.savingFailed"} />} : ${error}`);
                                       reject(error);
                                }
                            }
                        });
                    } else {
-                       toast.error(<TranslateText key={"resourcesManager.resources.notificationsmodel.noFileMap"} />);
+                       toast.error(<TranslateText contentData={"resourcesManager.resources.notificationsmodel.noFileMap"} />);
                        reject("Error fetching resources update: FileMap.json not found");
                    }
                }).catch(err => {
                    console.log(err);
-                   toast.error(`${<TranslateText key={"resourcesManager.resources.notifications.model.extractFailed"} />} : ${err}`);
+                   toast.error(`${<TranslateText contentData={"resourcesManager.resources.notifications.model.extractFailed"} />} : ${err}`);
                      reject(err);
                });
            }).catch(err => {
                console.log(err);
-               toast.error(`${<TranslateText key={"resourcesManager.resources.notifications.model.downloadingFailed"} />} : ${err}`);
+               toast.error(`${<TranslateText contentData={"resourcesManager.resources.notifications.model.downloadingFailed"} />} : ${err}`);
                 reject(err);
            });
        }

@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import TranslateText from "global/TranslateText/translateText";
 
 function initLocalStorage(): void {
-    const toastId = toast.info(<TranslateText key={ "resourcesManager.cache.notifications.initializing" } />);
+    const toastId = toast.info(<TranslateText contentData="resourcesManager.cache.notifications.initializing"></TranslateText>);
     let fixedCount = 0;
     try {
         if (!localStorage.getItem("environment")) {
@@ -38,10 +38,11 @@ function initLocalStorage(): void {
             localStorage.setItem("DBVersion", JSON.stringify(DBVersion));
             fixedCount++;
         }
-        toast.success(`${<TranslateText key={"resourcesManager.cache.notifications.fixed"} />} ${fixedCount ? ` ${fixedCount} ${<TranslateText key={"resourcesManager.resources.cache.fixed"} />}`:``}`);
+        toast.success(<TranslateText contentData={"resourcesManager.cache.notifications.initialized"} end={<TranslateText contentData={"resourcesManager.cache.notifications.fixed"} start={fixedCount.toString()} />} />);
+        //toast.success(<TranslateText contentData={"resourcesManager.cache.notifications.fixed"} />);
     } catch (error) {
         console.error(error);
-        toast.error(`${<TranslateText key={"resourcesManager.cache.notifications.initializingFailed"} />} : ${error}`);
+        toast.error(`${<TranslateText contentData={"resourcesManager.cache.notifications.initializingFailed"} />} : ${error}`);
     }
 }
 

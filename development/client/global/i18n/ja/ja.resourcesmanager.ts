@@ -3,12 +3,12 @@ const JAResourcesManagerTranslation = {
         "notifications": {
             "downloading": "リソースをダウンロード中...",
             "downloadingFailed": "リソースのダウンロードに失敗しました。",
-            "initiailized": "リソースををイニシャライズしました。",
+            "initialized": "リソースををイニシャライズしました。",
             "model": {
                 "downloading": "モデルをダウンロード中...",
                 "noMap": "アップデートのマップが見つかりませんでした。",
                 "downloadingFailed": "モデルのダウンロードに失敗しました。",
-                "noupdate": "モデルのアップデートがありませんでした。",
+                "noupdate": "モデルのアップデートはありませんでした。このままご利用ください。",
                 "updated": "モデルをアップデートしました。",
                 "savingFailed": "モデルのインストールに失敗しました。",
                 "noFileMap": "モデルのファイルマップが見つかりませんでした。",

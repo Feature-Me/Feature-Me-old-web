@@ -8,7 +8,7 @@ const ENUKResourcesManagerTranslation = {
                 "downloading": "Downloading model...",
                 "noMap": "Update map not found.",
                 "downloadingFailed": "Failed to download model.",
-                "noupdate": "There is no model updates.",
+                "noupdate": "There is no model updates. Please enjoy!",
                 "updated": "Successfully updated model.",
                 "errorSaving": "Failed to save model.",
                 "noFileMap": "File map not found.",
