@@ -4,9 +4,14 @@ import { FiSettings } from "react-icons/fi";
 import { useTranslation } from 'react-i18next';
 import version from "../global/versions.json";
 import fetchResourcesUpdate from "../global/resourcesUpdater/fetchResourcesUpdate";
+import TitleVariables from "./variables"
+import { motion, useAnimation } from "framer-motion";
 
 const TitleText: React.FC<{ showSettingsWindow: boolean, setShowSettingsWindow: React.Dispatch<React.SetStateAction<boolean>>, titleBackgroundOpened: boolean, setTitleBackgroundOpened: React.Dispatch<React.SetStateAction<boolean>> }> = (props) => {
     const [translation, i18n] = useTranslation();
+    React.useEffect(()=>{
+
+    },[props.titleBackgroundOpened])
     return (
         <div className={style.titletext}>
             <div className={style.title}>
@@ -32,7 +37,10 @@ const TitleText: React.FC<{ showSettingsWindow: boolean, setShowSettingsWindow: 
 }
 
 async function titleTextClicked(name: string, setTitleBackgroundOpened: React.Dispatch<React.SetStateAction<boolean>>): Promise<void> {
-    await fetchResourcesUpdate();
+    if(!TitleVariables.checkedUpdated){
+        TitleVariables.checkedUpdated = true;
+        await fetchResourcesUpdate();
+    }
     setTitleBackgroundOpened(true);
 }
 

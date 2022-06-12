@@ -7,6 +7,7 @@ import style from './title.scss';
 import TermsWindow from '../global/terms/termsWindow';
 
 
+
 const Title: React.FC = () => {
     const [showSettingsWindow, setShowSettingsWindow] = React.useState(false);
     const [showTermsWindow, setShowTermsWindow] = React.useState(false);
