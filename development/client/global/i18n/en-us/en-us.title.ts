@@ -1,5 +1,4 @@
 const ENUSTitleTranslation = {
-    "displayDirectionCaution": "Please turn your device to sideways!",
     "language": "English-EN_US",
     "terms": "Terms of Use",
     "read": "Read",
@@ -10,10 +9,9 @@ const ENUSTitleTranslation = {
         "storageCache": {
             "config": "Game Config Data",
             "account": "Account Login Data",
-            "chart": "All charts",
             "resources": "Resources Data",
             "environment": "Environment Data",
-            "all": "Cached all Data(include config, account, chart)"
+            "all": "Cached all Data(include config, account login session,offline save data and chart)"
         }
     }
 }

@@ -1,0 +1,14 @@
+@import "../../../../assets/mixin.scss";
+
+.caution_screen {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: rgba(20, 20, 30, 0.8);
+    @include blur(16px);
+    @include font-body;
+    text-align: center;
+}

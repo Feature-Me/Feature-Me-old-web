@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import version from "../versions.json";
 import compareVersions from "compare-versions";
 import Window from "../window/window";
-import { deleteEnvironmentData } from "../cacheController/deleteData";
+import deleteCache from "global/cacheController/deleteCache"; "../cacheController/deleteData";
 
 
 
@@ -26,7 +26,7 @@ const TermsWindow: React.FC<{ showTermsWindow: boolean, setShowTermsWindow: Reac
     function declineTerms(): void {
         closeTermsWindow();
         document.body.innerHTML = translation("terms.termsMessage.decline");
-        deleteEnvironmentData();
+        deleteCache.enviroment();
     }
 
     React.useEffect(() => {

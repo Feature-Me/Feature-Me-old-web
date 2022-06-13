@@ -1,0 +1,29 @@
+.display_direction_caution {
+    @media screen and (orientation: landscape) {
+        display: none;
+    }
+
+    .caution_phone_icon {
+        position: absolute;
+        margin: auto;
+        width: 50%;
+        height: auto;
+        top: 50%;
+        left: 50%;
+        animation: phone_icon_rotate 1.25s infinite cubic-bezier(0, 0.1, 0, 1);
+    }
+}
+
+@keyframes phone_icon_rotate {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(-50%, -50%) rotate(-90deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+}

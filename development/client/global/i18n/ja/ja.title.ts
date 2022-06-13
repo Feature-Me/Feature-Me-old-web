@@ -1,5 +1,4 @@
 const JATitleTranslation = {
-    "displayDirectionCaution": "画面を横向きにしてください!",
     "language": "日本語-JA",
     "terms": "利用規約",
     "read": "読む",
@@ -10,10 +9,9 @@ const JATitleTranslation = {
         "storageCache": {
             "config": "ゲーム設定",
             "account": "ログイン情報",
-            "chart": "すべての譜面",
             "resources": "リソースデータ",
             "environment": "環境設定",
-            "all": "すべてのデータ(設定、ログイン、譜面を含む)"
+            "all": "すべてのデータ(設定、ログイン状況、オフラインのセーブデータ、譜面を含む)"
         }
     }
 }

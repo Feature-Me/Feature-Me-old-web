@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Background from '../title/background';
 import TitleText from '../title/titleText';
-import DisplayAspectCaution from '../title/directionCaution';
 import SettingsWindow from './settingsWindow';
 import style from './title.scss';
 import TermsWindow from '../global/terms/termsWindow';
@@ -18,7 +17,6 @@ const Title: React.FC = () => {
             <TitleText showSettingsWindow={showSettingsWindow} setShowSettingsWindow={setShowSettingsWindow} titleBackgroundOpened={titleBackgroundOpened} setTitleBackgroundOpened={setTitleBackgroundOpened} />
             <SettingsWindow showSettingsWindow={showSettingsWindow} setShowSettingsWindow={setShowSettingsWindow} showTermsWindow={showTermsWindow} setShowTermsWindow={setShowTermsWindow} />
             <TermsWindow showTermsWindow={showTermsWindow} setShowTermsWindow={setShowTermsWindow} />
-            <DisplayAspectCaution />
 
         </div>
     )

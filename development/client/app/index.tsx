@@ -4,6 +4,7 @@ import "../global/i18n/i18n";
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
+import DisplayDirectionCaution from 'global/cautions/directionCaution/directionCaution';
 
 import Title from '../title/title';
 import style from './style.scss';
@@ -18,6 +19,8 @@ const App: React.FC = () => {
     return(
         <div className={style.app}>
             <Title />
+            <DisplayDirectionCaution  />
+
             <ToastContainer position='bottom-right' autoClose={3000} hideProgressBar closeOnClick draggable transition={Slide} theme="dark" />
         </div>
     )

@@ -4,7 +4,7 @@ import { VscClose } from 'react-icons/vsc';
 import { motion, useAnimation } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import SelectBox from "../global/selectbox/selectbox";
-import { deleteEnvironmentData } from "../global/cacheController/deleteData";
+import deleteCache from "global/cacheController/deleteCache";
 import Window from "../global/window/window";
 
 const selectLanguageOptions = [
@@ -48,21 +48,18 @@ const SettingsWindow: React.FC<{ showSettingsWindow: boolean, setShowSettingsWin
                     <h3>{translation("title.settingsWindow.storageCache.account")}</h3>
                     <button className={style.redbtn}>{translation("title.settingsWindow.delete")}</button>
                 </div>
-                <div className={style.content}>
-                    <h3>{translation("title.settingsWindow.storageCache.chart")}</h3>
-                    <button className={style.redbtn}>{translation("title.settingsWindow.delete")}</button>
-                </div>
+
                 <div className={style.content}>
                     <h3>{translation("title.settingsWindow.storageCache.resources")}</h3>
-                    <button className={style.redbtn}>{translation("title.settingsWindow.delete")}</button>
+                    <button className={style.redbtn} onClick={e => deleteCache.resources()}>{translation("title.settingsWindow.delete")}</button>
                 </div>
                 <div className={style.content}>
                     <h3>{translation("title.settingsWindow.storageCache.environment")}</h3>
-                    <button className={style.redbtn} onClick={deleteEnvironmentData}>{translation("title.settingsWindow.delete")}</button>
+                    <button className={style.redbtn} onClick={e => deleteCache.enviroment()}>{translation("title.settingsWindow.delete")}</button>
                 </div>
                 <div className={style.content}>
                     <h3>{translation("title.settingsWindow.storageCache.all")}</h3>
-                    <button className={style.redbtn}>{translation("title.settingsWindow.delete")}</button>
+                    <button className={style.redbtn} >{translation("title.settingsWindow.delete")}</button>
                 </div>
                 <div className={style.content}>
                     <h3>{translation("title.terms")}</h3>

@@ -9,7 +9,7 @@ const JAResourcesManagerTranslation = {
                 "noMap": "アップデートのマップが見つかりませんでした。",
                 "downloadingFailed": "モデルのダウンロードに失敗しました。",
                 "noupdate": "モデルのアップデートはありませんでした。このままご利用ください。",
-                "updated": "モデルをアップデートしました。",
+                "updated": "個のモデルをアップデートしました。",
                 "savingFailed": "モデルのインストールに失敗しました。",
                 "noFileMap": "モデルのファイルマップが見つかりませんでした。",
                 "extractingFailed": "モデルの展開に失敗しました。",

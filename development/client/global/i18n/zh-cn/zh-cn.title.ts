@@ -1,5 +1,4 @@
 const ZHCNTitleTranslation = {
-    "displayDirectionCaution": "请把你的设备转到侧面!",
     "language": "简体中文-ZH_CN",
     "terms": "使用条款",
     "read": "阅读",
@@ -10,10 +9,9 @@ const ZHCNTitleTranslation = {
         "storageCache": {
             "config": "游戏设定",
             "account": "登录信息",
-            "chart": "乐谱",
             "resources": "资源",
             "environment": "环境设定",
-            "all": "缓存所有数据(包括设定、登录、乐谱)"
+            "all": "缓存所有数据(包括设定、登录信息、离线保存的数据、乐谱)"
         }
     }
 }
