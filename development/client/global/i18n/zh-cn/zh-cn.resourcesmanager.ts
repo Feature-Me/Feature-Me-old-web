@@ -18,16 +18,16 @@ const ZHCNResourcesManagerTranslation = {
     },
     "database": {
         "notifications": {
-            "Initializing": "正在初始化数据库...",
-            "InitializingFailed": "初始化数据库失败。",
-            "Initialized": "成功初始化数据库。",
+            "initializing": "正在初始化数据库...",
+            "initializingFailed": "初始化数据库失败。",
+            "initialized": "成功初始化数据库。",
         }
     },
     "cache": {
         "notifications": {
-            "Initializing": "正在初始化缓存...",
-            "InitializingFailed": "初始化缓存失败。",
-            "Initialized": "成功初始化缓存。",
+            "initializing": "正在初始化缓存...",
+            "initializingFailed": "初始化缓存失败。",
+            "initialized": "成功初始化缓存。",
             "fixed": "个案例的数据已被纠正。",
         }
     }

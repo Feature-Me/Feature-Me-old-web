@@ -18,16 +18,16 @@ const ENUKResourcesManagerTranslation = {
     },
     "database": {
         "notifications": {
-            "Initializing": "Initializing database...",
-            "InitializingFailed": "Failed to initialize database.",
-            "Initialized": "Successfully initialized database.",
+            "initializing": "initializing database...",
+            "initializingFailed": "Failed to initialize database.",
+            "initialized": "Successfully initialized database.",
         }
     },
     "cache": {
         "notifications": {
-            "Initializing": "Initializing cache...",
-            "InitializingFailed": "Failed to initialize cache.",
-            "Initialized": "Successfully initialized cache.",
+            "initializing": "initializing cache...",
+            "initializingFailed": "Failed to initialize cache.",
+            "initialized": "Successfully initialized cache.",
             "fixed": "data(s) have been fixed.",
         }
     }

@@ -1,15 +1,5 @@
 @import "../../assets/mixin.scss";
 
-@font-face {
-    font-family: "Julius Sans One";
-    src: url("../../assets/JuliusSansOne-Regular.ttf");
-}
-
-@font-face {
-    font-family: "IBM Plex Sans";
-    src: url("../../assets/IBMPLEXSANSJP-TEXT.OTF");
-}
-
 .titlepage {
     height: inherit;
     @include font-header;

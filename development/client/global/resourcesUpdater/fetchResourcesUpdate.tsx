@@ -122,9 +122,17 @@ function fetchModelUpdate(versionMap: versionMap) {
                                         savedModel.onsuccess = e => {
 
                                             const modelData = savedModel.result?.data || [];
+                                            for (const asset of assets[category]) {
+                                                if(!modelData.find((m: { name: string; }) => m.name == asset.name)) modelData.push(asset);
+                                                else {
+                                                    const index = modelData.findIndex((m: { name: string; }) => m.name == asset.name);
+                                                    modelData[index] = asset;
+                                                }
+
+                                            }
                                             ModelStore.put({
                                                 id: category,
-                                                data: [...modelData, ...assets[category]]
+                                                data: modelData
                                             });
                                         }
                                         savedModel.onerror = e => {
