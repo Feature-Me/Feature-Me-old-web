@@ -30,9 +30,12 @@ const JAResourcesManagerTranslation = {
             "initialized": "キャッシュをイニシャライズしました。",
             "fixed": "件のデータを修正しました。",
         }
+    },
+    "loadData": {
+        "notifications": {
+            "loadFailed": "データの読み込みに失敗しました。",
+        }
     }
-
-
 }
 
 export default JAResourcesManagerTranslation

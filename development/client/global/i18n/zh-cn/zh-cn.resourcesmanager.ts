@@ -3,7 +3,7 @@ const ZHCNResourcesManagerTranslation = {
         "notifications": {
             "downloading": "正在下载资源...",
             "downloadingFailed": "下载资源失败。",
-            "initiailized": "成功初始化资源。",
+            "initialized": "成功初始化资源。",
             "model": {
                 "downloading": "正在下载模型...",
                 "noMap": "没有找到更新的地图。",
@@ -29,6 +29,11 @@ const ZHCNResourcesManagerTranslation = {
             "initializingFailed": "初始化缓存失败。",
             "initialized": "成功初始化缓存。",
             "fixed": "个案例的数据已被纠正。",
+        }
+    },
+    "loadData": {
+        "notifications": {
+            "loadFailed": "加载数据失败。",
         }
     }
 

@@ -3,7 +3,7 @@ const ENUSResourcesManagerTranslation = {
         "notifications": {
             "downloading": "Downloading resources...",
             "downloadingFailed": "Failed to download resources.",
-            "initiailized": "Successfully initialized resources.",
+            "initialized": "Successfully initialized resources.",
             "model": {
                 "downloading": "Downloading model...",
                 "noMap": "Update map not found.",
@@ -29,6 +29,11 @@ const ENUSResourcesManagerTranslation = {
             "initializingFailed": "Failed to initialize cache.",
             "initialized": "Successfully initialized cache.",
             "fixed": "data(s) fixed.",
+        }
+    },
+    "loadData": {
+        "notifications": {
+            "loadFailed": "Failed to load data.",
         }
     }
 

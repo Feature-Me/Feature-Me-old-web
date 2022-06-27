@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import version from "../versions.json";
 import compareVersions from "compare-versions";
 import Window from "../window/window";
-import deleteCache from "global/cacheController/deleteCache"; "../cacheController/deleteData";
+import deleteCache from "dataController/cacheController/deleteCache"; "../cacheController/deleteData";
 
 
 

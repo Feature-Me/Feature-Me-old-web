@@ -1,3 +1,5 @@
+/*--------edited contents--------*/
+/*some properties changed*/
 :root {
   /*--toastify-color-dark: #121212;
     --toastify-color-info: #3498db;
@@ -44,7 +46,7 @@
   --toastify-color-progress-warning: var(--toastify-color-warning);
   --toastify-color-progress-error: var(--toastify-color-error);
 }
-
+/*--------end edited contents--------*/
 .Toastify__toast-container {
   z-index: var(--toastify-z-index);
   -webkit-transform: translate3d(0, 0, var(--toastify-z-index) px);
@@ -115,6 +117,8 @@
   }
 }
 
+/*--------edited contents--------*/
+/*some properties changed*/
 .Toastify__toast {
   position: relative;
   min-height: var(--toastify-toast-min-height);
@@ -134,7 +138,16 @@
   font-family: var(--toastify-font-family);
   cursor: pointer;
   direction: ltr;
+  font-size: 14px;
 }
+/*added media query*/
+@media screen and (max-width: 540px) {
+  .Toastify__toast{
+    padding: 4px;
+    font-size: 0.8em;
+  }
+}
+/*--------end edited contents--------*/
 
 .Toastify__toast--rtl {
   direction: rtl;

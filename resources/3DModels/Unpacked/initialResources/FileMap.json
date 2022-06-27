@@ -1,9 +1,10 @@
 {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "background":[
         {
-            "name": "Hydro Flow",
-            "src": "HydroFlow.glb"
+            "name": "Tidal Wreck",
+            "src": "tidal wreck.glb",
+            "alt": "tidal wreck.png"
         }
     ]
 }

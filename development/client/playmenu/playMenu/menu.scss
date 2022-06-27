@@ -1,0 +1,63 @@
+@import "../../../assets/mixin.scss";
+
+.menu{
+    display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 48px 1fr;
+    @media screen and (max-height: 540px) {
+        grid-template-rows: 24px 1fr;
+    }
+    .playselect{
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding: 16px 0;
+        div{
+            height: 64px;
+            margin: 16px 0;
+            position: relative;
+            transition: 0.2s;
+            @media screen and (max-height:540px) {
+                    height: 32px;
+            }
+        }
+        .left{
+            clip-path: polygon(0 0, 80% 0, calc(80% - 48px) 100%, 0 100%);
+            background: linear-gradient(to right, rgb(9, 26, 51), #0e4f7a);
+            left: -32px;
+            padding-left: 64px;
+            font-size: 36px;
+            line-height: 36px;
+            @include font-header;
+            @include small-device-font;
+            display: flex;
+                align-items: center;
+
+                &:hover{
+                    left: 0;
+                    background: linear-gradient(to right, rgb(11, 32, 63), #0e68a3);
+                    filter: brightness(1.5);
+                }
+            
+        }
+        .right{
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, calc(20% + 48px) 100%);
+            background: linear-gradient(to left, rgb(7, 39, 17), #025216);
+            right: -32px;
+            padding-right:64px;
+            font-size: 36px;
+            line-height: 36px;
+            @include font-header;
+            @include small-device-font;
+            display: flex;
+                flex-direction: row-reverse;
+                align-items: center;
+                justify-items: right;
+
+                &:hover {
+                        right: 0;
+                        background: linear-gradient(to left, rgb(7, 39, 18), #05680d);
+                        filter: brightness(1.5);
+                    }
+        }
+    }
+}
