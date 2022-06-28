@@ -3,8 +3,23 @@
     "background":[
         {
             "name": "Tidal Wreck",
-            "src": "tidal wreck.glb",
-            "alt": "tidal wreck.png"
+            "src": "background/tidal wreck.glb",
+            "alt": "background/tidal wreck.png"
+        }
+    ],
+    "behavior":[
+        {
+            "name":"Feature Me",
+            "type":"3d-behavior",
+            "src":{
+                "ground":"behavior/Ground.glb",
+                "tap":"behavior/Tapnote.glb",
+                "damagetap":"behavior/DamageTapnote.glb",
+                "hold":"behavior/Holdnote.glb",
+                "bright":"behavior/Brightnote.glb",
+                "seed":"behavior/Seednote.glb",
+                "flick":"behavior/Flicknote.glb"
+            }
         }
     ]
 }
