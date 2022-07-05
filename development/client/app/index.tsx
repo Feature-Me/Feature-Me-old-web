@@ -13,6 +13,7 @@ import initIndexedDB from '../dataController/database/initIndexedDB';
 import Background from 'background/background';
 import gameData from 'dataController/gameData/gameData';
 import PlayMenu from 'playmenu/playMenu/playMenu';
+import SelectMusic from 'musicSelect/musicSelect';
 import SceneChanger from 'global/sceneChanger/sceneChangeCover';
 
 
@@ -35,6 +36,8 @@ const App: React.FC = () => {
 
     React.useEffect(() => {
         gameData.page.allPages["play"] = PlayMenu;
+        gameData.page.allPages["musicSelect"] = SelectMusic;
+
     }, []);
 
 

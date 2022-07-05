@@ -29,6 +29,10 @@ type modelContentData = {
     alt?: string;
 }
 
+type Musiccollection = {
+    folders: Array<string>;
+}
+
 function sumArray(array: Array<number>): number {
     return array.reduce((a, b) => a + b, 0);
 }
@@ -70,10 +74,10 @@ function fetchModelUpdate(versionMap: versionMap) {
         let latestVersion: string = ResourcesDownloaded.model.version;
         let downloadCount = 0;
         let downloadSize = 0;
-        if (!JSON.parse(localStorage.getItem("ResourcesDownloaded")!).model.initialized) fetchUrl.push(`resources/model/${versionMap.initial}.fm3d`);
+        if (!JSON.parse(localStorage.getItem("ResourcesDownloaded")!).model.initialized) fetchUrl.push(versionMap.initialResources);
         for (const version in versionMap) {
-            if (version == "initial") continue;
-            if (compareVersions(versionMap[version], JSON.parse(localStorage.getItem("ResourcesDownloaded")!).model.version) == 1) fetchUrl.push(`resources/model/${versionMap[version]}.fm3d`);
+            if (version == "initialResources") continue;
+            if (compareVersions(versionMap[version], JSON.parse(localStorage.getItem("ResourcesDownloaded")!).model.version) == 1) fetchUrl.push(versionMap[version]);
         }
 
         if (fetchUrl.length == 0) {
@@ -84,41 +88,47 @@ function fetchModelUpdate(versionMap: versionMap) {
         //const version of fetchUrl
         for (let i = 0; i < fetchUrl.length; i++) {
             const version = fetchUrl[i];
-            await fetch(version!, {
+            await fetch(version, {
                 method: "GET",
                 headers: {
-                    "Content-Type": "application/zip"
-                }
-            }).then(res => res.arrayBuffer()).then(res => {
+                    "Content-Type": "application/zip",
+                },
+                redirect: "follow",
+                mode: "cors"
+            }).then(res=>{if(res.ok) return res.arrayBuffer();else{throw new Error(res.statusText)}}).then(res => {
                 downloadCount++;
                 downloadSize += res.byteLength;
                 JSZip.loadAsync(res).then(async zip => {
+                    
                     if (!zip.file("FileMap.json")) {
-                        toast.error(<TranslateText contentData={"resourcesManager.resources.notificationsmodel.noFileMap"} />);
+                        toast.error(<TranslateText contentData={"resourcesManager.resources.notificationsmodel.music.noFileMap"} />);
                         reject("Error fetching resources update: FileMap.json not found");
                     }
                     else {
                         try {
+                            const fileMap = JSON.parse(await zip.file("FileMap.json").async("string"));
                             await installModel(zip)
                             if (i == fetchUrl.length - 1) {
                                 //toast.success(<TranslateText contentData={"resourcesManager.resources.notifications.model.updated"} start={downloadCount.toString()} />);
                                 ResourcesDownloaded.model = {
                                     initialized: true,
-                                    version: latestVersion
+                                    version: compareVersions(versionMap.version, latestVersion) == 1 ? versionMap.version : latestVersion
                                 }
                                 localStorage.setItem("ResourcesDownloaded", JSON.stringify(ResourcesDownloaded));
                                 resolve(downloadSize);
                             }
                         }
                         catch (error) {
-                            toast.error(`${<TranslateText contentData={"resourcesManager.resources.notifications.model.extractFailed"} />} : ${error}`);
+                            toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.model.extractFailed"} />);
+                            console.log(error);
+                            
                             reject(error);
                         }
                     }
                 });
             }).catch(err => {
                 console.log(err);
-                toast.error(`${<TranslateText contentData={"resourcesManager.resources.notifications.downloadingFailed"} />}: ${err.message}`);
+                toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.downloadingFailed"} end={err} />);
             })
             /* if (i == fetchUrl.length - 1) {
                 //toast.success(<TranslateText contentData={"resourcesManager.resources.notifications.model.updated"} start={downloadCount.toString()} />);
@@ -134,12 +144,11 @@ function fetchModelUpdate(versionMap: versionMap) {
 }
 
 async function installModel(zip:JSZip) {
-    const ResourcesDownloaded = JSON.parse(localStorage.getItem("ResourcesDownloaded")!);
-    let latestVersion: string = ResourcesDownloaded.model.version;
+    console.log(zip);
     
-    const fileMap = await zip.file("FileMap.json").async("string");
+    
+    const filemMapJsonData = JSON.parse(await zip.file("FileMap.json").async("string"));
 
-    const filemMapJsonData = JSON.parse(fileMap);
     const assets: assets = {};
     for (const category in filemMapJsonData) {
         if (category == "version") continue;
@@ -156,7 +165,9 @@ async function installModel(zip:JSZip) {
             } else {
                 data = {} as { [key: string]: ArrayBuffer };
                 for (const key in content.src) {
-                    data[key] = await zip.file(content.src[key]).async("arraybuffer");
+                    const dataContent = await zip.file(content.src[key]).async("arraybuffer");
+                    console.log(key, content.src[key],dataContent);
+                    data[key] = dataContent
                     size += data[key].byteLength;
                 }
             }
@@ -197,7 +208,6 @@ async function installModel(zip:JSZip) {
                         data: modelData
                     });
                     put.onsuccess = e => {
-                        latestVersion = compareVersions(filemMapJsonData.version, latestVersion) == 1 ? filemMapJsonData.version : latestVersion;
                         resolve();
 
                     }
@@ -215,11 +225,143 @@ async function installModel(zip:JSZip) {
 }
 
 function fetchMusicUpdate(versionMap: versionMap) {
+    const ResourcesDownloaded = JSON.parse(localStorage.getItem("ResourcesDownloaded")!);
     return new Promise<number>(async (resolve, reject) => {
-        setTimeout(() => {
+        if(!versionMap){
+            toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.noMap"} />);
+            reject();
+            return;
+        }
+
+        const fetchUrl = [];
+        let latestVersion: string = ResourcesDownloaded.music.version;
+        let downloadCount = 0;
+        let downloadSize = 0;
+        if(!JSON.parse(localStorage.getItem("ResourcesDownloaded")!).music.initialized) fetchUrl.push(versionMap.initialResources);
+        
+        for(const version in versionMap){
+            if(version == "initialResources") continue;
+            if(compareVersions(version, latestVersion) == 1) fetchUrl.push(versionMap[version]);
+        }
+
+        if(fetchUrl.length == 0){
             resolve(0);
-        }, 0);
+            return;
+        }
+
+        for(let i = 0; i<fetchUrl.length; i++){
+            const version = fetchUrl[i];
+            await fetch(version,{
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                redirect: "follow",
+                mode: "cors"
+            }).then(res=>{if(res.ok) return res.arrayBuffer(); else throw new Error(res.statusText);}).then(res => {
+                downloadCount++;
+                downloadSize += res.byteLength;
+                JSZip.loadAsync(res).then(async zip => {
+
+                    if(!zip.file("FileMap.json")){
+                        toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.music.noFileMap"} />);
+                        reject("Error fetching resources update: FileMap.json not found");
+                    }
+                    else {
+                        try {
+                            await parseMusiccollection(zip);
+                            if(i == fetchUrl.length - 1){
+                                ResourcesDownloaded.music = {
+                                    initialized: true,
+                                    version: compareVersions(versionMap.version, latestVersion) == 1 ? versionMap.version : latestVersion
+                                }
+                                localStorage.setItem("ResourcesDownloaded", JSON.stringify(ResourcesDownloaded));
+                                resolve(downloadSize);
+                            }
+                        } catch (error) {
+                            toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.music.extractFailed"}/>);
+                            console.log(error);
+                            reject(error);
+                        }
+                    }
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.downloadingFailed"} end={err} />);
+            })
+        }
+
+
     });
 }
 
+async function parseMusiccollection(zip:JSZip){
+    return new Promise<void>(async (resolve, reject) => {
+            const folders = JSON.parse(await zip.file("FileMap.json").async("string"))
+            let promises = [];
+            for (const folder of folders.folders) {
+                const zipFilter = zip.filter(path => path.startsWith(folder));
+                const zipFolder = new JSZip();
+                for (const file of zipFilter) {
+                    if(file.dir) continue;
+
+                    zipFolder.file(file.name.replace(folder+"/",""), await file.async("arraybuffer"));
+                }
+                promises.push(installMusic(zipFolder));
+            }
+            await Promise.all(promises);
+    })
+}
+
+async function installMusic(zip:JSZip){
+    return new Promise<void>(async (resolve, reject) => {
+        console.log(zip);
+        if(!zip.file("FileMap.json")){
+            console.error("Error installing music: FileMap.json not found");
+            resolve();
+        }
+
+        const fileMapJsonData = JSON.parse(await zip.file("FileMap.json").async("string"));
+
+        const musicData = {
+            name: fileMapJsonData.name,
+            composer: fileMapJsonData.composer,
+            bpm: fileMapJsonData.bpm,
+            time: fileMapJsonData.time,
+            license: fileMapJsonData.license,
+            thumbnail: await zip.file(fileMapJsonData.thumbnail).async("arraybuffer"),
+            behavior: fileMapJsonData.behavior ? await zip.file(fileMapJsonData.behavior).async("arraybuffer") : null,
+            music: {} as { [key: string]: ArrayBuffer },
+            difficulties: {
+                memory:null,
+                advance:null,
+                prospects:null,
+                ozma:null,
+            } as { [key: string] :{}}
+
+
+        }
+
+        for (const musicName in fileMapJsonData.music){
+            const musicFile = await zip.file(fileMapJsonData.music[musicName]).async("arraybuffer");
+            musicData.music[musicName] = musicFile;
+        }
+        for (const chart in fileMapJsonData.difficulties){
+            console.log(chart);
+            
+            const chartData = {
+                level: fileMapJsonData.difficulties[chart].level,
+                constant : fileMapJsonData.difficulties[chart].constant,
+                chartDesigner: fileMapJsonData.difficulties[chart].chartDesigner,
+                offset : fileMapJsonData.difficulties[chart].offset,
+                chart: await zip.file(fileMapJsonData.difficulties[chart].chartFile).async("string"),
+            }
+            musicData.difficulties[chart] = chartData;
+        }
+
+    })
+}
+
 export default fetchResourcesUpdate;
+export { installModel,parseMusiccollection,installMusic };

@@ -6,6 +6,7 @@ const path = require("path");
 const http = require("http");
 const fs = require("fs");
 const nedb = require("nedb");
+const url = require("url");
 const app = express();
 const server = http.createServer(app);
 const basedir = path.join(__dirname, "../");
@@ -32,8 +33,23 @@ server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
 app.get("/update/map", (req, res) => {
+    const baseUrl = "http://" + req.hostname + ":" + port;
+    const modelUrl = new url.URL("/resources/model/", baseUrl);
+    const musicUrl = new url.URL("/resources/music/", baseUrl);
+    const model = {};
+    const music = {};
+    fs.readdirSync(path.join(resourcesdir, "3DModels")).forEach(file => {
+        if (file.endsWith(".fm3d")) {
+            model[file.replace(".fm3d", "")] = new url.URL(file, modelUrl).href;
+        }
+    });
+    fs.readdirSync(path.join(resourcesdir, "MusicResources")).forEach(file => {
+        if (file.endsWith(".fmmc")) {
+            music[file.replace(".fmmc", "")] = new url.URL(file, musicUrl).href;
+        }
+    });
     res.json({
-        model: JSON.parse(fs.readFileSync(path.join(resourcesdir, "3DModels/VersionMap.json"), "utf8")),
-        music: JSON.parse(fs.readFileSync(path.join(resourcesdir, "MusicResources/VersionMap.json"), "utf8"))
+        model: model,
+        music: music
     });
 });

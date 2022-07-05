@@ -6,6 +6,7 @@ import * as socketIo from "socket.io";
 import * as fs from "fs";
 import * as crypto from "crypto";
 import * as nedb from "nedb";
+import * as url from "url";
 
 const app = express();
 const server:http.Server = http.createServer(app);
@@ -42,8 +43,25 @@ server.listen(port, () => {
 });
 
 app.get("/update/map",(req,res)=>{
+    const modelUrl = "/resources/model/"
+    const musicUrl = "/resources/music/"
+    
+    const model:{[key:string]:string} = {}
+    const music: { [key: string]: string } = {}
+    fs.readdirSync(path.join(resourcesdir, "3DModels")).forEach(file => {
+        if(file.endsWith(".fm3d")){
+            model[file.replace(".fm3d","")] = new url.URL(file,modelUrl).href;
+        }
+    });
+    fs.readdirSync(path.join(resourcesdir, "MusicResources")).forEach(file => {
+        if(file.endsWith(".fmmc")){
+            music[file.replace(".fmmc","")] = new url.URL(file,musicUrl).href;
+        }
+    });
     res.json({
-        model: JSON.parse(fs.readFileSync(path.join(resourcesdir, "3DModels/VersionMap.json"), "utf8")),
-        music: JSON.parse(fs.readFileSync(path.join(resourcesdir, "MusicResources/VersionMap.json"), "utf8"))
+        model: model,
+        music: music
     })
+
+    
 })

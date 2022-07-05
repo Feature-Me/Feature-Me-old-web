@@ -1,0 +1,57 @@
+{
+    "title":"Feat you.",
+    "composer":"Rae",
+    "bpm":{
+        "max":120,
+        "min":120,
+        "display":"120"
+    },
+    "time":{
+        "ms":95000,
+        "display":"01:35"
+    },
+    "backgroundData":null,
+    "music":{
+        "Feat you. Prototype":"Music/Feat_you._1.mp3",
+        "Feat you. Crystal":"Music/Feat_you._2.mp3",
+        "Feat you. Alpha": "Music/Feat_you._3.mp3",
+        "Feat you. Future":"Music/Feat_you._4.mp3"
+    },
+    "licence": "2022 Mksk and Rae the Feature Me Project. All rights reserved.",
+    "thumbnail":"Images/Feat_you.png",
+    "defaultMusic":"Feat you. Future",
+    "defaultBackground":"",
+    "behavior":null,
+    "difficulties":{
+        "memory":{
+            "level":3,
+            "constant":2,
+            "chartDesigner":"Mksk vs Raetan",
+            "offset": 500,
+            "chartFile":"Chart/memory.fmc"
+        },
+        "advance":{
+            "level":9,
+            "constant":5,
+            "chartDesigner": "Mksk vs Raetan",
+            "offset": 500,
+            "chartFile":"Chart/advance.fmc"
+        },
+        "prospects":{
+            "level":16,
+            "constant":6,
+            "chartDesigner": "Mksk vs Raetan",
+            "offset": 500,
+            "chartFile":"Chart/prospects.fmc"
+        },
+        "ozma":{
+            "level":17,
+            "constant":0,
+            "chartDesigner": "Mksk vs Raetan",
+            "forceSound":"Feat you. Alpha",
+            "offset": 500,
+            "chartFile":"Chart/ozma.fmc"
+        }
+    }
+
+}

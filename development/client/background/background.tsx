@@ -59,7 +59,6 @@ function initBackground(backgroundCanvas: React.RefObject<HTMLDivElement>):Promi
             });
             renderer.outputEncoding = THREE.sRGBEncoding;
             renderer.physicallyCorrectLights = true;
-            renderer.outputEncoding = THREE.sRGBEncoding;
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
             renderer.toneMappingExposure = 0.25;
             gameData.background.renderer.engine = renderer;

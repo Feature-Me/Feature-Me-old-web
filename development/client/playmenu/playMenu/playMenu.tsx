@@ -3,6 +3,7 @@ import gameData from 'dataController/gameData/gameData';
 
 import style from "./menu.scss"
 import Head from 'global/head/head';
+import switchPage from 'global/sceneChanger/swtchPage';
 
 const PlayMenu: React.FC<{backFunc?:Function}> = (props) => {
     const backFunc = props.backFunc || function(){ gameData.titleBackgroundOpened.setter(false) }
@@ -22,7 +23,7 @@ const PlayMenu: React.FC<{backFunc?:Function}> = (props) => {
         <div className={style.menu}>
             <Head title='Home' backFunc={backFunc}/>
             <div className={style.playselect} ref={playSelectRef}>
-                <div className={style.left}>
+                <div className={style.left} onClick={()=>switchPage("musicSelect")}>
                     Play Solo
                 </div>
                 <div className={style.right}>
