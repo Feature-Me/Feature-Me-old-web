@@ -5,33 +5,17 @@ import compareVersions from "compare-versions";
 import React from "react";
 import TranslateText from "../../global/TranslateText/translateText";
 import filesize from "filesize";
+import { installModel } from "./installModel";
+import { parseMusiccollection } from "./installMusic";
 
 type versionMap = {
     [key: string]: string;
     version: string
 }
 
-type assets = {
-    [key: string]: Array<modelAssetContents>;
-}
 
-type modelAssetContents = {
-    name: string,
-    data: ArrayBuffer | { [key: string]: ArrayBuffer },
-    size: number
-    alt?: ArrayBuffer,
-}
 
-type modelContentData = {
-    [key: string]: string | {};
-    name: string;
-    src: string | { [key: string]: string };
-    alt?: string;
-}
 
-type Musiccollection = {
-    folders: Array<string>;
-}
 
 function sumArray(array: Array<number>): number {
     return array.reduce((a, b) => a + b, 0);
@@ -112,7 +96,7 @@ function fetchModelUpdate(versionMap: versionMap) {
                                 //toast.success(<TranslateText contentData={"resourcesManager.resources.notifications.model.updated"} start={downloadCount.toString()} />);
                                 ResourcesDownloaded.model = {
                                     initialized: true,
-                                    version: compareVersions(versionMap.version, latestVersion) == 1 ? versionMap.version : latestVersion
+                                    version: compareVersions(fileMap.version, latestVersion) == 1 ? fileMap.version : latestVersion
                                 }
                                 localStorage.setItem("ResourcesDownloaded", JSON.stringify(ResourcesDownloaded));
                                 resolve(downloadSize);
@@ -141,87 +125,6 @@ function fetchModelUpdate(versionMap: versionMap) {
             } */
         }
     })
-}
-
-async function installModel(zip:JSZip) {
-    console.log(zip);
-    
-    
-    const filemMapJsonData = JSON.parse(await zip.file("FileMap.json").async("string"));
-
-    const assets: assets = {};
-    for (const category in filemMapJsonData) {
-        if (category == "version") continue;
-        for (const content of filemMapJsonData[category]) {
-            content as modelContentData;
-
-            if (!assets[category]) assets[category] = []
-            let data: ArrayBuffer | { [key: string]: ArrayBuffer }
-            let size: number;
-            let alt: ArrayBuffer;
-            if (typeof content.src == "string") {
-                data = await zip.file(content.src).async("arraybuffer");
-                size = data.byteLength;
-            } else {
-                data = {} as { [key: string]: ArrayBuffer };
-                for (const key in content.src) {
-                    const dataContent = await zip.file(content.src[key]).async("arraybuffer");
-                    console.log(key, content.src[key],dataContent);
-                    data[key] = dataContent
-                    size += data[key].byteLength;
-                }
-            }
-            if (content.alt) alt = await zip.file(content.alt).async("arraybuffer");
-            else alt = new ArrayBuffer(0);
-            assets[category].push({
-                name: content.name,
-                data: data,
-                size: size,
-                alt: alt
-            })
-        }
-
-    }
-
-
-    const dbOpenRequest = indexedDB.open(databaseInfo.DBName);
-    dbOpenRequest.onsuccess = async e => {
-        const db = dbOpenRequest.result;
-        const ModelStore = db.transaction(databaseInfo.modelStore, "readwrite").objectStore(databaseInfo.modelStore);
-        for (const category in assets) {
-            const savedModel = ModelStore.get(category);
-
-            await new Promise<void>((resolve, reject) => {
-                savedModel.onsuccess = e => {
-
-                    const modelData = savedModel.result?.data || [];
-                    for (const asset of assets[category]) {
-                        if (!modelData.find((m: { name: string; }) => m.name == asset.name)) modelData.push(asset);
-                        else {
-                            const index = modelData.findIndex((m: { name: string; }) => m.name == asset.name);
-                            modelData[index] = asset;
-                        }
-
-                    }
-                    const put = ModelStore.put({
-                        id: category,
-                        data: modelData
-                    });
-                    put.onsuccess = e => {
-                        resolve();
-
-                    }
-                }
-                savedModel.onerror = e => {
-                    toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.model.saveFailed"} />);
-                    reject("Error merging resources update: ModelStore.put failed");
-                }
-
-            })
-
-        }
-        db.close();
-    }
 }
 
 function fetchMusicUpdate(versionMap: versionMap) {
@@ -269,11 +172,12 @@ function fetchMusicUpdate(versionMap: versionMap) {
                     }
                     else {
                         try {
+                            const fileMap = JSON.parse(await zip.file("FileMap.json").async("string"));
                             await parseMusiccollection(zip);
                             if(i == fetchUrl.length - 1){
                                 ResourcesDownloaded.music = {
                                     initialized: true,
-                                    version: compareVersions(versionMap.version, latestVersion) == 1 ? versionMap.version : latestVersion
+                                    version: compareVersions(fileMap.version, latestVersion) == 1 ? fileMap.version : latestVersion
                                 }
                                 localStorage.setItem("ResourcesDownloaded", JSON.stringify(ResourcesDownloaded));
                                 resolve(downloadSize);
@@ -296,72 +200,5 @@ function fetchMusicUpdate(versionMap: versionMap) {
     });
 }
 
-async function parseMusiccollection(zip:JSZip){
-    return new Promise<void>(async (resolve, reject) => {
-            const folders = JSON.parse(await zip.file("FileMap.json").async("string"))
-            let promises = [];
-            for (const folder of folders.folders) {
-                const zipFilter = zip.filter(path => path.startsWith(folder));
-                const zipFolder = new JSZip();
-                for (const file of zipFilter) {
-                    if(file.dir) continue;
-
-                    zipFolder.file(file.name.replace(folder+"/",""), await file.async("arraybuffer"));
-                }
-                promises.push(installMusic(zipFolder));
-            }
-            await Promise.all(promises);
-    })
-}
-
-async function installMusic(zip:JSZip){
-    return new Promise<void>(async (resolve, reject) => {
-        console.log(zip);
-        if(!zip.file("FileMap.json")){
-            console.error("Error installing music: FileMap.json not found");
-            resolve();
-        }
-
-        const fileMapJsonData = JSON.parse(await zip.file("FileMap.json").async("string"));
-
-        const musicData = {
-            name: fileMapJsonData.name,
-            composer: fileMapJsonData.composer,
-            bpm: fileMapJsonData.bpm,
-            time: fileMapJsonData.time,
-            license: fileMapJsonData.license,
-            thumbnail: await zip.file(fileMapJsonData.thumbnail).async("arraybuffer"),
-            behavior: fileMapJsonData.behavior ? await zip.file(fileMapJsonData.behavior).async("arraybuffer") : null,
-            music: {} as { [key: string]: ArrayBuffer },
-            difficulties: {
-                memory:null,
-                advance:null,
-                prospects:null,
-                ozma:null,
-            } as { [key: string] :{}}
-
-
-        }
-
-        for (const musicName in fileMapJsonData.music){
-            const musicFile = await zip.file(fileMapJsonData.music[musicName]).async("arraybuffer");
-            musicData.music[musicName] = musicFile;
-        }
-        for (const chart in fileMapJsonData.difficulties){
-            console.log(chart);
-            
-            const chartData = {
-                level: fileMapJsonData.difficulties[chart].level,
-                constant : fileMapJsonData.difficulties[chart].constant,
-                chartDesigner: fileMapJsonData.difficulties[chart].chartDesigner,
-                offset : fileMapJsonData.difficulties[chart].offset,
-                chart: await zip.file(fileMapJsonData.difficulties[chart].chartFile).async("string"),
-            }
-            musicData.difficulties[chart] = chartData;
-        }
-
-    })
-}
 
 export default fetchResourcesUpdate;
-export { installModel,parseMusiccollection,installMusic };

@@ -1,0 +1,6 @@
+#offset:500
+
+SCRIPT(0,TEXT(welcome_mem,3500))
+SCRIPT(4000,TEXT(welcome_mem_2,3500))
+
+SCRIPT(9000,TEXT(tap,3500))
