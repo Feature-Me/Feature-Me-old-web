@@ -33,19 +33,18 @@ server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
 app.get("/update/map", (req, res) => {
-    const baseUrl = "http://" + req.hostname + ":" + port;
-    const modelUrl = new url.URL("/resources/model/", baseUrl);
-    const musicUrl = new url.URL("/resources/music/", baseUrl);
+    const modelUrl = "/resources/model/";
+    const musicUrl = "/resources/music/";
     const model = {};
     const music = {};
     fs.readdirSync(path.join(resourcesdir, "3DModels")).forEach(file => {
         if (file.endsWith(".fm3d")) {
-            model[file.replace(".fm3d", "")] = new url.URL(file, modelUrl).href;
+            model[file.replace(".fm3d", "")] = new url.URL(file, modelUrl).pathname;
         }
     });
     fs.readdirSync(path.join(resourcesdir, "MusicResources")).forEach(file => {
         if (file.endsWith(".fmmc")) {
-            music[file.replace(".fmmc", "")] = new url.URL(file, musicUrl).href;
+            music[file.replace(".fmmc", "")] = new url.URL(file, musicUrl).pathname;
         }
     });
     res.json({

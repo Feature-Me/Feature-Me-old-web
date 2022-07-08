@@ -58,10 +58,26 @@ body {
     z-index: 10;
 }
 
+button {
+	position:relative;
+    transition: 0.2s;
+    color: whitesmoke;
+    border: 1px solid whitesmoke;
+    border-radius: 4px;
+    background-color: #36393f;
+    margin: 4px;
+    box-sizing: border-box;
+    line-height: 24px;
+    padding: 4px;
 
-
-
-
+	&:before{
+		position:absolute;
+		
+	}
+    &:hover {
+        background-color: #1189da;
+    }
+}
 
 
 ::-webkit-scrollbar {
