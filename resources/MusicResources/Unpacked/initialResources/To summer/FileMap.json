@@ -1,0 +1,54 @@
+{
+    "title": "To Summer",
+    "composer": "Goners",
+    "bpm":{
+        "max": 120,
+        "min": 120,
+        "display": "120"
+    },
+    "time":{
+        "ms":117000,
+        "display": "01:57"
+    },
+    "demo":{
+        "start":71000,
+        "end":100000
+    },
+    "backgroundData": null,
+    "defaultBackground": "",
+    "music":[
+        {
+            "name": "To Summer",
+            "src": "Music/To_Summer.mp3"
+        }
+    ],
+    "defaultMusic":"To Summer",
+    "license": "2021 Goners. All rights reserved.",
+    "thumbnail": "Image/music.png",
+    "behavior":null,
+    "difficulties":[
+        {
+            "name": "memory",
+            "level":6,
+            "constant":0,
+            "chartDesigner":"Mksk",
+            "chartFile":"Chart/memory.fmc"
+        },
+        {
+            "name": "advance",
+            "level": 8,
+            "constant": 1,
+            "chartDesigner": "Mksk",
+            "chartFile": "Chart/advance.fmc"
+        },
+        {
+            "name": "prospects",
+            "level": 15,
+            "constant": 6,
+            "chartDesigner": "Mksk",
+            "chartFile": "Chart/prospects.fmc"
+        }
+
+    ]
+
+}

@@ -2,6 +2,7 @@ import React from "react";
 import style from "./head.scss";
 import gameData from "dataController/gameData/gameData";
 import { MdOutlineArrowBackIosNew } from "react-icons/md"
+import { CgMenuGridR } from "react-icons/cg"
 import { useTranslation } from "react-i18next";
 
 const Head: React.FC<{ title: string,backFunc?:Function }> = (props) => {
@@ -20,8 +21,8 @@ const Head: React.FC<{ title: string,backFunc?:Function }> = (props) => {
     
     return(
         <div className={style.head}>
-            <div className={style.backicon_wrapper} onClick={()=>{if(props.backFunc) props.backFunc()}}>
-                <MdOutlineArrowBackIosNew className={style.backicon} />
+            <div className={style.icon_wrapper} onClick={()=>{if(props.backFunc) props.backFunc()}}>
+                <MdOutlineArrowBackIosNew className={style.icon} />
             </div>
             <h4>
                 {props.title}
@@ -30,6 +31,9 @@ const Head: React.FC<{ title: string,backFunc?:Function }> = (props) => {
             <h4>
                 {clock} ({hr.current}{translation("head.hr")}:{min.current}{translation("head.min")} {translation("head.sessiontime")})
             </h4>
+            <div className={style.icon_wrapper}>
+                <CgMenuGridR className={style.icon} />
+            </div>
         </div>
     )
 }

@@ -48,7 +48,7 @@ async function installModel(zip: JSZip) {
                 data = {} as { [key: string]: ArrayBuffer };
                 for (const key in content.src) {
                     const dataContent = await zip.file(content.src[key]).async("arraybuffer");
-                    console.log(key, content.src[key], dataContent);
+
                     data[key] = dataContent
                     size += data[key].byteLength;
                 }

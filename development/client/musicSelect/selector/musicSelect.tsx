@@ -10,25 +10,32 @@ import musicSelectVar from '../musicSelectVariables';
 import Head from 'global/head/head';
 import switchPage from 'global/sceneChanger/swtchPage';
 import MusicListContent from 'musicSelect/listContent/musicListContent';
+import MusicDetails from 'musicSelect/musicDetails/musicDetails';
 
 const SelectMusic: React.FC<{ backFunc?: Function }> = (props) => {
     const [translation,i18n] = useTranslation();
     const backFunc = props.backFunc || function () { switchPage("play") }
     const [musicSelectVariables,setMusicSelectVariables] = useRecoilState(musicSelectVar);
     const musicListRef = React.useRef<HTMLDivElement>();
+    const musicSelectCache = JSON.parse(localStorage.getItem("musicSelect")!)
     
     window.addEventListener("scroll",updateX);
     React.useEffect(()=>{
-        updateX();
-        setMusicSelectVariables({...musicSelectVariables,musicList:gameData.musicData.all})
+        setMusicSelectVariables({...musicSelectVariables,showMusicList:gameData.musicData.all})
+
     },[])
     React.useEffect(()=>{
         updateX();
-        setMusicSelectVariables({...musicSelectVariables,musicList:gameData.musicData.all.filter(data=>data.toLowerCase().includes(musicSelectVariables.search))})
+        console.log(musicSelectVariables.showMusicList);
+    },[musicSelectVariables.showMusicList]);
+    React.useEffect(()=>{
+        updateX();
+        setMusicSelectVariables({...musicSelectVariables,showMusicList:gameData.musicData.all.filter(data=>data.toLowerCase().includes(musicSelectVariables.search))});
+        
     },[musicSelectVariables.search])
     function updateX() {
         musicListRef.current.querySelectorAll("div").forEach((e)=>{
-            e.style.left = -e.offsetTop*0.16 + "px";
+            e.style.left = -e.offsetTop*0.08 + "px";
         });
     }
     return (
@@ -42,7 +49,7 @@ const SelectMusic: React.FC<{ backFunc?: Function }> = (props) => {
                     </div>
                     <div className={style.musiclist} ref={musicListRef}>
                         {
-                            musicSelectVariables.musicList.map(data => {
+                            musicSelectVariables.showMusicList.map(data => {
                                 return(
                                 <MusicListContent title={data} key={data}/>
                                 )
@@ -51,7 +58,7 @@ const SelectMusic: React.FC<{ backFunc?: Function }> = (props) => {
                     </div>
                 </div>
                 <div className={style.details}>
-                    Music Details here
+                    <MusicDetails />
                 </div>
             </div>
         </div>

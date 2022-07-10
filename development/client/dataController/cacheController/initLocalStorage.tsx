@@ -96,6 +96,12 @@ function initLocalStorage(): void {
             localStorage.setItem("gameConfig", JSON.stringify(gameConfig));
             fixedCount++;
         }
+        if(!localStorage.getItem("musicSelect")){
+            const musicSelect = {
+                selected: "",
+            }
+            localStorage.setItem("musicSelect", JSON.stringify(musicSelect));
+        }
         toast.success(<TranslateText contentData={"resourcesManager.cache.notifications.initialized"} end={<TranslateText contentData={"resourcesManager.cache.notifications.fixed"} start={fixedCount.toString()} />} />);
         //toast.success(<TranslateText contentData={"resourcesManager.cache.notifications.fixed"} />);
     } catch (error) {

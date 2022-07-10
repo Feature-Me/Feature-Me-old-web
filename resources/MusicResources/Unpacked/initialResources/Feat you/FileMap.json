@@ -10,7 +10,10 @@
         "ms": 95000,
         "display": "01:35"
     },
-    "demo": 52000,
+    "demo": {
+        "start":56500,
+        "end":72500
+    },
     "backgroundData": null,
     "defaultBackground": "",
     "music": [
@@ -31,9 +34,9 @@
             "src": "Music/Feat_you._4.mp3"
         }
     ],
-    "licence": "2022 Mksk and Rae the Feature Me Project. All rights reserved.",
-    "thumbnail": "Images/Feat_you.png",
     "defaultMusic": "Feat you. Future",
+    "licence": "2022 Mksk and Rae the Feature Me Project. All rights reserved.",
+    "thumbnail": "Image/Feat_you.png",
     "behavior": null,
     "difficulties": [
         {

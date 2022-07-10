@@ -31,7 +31,17 @@ function fetchResourcesUpdate() {
             }
         }).then(res => res.json()).then(res => {
             Promise.all([fetchModelUpdate(res.model), fetchMusicUpdate(res.music)]).then(values => {
-                toast.success(<TranslateText contentData={"resourcesManager.resources.notifications.initialized"} end={`(${filesize(sumArray(values)).toString()})`} />);
+                toast.success(<TranslateText contentData={"resourcesManager.resources.notifications.initialized"} end={`(${filesize(sumArray(values.map(data=>data[0]))).toString()})`} />);
+                const ResourcesDownloaded = JSON.parse(localStorage.getItem("ResourcesDownloaded")!);;
+                for (const name of values) {
+                    if(name[2]) {
+                        ResourcesDownloaded[name[2]] = {
+                            initialized: true,
+                            version: name[1]
+                        }
+                    }
+                }
+                localStorage.setItem("ResourcesDownloaded", JSON.stringify(ResourcesDownloaded));
 
                 resolve("Successfully initialized resources");
             })
@@ -46,7 +56,7 @@ function fetchResourcesUpdate() {
 
 function fetchModelUpdate(versionMap: versionMap) {
     const ResourcesDownloaded = JSON.parse(localStorage.getItem("ResourcesDownloaded")!);
-    return new Promise<number>(async (resolve, reject) => {
+    return new Promise<[number,string,string]>(async (resolve, reject) => {
         //toast.info(<TranslateText contentData={"resourcesManager.resources.notifications.model.downloading"} />);
         if (!versionMap) {
             toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.noMap"} />);
@@ -66,7 +76,7 @@ function fetchModelUpdate(versionMap: versionMap) {
 
         if (fetchUrl.length == 0) {
             // toast.success(<TranslateText contentData={"resourcesManager.resources.notifications.model.noupdate"} />);
-            resolve(0);
+            resolve([0,latestVersion,"model"]);
             return;
         }
         //const version of fetchUrl
@@ -94,12 +104,8 @@ function fetchModelUpdate(versionMap: versionMap) {
                             await installModel(zip)
                             if (i == fetchUrl.length - 1) {
                                 //toast.success(<TranslateText contentData={"resourcesManager.resources.notifications.model.updated"} start={downloadCount.toString()} />);
-                                ResourcesDownloaded.model = {
-                                    initialized: true,
-                                    version: compareVersions(fileMap.version, latestVersion) == 1 ? fileMap.version : latestVersion
-                                }
-                                localStorage.setItem("ResourcesDownloaded", JSON.stringify(ResourcesDownloaded));
-                                resolve(downloadSize);
+                                /* localStorage.setItem("ResourcesDownloaded", JSON.stringify(ResourcesDownloaded)); */
+                                resolve([downloadSize, compareVersions(fileMap.version, latestVersion) == 1 ? fileMap.version : latestVersion,"model"]);
                             }
                         }
                         catch (error) {
@@ -129,7 +135,7 @@ function fetchModelUpdate(versionMap: versionMap) {
 
 function fetchMusicUpdate(versionMap: versionMap) {
     const ResourcesDownloaded = JSON.parse(localStorage.getItem("ResourcesDownloaded")!);
-    return new Promise<number>(async (resolve, reject) => {
+    return new Promise<[number,string,string]>(async (resolve, reject) => {
         if(!versionMap){
             toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.noMap"} />);
             reject();
@@ -148,7 +154,7 @@ function fetchMusicUpdate(versionMap: versionMap) {
         }
 
         if(fetchUrl.length == 0){
-            resolve(0);
+            resolve([0, latestVersion, "music"]);
             return;
         }
 
@@ -175,12 +181,13 @@ function fetchMusicUpdate(versionMap: versionMap) {
                             const fileMap = JSON.parse(await zip.file("FileMap.json").async("string"));
                             await parseMusiccollection(zip);
                             if(i == fetchUrl.length - 1){
-                                ResourcesDownloaded.music = {
+                                /* ResourcesDownloaded.music = {
                                     initialized: true,
                                     version: compareVersions(fileMap.version, latestVersion) == 1 ? fileMap.version : latestVersion
-                                }
+                                } */
+                                
                                 localStorage.setItem("ResourcesDownloaded", JSON.stringify(ResourcesDownloaded));
-                                resolve(downloadSize);
+                                resolve([downloadSize, compareVersions(fileMap.version, latestVersion) == 1 ? fileMap.version : latestVersion,"music"]);
                             }
                         } catch (error) {
                             toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.music.extractFailed"}/>);

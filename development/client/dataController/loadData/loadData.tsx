@@ -1,9 +1,11 @@
+import React from "react"; 
+import { toast } from "react-toastify";
+
 import databaseInfo from "../../global/databaseInfo.json";
 import Version from "../../global/versions.json"
 import compareVersions from "compare-versions";
 import gameData from "dataController/gameData/gameData";
-import { toast } from "react-toastify";
-import React from "react";
+
 import TranslateText from "global/TranslateText/translateText";
 import arrayBufferToBase64 from "functions/arrayBufferToBase64/arrayBufferToBase64";
 import { MusicAssetContents } from "dataController/resourcesUpdater/installMusic";
@@ -54,7 +56,7 @@ function loadBackgroundAndGameObject() {
                 const result = e.target as EventTargetWithResult;
                 const backgrounds = result.result;
                 gameData.background.all = backgrounds.data.map((b: { name: string }) => b.name);
-                gameData.background.alt = "data:image/png;base64,"+arrayBufferToBase64(backgrounds.data.find((b: { name: string }) => b.name === gameConfig.background.backgroundName).alt)
+                gameData.background.alt = arrayBufferToBase64(backgrounds.data.find((b: { name: string }) => b.name === gameConfig.background.backgroundName).alt)
                 if (gameConfig.use3DBackground) gameData.background.data = new ArrayBuffer(0);
                 else gameData.background.data = backgrounds.data.find((e: { name:string }) => e.name === gameConfig.background.backgroundName).data;
                 
@@ -70,6 +72,10 @@ function loadBackgroundAndGameObject() {
 
 function loadMusic() {
     return new Promise<void>((resolve, reject) => {
+        gameData.musicData =  {
+            content: [],
+            all: [],
+        }
         const DBOpenRequest = indexedDB.open(databaseInfo.DBName);
         DBOpenRequest.onsuccess = function (event) {
             const db = DBOpenRequest.result;

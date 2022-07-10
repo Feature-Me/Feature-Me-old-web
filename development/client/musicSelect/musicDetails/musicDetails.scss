@@ -1,0 +1,57 @@
+@import "../../../assets/mixin.scss";
+
+.container{
+    height: 100%;
+    padding: 48px 32px;
+    display: grid;
+        align-items: center;
+        row-gap: 16px;
+        grid-template-columns: 1fr;
+        grid-template-rows: 48px 32px 24px 1fr 96px;
+
+        @media screen and (max-height: 540px) {
+            grid-template-rows: 32px 24px 16px 1fr 64px;
+            row-gap: 8px;
+            padding: 24px 32px;
+        }
+            
+
+    h1{
+        margin: 0;
+        @include font-body;
+        line-height: 48px;
+        @media screen and (max-height: 540px) {
+            line-height: 32px;
+        }
+    }
+    p{
+        margin: 0;
+        @include font-body;
+        @include small-device-font;
+        line-height: 24px;
+    }
+    h2{
+        margin: 0;
+        @include font-body;
+        line-height: 32px;
+        @media screen and (max-height: 540px) {
+                line-height: 24px;
+        }
+    }
+    .image{
+        height: 100%;
+        width: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .selections{
+        height: 100%;
+        display: grid;
+            grid-template-columns: 1fr auto;
+            grid-template-rows: 1fr;
+            column-gap: 16px;
+            align-items: center;
+    }
+
+}

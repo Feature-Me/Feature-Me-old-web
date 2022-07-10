@@ -10,7 +10,10 @@
         "ms": 95000,
         "display": "01:35"
     },
-    "demo": 52000,
+    "demo": {
+        "start": 56500,
+        "end": 72500
+    },
     "backgroundData": null,
     "defaultBackground": "",
     "music": [
@@ -19,9 +22,9 @@
             "src":"Music/Feat_you._3.mp3"
         }
     ],
-    "licence": "2022 Mksk and Rae the Feature Me Project. All rights reserved.",
-    "thumbnail": "Images/Tutorial.png",
     "defaultMusic": "Tutorial - Feat you.",
+    "licence": "2022 Mksk and Rae the Feature Me Project. All rights reserved.",
+    "thumbnail": "Image/Tutorial.png",
     "behavior": null,
     "directing": [
         {

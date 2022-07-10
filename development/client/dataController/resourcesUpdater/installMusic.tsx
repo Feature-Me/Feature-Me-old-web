@@ -1,4 +1,5 @@
 import JSZip from "jszip";
+import {match} from "ts-pattern"
 import databaseInfo from "../../global/databaseInfo.json";
 
 type Musiccollection = {
@@ -16,7 +17,8 @@ interface MusicAssetMapDifficulty {
 }
 
 interface DirectingTextMap{
-    file:{
+    type: "text"
+    lngfiles:{
         [key:string]:string;
     }
     fallback:string;
@@ -72,6 +74,14 @@ interface chartData{
     name: difficulties;
     data: string;
 }
+interface DirectingText{
+    type:"text";
+    data: {
+        [key:string]:string;
+    };
+    fallback:string;
+}
+type directings = DirectingText
 interface MusicAssetContents {
     metadata: {
         title: string;
@@ -95,6 +105,7 @@ interface MusicAssetContents {
 
         difficulties: Array<difficultyData>;
     }
+    directing: Array<directings>|null;
     behavior: ArrayBuffer | null;
     music: Array<musicData>
     chart: Array<chartData>
@@ -120,9 +131,9 @@ async function parseMusiccollection(zip: JSZip) {
     })
 }
 
+
 async function installMusic(zip: JSZip) {
     return new Promise<void>(async (resolve, reject) => {
-        console.log(zip);
         if (!zip.file("FileMap.json")) {
             console.error("Error installing music: FileMap.json not found");
             resolve();
@@ -149,6 +160,7 @@ async function installMusic(zip: JSZip) {
             behavior: fileMapJsonData.behavior ? await zip.file(fileMapJsonData.behavior).async("arraybuffer") : null,
             music: [],
             chart: [],
+            directing: []
 
         }
 
@@ -170,6 +182,21 @@ async function installMusic(zip: JSZip) {
             const metadata = difficulty
             delete metadata.chartFile;
             musicData.metadata.difficulties.push(metadata);
+        }
+        if(fileMapJsonData.directing){
+            for (const directing of fileMapJsonData.directing) {
+                if(directing.type == "text"){
+                    const data:DirectingText = {
+                        type: directing.type,
+                        data: {},
+                        fallback: directing.fallback
+                    }
+                    for (const file in directing.lngfiles) {
+                        data.data[file] = await zip.file(directing.lngfiles[file]).async("string");
+                    }
+                    musicData.directing.push(data)
+                }
+            }
         }
         
         const dbOpenRequest = indexedDB.open(databaseInfo.DBName);

@@ -1,11 +1,20 @@
+import { MusicAssetContents } from "dataController/resourcesUpdater/installMusic";
 import {atom} from "recoil";
 
-const musicSelectVarialbes = atom({
+interface MusicSelectVariables {
+    selected:string;
+    selectedContentData:MusicAssetContents;
+    search:string;
+    showMusicList:Array<string>;
+}
+
+const musicSelectVarialbes = atom<MusicSelectVariables>({
     key: "musicSelectVariables",
     default: {
         selected:null,
+        selectedContentData:null,
         search: "",
-        musicList: [],
+        showMusicList: [],
     }
 });
 

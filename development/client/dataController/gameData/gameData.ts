@@ -8,7 +8,15 @@ declare global {
 
 type gameData = {
     startedTime: Date,
-    background: { data: ArrayBuffer, alt?: string, all: string[], renderer: { container:React.MutableRefObject<HTMLDivElement>|null,engine:THREE.WebGLRenderer | THREE.WebGL1Renderer | null} };
+    background: { 
+        data: ArrayBuffer,
+         alt?: string,
+          all: string[], 
+          renderer: {
+            container:React.MutableRefObject<HTMLDivElement>|null,
+            engine:THREE.WebGLRenderer | THREE.WebGL1Renderer | null
+        } 
+    };
     page: {
         current: React.FC | null,
         container:React.MutableRefObject<HTMLDivElement>|null,
@@ -41,6 +49,7 @@ var gameData: gameData = gameData = {
             container: null,
             engine: null,
         }
+
     },
     sceneChangerOpened:{
         value: null,
@@ -63,5 +72,6 @@ var gameData: gameData = gameData = {
         all: [],
     }
 }
+
 
 export default gameData;

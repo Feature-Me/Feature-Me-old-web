@@ -9,7 +9,7 @@
     text-shadow: 0 0 4px white;
     padding: 0 16px;
     display: grid;
-        grid-template-columns: 48px auto 1fr auto;
+        grid-template-columns: 48px auto 1fr auto 48px;
         grid-template-rows: 1fr;
         align-items: center;
         column-gap: 8px;
@@ -27,19 +27,19 @@
         @include small-device-font;
     }
 
-    .backicon_wrapper{
+    .icon_wrapper{
         margin: 4px;
         display: flex;
             align-items: center;
             justify-content: center;
-            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
-        .backicon {
+        .icon {
             transition: 0.3s;
                 margin: 0 auto;
                 transform: scale(1);
                 &:hover{
                     fill: #1189da;
-                    transform: scale(2.5);
+                    color: #1189da;
+                    transform: scale(1.5);
                 }
             }
     }
