@@ -3,13 +3,19 @@ import ENUSTermsTranslation from "./en-us.terms";
 import ENUSResourcesManagerTranslation from "./en-us.resourcesmanager";
 import ENUSCacheController from "./en-us.cachecontroller";
 import ENUSCautions from "./en-us.cautions";
+import ENUSMenuTranslation from "./en-us.menu";
+import ENUSHeadTranslation from "./en-us.head";
+import ENUSMusicSelectTranslation from "./en-us.musicselect";
 
 const ENUStranslation = {
     title: ENUSTitleTranslation,
     terms: ENUSTermsTranslation,
     resourcesManager: ENUSResourcesManagerTranslation,
     cacheController : ENUSCacheController,
-    cautions: ENUSCautions
+    cautions: ENUSCautions,
+    menu: ENUSMenuTranslation,
+    head: ENUSHeadTranslation,
+    musicSelect: ENUSMusicSelectTranslation
 }
 
 export default ENUStranslation;

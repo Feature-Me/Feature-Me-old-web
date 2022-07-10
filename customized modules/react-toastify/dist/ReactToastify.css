@@ -273,6 +273,7 @@
   background: var(--toastify-color-transparent);
 }
 
+/*--------edited contents--------*/
 .Toastify__close-button {
   color: #fff;
   background: transparent;
@@ -284,8 +285,19 @@
   transition: 0.3s ease;
   -ms-flex-item-align: start;
   align-self: flex-start;
+  clip-path: none;
 }
-
+.Toastify__close-button::before{
+  position: static;
+  background-color: transparent;
+}
+.Toastify__close-button::before:hover {
+  background-color: transparent;
+}
+.Toastify__close-button:hover{
+  background-color: transparent;
+}
+/*--------end edited contents--------*/
 .Toastify__close-button--light {
   color: #000;
   opacity: 0.3;

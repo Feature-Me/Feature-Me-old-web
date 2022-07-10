@@ -2,8 +2,10 @@ import React from "react";
 import style from "./head.scss";
 import gameData from "dataController/gameData/gameData";
 import { MdOutlineArrowBackIosNew } from "react-icons/md"
+import { useTranslation } from "react-i18next";
 
 const Head: React.FC<{ title: string,backFunc?:Function }> = (props) => {
+    const [translation,i18n] = useTranslation();
     const [clock, setClock] = React.useState(new Date().toLocaleTimeString());
     let nowTime:Date = new Date();
     const hr = React.useRef<number>()
@@ -26,7 +28,7 @@ const Head: React.FC<{ title: string,backFunc?:Function }> = (props) => {
             </h4>
             <div></div>
             <h4>
-                {clock} ({hr.current}hr:{min.current}min in this session)
+                {clock} ({hr.current}{translation("head.hr")}:{min.current}{translation("head.min")} {translation("head.sessiontime")})
             </h4>
         </div>
     )

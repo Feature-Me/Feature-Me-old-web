@@ -191,3 +191,4 @@ async function installMusic(zip: JSZip) {
 }
 
 export { parseMusiccollection, installMusic };
+export type {MusicAssetContents};

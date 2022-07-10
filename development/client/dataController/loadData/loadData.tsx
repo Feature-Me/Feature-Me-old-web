@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import React from "react";
 import TranslateText from "global/TranslateText/translateText";
 import arrayBufferToBase64 from "functions/arrayBufferToBase64/arrayBufferToBase64";
+import { MusicAssetContents } from "dataController/resourcesUpdater/installMusic";
 
 type Version = {
     [key: string]: string | {};
@@ -24,8 +25,12 @@ interface EventTargetWithResult  extends EventTarget {
 
 function loadData() {
     return new Promise<void>(async (resolve, reject) => {
-        await loadBackgroundAndGameObject();
-        resolve()
+        await Promise.all([
+            loadBackgroundAndGameObject(),
+            loadMusic(),
+        ]);
+        resolve();
+        
     })
 }
 
@@ -58,6 +63,42 @@ function loadBackgroundAndGameObject() {
         }
         DBOpenRequest.onerror = e => {
             reject();
+            toast.error(<TranslateText contentData={"resourcesManager.loadData.notifications.failed"} />);
+        }
+    })
+}
+
+function loadMusic() {
+    return new Promise<void>((resolve, reject) => {
+        const DBOpenRequest = indexedDB.open(databaseInfo.DBName);
+        DBOpenRequest.onsuccess = function (event) {
+            const db = DBOpenRequest.result;
+            const modelStore = db.transaction(databaseInfo.musicStore, "readonly").objectStore(databaseInfo.musicStore);
+            modelStore.getAllKeys().onsuccess = async e => {
+                const result = e.target as EventTargetWithResult;
+                const keys = result.result;
+                console.log(keys);
+                resolve();
+                for (const key of keys) {
+                    await new Promise<void>(resolve => {
+                        modelStore.get(key).onsuccess = e => {
+                            const result = e.target as EventTargetWithResult;
+                            const music = result.result as { id: string, data: MusicAssetContents }
+                            gameData.musicData.content.push(music.data);
+                            gameData.musicData.all.push(key);
+                            resolve();
+                        }
+                    });
+                }
+                gameData.musicData.all.sort();
+                gameData.musicData.all.splice(gameData.musicData.all.findIndex(e => e == "Tutorial"),1);
+                gameData.musicData.all.unshift("Tutorial");
+
+            }
+        }
+        DBOpenRequest.onerror = e => {
+            reject();
+            console.error(e);
             toast.error(<TranslateText contentData={"resourcesManager.loadData.notifications.failed"} />);
         }
     })

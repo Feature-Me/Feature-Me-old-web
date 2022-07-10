@@ -8,7 +8,7 @@
 }
 
 @mixin font-body {
-    font-family: "Noto Sans JP","Noto Sans Chinese",sans-serif;
+    font-family: "IBM Plex Sans JP","Noto Sans Chinese",sans-serif;
 }
 
 @mixin no-support-background-blur($color) {
@@ -20,5 +20,6 @@
 @mixin small-device-font {
     @media screen and (max-height: 540px) {
         font-size: 16px;
+        line-height: 16px;
     }
 }

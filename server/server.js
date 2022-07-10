@@ -6,7 +6,6 @@ const path = require("path");
 const http = require("http");
 const fs = require("fs");
 const nedb = require("nedb");
-const url = require("url");
 const app = express();
 const server = http.createServer(app);
 const basedir = path.join(__dirname, "../");
@@ -39,12 +38,12 @@ app.get("/update/map", (req, res) => {
     const music = {};
     fs.readdirSync(path.join(resourcesdir, "3DModels")).forEach(file => {
         if (file.endsWith(".fm3d")) {
-            model[file.replace(".fm3d", "")] = new url.URL(file, modelUrl).pathname;
+            model[file.replace(".fm3d", "")] = modelUrl + file;
         }
     });
     fs.readdirSync(path.join(resourcesdir, "MusicResources")).forEach(file => {
         if (file.endsWith(".fmmc")) {
-            music[file.replace(".fmmc", "")] = new url.URL(file, musicUrl).pathname;
+            music[file.replace(".fmmc", "")] = musicUrl + file;
         }
     });
     res.json({

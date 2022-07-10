@@ -1,20 +1,26 @@
 import * as React from 'react';
 import {createRoot} from 'react-dom/client';
-import "../global/i18n/i18n";
+import { useTranslation } from 'react-i18next';
+import { RecoilRoot } from "recoil";
+
+
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useTranslation } from 'react-i18next';
-import DisplayDirectionCaution from 'global/cautions/directionCaution/directionCaution';
+
+import "../global/i18n/i18n";
 
 import Title from '../title/title/title';
 import style from './style.scss';
+
+import DisplayDirectionCaution from 'global/cautions/directionCaution/directionCaution';
 import initLocalStorage from '../dataController/cacheController/initLocalStorage';
 import initIndexedDB from '../dataController/database/initIndexedDB';
 import Background from 'background/background';
 import gameData from 'dataController/gameData/gameData';
 import PlayMenu from 'playmenu/playMenu/playMenu';
-import SelectMusic from 'musicSelect/musicSelect';
+import SelectMusic from 'musicSelect/selector/musicSelect';
 import SceneChanger from 'global/sceneChanger/sceneChangeCover';
+
 
 
 const App: React.FC = () => {
@@ -58,7 +64,9 @@ function render():void{
     const container:HTMLDivElement = document.querySelector("#root")!;
     createRoot(container).render(
         <React.StrictMode>
-            <App />
+            <RecoilRoot>
+                <App />
+            </RecoilRoot>
         </React.StrictMode>
     );
 }

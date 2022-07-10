@@ -1,0 +1,70 @@
+.musicselect {
+    display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 48px 1fr;
+
+    @media screen and (max-height: 540px) {
+        grid-template-rows: 24px 1fr;
+    }
+
+    .selectorcontainer {
+        display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+
+        .listcontainer,
+        .details {
+            height: 100%;
+            width: 50%;
+        }
+
+        .listcontainer {
+            display: grid;
+            grid-template-rows: 72px 1fr;
+
+            @media screen and (max-height: 540px) {
+                grid-template-rows: 32px 1fr;
+                
+            }
+
+            .search {
+                display: grid;
+                    grid-template-rows: 32px 1fr;
+
+                margin: 8px;
+                /* clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); */
+                clip-path: polygon(16px 0, calc(100% - 32px) 0%,100% calc(100% - 16px), calc(100% - 16px) 100%, 32px 100%, 0 16px);
+                width: 60%;
+                height: 72px;
+                background-color: whitesmoke;
+                @media screen and (max-height: 540px) {
+                    height: 32px;
+                    grid-template-rows: 12px 1fr;
+                    clip-path: polygon(4px 0, calc(100% - 8px) 0%, 100% calc(100% - 4px), calc(100% - 4px) 100%, 8px 100%, 0 4px);
+                    input{
+                        padding: 0 8px!important;
+                    }
+                    label{
+                        padding: 0 8px!important;
+                        font-size: 12px;
+                        line-height: 12px;
+                    }
+                }
+                input{
+                    border: none;
+                    border-top: 1px solid #36393f;
+                    padding: 0 32px;
+                    &:focus{
+                        outline: none;
+                        border-top: 2px solid #1189da;
+                    }
+                }
+                label{
+                    color: rgb(8, 14, 20);
+                    font-style: italic;
+                    padding: 0 32px;
+                }
+            }
+        }
+    }
+}

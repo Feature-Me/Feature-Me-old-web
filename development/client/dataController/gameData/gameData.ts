@@ -1,3 +1,4 @@
+import { MusicAssetContents } from "dataController/resourcesUpdater/installMusic";
 import React from "react";
 import { Root } from "react-dom/client";
 
@@ -19,12 +20,16 @@ type gameData = {
         setter: React.Dispatch<React.SetStateAction<boolean>>|null
     }
     gameObjects: {};
+    gameMode:string,
     titleBackgroundOpened:{
         value:boolean|null,
         setter:React.Dispatch<React.SetStateAction<boolean>>|null
     }
-    /* musicMetaData: any[];
-    replayMetaData: any[]; */
+    musicData: {
+        content: MusicAssetContents[],
+        all: string[]
+    }
+    /* replayMetaData: any[]; */
 }
 
 var gameData: gameData = gameData = {
@@ -47,10 +52,15 @@ var gameData: gameData = gameData = {
         allPages: {},
         root: null,
     },
+    gameMode: "",
     gameObjects: {},
     titleBackgroundOpened:{
         value:null,
         setter:null
+    },
+    musicData: {
+        content: [],
+        all: [],
     }
 }
 

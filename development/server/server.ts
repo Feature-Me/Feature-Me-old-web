@@ -50,12 +50,12 @@ app.get("/update/map",(req,res)=>{
     const music: { [key: string]: string } = {}
     fs.readdirSync(path.join(resourcesdir, "3DModels")).forEach(file => {
         if(file.endsWith(".fm3d")){
-            model[file.replace(".fm3d","")] = new url.URL(file,modelUrl).pathname;
+            model[file.replace(".fm3d","")] = modelUrl + file
         }
     });
     fs.readdirSync(path.join(resourcesdir, "MusicResources")).forEach(file => {
         if(file.endsWith(".fmmc")){
-            music[file.replace(".fmmc","")] = new url.URL(file,musicUrl).pathname;
+            music[file.replace(".fmmc","")] = musicUrl + file
         }
     });
     res.json({
