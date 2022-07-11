@@ -11,8 +11,8 @@
         "display": "01:39"
     },
     "demo":{
-        "start":100500,
-        "end":115500
+        "start":60000,
+        "end":75000
     },
     "backgroundData": null,
     "defaultBackground": "",

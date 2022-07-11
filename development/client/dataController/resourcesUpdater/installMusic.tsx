@@ -1,3 +1,4 @@
+import getMimeFromFileName from "functions/getMime/getMime";
 import JSZip from "jszip";
 import {match} from "ts-pattern"
 import databaseInfo from "../../global/databaseInfo.json";
@@ -26,8 +27,7 @@ interface DirectingTextMap{
 
 interface musicMap{
     name:string;
-    src:string
-
+    src:string;
 }
 
 type directingsMap = DirectingTextMap;
@@ -44,7 +44,10 @@ interface MusicAssetMap {
         ms: number;
         display: string;
     }
-    demo: number;
+    demo:{
+        start:number;
+        end:number;
+    }
     backgroundData?: string | null;
     defaultBackground?: string;
     behavior?: string | null;
@@ -62,6 +65,7 @@ interface MusicAssetMap {
 interface musicData{
     name:string;
     data:ArrayBuffer;
+    mime: string;
 }
 
 interface difficultyData {
@@ -95,12 +99,21 @@ interface MusicAssetContents {
             ms: number;
             display: string;
         }
+        demo:{
+            start:number;
+            end:number;
+        }
         license: string;
-        thumbnail: ArrayBuffer;
+        thumbnail: {
+            data: ArrayBuffer;
+            mime: string;
+        }
         defaultMusic: string;
+        selectedMusic: string;
         background: {
             type: string,
             data: ArrayBuffer;
+            mime: string;
         } | null
 
         difficulties: Array<difficultyData>;
@@ -147,13 +160,19 @@ async function installMusic(zip: JSZip) {
                 composer: fileMapJsonData.composer,
                 bpm: fileMapJsonData.bpm,
                 time: fileMapJsonData.time,
+                demo: fileMapJsonData.demo,
                 license: fileMapJsonData.license,
-                thumbnail: await zip.file(fileMapJsonData.thumbnail).async("arraybuffer"),
+                thumbnail: {
+                    data: await zip.file(fileMapJsonData.thumbnail).async("arraybuffer"),
+                    mime: getMimeFromFileName(fileMapJsonData.thumbnail)
+                },
+                selectedMusic: fileMapJsonData.defaultMusic,
                 defaultMusic: fileMapJsonData.defaultMusic,
                 background: fileMapJsonData.backgroundData && fileMapJsonData.defaultBackground ?
                     {
                         type: fileMapJsonData.defaultBackground,
-                        data: await zip.file(fileMapJsonData.backgroundData).async("arraybuffer")
+                        data: await zip.file(fileMapJsonData.backgroundData).async("arraybuffer"),
+                        mime: getMimeFromFileName(fileMapJsonData.backgroundData)
                     } : null,
                 difficulties: [],
             },
@@ -168,7 +187,8 @@ async function installMusic(zip: JSZip) {
             const musicFile = await zip.file(music.src).async("arraybuffer");
             musicData.music.push({
                 name: music.name,
-                data: musicFile
+                data: musicFile,
+                mime: getMimeFromFileName(music.src)
             })
         }
 

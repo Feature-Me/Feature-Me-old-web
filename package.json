@@ -47,6 +47,8 @@
     "webpack": "^5.72.1"
   },
   "devDependencies": {
+    "@types/howler": "^2.2.7",
+    "@types/mime-db": "^1.43.1",
     "@types/mime-types": "^2.1.1",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.4",

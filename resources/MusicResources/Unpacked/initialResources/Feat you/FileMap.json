@@ -12,7 +12,7 @@
     },
     "demo": {
         "start":56500,
-        "end":72500
+        "end":79000
     },
     "backgroundData": null,
     "defaultBackground": "",
@@ -35,7 +35,7 @@
         }
     ],
     "defaultMusic": "Feat you. Future",
-    "licence": "2022 Mksk and Rae the Feature Me Project. All rights reserved.",
+    "license": "2022 Mksk and Rae the Feature Me Project. All rights reserved.",
     "thumbnail": "Image/Feat_you.png",
     "behavior": null,
     "difficulties": [
@@ -43,28 +43,28 @@
             "name": "memory",
             "level": 3,
             "constant": 2,
-            "chartDesigner": "Mksk vs Raetan",
+            "chartDesigner": "Mksk vs Rae",
             "chartFile": "Chart/memory.fmc"
         },
         {
             "name": "advance",
             "level": 9,
             "constant": 5,
-            "chartDesigner": "Mksk vs Raetan",
+            "chartDesigner": "Mksk vs Rae",
             "chartFile": "Chart/advance.fmc"
         },
         {
             "name": "prospects",
             "level": 16,
             "constant": 6,
-            "chartDesigner": "Mksk vs Raetan",
+            "chartDesigner": "Mksk vs Rae",
             "chartFile": "Chart/prospects.fmc"
         },
         {
             "name": "ozma",
             "level": 17,
             "constant": 0,
-            "chartDesigner": "Mksk vs Raetan",
+            "chartDesigner": "Mksk vs Rae",
             "forceSound": "Feat you. Alpha",
             "chartFile": "Chart/ozma.fmc"
         }

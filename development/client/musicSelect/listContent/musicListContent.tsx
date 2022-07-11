@@ -11,7 +11,7 @@ const MusicListContent:React.FC<{title:string}> = (props) => {
     const [musicSelectVariables, setMusicSelectVariables] = useRecoilState(musicSelectVar);
     const contentRef = React.useRef<HTMLDivElement>();
     const data = gameData.musicData.content.find(data => data.metadata.title == props.title);
-    const background = "data:image/png;base64," + arrayBufferToBase64(data.metadata.thumbnail);
+    const background = `data:${data.metadata.thumbnail.mime};base64,${arrayBufferToBase64(data.metadata.thumbnail.data)}`
     const musicSelectCache = JSON.parse(localStorage.getItem("musicSelect")!);
 
     React.useEffect(()=>{

@@ -2,13 +2,18 @@ import TranslateText from "global/TranslateText/translateText";
 import JSZip from "jszip";
 import React from "react";
 import { toast } from "react-toastify";
+import mimedb from "mime-db";
 import databaseInfo from "../../global/databaseInfo.json";
+import getMime from "functions/getMime/getMime";
 
 type modelAssetContents = {
     name: string,
     data: ArrayBuffer | { [key: string]: ArrayBuffer },
     size: number
-    alt?: ArrayBuffer,
+    alt?: {
+        data:ArrayBuffer,
+        mime:string
+    }
 }
 
 type assets = {
@@ -40,7 +45,7 @@ async function installModel(zip: JSZip) {
             if (!assets[category]) assets[category] = []
             let data: ArrayBuffer | { [key: string]: ArrayBuffer }
             let size: number;
-            let alt: ArrayBuffer;
+            let alt:modelAssetContents["alt"];
             if (typeof content.src == "string") {
                 data = await zip.file(content.src).async("arraybuffer");
                 size = data.byteLength;
@@ -48,13 +53,18 @@ async function installModel(zip: JSZip) {
                 data = {} as { [key: string]: ArrayBuffer };
                 for (const key in content.src) {
                     const dataContent = await zip.file(content.src[key]).async("arraybuffer");
-
                     data[key] = dataContent
                     size += data[key].byteLength;
                 }
             }
-            if (content.alt) alt = await zip.file(content.alt).async("arraybuffer");
-            else alt = new ArrayBuffer(0);
+            if (content.alt) alt = {
+                data : await zip.file(content.alt).async("arraybuffer"),
+                mime : getMime(content.alt)
+            }
+            else alt = {
+                data: new ArrayBuffer(0),
+                mime: "image/png"
+            }
             assets[category].push({
                 name: content.name,
                 data: data,

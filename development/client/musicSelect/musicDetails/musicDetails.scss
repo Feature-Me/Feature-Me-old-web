@@ -7,7 +7,7 @@
         align-items: center;
         row-gap: 16px;
         grid-template-columns: 1fr;
-        grid-template-rows: 48px 32px 24px 1fr 96px;
+        grid-template-rows: 56px 32px 24px 1fr 96px;
 
         @media screen and (max-height: 540px) {
             grid-template-rows: 32px 24px 16px 1fr 64px;
@@ -17,9 +17,12 @@
             
 
     h1{
+        padding: 4px;
         margin: 0;
         @include font-body;
         line-height: 48px;
+        background-image: linear-gradient(to right, black, transparent);
+        text-shadow: 0 0 4px whitesmoke;
         @media screen and (max-height: 540px) {
             line-height: 32px;
         }
@@ -29,6 +32,13 @@
         @include font-body;
         @include small-device-font;
         line-height: 24px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        .license{
+            font-size: 12px;
+            line-height: 12px;
+        }
     }
     h2{
         margin: 0;
@@ -44,6 +54,7 @@
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
+        opacity: 0.5;
     }
     .selections{
         height: 100%;
