@@ -70,7 +70,7 @@ function initLocalStorage(): void {
             }
             const gameConfig:gameConfig = {
                 background:{
-                    use3DBackground: true,
+                    use3DBackground: false,
                     backgroundName: "default",
                     resolution:0.8,
                     fps:45,

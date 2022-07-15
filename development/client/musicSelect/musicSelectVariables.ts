@@ -2,6 +2,7 @@ import { MusicAssetContents } from "dataController/resourcesUpdater/installMusic
 import {atom} from "recoil";
 
 interface MusicSelectVariables {
+    [x: string]: any;
     selected:string;
     selectedContentData:MusicAssetContents;
     search:string;
