@@ -38,16 +38,16 @@
         box-sizing: border-box;
         overflow: auto;
         display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr;
-        row-gap: 16px;
-        justify-content: center;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 1fr;
+            row-gap: 16px;
+            justify-content: center;
 
         .titlebar {
             display: grid;
-            grid-template-columns: 1fr 48px;
-            grid-template-rows: 1fr;
-            align-items: center;
+                grid-template-columns: 1fr 48px;
+                grid-template-rows: 1fr;
+                align-items: center;
             @include font-header;
             @include small-device-font-big;
 
@@ -57,8 +57,8 @@
 
             .closebtn {
                 display: flex;
-                align-items: center;
-                justify-content: center;
+                    align-items: center;
+                    justify-content: center;
                 padding: 4px;
                 margin: 4px;
                 clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));

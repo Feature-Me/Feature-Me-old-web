@@ -7,6 +7,7 @@
     "test": "node ./dist/server/server.js",
     "server-build": "tsc -b && node server/server.js",
     "devbuild": "npx webpack --mode development --watch",
+    "devbuildrun": "cd ./development/client/app && npm run devbuild && cd ../../../ && npm run test",
     "build": "npx webpack --mode production",
     "clear": "npm prune && npm cache clean"
   },
