@@ -1,0 +1,155 @@
+@import "../../../assets/mixin.scss";
+
+.container {
+    height: 100%;
+}
+
+
+.details {
+    height: 100%;
+    padding: 48px 32px;
+    display: grid;
+    align-items: center;
+    row-gap: 16px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 56px 32px 24px 1fr 96px;
+
+    @media screen and (max-height: 540px) {
+        grid-template-rows: 32px 24px 16px 1fr 64px;
+        row-gap: 8px;
+        padding: 12px 32px;
+    }
+
+
+    h1 {
+        padding: 8px;
+        margin: 0;
+        @include font-body;
+        line-height: 48px;
+        background-image: linear-gradient(to right, black, transparent);
+        text-shadow: 0 0 4px whitesmoke;
+        clip-path: polygon(16px 0, 100% 0, 100% 100%, 0 100%, 0 16px);
+        @include small-device-font-big;
+    }
+
+    p {
+        margin: 0;
+        padding: 0 8px;
+        @include font-body;
+        @include small-device-font;
+        line-height: 24px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        .license {
+            font-size: 12px;
+            line-height: 12px;
+        }
+    }
+
+    h2 {
+        margin: 0;
+        padding: 0 8px;
+        @include font-body;
+        line-height: 32px;
+
+        @media screen and (max-height: 540px) {
+            line-height: 24px;
+        }
+    }
+
+    .image {
+        height: 100%;
+        width: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0.5;
+    }
+
+    .selections {
+        
+        .solo{
+            height: 100%;
+                width: 100%;
+                overflow-x: auto;
+                overflow-y: hidden;
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: 1fr;
+                column-gap: 16px;
+                align-items: center;
+        }
+
+        .multi{
+            height: 100%;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+            button{
+                width: 80%;
+            }
+
+        }
+
+        button{
+            display: inline-block;
+            height: 48px;
+            line-height: 24px;
+            font-weight: 900;
+        }
+        .diffbtn:hover{
+            background-color: #1189da;
+            background-image: none;
+            
+            &::before{
+                transition: 0.2s;
+            }
+        }
+
+        .memory{
+            background-color: rgb(139, 221, 17);
+            &:hover {
+                &::before{
+                    background-color: rgb(139, 221, 17);
+                }
+            }
+        }
+        .advance{
+            background-color: rgb(226, 195, 21);
+            &:hover {
+                &::before{
+                    background-color: rgb(226, 195, 21);
+                }
+            }
+        }
+        .prospects{
+            background-color: rgb(89, 10, 192);
+            &:hover {
+                &::before{
+                    background-color: rgb(89, 10, 192);
+                }
+            }
+        }
+        .ozma{
+            background-image: linear-gradient(31deg, rgba(236, 20, 20, 1) 0%, rgba(255, 227, 0, 1) 17%, rgba(37, 255, 0, 1) 25%, rgba(29, 253, 170, 1) 41%, rgba(26, 138, 250, 1) 59%, rgba(138, 23, 248, 1) 81%, rgba(244, 61, 204, 1) 100%);
+            &::before{
+                background-image: none;
+            }
+            &:hover {
+                &::before{
+                    background-image: linear-gradient(31deg, rgba(236, 20, 20, 1) 0%, rgba(255, 227, 0, 1) 17%, rgba(37, 255, 0, 1) 25%, rgba(29, 253, 170, 1) 41%, rgba(26, 138, 250, 1) 59%, rgba(138, 23, 248, 1) 81%, rgba(244, 61, 204, 1) 100%);
+                }
+            }
+        }
+
+        .disabled {
+            pointer-events: none;
+            filter: brightness(0.5);
+        }
+    }
+
+}

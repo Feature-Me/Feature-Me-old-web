@@ -1,0 +1,14 @@
+{
+    "version": "1.0.0",
+    "name": "Feature Me",
+    "type":"3d",
+    "tap": "Tapnote.glb",
+    "damageTap": "DamageTapnote.glb",
+    "hold": "Holdnote.glb",
+    "bright": "Brightnote.glb",
+    "seed": "Seednote.glb",
+    "flick": "Flicknote.glb",
+    "character": "Character.glb",
+    "ground": "Ground.glb"
+    
+}

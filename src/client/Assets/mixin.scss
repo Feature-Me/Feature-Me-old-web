@@ -1,0 +1,33 @@
+@mixin blur($amount) {
+    backdrop-filter: blur($amount);
+    -webkit-backdrop-filter: blur($amount);
+}
+
+@mixin font-header {
+    font-family: "Julius Sans One", "Noto Sans JP", "Noto Sans chinese", sans-serif;
+    font-weight: bold;
+}
+
+@mixin font-body {
+    font-family: "IBM Plex Sans JP", "Noto Sans Chinese", sans-serif;
+}
+
+@mixin no-support-background-blur($color) {
+    @supports not (backdrop-filter: blur(1px)) {
+        background-color: $color;
+    }
+}
+
+@mixin small-device-font {
+    @media screen and (max-height: 540px) {
+        font-size: 14px;
+        line-height: 14px;
+    }
+}
+
+@mixin small-device-font-big {
+    @media screen and (max-height: 540px) {
+        font-size: 24px;
+        line-height: 32px;
+    }
+}

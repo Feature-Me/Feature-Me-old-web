@@ -1,0 +1,75 @@
+@import "../../../Assets/mixin.scss";
+
+.menupage {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: grid;
+        grid-auto-rows: 48px 1fr;
+    
+    @media screen and (max-height: 540px) {
+        grid-auto-rows: 24px 1fr;
+    }
+
+    .menu {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        max-height: 100%;
+        padding: 16px 0;
+
+        div {
+            height: 72px;
+            margin: 16px 0;
+            position: relative;
+            transition: 0.2s;
+            color: white;
+            text-decoration: none;
+            @media screen and (max-height:540px) {
+                height: 48px;
+            }
+        }
+
+        .left {
+            clip-path: polygon(0 0, 80% 0, calc(80% - 48px) 100%, 0 100%);
+            background: linear-gradient(to right, rgb(9, 26, 51), #0e4f7a);
+            left: -32px;
+            padding-left: 64px;
+            font-size: 36px;
+            line-height: 36px;
+            @include font-header;
+            @include small-device-font-big;
+            display: flex;
+                align-items: center;
+
+            &:hover {
+                left: 0;
+                background: linear-gradient(to right, rgb(11, 32, 63), #0e68a3);
+                filter: brightness(1.5);
+            }
+
+        }
+
+        .right {
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, calc(20% + 48px) 100%);
+            background: linear-gradient(to left, rgb(7, 39, 17), #025216);
+            right: -32px;
+            padding-right: 64px;
+            font-size: 36px;
+            line-height: 36px;
+            @include font-header;
+            @include small-device-font-big;
+            display: flex;
+                flex-direction: row-reverse;
+                align-items: center;
+                justify-items: right;
+
+            &:hover {
+                right: 0;
+                background: linear-gradient(to left, rgb(7, 39, 18), #05680d);
+                filter: brightness(1.5);
+            }
+        }
+    }
+} 

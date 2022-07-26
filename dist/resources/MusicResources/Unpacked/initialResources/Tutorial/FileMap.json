@@ -1,0 +1,64 @@
+{
+    "title": "Tutorial",
+    "composer": "Feature Me",
+    "bpm": {
+        "max": 120,
+        "min": 120,
+        "display": "120"
+    },
+    "time": {
+        "ms": 95000,
+        "display": "01:35"
+    },
+    "demo": {
+        "start": 56500,
+        "end": 79000
+    },
+    "backgroundData": null,
+    "defaultBackground": "",
+    "music": [
+        {
+            "name":"Tutorial - Feat you.",
+            "src":"Music/Feat_you._3.mp3"
+        }
+    ],
+    "defaultMusic": "Tutorial - Feat you.",
+    "license": "2022 Mksk and Rae the Feature Me Project. All rights reserved.",
+    "thumbnail": "Image/Tutorial.png",
+    "behavior": null,
+    "directing": [
+        {
+            "type": "text",
+            "lngfiles": {
+                "ja": "Text/ja.json",
+                "en_us": "Text/en_us.json",
+                "en_uk": "Text/en_uk.json",
+                "zh_cn": "Text/zh_cn.json"
+            },
+            "fallback": "en"
+        }
+    ],
+    "difficulties": [
+        {
+            "name": "memory",
+            "level": 1,
+            "constant": 0,
+            "chartDesigner": "Mksk",
+            "chartFile": "Chart/memory.fmc"
+        },
+        {
+            "name": "advance",
+            "level": 5,
+            "constant": 0,
+            "chartDesigner": "Mksk",
+            "chartFile": "Chart/advance.fmc"
+        },
+        {
+            "name": "prospects",
+            "level": 13,
+            "constant": 0,
+            "chartDesigner": "Mksk",
+            "chartFile": "Chart/prospects.fmc"
+        }
+    ]
+}

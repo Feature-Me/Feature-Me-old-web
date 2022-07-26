@@ -1,0 +1,25 @@
+.settings_window {
+    .content {
+        position: relative;
+        margin: 16px auto;
+        display: grid;
+        grid-template-columns: 1fr 256px;
+        grid-template-rows: 1fr;
+        align-items: center;
+        align-content: center;
+        height: 64px;
+        width: 90%;
+        padding: 0 32px;
+        background-color: #424242;
+        /*clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));*/
+
+        @media screen and (max-width: 960px) {
+            grid-template-columns: 1fr 160px;
+        }
+
+        h3 {
+            margin: 0;
+        }
+
+    }
+}

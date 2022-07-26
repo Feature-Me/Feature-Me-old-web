@@ -1,0 +1,8 @@
+{
+    "DBName": "ResourcesDatabase",
+    "backgroundStore": "backgroundDB",
+    "behaviorStore": "behaviorDB",
+    "musicStore": "MusicDB",
+    "replayStore": "ReplayDB",
+    "chartEditorStore": "ChartEditorDB"
+}

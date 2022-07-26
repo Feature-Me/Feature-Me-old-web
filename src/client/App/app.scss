@@ -1,0 +1,68 @@
+@import "../Assets/mixin.scss";
+@font-face {
+    font-family: "Julius Sans One";
+    src: url("../Assets/Fonts/JuliusSansOne-Regular.ttf");
+}
+@font-face {
+    font-family: "IBM Plex Sans JP";
+    src: url("../Assets/Fonts/IBMPLEXSANSJP-TEXT.OTF");
+}
+@font-face {
+    font-family: "Noto Sans JP";
+    src: url("../Assets/Fonts/NOTOSANSJP-REGULAR.OTF");
+}
+@font-face {
+    font-family: "Appli Mincho";
+    src: url("../Assets/Fonts/appliMincho.otf");
+}
+@font-face {
+    font-family: "Rajdhani";
+    src: url("../Assets/Fonts/Rajdhani-Regular.ttf");
+}
+@font-face {
+    font-family: "Noto Sans Chinese";
+    src: url("../Assets/Fonts/NotoSansSC-Regular.otf");
+}
+
+body {
+    background-color: rgb(20, 20, 30);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    margin: 0;
+    color: whitesmoke;
+    @include font-body;
+    user-select: none;
+    scroll-behavior: smooth;
+    cursor: url("../assets/Images/pointer.cur"), default;
+    form,select,input,textarea,button,label{
+        cursor: inherit;
+        outline: none;
+        @include font-body;
+    }
+
+}
+
+.app {
+    height: 100vh;
+}
+a{
+    text-decoration: none;
+    color: whitesmoke;
+    cursor: url("../assets/Images/pointer.cur"), default;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+
+
+::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+    background: transparent;
+}
+::-webkit-scrollbar-thumb{
+    background: whitesmoke;
+}
