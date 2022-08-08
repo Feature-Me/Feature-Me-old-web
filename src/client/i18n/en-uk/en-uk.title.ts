@@ -1,6 +1,6 @@
 const ENUKTitleTranslation = {
     "language": "English-EN_UK",
-    "terms": "Terms of Use",
+    "terms": "Terms of Service",
     "read": "Read",
     "settingsWindow": {
         "title": "Settings",

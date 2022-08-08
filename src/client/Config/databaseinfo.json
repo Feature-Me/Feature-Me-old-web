@@ -1,8 +1,11 @@
 {
     "DBName": "ResourcesDatabase",
-    "backgroundStore": "backgroundDB",
-    "behaviorStore": "behaviorDB",
+    "backgroundStore": "BackgroundDB",
+    "behaviorStore": "BehaviorDB",
     "musicStore": "MusicDB",
+    "soundEffectStore": "SoundEffectDB",
+    "fontStore": "FontDB",
+    "storyStore": "StoryDB",
     "replayStore": "ReplayDB",
     "chartEditorStore": "ChartEditorDB"
 }
