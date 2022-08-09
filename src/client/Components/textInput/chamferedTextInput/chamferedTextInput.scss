@@ -1,0 +1,38 @@
+.chamferdtextinput{
+    position: relative;
+    transition: 0.2s;
+    color: whitesmoke;
+    /* background-color: #36393f; */
+    background-color: whitesmoke;
+    margin: 4px;
+    box-sizing: border-box;
+    line-height: 24px;
+    padding: 4px;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+    border: none;
+
+
+
+    &:before {
+        z-index: -1;
+        position: absolute;
+        height: calc(100% - 4px);
+        width: calc(100% - 4px);
+        top: 0;
+        left: 0;
+        clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+        /* background-color: whitesmoke; */
+        background-color: #36393f;
+        margin: 2px;
+
+        content: "";
+    }
+
+    &:hover {
+        background-color: #1189da;
+    }
+
+    &:hover[data-color="red"] {
+        background-color: #ca1c1c
+    }
+}

@@ -26,6 +26,8 @@ const TermsWindow: React.FC = (): JSX.Element => {
         setShowTermsWindow(false);
     }
     function acceptTerms(): void {
+        console.log("acceptTerms");
+        
         const environment = JSON.parse(localStorage.getItem("environment")!);
         environment.termsVersion = version.TermsVersion
         environment.termsAccepted = true;

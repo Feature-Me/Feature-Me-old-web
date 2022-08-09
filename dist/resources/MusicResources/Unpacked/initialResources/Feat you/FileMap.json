@@ -1,11 +1,7 @@
 {
     "title": "Feat you.",
     "composer": "Rae",
-    "bpm": {
-        "max": 120,
-        "min": 120,
-        "display": "120"
-    },
+    "bpm": "120",
     "time": {
         "ms": 95000,
         "display": "01:35"
@@ -15,7 +11,7 @@
         "end":79000
     },
     "backgroundData": null,
-    "defaultBackground": "",
+    "backgroundType": "image",
     "music": [
         {
             "name": "Feat you. Prototype",

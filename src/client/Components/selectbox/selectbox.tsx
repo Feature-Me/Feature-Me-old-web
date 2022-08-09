@@ -3,11 +3,11 @@ import style from './style.scss';
 import { motion, useAnimation } from 'framer-motion';
 
 interface selectboxContent{
-    value:string;
-    label:string;
+    value:string
+    label:string
 }
 
-const SelectBox: React.FC<{contents:Array<selectboxContent>,onChange:Function,value:{value:string,label:string}}> = (props):JSX.Element => {
+const SelectBox: React.FC<{contents:Array<selectboxContent>,onChange:Function,value:selectboxContent}> = (props):JSX.Element => {
     const [value, setValue] = React.useState(props.value.value);
     const [label, setLabel] = React.useState(props.value.label);
     const [isOpen, setIsOpen] = React.useState(false);

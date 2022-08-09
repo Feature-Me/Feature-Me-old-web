@@ -17,3 +17,8 @@ FileMap.json must be in the root of the zip file.
 .fmmc Feature Me Music Collection
 
 music volume 89db
+
+3D Resolution:70%
+None 35% 60W
+AO 65% 125W
+Bloom 40% 70W

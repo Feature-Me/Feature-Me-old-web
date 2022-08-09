@@ -1,11 +1,7 @@
 {
     "title": "To Summer",
     "composer": "Goners",
-    "bpm":{
-        "max": 120,
-        "min": 120,
-        "display": "120"
-    },
+    "bpm": "120",
     "time":{
         "ms":117000,
         "display": "01:57"
@@ -15,7 +11,7 @@
         "end":100000
     },
     "backgroundData": null,
-    "defaultBackground": "",
+    "backgroundType": "image",
     "music":[
         {
             "name": "To Summer",

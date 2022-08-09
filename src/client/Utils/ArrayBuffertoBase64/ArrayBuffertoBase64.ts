@@ -1,4 +1,3 @@
-//@ts-ignore
 function arrayBufferToBase64(buffer: ArrayBuffer): string {
     let binary = '';
     const bytes = new Uint8Array(buffer);

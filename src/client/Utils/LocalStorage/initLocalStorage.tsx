@@ -2,6 +2,7 @@ import React from "react";
 import { toast } from "react-toastify";
 import TranslateText from "../../Components/TranslateText/TranslateText";
 
+
 function initLocalStorage(): void {
     let fixedCount = 0;
     try {
@@ -46,71 +47,6 @@ function initLocalStorage(): void {
         }
 
         if (!localStorage.getItem("gameConfig")) {
-            interface gameConfig {
-                graphics: {
-                    background: {
-                        renderType: string,
-                        backgroundName: string,
-                        resolution: number,
-                        fps: number,
-                        postProcessing: {
-                            enabled: boolean,
-                            antialias: false | "default" | "TAA" | "SMAA" | "SSAA",
-                            ambientOcclusion: false | "SAO" | "SSAO",
-                            bloom: boolean
-                        }
-                    },
-                    musicgame: {
-                        renderType: "3D" | "2D",
-                        resolution: number,
-                        fps: number,
-                        postProcessing: {
-                            enabled: boolean,
-                            antialias: false | "default" | "TAA" | "SMAA" | "SSAA",
-                            ambientOcclusion: false | "SAO" | "SSAO",
-                            bloom: boolean
-                        }
-                    }
-                },
-                gameplay:{
-                    key:Array<{code:number,key:string}>,
-                    scrollSpeed:number,
-                    mirror:boolean,
-                    random:boolean,
-                    fieldWall:false|number,
-                    effect: {
-                        cameraShaking: boolean,
-                    }
-                    timing:{
-                        offset: number,
-                        judge: number,
-                    },
-                    behavior: {
-                        model: string,
-                        audio: string,
-                    }
-                    background: {
-                        mode: "solid" | "2d" | "3d",
-                        color: string,
-                        allowImage: boolean,
-                        allowVideo: boolean,
-                    },
-                    visualization: {
-                        enabled: boolean,
-                        preset: "default" | "simple" | "advanced" | "custom",
-                        acctualy: boolean,
-                        maxScore: boolean,
-                        predictionScore: boolean,
-                        maxCombo: boolean,
-                        predictionRating: boolean,
-                    }
-                },
-                audio: {
-                    masterVolume: number,
-                    musicVolume: number,
-                    effectVolume: number,
-                },
-            }
             const gameConfig: gameConfig = {
                 graphics: {
                     background: {
@@ -120,17 +56,18 @@ function initLocalStorage(): void {
                         fps: 30,
                         postProcessing: {
                             enabled: false,
-                            antialias: false,
+                            antialias: "default",
                             ambientOcclusion: false,
                             bloom: false,
                         }
                     },
                     musicgame: {
                         renderType: "3D",
+                        behaviorName: "default",
                         resolution: 1,
                         fps: 120,
                         postProcessing: {
-                            antialias: false,
+                            antialias: "default",
                             enabled: false,
                             ambientOcclusion: false,
                             bloom: false,
@@ -142,18 +79,11 @@ function initLocalStorage(): void {
                     mirror: false,
                     random: false,
                     fieldWall: false,
-                    key: [
-                        {code: 68,key: "d"},
-                        {code: 70,key: "f"},
-                        {code: 74,key: "j"},
-                        {code: 75,key: "k"},
-                        {code: 32,key: "space"},
-                        {code: 69,key: "e"},
-                        {code: 73,key: "i"}
-                    ],
+                    key: ["KeyD","KeyF","KeyJ","KeyK","Space","KeyE","KeyI"],
                     behavior: {
                         model: "default",
-                        audio: "default",
+                        sound: "default",
+                        font: "default"
                     },
                     effect: {
                         cameraShaking: true,
@@ -163,7 +93,7 @@ function initLocalStorage(): void {
                         judge: 0,
                     },
                     background: {
-                        mode: "2d",
+                        mode: "2D",
                         color: "#000000",
                         allowImage: true,
                         allowVideo: true,
@@ -176,7 +106,6 @@ function initLocalStorage(): void {
                         predictionScore: false,
                         maxCombo: false,
                         predictionRating: false,
-
                     }
                 },
                 audio: {

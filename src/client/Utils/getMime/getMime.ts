@@ -1,6 +1,5 @@
 import mimedb from 'mime-db';
 
-// @ts-ignore
 function getMime(path: string): string {
     if (!path) return "";
     const ext = path.split(".").pop()!;

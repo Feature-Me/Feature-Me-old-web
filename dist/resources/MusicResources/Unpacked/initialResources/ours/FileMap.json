@@ -1,11 +1,7 @@
 {
     "title": "Ours",
     "composer": "Goners",
-    "bpm":{
-        "max": 60,
-        "min": 60,
-        "display": "60"
-    },
+    "bpm":"60",
     "time":{
         "ms":99000,
         "display": "01:39"
@@ -15,7 +11,7 @@
         "end":75000
     },
     "backgroundData": null,
-    "defaultBackground": "",
+    "backgroundType": "image",
     "music":[
         {
             "name": "Ours",

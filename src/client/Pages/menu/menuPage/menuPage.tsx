@@ -5,14 +5,23 @@ import style from "./menuPage.scss";
 
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 
-import Head from "Block/Head/head";
+import Head from "Block/head/head";
 import LinkWrapper from "Components/linkWrapper/linkWrapper";
+import { useSetRecoilState } from "recoil";
+import gameConfigState from "State/gameConfig/gameConfig";
 
 
 const MenuPage:React.FC = () => {
     const [translation, i18n] = useTranslation();
     const sceneChangeNavigation = useSeneChangeNavigation();
-    
+    const useSetGameConfig = useSetRecoilState(gameConfigState);
+
+    React.useEffect(() => {
+        const config = JSON.parse(localStorage.getItem("gameConfig") || "{}");
+        useSetGameConfig(config);
+    }
+    , []);
+
     return (
         <div className={style.menupage}>
             <Head title="Home" backFunc={() => sceneChangeNavigation("/")}/>

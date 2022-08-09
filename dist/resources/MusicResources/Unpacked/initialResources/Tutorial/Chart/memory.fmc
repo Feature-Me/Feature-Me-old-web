@@ -1,6 +1,13 @@
-#offset:500
+{
+    "metadata":{
+        "offset":500,
+        "initialBpm":120
+    },
+    "notes":[
 
-SCRIPT(0,TEXT(welcome_mem,3500))
-SCRIPT(4000,TEXT(welcome_mem_2,3500))
+    ],
+    "effects":[
+        
+    ]
 
-SCRIPT(9000,TEXT(tap,3500))
+}

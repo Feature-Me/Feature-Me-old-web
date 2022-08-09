@@ -12,10 +12,18 @@ function initDatabase() {
         console.log("Database Upgraded");
         try {
             const db = databaseRequest.result;
-            const ModelStore = db.createObjectStore(databaseInfo.backgroundStore, { keyPath: "id" });
-            const behaviorStore = db.createObjectStore(databaseInfo.behaviorStore, { keyPath: "id" });
-            const MusicStore = db.createObjectStore(databaseInfo.musicStore, { keyPath: "id" });
-            const ReplayStore = db.createObjectStore(databaseInfo.replayStore, { keyPath: "id", autoIncrement: true });
+            const backgroundStore = db.createObjectStore(databaseInfo.backgroundStore, { keyPath: "name" });
+
+            const behaviorStore = db.createObjectStore(databaseInfo.behaviorStore, { keyPath: "name" });
+            const soundEffectStore = db.createObjectStore(databaseInfo.soundEffectStore, { keyPath: "name" });
+            const fontStore = db.createObjectStore(databaseInfo.fontStore, { keyPath: "name" });
+
+            const musicStore = db.createObjectStore(databaseInfo.musicStore, { keyPath: "name" });
+
+            const storyStore = db.createObjectStore(databaseInfo.storyStore, { keyPath: "id" });
+
+            const replayStore = db.createObjectStore(databaseInfo.replayStore, { keyPath: "id", autoIncrement: true });
+            
             const chartEditorStore = db.createObjectStore(databaseInfo.chartEditorStore, { keyPath: "id"});
             db.close();
             localStorage.setItem("DBVersion", JSON.stringify({ version: DBVersion, initialized: true, updated: new Date().getDate() }));

@@ -1,4 +1,4 @@
-import Head from "Block/Head/head";
+import Head from "Block/head/head";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -13,6 +13,12 @@ const SettingsPage: React.FC = (props) => {
     const sceneChangeNavigation = useSeneChangeNavigation();
     const [gameConfig, setGameConfig] = useRecoilState(gameConfigState);
     const [translate, i18n] = useTranslation();
+
+    React.useEffect(() => {
+        const config = JSON.stringify(gameConfig);
+        localStorage.setItem("gameConfig", config);
+    }, [gameConfig]);
+
     return (
         <div className={style.settingspage}>
             <Head title="Settings" backFunc={() => sceneChangeNavigation("../menu")} />
@@ -22,7 +28,7 @@ const SettingsPage: React.FC = (props) => {
                     <Link className={style.sidebar_content} to={"./gameplay"}>{translate("settingsPage.gameplay.title")}</Link>
                     <Link className={style.sidebar_content} to={"./video"}>{translate("settingsPage.video.title")}</Link>
                     <Link className={style.sidebar_content} to={"./audio"}>{translate("settingsPage.audio.title")}</Link>
-
+                    <Link className={style.sidebar_content} to={"./storage"}>{translate("settingsPage.storage.title")}</Link>
                 </div>
                 <div className={style.content}>
                     <SettingsRouter />

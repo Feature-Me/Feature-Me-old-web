@@ -5,13 +5,12 @@ import { useRecoilValue } from "recoil";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Sky } from "three/examples/jsm/objects/Sky";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
-import { SAOPass } from "three/examples/jsm/postprocessing/SAOPass"
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass"
 import { SSAOPass } from "three/examples/jsm/postprocessing/SSAOPass"
 import { SMAAPass } from "three/examples/jsm/postprocessing/SMAAPass"
 import { TAARenderPass } from "three/examples/jsm/postprocessing/TAARenderPass"
 import { SSAARenderPass } from "three/examples/jsm/postprocessing/SSAARenderPass";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
-import { match } from "ts-pattern";
 
 import style from "./background.scss"
 
@@ -20,9 +19,8 @@ import versions from  "../../Config/versions.json";
 import backgroundNameState from "State/background/backgroundState";
 import gameConfigState from "State/gameConfig/gameConfig";
 import compareVersions from "compare-versions";
-import { modelAssetContents } from "Utils/resources/backgroundResources/installBackground";
-import arrayBufferToBase64 from "Utils/ArrayBuffertoBase64/ArrayBuffertoBase64";
-import getMime from "Utils/getMime/getMime";
+import arrayBufferToBase64 from "../../Utils/arrayBufferToBase64/ArrayBuffertoBase64";
+import getMime from "../../Utils/getMime/getMime";
 
 const Background: React.FC<{ onload?: Function }> = (props) => {
     const backgroundCanvas = React.useRef<HTMLDivElement>(null);
@@ -34,11 +32,20 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
     const gameConfig = useRecoilValue(gameConfigState);
 
     const backgroundData = React.useMemo(async () => {
-        let background: modelAssetContents = {
+        let background: backgroundAssetContents = {
+            name: "",
             data: new ArrayBuffer(0),
             alt: {
                 data: new ArrayBuffer(0),
                 mime: "image/png"
+            },
+            skydata: {
+                turbidity: 0,
+                rayleigh: 0,
+                mieCoeffient: 0,
+                mieDirectionalG: 0,
+                sunPhi: 0,
+                sunTheta: 0
             }
         }
         if (!backgroundState.showed) return background;
@@ -50,7 +57,7 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
                 const backgroundStore = db.transaction(databaseInfo.backgroundStore, "readonly").objectStore(databaseInfo.backgroundStore);
                 const model = backgroundStore.get((backgroundState.name == "default" ? versions.themeBackground : backgroundState.name));
                 model.onsuccess = (event) => {
-                    background = model.result.data;
+                    background = model.result as backgroundAssetContents;
                     resolve();
                 }
                 model.onerror = (event) => {
@@ -73,10 +80,13 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
     }
 
     async function renderBackground() {
+
+        const background = await backgroundData
+
         const scene = new THREE.Scene();
         const renderer = new THREE.WebGLRenderer({
             precision: "lowp",
-            antialias: (gameConfig.graphics.background.postProcessing.enabled && gameConfig.gameConfig.graphics.background.postProcessing.antialias == "default")
+            antialias: (gameConfig.graphics.background.postProcessing.enabled && gameConfig.graphics.background.postProcessing.antialias == "default")
         });
 
         backgroundRenderer.current = renderer;
@@ -88,20 +98,14 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
         renderer.toneMappingExposure = 0.25;
         backgroundRenderer.current = renderer;
         renderer.setSize(window.innerWidth, window.innerHeight);
-        if(backgroundCanvas.current) backgroundCanvas.current.appendChild(renderer.domElement);
-        renderer.setPixelRatio(gameConfig.resolution || 0.7);
-        console.log("render",backgroundScene);
+        renderer.setPixelRatio(gameConfig.graphics.background.resolution || 0.7);
+
+        if (backgroundCanvas.current) backgroundCanvas.current.appendChild(renderer.domElement);
         
-        render();
-        function render() {
-            setInterval(() => {
-                renderer.render(scene, camera);
-            }, 1000 / (gameConfig.fps || 30))
-        }
 
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
         camera.position.set(0, 3, 25);
-        camera.lookAt(10, 0, 0);
+        camera.lookAt(0, 0, 0);
         backgroundCamera.current = camera;
 
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -112,8 +116,11 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
         directionalLight.lookAt(0, 0, 0);
         scene.add(directionalLight);
 
+        console.log(background.data);
+        
+
         const gltf = await new GLTFLoader().loadFromArrayBufferAsync(
-            await backgroundData.then(background => background.data as ArrayBuffer)
+            background.data
         );
         const model = gltf.scene;
         model.matrixAutoUpdate = false;
@@ -124,12 +131,12 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
         const sun = new THREE.Vector3();
 
         const uniforms = sky.material.uniforms;
-        uniforms.turbidity.value = 1;
-        uniforms.rayleigh.value = 0.0075;
-        uniforms.mieCoefficient.value = 0.003;
-        uniforms.mieDirectionalG.value = 0.5;
-        const phi = THREE.MathUtils.degToRad(80);
-        const theta = THREE.MathUtils.degToRad(180);
+        uniforms.turbidity.value = background.skydata.turbidity;
+        uniforms.rayleigh.value = background.skydata.rayleigh;
+        uniforms.mieCoefficient.value = background.skydata.mieCoeffient;
+        uniforms.mieDirectionalG.value = background.skydata.mieDirectionalG;
+        const phi = background.skydata.sunPhi;
+        const theta = background.skydata.sunTheta;
 
         sun.setFromSphericalCoords(1, phi, theta);
 
@@ -138,9 +145,26 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
         sky.scale.addScalar(100);
         scene.add(sky);
 
+        //post processing
+        const composer = new EffectComposer(renderer);
+        const renderScene = new RenderPass(scene, camera);
+        composer.addPass(renderScene);
+        /* const ssaoPass = new SSAOPass(scene, camera);
+        ssaoPass.kernelRadius = 16;
+        composer.addPass(ssaoPass); */
 
-        //post process
-        //if(localStorage.getItem(""))
+        /*const bloomPass = new UnrealBloomPass(
+            new THREE.Vector2(window.innerWidth * gameConfig.graphics.background.resolution || 0.7,
+                window.innerHeight * gameConfig.graphics.background.resolution || 0.7
+                ), 1.5, 0.4, 0);
+        composer.addPass(bloomPass); */
+        function render() {
+            setInterval(() => {
+                //renderer.render(scene, camera);
+                composer.render();
+            }, 1000 / (gameConfig.graphics.background.fps || 30))
+        }
+        render();
 
 
         function resizeRenderer(){
@@ -152,6 +176,7 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
             const diff = [-(mouse[0] - window.innerWidth / 2), -(mouse[1] - window.innerHeight / 2)];
             camera.rotation.set(diff[1] * 0.0001, diff[0] * 0.0001, 0);
         }
+
         //window events
         window.removeEventListener("resize", resizeRenderer);
         window.addEventListener("resize", resizeRenderer);
@@ -164,8 +189,10 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
         if(backgroundState.renderer=="2D" && backgroundRenderer.current) disposeRenderer();
         if(backgroundImage.current){
             (async ()=> {
+                const background =(await backgroundData).alt
+                
                 if(backgroundImage.current)
-                    backgroundImage.current.src = await backgroundData.then(background => (getMime(background.alt?.mime || "") || "data:image/png;base64,") +arrayBufferToBase64(background.alt?.data || new ArrayBuffer(0)));
+                    backgroundImage.current.src = background ? `data:${background.mime};base64,` + arrayBufferToBase64(background.data) : "data:image/png;base64," + new ArrayBuffer(0)
             })();
         }
         if(backgroundState.renderer=="3D" && backgroundCanvas.current && !backgroundRenderer.current) {

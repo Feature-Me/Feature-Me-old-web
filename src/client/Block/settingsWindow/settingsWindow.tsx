@@ -32,18 +32,12 @@ const SettingsWindow: React.FC = (): JSX.Element => {
         }, 500);
     }
 
-    React.useEffect(() => {
-        const environment = JSON.parse(localStorage.getItem("environment")!);
-        environment.language = i18n.language;
-        localStorage.setItem("environment", JSON.stringify(environment));
-    }, [i18n.language]);
-
     return (
         <Window title={translation("title.settingsWindow.title")} className={style.settings_window} showed={showSettingsWindow} setShowed={setShowSettingsWindow}>
             <div>
                 <div className={style.content}>
                     <h3>{translation("title.settingsWindow.selectLanguage")}</h3>
-                    <SelectBox contents={selectLanguageOptions} onChange={(value: { value: string, label: string }) => { console.log(`Language is Changed to ${value.label}`); i18n.changeLanguage(value.value) }} value={selectLanguageOptions.find(e => e.value == i18n.language)!} />
+                    <SelectBox contents={selectLanguageOptions} onChange={(value: { value: string, label: string }) => { i18n.changeLanguage(value.value) }} value={selectLanguageOptions.find(e => e.value == i18n.language)!} />
                 </div>
                 <div className={style.content}>
                     <h3>{translation("title.settingsWindow.storageCache.all")}</h3>

@@ -1,6 +1,6 @@
 import {atom} from 'recoil';
 
-const gameConfigState = atom({
+const gameConfigState = atom<gameConfig>({
     key: 'gameConfig',
     default: JSON.parse(localStorage.getItem("gameConfig") || "{}")
 })

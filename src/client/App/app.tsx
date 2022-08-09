@@ -15,9 +15,16 @@ import i18next from 'i18next';
 import PageRouter from '../Routs/router';
 import initDatabase from '../Utils/database/initDatabase';
 import SceneChangeCover from 'Block/sceneChangeCover/sceneChangeCover';
-import Background from 'Block/Background/background';
+import Background from 'Block/background/background';
 
 function App(): JSX.Element {
+    const [translation, i18n] = useTranslation();
+
+    React.useEffect(() => {
+        const environment = JSON.parse(localStorage.getItem("environment")!);
+        environment.language = i18n.language;
+        localStorage.setItem("environment", JSON.stringify(environment));
+    }, [i18n.language]);
     
     return(
         <BrowserRouter>

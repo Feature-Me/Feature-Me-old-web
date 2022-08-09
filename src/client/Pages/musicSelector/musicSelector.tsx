@@ -4,14 +4,13 @@ import { useTranslation } from "react-i18next";
 
 import sceneChangerState from "State/sceneChanger/sceneChangerstate";
 import musicSelectorState from "State/musicSelector/musicSelectorState";
-import { MusicAssetContents } from "Utils/resources/musicResources/installMusic";
-import Head from "Block/Head/head";
+import Head from "Block/head/head";
 import MusicListContent from "./musicListContent/musicListContent";
 
 import databaseInfo from "Config/databaseinfo.json";
 
 import style from "./musicSelector.scss";
-import MusicDetails from "./musicDetails/musicDetails";
+import MusicDetails from "./musicDetailsPane/musicDetails";
 
 
 

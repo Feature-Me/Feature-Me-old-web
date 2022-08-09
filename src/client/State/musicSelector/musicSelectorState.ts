@@ -1,13 +1,8 @@
 import {atom} from 'recoil';
-import { MusicAssetContents } from 'Utils/resources/musicResources/installMusic';
 
-interface musicSelect{
-    selectedName:string;
-    selectedData:MusicAssetContents|{};
-    search:string;
-}
 
-const musicSelectorState = atom<musicSelect>({
+
+const musicSelectorState = atom<musicSelectType>({
     key: 'musicSelectorState',
     default: {
         selectedName: JSON.parse(localStorage.getItem("musicSelect") || "{}").selected as string || "",
@@ -17,4 +12,3 @@ const musicSelectorState = atom<musicSelect>({
 });
 
 export default musicSelectorState;
-export type { musicSelect };
