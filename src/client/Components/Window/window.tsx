@@ -2,6 +2,7 @@ import { motion, useAnimation } from "framer-motion";
 import React from "react";
 import { VscClose } from "react-icons/vsc";
 import { SetterOrUpdater } from "recoil";
+
 import style from "./window.scss";
 
 const Window: React.FC<{className?: Array<string>|string,title:string,children:React.ReactNode,showed:boolean,setShowed:React.Dispatch<React.SetStateAction<boolean>>|SetterOrUpdater<boolean>}> = (props) => {

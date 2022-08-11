@@ -1,14 +1,15 @@
 import React from "react";
-import style from './settingsWindow.scss';
 import { VscClose } from 'react-icons/vsc';
 import { motion, useAnimation } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useRecoilState } from "recoil";
 
-import SelectBox from "../../Components/SelectBox/selectBox";
-import Window from "../../Components/Window/window";
-import { settingsWindowAtomState, termsWindowAtomState } from "../../State/window/windowState";
-import ChamferdButton from "../../Components/Button/chamferedButton/chamferedButton";
+import SelectBox from "Components/SelectBox/selectBox";
+import Window from "Components/Window/window";
+import { settingsWindowAtomState, termsWindowAtomState } from "State/window/windowState";
+import ChamferdButton from "Components/Button/chamferedButton/chamferedButton";
+
+import style from './settingsWindow.scss';
 
 const selectLanguageOptions = [
     { value: "en_us", label: "English(EN-US)" },

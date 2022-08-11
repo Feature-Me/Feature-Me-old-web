@@ -1,6 +1,7 @@
 //inspired by https://zenn.dev/ixkaito/articles/css-image-glitch
 
 import React from "react";
+
 import style from "./glitchImage.scss";
 
 const GlitchImage: React.FC<{background:string}> = (props) => {

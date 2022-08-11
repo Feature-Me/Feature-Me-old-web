@@ -135,13 +135,13 @@
             }
         }
         .ozma{
-            background-image: linear-gradient(31deg, rgba(236, 20, 20, 1) 0%, rgba(255, 227, 0, 1) 17%, rgba(37, 255, 0, 1) 25%, rgba(29, 253, 170, 1) 41%, rgba(26, 138, 250, 1) 59%, rgba(138, 23, 248, 1) 81%, rgba(244, 61, 204, 1) 100%);
+            @include ozma-background;
             &::before{
                 background-image: none;
             }
             &:hover {
                 &::before{
-                    background-image: linear-gradient(31deg, rgba(236, 20, 20, 1) 0%, rgba(255, 227, 0, 1) 17%, rgba(37, 255, 0, 1) 25%, rgba(29, 253, 170, 1) 41%, rgba(26, 138, 250, 1) 59%, rgba(138, 23, 248, 1) 81%, rgba(244, 61, 204, 1) 100%);
+                    @include ozma-background;
                 }
             }
         }

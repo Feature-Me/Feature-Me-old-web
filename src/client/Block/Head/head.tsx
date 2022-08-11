@@ -1,12 +1,14 @@
 import React from "react";
-import style from "./head.scss";
 import { useNavigate } from "react-router";
 import { MdOutlineArrowBackIosNew } from "react-icons/md"
 import { CgMenuGridR } from "react-icons/cg"
 import { useTranslation } from "react-i18next";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+
 import sceneChangerState from "State/sceneChanger/sceneChangerstate";
 import timeState from "State/timeState/timeState";
+
+import style from "./head.scss";
 
 const Head: React.FC<{ title: string, backFunc?: Function }> = (props) => {
     const [translation, i18n] = useTranslation();

@@ -1,6 +1,7 @@
 import * as React from 'react';
-import style from './style.scss';
 import { motion, useAnimation } from 'framer-motion';
+
+import style from './style.scss';
 
 interface selectboxContent{
     value:string

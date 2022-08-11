@@ -1,8 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import style from "./menuPage.scss";
-
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 
 import Head from "Block/head/head";
@@ -10,6 +8,7 @@ import LinkWrapper from "Components/linkWrapper/linkWrapper";
 import { useSetRecoilState } from "recoil";
 import gameConfigState from "State/gameConfig/gameConfig";
 
+import style from "./menuPage.scss";
 
 const MenuPage:React.FC = () => {
     const [translation, i18n] = useTranslation();

@@ -2,10 +2,10 @@ type Musiccollection = {
     folders: Array<string>;
 }
 
-type difficulties = "memory" | "advance" | "prospects" | "ozma"
+type musicDifficulties = "memory" | "advance" | "prospects" | "ozma" | "";
 
 interface MusicAssetDifficultyMap {
-    name: difficulties
+    name: musicDifficulties
     chartFile: string
     level: number
     constant: number
@@ -13,7 +13,7 @@ interface MusicAssetDifficultyMap {
 }
 
 interface MusicAssetMetadataMap {
-    name: difficulties
+    name: musicDifficulties
     chartFile?: string
     level: number
     constant: number
@@ -67,13 +67,13 @@ interface musicData {
 }
 
 interface difficultyData {
-    name: difficulties
+    name: musicDifficulties
     level: number
     constant: number
     chartDesigner: string
 }
 interface chartData {
-    name: difficulties
+    name: musicDifficulties
     data: string
 }
 interface DirectingText {

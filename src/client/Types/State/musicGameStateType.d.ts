@@ -8,6 +8,14 @@ interface MusicGameStateType {
     maxScore: number
     maxChain: number
     bpm: number
+    UIVisibility: {
+        visible: boolean
+        details: boolean
+    }
+    time:{
+        gameTime: number
+        elapsedTime: number
+    }
     judge: {
         stunninng: number
         glossy: number

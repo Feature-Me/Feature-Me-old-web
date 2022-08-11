@@ -1,21 +1,21 @@
 import * as React from 'react';
 import {createRoot} from 'react-dom/client';
-import style from './app.scss';
 import { useTranslation } from 'react-i18next';
 import { RecoilRoot } from "recoil";
 import { BrowserRouter , Route } from 'react-router-dom';
 import { ToastContainer,Slide } from 'react-toastify';
+import "i18n/i18n";
 
-import 'react-toastify/dist/ReactToastify.css';
+import initDatabase from 'Utils/database/initDatabase';
+import initLocalStorage from 'Utils/LocalStorage/initLocalStorage';
 
-import "../i18n/i18n";
-import DisplayDirectionCaution from '../Block/displayDirectionCaution/displayDirectionCaution';
-import initLocalStorage from '../Utils/LocalStorage/initLocalStorage';
-import i18next from 'i18next';
-import PageRouter from '../Routs/router';
-import initDatabase from '../Utils/database/initDatabase';
+import DisplayDirectionCaution from 'Block/displayDirectionCaution/displayDirectionCaution';
+import PageRouter from 'Routs/router';
 import SceneChangeCover from 'Block/sceneChangeCover/sceneChangeCover';
 import Background from 'Block/background/background';
+
+import 'react-toastify/dist/ReactToastify.css';
+import style from './app.scss';
 
 function App(): JSX.Element {
     const [translation, i18n] = useTranslation();
@@ -60,8 +60,8 @@ function init():void{
 }
 
 
-
 window.addEventListener('load', init);
 window.addEventListener("contextmenu",(e)=>e.preventDefault());
-window.addEventListener("popstate",()=>{
+window.addEventListener("popstate",(e)=>{
+
 });

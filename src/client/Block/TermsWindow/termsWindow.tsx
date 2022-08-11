@@ -5,12 +5,12 @@ import { useTranslation } from 'react-i18next';
 import compareVersions from "compare-versions";
 import { useRecoilState } from "recoil";
 
-import style from './termsWindow.scss';
+import version from "Config/versions.json";
+import Window from "Components/Window/window";
+import { termsWindowAtomState } from "State/window/windowState";
+import ChamferdButton from "Components/Button/chamferedButton/chamferedButton";
 
-import version from "../../Config/versions.json";
-import Window from "../../Components/Window/window";
-import { termsWindowAtomState } from "../../State/window/windowState";
-import ChamferdButton from "../../Components/Button/chamferedButton/chamferedButton";
+import style from './termsWindow.scss';
 //import { deleteEnvironmentData } from "../cacheController/deleteData";
 
 

@@ -13,6 +13,14 @@ const musicGameState = atom<MusicGameStateType>({
         maxScore:0,
         maxChain:0,
         bpm: 0,
+        UIVisibility:{
+            visible:false,
+            details:false,
+        },
+        time:{
+            gameTime:0,
+            elapsedTime:0,
+        },
         judge:{
             stunninng:0,
             glossy:0,

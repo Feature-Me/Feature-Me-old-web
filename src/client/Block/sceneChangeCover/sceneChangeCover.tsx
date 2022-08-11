@@ -3,10 +3,12 @@ import { useLocation } from "react-router";
 import { useRecoilValue } from "recoil";
 import { motion, useAnimation } from "framer-motion";
 
-import style from "./sceneChangeCover.scss";
-
 import sceneChangerState from "State/sceneChanger/sceneChangerstate";
 import sleep from "Utils/sleep/sleep";
+
+import style from "./sceneChangeCover.scss";
+
+
 
 const SceneChangeCover:React.FC = () => {
     const location = useLocation();
@@ -56,7 +58,7 @@ const SceneChangeCover:React.FC = () => {
             if (sceneChangerRef.current) sceneChangerRef.current.style.display = "block";
             BlueAnimationController.start(BlueAnimationClose);
             GreenAnimationController.start(GreenAnimationClose);
-            await sleep(700);
+            await sleep(1000);
             BlueAnimationController.start(BlueAnimationOpen);
             GreenAnimationController.start(GreenAnimationOpen);
             await sleep(500);

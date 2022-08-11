@@ -11,16 +11,18 @@ import { SMAAPass } from "three/examples/jsm/postprocessing/SMAAPass"
 import { TAARenderPass } from "three/examples/jsm/postprocessing/TAARenderPass"
 import { SSAARenderPass } from "three/examples/jsm/postprocessing/SSAARenderPass";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
+import compareVersions from "compare-versions";
 
-import style from "./background.scss"
-
-import databaseInfo from "../../Config/databaseinfo.json";
-import versions from  "../../Config/versions.json";
+import arrayBufferToBase64 from "Utils/arrayBufferToBase64/ArrayBuffertoBase64";
+import getMime from "Utils/getMime/getMime";
+import databaseInfo from "Config/databaseinfo.json";
+import versions from  "Config/versions.json";
 import backgroundNameState from "State/background/backgroundState";
 import gameConfigState from "State/gameConfig/gameConfig";
-import compareVersions from "compare-versions";
-import arrayBufferToBase64 from "../../Utils/arrayBufferToBase64/ArrayBuffertoBase64";
-import getMime from "../../Utils/getMime/getMime";
+
+
+
+import style from "./background.scss"
 
 const Background: React.FC<{ onload?: Function }> = (props) => {
     const backgroundCanvas = React.useRef<HTMLDivElement>(null);

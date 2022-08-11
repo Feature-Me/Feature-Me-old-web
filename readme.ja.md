@@ -4,6 +4,11 @@
 
 # パッチノート
 
+## 00031-beta(Version 0.5)
+
+インポートの整理
+
+SCSSミックスインの変更
 
 ## 00030-beta(Version 0.5)
 Commit A:
