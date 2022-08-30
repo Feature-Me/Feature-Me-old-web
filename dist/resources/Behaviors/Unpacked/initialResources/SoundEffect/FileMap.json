@@ -1,8 +1,9 @@
 {
     "name": "Feature Me",
     "sound":{
-        "normal": "tap.mp3",
+        "tap": "tap.mp3",
         "damage": "damage.mp3",
+        "hold": "tap.mp3",
         "bright": "tap.mp3",
         "seed": "tap.mp3",
         "flick": "flick.mp3",

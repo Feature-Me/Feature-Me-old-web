@@ -14,6 +14,10 @@ const JASettingsPage = {
             "name": "利用規約",
             "description": "利用規約を表示します。",
             "button": "表示"
+        },
+        "credit": {
+            "name": "クレジット",
+            "description": "クレジット\n プログラム : Mksk \n 書き下ろし楽曲 : Rae/Goners \n イラストレーション : てぬ",
         }
     },
     "gameplay": {

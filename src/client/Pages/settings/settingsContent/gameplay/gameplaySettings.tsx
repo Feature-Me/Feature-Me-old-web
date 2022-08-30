@@ -28,9 +28,9 @@ const GameplaySettings: React.FC = () => {
         },
         {
             details: {
-                title: <TranslateText contentData="settingsPage.gameplay.liveVisualization.name" />,
+                title: <TranslateText contentData="settingsPage.gameplay.details.name" />,
                 processingLoad: "none",
-                description: <TranslateText contentData="settingsPage.gameplay.liveVisualization.description" />
+                description: <TranslateText contentData="settingsPage.gameplay.details.description" />
             },
             input: <></>
         }

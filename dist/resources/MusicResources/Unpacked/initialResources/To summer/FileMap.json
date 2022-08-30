@@ -16,9 +16,13 @@
         {
             "name": "To Summer",
             "src": "Music/To_Summer.mp3"
+        },
+        {
+            "name":"To Summer-2022",
+            "src":"Music/To_Summer_2022.mp3"
         }
     ],
-    "defaultMusic":"To Summer",
+    "defaultMusic":"To Summer-2022",
     "license": "2021 Goners. All rights reserved.",
     "thumbnail": "Image/music.png",
     "behavior":null,

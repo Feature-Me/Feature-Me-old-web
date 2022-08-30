@@ -3,7 +3,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useRecoilState } from "recoil";
 import gameConfigState from "State/gameConfig/gameConfig";
-import { gameConfig } from "Utils/LocalStorage/initLocalStorage";
 
 import style from "./keybindSettings.scss";
 

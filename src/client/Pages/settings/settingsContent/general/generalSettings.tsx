@@ -44,6 +44,14 @@ const GeneralSettings: React.FC = () => {
                 description: <TranslateText contentData="settingsPage.general.terms.description" />
             },
             input: <ChamferdButton>{translate("settingsPage.general.terms.button")}</ChamferdButton>
+        },
+        {
+            details: {
+                title: <TranslateText contentData="settingsPage.general.credit.name" />,
+                processingLoad: "none",
+                description: <TranslateText contentData="settingsPage.general.credit.description" />
+            },
+            input: <></>
         }
     ]
 
