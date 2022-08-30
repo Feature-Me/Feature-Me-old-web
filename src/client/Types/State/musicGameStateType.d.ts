@@ -1,23 +1,21 @@
+import { chartType } from "Features/parseChart/chartSample"
+import { GLTF } from "three/examples/jsm/loaders/GLTFLoader"
 
-interface MusicGameStateType {
-    difficulty: "memory" | "advance" | "prospects" | "ozma" | ""
-    mode: "solo" | "multi-royale" | "multi-team" | ""
-    score: number
-    chain: number
-    accualy: number
-    maxScore: number
-    maxChain: number
-    bpm: number
-    UIVisibility: {
-        visible: boolean
-        details: boolean
+interface musicGameValueType {
+    score:number
+    chain:number
+    maxChain:number
+    bpm:number
+}
+
+interface musicGameNotesJudgeType {
+    notesCount:{
+        all:number,
+        current:number
     }
-    time:{
-        gameTime: number
-        elapsedTime: number
-    }
+    accuracy:number
     judge: {
-        stunninng: number
+        stunning: number
         glossy: number
         moderate: number
         lost: number
@@ -26,8 +24,29 @@ interface MusicGameStateType {
         future: number
         past: number
     }
-    prediction: {
-        score: number
-        rating: number
-    }
+}
+
+interface musicGamePredictionType {
+    rating: number
+    score: number
+}
+
+interface musicgameUIStateType{
+    visibility:boolean
+}
+
+interface musicGameModeType{
+    difficulty: "memory" | "advance" | "prospects" | "ozma" 
+    mode: "solo" | "multi-royale" | "multi-team" | "auto"
+    level:number
+    constant:number
+}
+interface musicGamePauseState {
+    ready: boolean
+    paused: boolean
+}
+
+interface musicGameTimeType{
+    totalTime:number
+    pausedDuration:number
 }

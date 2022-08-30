@@ -13,7 +13,7 @@ import { SSAARenderPass } from "three/examples/jsm/postprocessing/SSAARenderPass
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
 import compareVersions from "compare-versions";
 
-import arrayBufferToBase64 from "Utils/arrayBufferToBase64/ArrayBuffertoBase64";
+import arrayBufferToBase64 from "Utils/ArrayBufferToBase64/ArrayBufferToBase64";
 import getMime from "Utils/getMime/getMime";
 import databaseInfo from "Config/databaseinfo.json";
 import versions from  "Config/versions.json";

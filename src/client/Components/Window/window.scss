@@ -49,7 +49,6 @@
                 grid-template-rows: 1fr;
                 align-items: center;
             @include font-header;
-            @include small-device-font-big;
 
             h1 {
                 margin: 0;

@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 
 import style from "./musicListContent.scss";
 
-import arrayBufferToBase64 from "../../../Utils/arrayBufferToBase64/ArrayBuffertoBase64";
+import arrayBufferToBase64 from "../../../Utils/ArrayBufferToBase64/ArrayBufferToBase64";
 
 import musicSelectorState from "State/musicSelector/musicSelectorState";
 

@@ -8,7 +8,7 @@ import style from "./musicDetails.scss";
 import Window from "Components/Window/window";
 import ChamferedButton from "Components/Button/chamferedButton/chamferedButton";
 
-import arrayBufferToBase64 from "Utils/arrayBufferToBase64/ArrayBuffertoBase64";
+import arrayBufferToBase64 from "Utils/ArrayBufferToBase64/ArrayBufferToBase64";
 import databaseInfo from "Config/databaseInfo.json";
 import musicSelectorState from "State/musicSelector/musicSelectorState";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
@@ -50,6 +50,9 @@ const MusicDetails: React.FC = () => {
         if (data?.metadata?.title != musicSelector.selectedName) return;
         if (!imageRef.current||!selectionsRef) return;
 
+        let fadeOutTimeout: NodeJS.Timeout;
+        let musicTimeout:NodeJS.Timeout;
+
         animationController.start(imageAnimation);
         imageRef.current.style.backgroundImage = `url(data:${data.metadata.thumbnail.mime || "image/png"};base64,${arrayBufferToBase64(data.metadata.thumbnail.data)})`;
         console.log(data.metadata.selectedMusic);
@@ -60,23 +63,22 @@ const MusicDetails: React.FC = () => {
 
         const sound = data.music.find(audio => audio.name == data.metadata.selectedMusic) || data.music[0];
         const audioUri = `data:${sound.mime || "audio/mp3"};base64,${arrayBufferToBase64(sound.data)}`;
-        let fadeOutCount: NodeJS.Timeout;
         audio = new Howl({
             src: [audioUri],
             loop: true,
-            volume: (gameConfig.audio.masterVolume * gameConfig.audio.musicVolume) || 1,
+            volume: (gameConfig.audio.masterVolume * gameConfig.audio.musicVolume) / 100,
             sprite: {
                 music: [data.metadata.demo.start - 3000, data.metadata.demo.end + 3000]
             }
         });
 
         function playMusic() {
-            if (fadeOutCount) clearTimeout(fadeOutCount);
+            if (fadeOutTimeout) clearTimeout(fadeOutTimeout);
             audio.play("music");
             audio.fade(0, 0.8, 3000);
-            fadeOutCount = setTimeout(() => {
+            fadeOutTimeout = setTimeout(() => {
                 audio.fade(0.8, 0, 3000);
-                setTimeout(() => {
+                musicTimeout = setTimeout(() => {
                     audio.stop();
                     playMusic();
                 }, 3500);
@@ -94,8 +96,10 @@ const MusicDetails: React.FC = () => {
         });
 
         return () => {
+            audio.stop();
             audio.unload();
-            if (fadeOutCount) clearTimeout(fadeOutCount);
+            clearTimeout(fadeOutTimeout);
+            clearTimeout(musicTimeout);
         }
 
     }, [data]);
@@ -126,9 +130,9 @@ const MusicDetails: React.FC = () => {
                     <div className={style.solo}>
                         <ChamferedButton onClick={() => { setShowWindow(!showWindow) }}>Change Music</ ChamferedButton>
                         <ChamferedButton onClick={()=> { scenechange("../relay/memory")}} className={`${style.diffbtn} ${style.memory} ${!(difficulties?.memory) ? style.disabled : ""}`}>Memory {(difficulties?.memory) || "-"}</ChamferedButton>
-                        <ChamferedButton className={`${style.diffbtn} ${style.advance} ${!(difficulties?.advance) ? style.disabled : ""}`}>Advance {(difficulties?.advance) || "-"}</ChamferedButton>
-                        <ChamferedButton className={`${style.diffbtn} ${style.prospects} ${!(difficulties?.prospects) ? style.disabled : ""}`}>Prospects {(difficulties?.prospects) || "-"}</ChamferedButton>
-                        <ChamferedButton className={`${style.diffbtn} ${style.ozma} ${!(difficulties?.ozma) ? style.disabled : ""}`}>Ozma {(difficulties?.ozma) || "-"}</ChamferedButton>
+                        <ChamferedButton onClick={() => { scenechange("../relay/advance") }} className={`${style.diffbtn} ${style.advance} ${!(difficulties?.advance) ? style.disabled : ""}`}>Advance {(difficulties?.advance) || "-"}</ChamferedButton>
+                        <ChamferedButton onClick={() => { scenechange("../relay/prospects") }} className={`${style.diffbtn} ${style.prospects} ${!(difficulties?.prospects) ? style.disabled : ""}`}>Prospects {(difficulties?.prospects) || "-"}</ChamferedButton>
+                        <ChamferedButton onClick={() => { scenechange("../relay/ozma") }} className={`${style.diffbtn} ${style.ozma} ${!(difficulties?.ozma) ? style.disabled : ""}`}>Ozma {(difficulties?.ozma) || "-"}</ChamferedButton>
                     </div>
                     <div className={style.multi} >
                         <ChamferedButton>Select</ChamferedButton>

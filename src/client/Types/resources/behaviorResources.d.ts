@@ -38,8 +38,9 @@ interface behaviorAssetContents {
 interface soundEffectContentMap {
     name: string
     sound: {
-        normal: string
+        tap: string
         damage: string
+        hold: string
         bright: string
         seed: string
         flick: string
@@ -51,11 +52,15 @@ interface soundEffectContentMap {
 interface soundEffectAssetContents {
     name: string
     sound: {
-        normal:{
+        tap:{
             data: ArrayBuffer
             mime: string
         }
         damage:{
+            data: ArrayBuffer
+            mime: string
+        }
+        hold:{
             data: ArrayBuffer
             mime: string
         }
