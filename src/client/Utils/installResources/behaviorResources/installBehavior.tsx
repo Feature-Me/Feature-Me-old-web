@@ -3,7 +3,7 @@ import React from "react";
 import { toast } from "react-toastify";
 import * as THREE from "three";
 import { FontObject, TTFLoader } from "three/examples/jsm/loaders/TTFLoader";
-
+import json5 from "json5";
 import path from "path-browserify";
 
 import TranslateText from "../../../Components/TranslateText/TranslateText";
@@ -15,6 +15,7 @@ import { installSoundEffect } from "./installSoundEffect";
 
 
 
+
 function installBehavior(zip: JSZip) {
     return new Promise<void | Error>(async (resolve, reject) => {
         if (!zip.file("FileMap.json")) {
@@ -22,10 +23,10 @@ function installBehavior(zip: JSZip) {
             resolve(new Error("FileMap.json not found"));
         }
 
-        const fileMapJsonData: behaviorContentMap = JSON.parse(await zip.file("FileMap.json")!.async("string"));
+        const fileMapJsonData: behaviorContentMap = json5.parse(await zip.file("FileMap.json")!.async("string"));
 
         console.log(fileMapJsonData, zip);
-
+        
         const data: behaviorAssetContents["models"] = {
             tap: await zip.file(path.normalize(fileMapJsonData.models.tap))?.async("arraybuffer") || new ArrayBuffer(0),
             damageTap: await zip.file(path.normalize(fileMapJsonData.models.damageTap))?.async("arraybuffer") || new ArrayBuffer(0),

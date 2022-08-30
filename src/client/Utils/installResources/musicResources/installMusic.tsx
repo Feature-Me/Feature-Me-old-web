@@ -1,6 +1,8 @@
-import getMimeFromFileName from "../../getMime/getMime";
 import JSZip from "jszip";
-import databaseInfo from "../../../Config/databaseinfo.json";
+import json5 from "json5";
+
+import databaseInfo from "Config/databaseinfo.json";
+import getMimeFromFileName from "Utils/getMime/getMime";
 
 function installMusic(zip: JSZip) {
     return new Promise<void|Error>(async (resolve, reject) => {
@@ -11,7 +13,7 @@ function installMusic(zip: JSZip) {
             resolve(new Error("Error installing music: FileMap.json not found"));
         }
 
-        const fileMapJsonData: MusicAssetMap = JSON.parse(await zip.file("FileMap.json")!.async("string"));
+        const fileMapJsonData: MusicAssetMap = json5.parse(await zip.file("FileMap.json")!.async("string"));
 
         const musicData: MusicAssetContents = {
             metadata: {

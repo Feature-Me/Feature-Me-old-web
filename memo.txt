@@ -29,3 +29,5 @@ import
 3. Components
 4. style
 5. resources(ex. img audio json etc)
+
+fix: ui clean up

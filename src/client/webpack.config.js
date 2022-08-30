@@ -40,13 +40,15 @@ module.exports = {
                     'postcss-loader', 'sass-loader'
                 ]
             },
-            { test:/\.cur?$/,
-            type: "asset/inline",
-            generator: { dataUrl: context => "data:image/cur;base64," + context.toString("base64") }
+            {
+                test:/\.cur?$/,
+                type: "asset/inline",
+                generator: { dataUrl: context => "data:image/cur;base64," + context.toString("base64") }
             },
             {test: /\.(jpg|png|ico)$/, type:"asset/inline"},
             { test: /\.(ttf|TTF|otf|OTF)$/, type: "asset/inline"},
             { test:/\.svg$/, type:"asset/inline" },
+            {test: /\.mp3$/, type: "asset/inline"},
 
             //{ test: /\.json$/, loader: 'json-loader' },
 

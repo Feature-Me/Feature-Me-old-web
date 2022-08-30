@@ -4,6 +4,24 @@
 
 # パッチノート
 
+# 00032-beta(Version 0.5)
+Commit A:
+
+package.jsonの更新
+
+インポート更新
+
+Webpack設定の更新,TS-loaderからbabel-loaderへ
+
+譜面コンバーターの仮実装
+
+リソースのファイルマップとチャートのパーサーをJSON5へ変更。
+
+Utilsの関連の軽微な変更,stats.jsとレンダリングステータスクラスを追加。
+
+タップ音の追加
+
+
 ## 00031-beta(Version 0.5)
 
 インポートの整理

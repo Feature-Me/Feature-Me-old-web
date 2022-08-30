@@ -1,7 +1,9 @@
 import JSZip from "jszip";
 import React from "react";
+import json5 from "json5";
+
 import { toast } from "react-toastify";
-import TranslateText from "../../../Components/TranslateText/TranslateText";
+import TranslateText from "Components/TranslateText/TranslateText";
 import { installMusic } from "./installMusic";
 
 function parseMusicCollection(zip: JSZip) {
@@ -10,8 +12,9 @@ function parseMusicCollection(zip: JSZip) {
             toast.error(<TranslateText contentData={"resourcesManager.database.notifications.installFailed"} />);
             resolve();
         }
-        const folders = JSON.parse(await zip.file("FileMap.json")!.async("string"))
+        const folders = json5.parse(await zip.file("FileMap.json")!.async("string"))
         let promises = [];
+        
         for (const folder of folders.folders) {
             const zipFilter = zip.filter(path => path.startsWith(folder));
             const zipFolder = new JSZip();

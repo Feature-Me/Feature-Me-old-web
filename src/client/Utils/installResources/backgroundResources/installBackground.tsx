@@ -2,6 +2,7 @@ import JSZip from "jszip";
 import React from "react";
 import { toast } from "react-toastify";
 import mimedb from "mime-db";
+import json5 from "json5";
 
 import TranslateText from "../../../Components/TranslateText/TranslateText";
 import databaseInfo from "../../../Config/databaseinfo.json";
@@ -18,7 +19,7 @@ function installBackground(zip: JSZip) {
             resolve(new Error("FileMap.json not found"));
         }
 
-        const fileMapJsonData: backgroundContentMap = JSON.parse(await zip.file("FileMap.json")!.async("string"));
+        const fileMapJsonData: backgroundContentMap = json5.parse(await zip.file("FileMap.json")!.async("string"));
         const data: backgroundAssetContents = {
             name: fileMapJsonData.name,
             data: await zip.file(fileMapJsonData.src)?.async("arraybuffer") || new ArrayBuffer(0),

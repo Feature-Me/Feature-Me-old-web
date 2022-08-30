@@ -1,5 +1,6 @@
 import JSZip from "jszip";
 import path from "path-browserify";
+import json5 from "json5";
 
 import databaseInfo from "../../../Config/databaseinfo.json";
 import getMime from "../../../Utils/getMime/getMime";
@@ -10,9 +11,41 @@ function installSoundEffect(zip:JSZip) {
             resolve(new Error("FileMap.json not found"));
         }
 
-        const fileMapJsonData:soundEffectContentMap = JSON.parse(await zip.file("FileMap.json")!.async("string"));
+        const fileMapJsonData:soundEffectContentMap = json5.parse(await zip.file("FileMap.json")!.async("string"));
 
-        let data:any = {
+        const data: soundEffectAssetContents["sound"] = {
+            tap:{
+                data: await zip.file(path.normalize(fileMapJsonData.sound.tap))?.async("arraybuffer") || new ArrayBuffer(0),
+                mime: getMime(path.normalize(fileMapJsonData.sound.tap))
+            },
+            damage: {
+                data: await zip.file(path.normalize(fileMapJsonData.sound.damage))?.async("arraybuffer") || new ArrayBuffer(0),
+                mime: getMime(path.normalize(fileMapJsonData.sound.damage))
+            },
+            hold: {
+                data: await zip.file(path.normalize(fileMapJsonData.sound.hold))?.async("arraybuffer") || new ArrayBuffer(0),
+                mime: getMime(path.normalize(fileMapJsonData.sound.hold))
+            },
+            bright: {
+                data: await zip.file(path.normalize(fileMapJsonData.sound.bright))?.async("arraybuffer") || new ArrayBuffer(0),
+                mime: getMime(path.normalize(fileMapJsonData.sound.bright))
+            },
+            seed: {
+                data: await zip.file(path.normalize(fileMapJsonData.sound.seed))?.async("arraybuffer") || new ArrayBuffer(0),
+                mime: getMime(path.normalize(fileMapJsonData.sound.seed))
+            },
+            flick: {
+                data: await zip.file(path.normalize(fileMapJsonData.sound.flick))?.async("arraybuffer") || new ArrayBuffer(0),
+                mime: getMime(path.normalize(fileMapJsonData.sound.flick))
+            },
+            assist: {
+                data: await zip.file(path.normalize(fileMapJsonData.sound.assist))?.async("arraybuffer") || new ArrayBuffer(0),
+                mime: getMime(path.normalize(fileMapJsonData.sound.assist))
+            }
+            
+        }
+
+        /* let data:any = {
 
         }
 
@@ -27,7 +60,7 @@ function installSoundEffect(zip:JSZip) {
             }
         }
 
-        data = data as soundEffectAssetContents["sound"];
+        data = data as soundEffectAssetContents["sound"]; */
 
         const dbOpenRequest = indexedDB.open(databaseInfo.DBName);
         dbOpenRequest.onsuccess = (event) => {

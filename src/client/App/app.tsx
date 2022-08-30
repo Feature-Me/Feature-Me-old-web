@@ -1,9 +1,10 @@
 import * as React from 'react';
 import {createRoot} from 'react-dom/client';
 import { useTranslation } from 'react-i18next';
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, useRecoilValue } from "recoil";
 import { BrowserRouter , Route } from 'react-router-dom';
 import { ToastContainer,Slide } from 'react-toastify';
+import { Howl, Howler } from 'howler';
 import "i18n/i18n";
 
 import initDatabase from 'Utils/database/initDatabase';
@@ -17,6 +18,8 @@ import Background from 'Block/background/background';
 import 'react-toastify/dist/ReactToastify.css';
 import style from './app.scss';
 
+import clicksound from 'Assets/Sounds/click.mp3';
+
 function App(): JSX.Element {
     const [translation, i18n] = useTranslation();
 
@@ -25,6 +28,7 @@ function App(): JSX.Element {
         environment.language = i18n.language;
         localStorage.setItem("environment", JSON.stringify(environment));
     }, [i18n.language]);
+
     
     return(
         <BrowserRouter>
@@ -49,6 +53,14 @@ function render():void{
     );
 }
 
+
+const clickSound = new Howl({
+    src: clicksound,
+    volume: 0.5,
+    loop: false,
+    autoplay: false,
+});
+
 function init():void{
     initLocalStorage();
     if (!JSON.parse(localStorage.getItem("DBVersion")!).initialized) initDatabase();
@@ -58,10 +70,9 @@ function init():void{
     console.log("%c Hold up!","color:red;font-size:64px;border:4px solid black;");
     console.log("%c  Do you know what you are supposed to do with this tool? If you do, how about contributing to this project?","color:#1189da;font-size:24px;");
 }
-
-
 window.addEventListener('load', init);
-window.addEventListener("contextmenu",(e)=>e.preventDefault());
-window.addEventListener("popstate",(e)=>{
-
-});
+window.addEventListener("contextmenu", (e) => e.preventDefault());
+window.addEventListener("popstate", (e) => { });
+window.addEventListener("click", () => {
+    clickSound.play();
+})
