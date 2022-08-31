@@ -7,5 +7,6 @@
     "fontStore": "FontDB",
     "storyStore": "StoryDB",
     "replayStore": "ReplayDB",
-    "chartEditorStore": "ChartEditorDB"
+    "chartEditorStore": "ChartEditorDB",
+    "practiceAssetStore":"PracticeAssetDB"
 }

@@ -15,7 +15,7 @@ import style from "./musicGameUI.scss";
 import MusicGameTitle from "./musicGameTitle";
 
 const MusicGameUI: React.FC = () => {
-    const navigation = useSeneChangeNavigation();
+    const scenechange = useSeneChangeNavigation();
     const selectedMusic = useRecoilValue(musicSelectorState);
     const gameConfig = useRecoilValue(gameConfigState);
 
@@ -251,8 +251,8 @@ const MusicGameUI: React.FC = () => {
                 <Head title={`Paused - ${musicData.metadata.title}`} backFunc={() => setMusicGameMode(game => { return { ...game, paused: false } })} />
                 <div className={style.pause_content}>
                     <p>Resume</p>
-                    <p onClick={() => navigation(-1)}>Restart</p>
-                    <p onClick={() => navigation(-2)}>Quit</p>
+                    <p onClick={() => scenechange(-1)}>Restart</p>
+                    <p onClick={() => scenechange(-2)}>Quit</p>
                 </div>
             </motion.div>
 

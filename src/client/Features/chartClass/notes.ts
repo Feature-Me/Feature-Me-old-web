@@ -31,7 +31,7 @@ class note {
             loop: false
         });
     }
-     judge(judgeTime: number):{judge:judgeText,accualy:number}| undefined{
+    judge(judgeTime: number): { judge: judgeText, accuracy:number}| undefined{
         if(this.judged) return;
         this.judged = true;
         let judgeText:judgeText;
@@ -44,13 +44,13 @@ class note {
 
         return {
             judge: judgeText,
-            accualy: judgeTime - this.time
+            accuracy: judgeTime - this.time
         }
     }
     setBehavior(model: GLTF) {
         const behavior = model.scene.clone();
         this.note = behavior;
-        this.note.position.set(0, 0.1, 0);
+        this.note.position.set(0, 0.1, 100);
     }
     setAudio(audioUrl: string,volume:number) {
         this.audio = new Howl({
@@ -147,19 +147,16 @@ class brightNote extends note {
         if (judgeText != "lost") this.audio.play();
         return {
             judge: judgeText,
-            accualy: judgeTime - this.time
+            accuracy: judgeTime - this.time
         }
     }
 }
 
 class seedNote extends note {
     lane: "left" | "right";
-    awaitingJudge: boolean;
-    awitingJudgeData: { judge: judgeText; accualy: number; } | undefined;
     constructor(note: chartSeedNote) {
         super(note);
         this.lane = note.lane;
-        this.awaitingJudge = false;
     }
     setBehavior(model: GLTF): void {
         super.setBehavior(model);
@@ -169,22 +166,22 @@ class seedNote extends note {
     }
     judge(judgeTime: number) {
         if(this.judged) return;
-        //this.audio.play();
-        this.awaitingJudge = true;
-        this.awitingJudgeData = {
-            judge: "stunning" as judgeText,
-            accualy: 0
+        this.judged = true;
+        console.log(judgeTime,this.time);
+        
+        if(judgeTime - this.time > 100)
+            return{
+                judge:"lost" as judgeText,
+                accuracy:0
         }
-        return this.awitingJudgeData;
+        this.audio.play();
+        return {
+            judge: "stunning" as judgeText,
+            accuracy: 0
+        }
     }
     updatePosition(gameTime: number): void {
         super.updatePosition(gameTime);
-        if(gameTime > this.time) this.judge(gameTime);
-    }
-    resolveAwaiting(){
-        this.awaitingJudge = false;
-        this.awitingJudgeData = undefined;
-        this.judged = true;
     }
 }
 

@@ -25,6 +25,9 @@ function initDatabase() {
             const replayStore = db.createObjectStore(databaseInfo.replayStore, { keyPath: "id", autoIncrement: true });
             
             const chartEditorStore = db.createObjectStore(databaseInfo.chartEditorStore, { keyPath: "id"});
+
+            const practiceAssetStore = db.createObjectStore(databaseInfo.practiceAssetStore,{keyPath:"name"});
+
             db.close();
             localStorage.setItem("DBVersion", JSON.stringify({ version: DBVersion, initialized: true, updated: new Date().getDate() }));
         } catch (error) {

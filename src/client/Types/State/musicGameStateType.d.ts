@@ -15,6 +15,7 @@ interface musicGameNotesJudgeType {
     }
     accuracy:number
     judge: {
+        [key:judgeText]:number;
         stunning: number
         glossy: number
         moderate: number
