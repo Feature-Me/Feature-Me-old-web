@@ -1,0 +1,21 @@
+@import "../../../Assets/mixin.scss";
+
+.titlepage {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    @include font-header;
+    z-index: 99;
+}
+
+.background{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transform: scale(1.5);
+}

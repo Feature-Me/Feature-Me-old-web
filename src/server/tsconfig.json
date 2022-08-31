@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "target": "ES6",
+    "module": "commonjs",
+    "outDir": "../../dist/server",
+    "strict": true,
+    "skipLibCheck": true,
+    "lib": ["ES6","ES2015","DOM"],
+    "moduleResolution": "node",
+  },
+}

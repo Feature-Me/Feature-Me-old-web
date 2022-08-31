@@ -1,0 +1,48 @@
+@import "../../Assets/mixin.scss";
+
+.head {
+    background-color: rgba(245, 245, 245, 0.5);
+    @include blur(16px);
+    @include no-support-background-blur(whitesmoke);
+
+    color: rgb(8, 14, 20);
+    text-shadow: 0 0 4px white;
+    padding: 0 16px;
+    display: grid;
+    grid-template-columns: 48px auto 1fr auto 48px;
+    grid-template-rows: 1fr;
+    align-items: center;
+    column-gap: 8px;
+
+    height: 48px;
+
+    @media screen and (max-height: 540px) {
+        height: 24px;
+    }
+
+    h4 {
+        margin: 0;
+        @include font-header;
+        font-size: 1.25em;
+        @include small-device-font;
+    }
+
+    .icon_wrapper {
+        margin: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .icon {
+            transition: 0.3s;
+            margin: 0 auto;
+            transform: scale(1);
+
+            &:hover {
+                fill: #1189da;
+                color: #1189da;
+                transform: scale(1.5);
+            }
+        }
+    }
+}

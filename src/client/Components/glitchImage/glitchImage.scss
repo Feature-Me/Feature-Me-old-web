@@ -1,0 +1,133 @@
+@function rand($min, $max) {
+  @return random() * ($max - $min) + $min;
+}
+
+$animation-duration: 1.5s;
+$glitch-duration: 10%;
+$glitch-frequency: 20;
+$glitch-interval: calc($glitch-duration / $glitch-frequency);
+
+@mixin rgb-shift($name) {
+  @keyframes rgb-shift-#{$name} {
+    @for $i from 0 to $glitch-frequency {
+      #{$i * $glitch-interval} {
+        transform: translate(
+          #{rand(-2, 2) * 1%},
+          #{rand(-0.5, 0.5) * 1%}
+        );
+      }
+    }
+
+    #{$glitch-duration}, 100% {
+      transform: none;
+    }
+  }
+
+  animation: rgb-shift-#{$name} $animation-duration steps(1, jump-end) infinite alternate both;
+}
+
+@mixin glitch($name) {
+  @keyframes glitch-#{$name} {
+    @for $i from 0 to $glitch-frequency {
+      $left: 0%;
+      $right: 100%;
+      $top: rand(0, 90) * 1%;
+      $bottom: $top + rand(1, 10) * 1%;
+
+      #{$i * $glitch-interval} {
+        clip-path: polygon(
+          $left $top,
+          $right $top,
+          $right $bottom,
+          $left $bottom
+        );
+        transform: translate(
+          #{rand(-8, 8) * 1%},
+          #{rand(-0.5, 0.5) * 1%}
+        );
+      }
+    }
+
+    #{$glitch-duration}, 100% {
+      clip-path: none;
+      transform: none;
+    }
+  }
+
+  animation: glitch-#{$name} $animation-duration linear infinite alternate both;
+}
+
+body {
+  margin: 0;
+}
+
+.glitch {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 0;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+
+  &::before,
+  &::after,
+  .channel {
+    background: inherit;
+    background-size: cover;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  &::before {
+    @include glitch(before);
+    content: "";
+  }
+
+  &::after {
+    @include glitch(after);
+    content: "";
+  }
+
+  .channel {
+    mix-blend-mode: screen;
+
+    &::before {
+      bottom: 0;
+      content: "";
+      display: block;
+      mix-blend-mode: multiply;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+    }
+  }
+
+  .r {
+    @include rgb-shift(r);
+
+    &::before {
+      background: rgb(240, 0, 0);
+    }
+  }
+
+  .g {
+    @include rgb-shift(g);
+
+    &::before {
+      background: rgb(0, 240, 0);
+    }
+  }
+
+  .b {
+    @include rgb-shift(b);
+
+    &::before {
+      background: rgb(0, 0, 240);
+    }
+  }
+}

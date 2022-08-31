@@ -1,2 +1,33 @@
-https://devlog.atlas.jp/2021/12/08/4140
-https://qiita.com/suzukalight/items/54860fdda35e6ce983d9
+
+stunning
+glossy
+moderate
+lost
+
+Future Past
+
+Resource files
+
+renamed zip
+
+FileMap.json must be in the root of the zip file.
+
+.fm3d Feature Me 3D Resource
+.fmmr Feature Me Music Resource
+.fmmc Feature Me Music Collection
+
+music volume 89db
+
+3D Resolution:70%
+None 35% 60W
+AO 65% 125W
+Bloom 40% 70W
+
+import 
+1. module
+2. Utils 
+3. Components
+4. style
+5. resources(ex. img audio json etc)
+
+fix: ui clean up
