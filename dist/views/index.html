@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="icon/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon" type="image/x-icon">
+    <meta name="description" content="新感覚の新作音ゲー。 | A new music game with a new style.">
+    <link rel="manifest" href="scripts/manifest.json">
     <title>Feature Me</title>
 
 </head>
@@ -18,5 +20,10 @@
         
     </div>
     <script src="scripts/bundle.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('scripts/serviceWorker.js');
+            }
+    </script>
 </body>
 </html>

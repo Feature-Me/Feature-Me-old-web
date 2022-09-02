@@ -1,0 +1,17 @@
+{
+    "short_name": "Feature Me",
+    "name": "Feature Me",
+    "categories":["game"],
+    "description":"A new music game with a new style.",
+    "display": "standalone",
+    "start_url": "index.html",
+    "orientation":"landscape",
+    "theme-color":"#14141e",
+    "icons": [
+        {
+            "src": "/favicon",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
