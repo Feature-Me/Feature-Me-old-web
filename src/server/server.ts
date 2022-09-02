@@ -17,7 +17,7 @@ const resourcesdir: string = path.join(basedir, "resources");
 const scriptsdir: string = path.join(basedir, "scripts");
 const icondir: string = path.join(basedir, "icon");
 const dbdir: string = path.join(basedir, "db");
-const port: number = 3000;
+const port: number = Number(process.env.PORT) || 3000;
 
 const db = {
     users: new nedb({ filename: path.join(dbdir, "users.db"), autoload: true }),
