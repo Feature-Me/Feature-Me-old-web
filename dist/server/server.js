@@ -15,7 +15,7 @@ const resourcesdir = path.join(basedir, "resources");
 const scriptsdir = path.join(basedir, "scripts");
 const icondir = path.join(basedir, "icon");
 const dbdir = path.join(basedir, "db");
-const port = 3000;
+const port = Number(process.env.PORT) || 3000;
 const db = {
     users: new nedb({ filename: path.join(dbdir, "users.db"), autoload: true }),
     leaderboard: new nedb({ filename: path.join(dbdir, "leaderboard.db"), autoload: true })
