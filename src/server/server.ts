@@ -15,7 +15,7 @@ const basedir: string = path.join(__dirname, "../");
 const viewsdir: string = path.join(basedir, "views");
 const resourcesdir: string = path.join(basedir, "resources");
 const scriptsdir: string = path.join(basedir, "scripts");
-const icondir: string = path.join(basedir, "icon");
+const imagedir: string = path.join(basedir, "images");
 const dbdir: string = path.join(basedir, "db");
 const port: number = Number(process.env.PORT) || 3000;
 
@@ -34,7 +34,12 @@ app.use("/scripts", express.static(scriptsdir));
 app.use("/resources/background", express.static(path.join(resourcesdir, "Backgrounds")));
 app.use("/resources/behavior", express.static(path.join(resourcesdir, "Behaviors")));
 app.use("/resources/music", express.static(path.join(resourcesdir, "MusicResources")));
-app.use("/icon", express.static(icondir));
+app.use("/images", express.static(imagedir));
+
+app.get("/favicon",(req,res)=>{
+    if(req.headers["content-type"] == "image/x-icon") res.sendFile(path.join(imagedir,"favicon.ico"));
+    else res.sendFile(path.join(imagedir,"favicon.png"));
+})
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(viewsdir, "index.html"));
