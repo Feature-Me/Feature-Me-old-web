@@ -3,6 +3,8 @@
 ### 音ゲーマーが贈る,音ゲーの新しい形。
 
 # パッチノート
+# 00040-beta(Version 0.5)
+Google Search Consoleの設定
 
 # 00039-beta(Version 0.5)
 Google Analyticsの更新
