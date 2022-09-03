@@ -29,10 +29,18 @@ const JASettingsPage = {
         "liveVisualization":{
             "name":"ライブビジュアライゼーション",
             "description":"プレイ中の精度/予測表示を有効にします。",
+        },
+        "scrollSpeed":{
+            "name":"スクロールスピード",
+            "description":"ゲームのスクロールスピードを設定します",
         }
     },
     "video": {
         "title": "ビデオ",
+        "gameResolution":{
+            "name":"ゲーム3D解像度",
+            "description":"ゲームの3Dレンダリング品質を設定します。"
+        }
     },
     "audio": {
         "title": "オーディオ",
