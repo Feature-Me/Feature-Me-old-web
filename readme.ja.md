@@ -4,6 +4,9 @@
 
 # パッチノート
 
+# 00039-beta(Version 0.5)
+Google Analyticsの更新
+
 # 00038-beta(Version 0.5)
 リソースの調整とリバート
 

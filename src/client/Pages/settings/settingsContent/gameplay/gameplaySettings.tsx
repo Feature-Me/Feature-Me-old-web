@@ -10,6 +10,7 @@ import style from "../settingsContent.scss"
 import KeybindSettings from "./keybindSettings/keybindSettings";
 
 import keybindImage from "../../../../Assets/Images/keybindmap.png";
+import RangeInput from "Components/RangeInput/RangeInput";
 
 const GameplaySettings: React.FC = () => {
     const [translate, i18n] = useTranslation();
@@ -28,11 +29,11 @@ const GameplaySettings: React.FC = () => {
         },
         {
             details: {
-                title: <TranslateText contentData="settingsPage.gameplay.details.name" />,
-                processingLoad: "none",
-                description: <TranslateText contentData="settingsPage.gameplay.details.description" />
+                title: <TranslateText contentData="settingsPage.gameplay.scrollSpeed.name" />,
+                processingLoad: "low",
+                description: <TranslateText contentData="settingsPage.gameplay.scrollSpeed.description" />
             },
-            input: <></>
+            input: <RangeInput min={0} max={20} step={0.1} value={gameConfig.gameplay.scrollSpeed} />
         }
     ]
 
