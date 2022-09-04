@@ -66,7 +66,7 @@ const MusicDetails: React.FC = () => {
         audio = new Howl({
             src: [audioUri],
             loop: true,
-            volume: (gameConfig.audio.masterVolume * gameConfig.audio.musicVolume) / 100,
+            volume: (gameConfig.audio.masterVolume * gameConfig.audio.musicVolume) ,
             sprite: {
                 music: [data.metadata.demo.start - 3000, data.metadata.demo.end + 3000]
             }

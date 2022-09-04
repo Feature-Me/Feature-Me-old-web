@@ -19,8 +19,8 @@ const ENUSSettingsPage = {
     "gameplay": {
         "title": "Gameplay",
     },
-    "video": {
-        "title": "Video",
+    "graphics": {
+        "title": "Graphics",
     },
     "audio": {
         "title": "Audio",

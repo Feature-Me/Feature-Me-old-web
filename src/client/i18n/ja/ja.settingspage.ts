@@ -35,15 +35,43 @@ const JASettingsPage = {
             "description":"ゲームのスクロールスピードを設定します",
         }
     },
-    "video": {
-        "title": "ビデオ",
+    "graphics": {
+        "title": "グラフィックス",
         "gameResolution":{
             "name":"ゲーム3D解像度",
             "description":"ゲームの3Dレンダリング品質を設定します。"
+        },
+        "gameFps":{
+            "name": "ゲーム最大フレームレート",
+            "description":"ゲームの最大フレームレートを設定します。この設定は判定精度に影響します。"
+        },
+        "enable3DBackground":{
+            "name":"3Dバックグラウンドの使用",
+            "description":"3Dバックグラウンドを使用するかどうかを設定します。"
+        },
+        "backgroundResolution":{
+            "name":"背景3D解像度",
+            "description":"3D背景使用中のレンダリング品質を設定します。"
+        },
+        "backgroundFps":{
+            "name": "背景フレームレート",
+            "description": "3D背景使用中の最大フレームレートを設定します。"
         }
     },
     "audio": {
         "title": "オーディオ",
+        "masterVolume":{
+            "name":"マスター音量",
+            "description":"ゲームの総合音量を設定します。"
+        },
+        "musicVolume":{
+            "name":"楽曲音量",
+            "description":"楽曲と選曲プレビューの音量を設定します。"
+        },
+        "effectVolume": {
+            "name": "エフェクト音量",
+            "description": "判定音とアシストサウンドの音量を設定します。"
+        }
     },
     "storage": {
         "title": "ストレージ",
