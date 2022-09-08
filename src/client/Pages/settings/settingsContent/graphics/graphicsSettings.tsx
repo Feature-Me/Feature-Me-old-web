@@ -31,7 +31,7 @@ const GraphicsSettings: React.FC = () => {
                 processingLoad:"high",
                 description: <TranslateText contentData="settingsPage.graphics.gameFps.description" />,
             },
-            input: <RangeInput min={30} max={480} step={3} value={gameConfig.graphics.musicgame.fps} onChange={(value: number) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, musicgame: { ...config.graphics.musicgame, fps: value } } } })} />
+            input: <RangeInput min={30} max={480} step={1} value={gameConfig.graphics.musicgame.fps} onChange={(value: number) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, musicgame: { ...config.graphics.musicgame, fps: value } } } })} />
         },
         {
             details: {
@@ -47,7 +47,7 @@ const GraphicsSettings: React.FC = () => {
                 processingLoad: "high",
                 description: <TranslateText contentData="settingsPage.graphics.backgroundFps.description" />,
             },
-            input: <RangeInput min={1} max={480} step={3} value={gameConfig.graphics.background.fps} onChange={(value: number) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, background: { ...config.graphics.background, fps: value } } } })} />
+            input: <RangeInput min={1} max={480} step={1} value={gameConfig.graphics.background.fps} onChange={(value: number) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, background: { ...config.graphics.background, fps: value } } } })} />
         }
     ]
 

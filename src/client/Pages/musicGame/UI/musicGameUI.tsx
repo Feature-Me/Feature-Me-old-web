@@ -161,10 +161,12 @@ const MusicGameUI: React.FC = () => {
 
     React.useEffect(() => {
         if (musicGameTime.totalTime == 0) return;
-
+        console.log("Total Time:",musicGameTime.totalTime);
+        
+        let changeSceneTimeout:NodeJS.Timeout
         const progressInterval = setInterval(() => {
             if (!progressRef.current) return;
-            const progress = (Date.now() - musicGameTime.totalTime) / musicGameTime.totalTime * 100;
+            const progress = (performance.now() - musicGameTime.startedTime) / musicGameTime.totalTime * 100
             if (progress < 100) progressRef.current.style.backgroundSize = `${progress}%`;
             if (progress >= 100 && !musicGamePause.paused) {
                 setMusicGamePause(pause=>{
@@ -172,7 +174,7 @@ const MusicGameUI: React.FC = () => {
                         ...pause,
                         paused:true
                     }
-                })
+                });
             }
         }, 100);
         return () => {

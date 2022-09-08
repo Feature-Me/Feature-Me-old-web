@@ -53,6 +53,7 @@ const defaultMusicGamePauseState: musicGameType.musicGamePauseState = {
 const defaultMusicGameTime: musicGameType.musicGameTimeType = {
     pausedDuration: 0,
     totalTime:0,
+    startedTime:0
 }
 
 const defaultChart: chartType = {

@@ -50,4 +50,5 @@ interface musicGamePauseState {
 interface musicGameTimeType{
     totalTime:number
     pausedDuration:number
+    startedTime:number
 }
