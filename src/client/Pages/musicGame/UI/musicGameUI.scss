@@ -90,6 +90,16 @@
             background-repeat: no-repeat;
             background-size: 0%;
             position: relative;
+            .progressPoint{
+                transform: rotate(45deg);
+                box-shadow: 0 0 4px 2px #1189da;
+                background-color: whitesmoke;
+                height: 8px;
+                width: 8px;
+                position: absolute;
+                top: -2px;
+                z-index: 50;
+            }
         }
 
         .score {

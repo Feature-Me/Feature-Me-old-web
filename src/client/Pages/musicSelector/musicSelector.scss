@@ -11,10 +11,6 @@
     grid-template-columns: 1fr;
     grid-template-rows: 48px 1fr;
 
-    @media screen and (max-height: 540px) {
-        grid-template-rows: 24px 1fr;
-    }
-
     .selector_container {
         display: flex;
         flex-direction: row;

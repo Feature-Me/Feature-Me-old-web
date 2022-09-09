@@ -33,6 +33,7 @@ const MusicGameUI: React.FC = () => {
     //4 boards
     const primaryBoardRef = React.useRef<HTMLDivElement>(null);
     const progressRef = React.useRef<HTMLDivElement>(null);
+    const progressPointRef = React.useRef<HTMLDivElement>(null);
     const secondaryBoardRef = React.useRef<HTMLDivElement>(null);
     const tertiaryBoardRef = React.useRef<HTMLDivElement>(null);
 
@@ -165,9 +166,13 @@ const MusicGameUI: React.FC = () => {
         
         let changeSceneTimeout:NodeJS.Timeout
         const progressInterval = setInterval(() => {
-            if (!progressRef.current) return;
+            if (!progressRef.current || !progressPointRef.current) return;
             const progress = (performance.now() - musicGameTime.startedTime) / musicGameTime.totalTime * 100
-            if (progress < 100) progressRef.current.style.backgroundSize = `${progress}%`;
+            if (progress < 100) {
+                progressRef.current.style.backgroundSize = `${progress}%`;
+                progressPointRef.current.style.left = `${progress}%`;
+
+            }
             if (progress >= 100 && !musicGamePause.paused) {
                 setMusicGamePause(pause=>{
                     return{
@@ -219,6 +224,7 @@ const MusicGameUI: React.FC = () => {
                     </div>
                 </div>
                 <div className={style.progress} ref={progressRef}>
+                    <div className={style.progressPoint} ref={progressPointRef}></div>
                 </div>
                 <div className={style.score}>
                     <span>Score</span>
