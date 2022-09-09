@@ -9,7 +9,7 @@ import SettingDetails, { settingDetailsData } from "../detailsPane/settingDetail
 import style from "../settingsContent.scss"
 import KeybindSettings from "./keybindSettings/keybindSettings";
 
-import keybindImage from "../../../../Assets/Images/keybindmap.png";
+import keybindImage from "Assets/Images/keybindmap.png";
 import RangeInput from "Components/RangeInput/RangeInput";
 
 const GameplaySettings: React.FC = () => {
@@ -33,7 +33,7 @@ const GameplaySettings: React.FC = () => {
                 processingLoad: "low",
                 description: <TranslateText contentData="settingsPage.gameplay.scrollSpeed.description" />
             },
-            input: <RangeInput min={0} max={20} step={0.1} value={gameConfig.gameplay.scrollSpeed} />
+            input: <RangeInput min={0} max={20} step={0.1} value={gameConfig.gameplay.scrollSpeed} onChange={(value:number) => setGameConfig(config => { return { ...config, gameplay: { ...config.gameplay, scrollSpeed: value } } })} />
         }
     ]
 

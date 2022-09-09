@@ -16,15 +16,11 @@
 
     height: 48px;
 
-    @media screen and (max-height: 540px) {
-        height: 24px;
-    }
-
     h4 {
         margin: 0;
         @include font-header;
         font-size: 1.25em;
-        @include small-device-font;
+/*         @include small-device-font; */
     }
 
     .icon_wrapper {

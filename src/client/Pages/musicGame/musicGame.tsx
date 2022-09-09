@@ -127,9 +127,12 @@ const MusicGame: React.FC = () => {
     React.useEffect(() => {
         preparingGame();
         window.addEventListener("keydown", keyInput);
+        window.addEventListener("resize",resizeCanvas);
         return () => {
             clearTimeout(ResultNavigationInterval);
-            window.removeEventListener("keydown", keyInput)
+            gameRenderer.dispose();
+            window.removeEventListener("keydown", keyInput);
+            window.removeEventListener("resize",resizeCanvas);
             musicAudio.stop();
             musicAudio.unload();
         }
@@ -153,8 +156,13 @@ const MusicGame: React.FC = () => {
             .exhaustive();
     }
 
+    //when resized window, resize canvas to fit window size
+    function resizeCanvas(){
+        gameRenderer.setSize(window.innerWidth,window.innerHeight)
+    }
+
+    //accept behavior , load chart and play assist sound
     function preparingGame() {
-        //console.log(musicData,rawChart);
         getBehavior.then((behavior) => {
             parseChart(rawChart!.data, gameConfig.gameplay.scrollSpeed).then(async (chartData) => {
 
@@ -191,6 +199,7 @@ const MusicGame: React.FC = () => {
                     return {
                         ...time,
                         totalTime: totalTime,
+                        startedTime:performance.now()
                     }
                 })
 
@@ -198,8 +207,8 @@ const MusicGame: React.FC = () => {
                 musicGameVariables.time.startTime = performance.now() + (((60 / chartData.metadata.initialBpm) * 1000) * 4) + 3500 + chartData.metadata.offset;
                 musicGameVariables.ready = true;
                 ResultNavigationInterval = setInterval(()=>{
-                    scenechange(-2)
-                },totalTime+musicGameVariables.time.initialVoidTime)
+                    scenechange("../result");
+                },totalTime+musicGameVariables.time.initialVoidTime+2000);
 
                 await sleep(3500);
                 const sound = (await getBehavior).sound.sound.assist;
@@ -213,12 +222,15 @@ const MusicGame: React.FC = () => {
                     await sleep((60 / chartData.metadata.initialBpm) * 1000);
                 }
                 audio.stop();
+                audio.unload();
                 musicAudio.play();
                 musicGameVariables.delay = performance.now() - musicGameVariables.time.startTime
             })
         })
     }
 
+
+    //initialize game scene
     async function initRenderer() {
         const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
         const directionalLight = new THREE.DirectionalLight(0xffffff, 7);
@@ -268,8 +280,6 @@ const MusicGame: React.FC = () => {
     }
 
     async function moveCharacter(position: ("left" | "right")) {
-        console.log("move");
-
         const currentPos = character.position.x;
         const newPos = position == "left" ? -9 : 9;
         if (currentPos == newPos) return;
@@ -277,6 +287,7 @@ const MusicGame: React.FC = () => {
         for (let i = 0; i < 100; i++) {
             const pos = easings.bounce(i / 100) * moveDistance / 100 + newPos;
             character.position.x = pos;
+            await sleep(10);
         }
 
     }
@@ -285,6 +296,8 @@ const MusicGame: React.FC = () => {
         composer.render();
         updateGame();
     }
+    
+    //update notes position
     function updateGame() {
         if (!musicGameVariables.ready) return;
         const activeRange = musicGameVariables.activeRange
@@ -330,10 +343,9 @@ const MusicGame: React.FC = () => {
             const note = musicGameVariables.activeNotes.find(note => note instanceof brightNote && Math.abs(note.time - judgeTime) < activeRange);
             if (note) managementJudge(note.judge(judgeTime));
         }
-
-
-
     }
+
+    //set score and some info
     function managementJudge(judge: { judge: judgeText, accuracy: number } | undefined) {
         if (!judge) return;
         let score = chart.metadata.scorePerNote;

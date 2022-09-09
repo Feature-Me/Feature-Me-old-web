@@ -26,7 +26,7 @@ const SettingsPage: React.FC = (props) => {
                 <div className={style.sidebar}>
                     <Link className={style.sidebar_content} to={"./"}>{translate("settingsPage.general.title")}</Link>
                     <Link className={style.sidebar_content} to={"./gameplay"}>{translate("settingsPage.gameplay.title")}</Link>
-                    <Link className={style.sidebar_content} to={"./video"}>{translate("settingsPage.video.title")}</Link>
+                    <Link className={style.sidebar_content} to={"./graphics"}>{translate("settingsPage.graphics.title")}</Link>
                     <Link className={style.sidebar_content} to={"./audio"}>{translate("settingsPage.audio.title")}</Link>
                     <Link className={style.sidebar_content} to={"./storage"}>{translate("settingsPage.storage.title")}</Link>
                 </div>

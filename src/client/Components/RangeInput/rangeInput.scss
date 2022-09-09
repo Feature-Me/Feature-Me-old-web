@@ -1,0 +1,46 @@
+.rangeinput_wrapper{
+    display: grid;
+    grid-template-columns: 1fr 64px;
+    grid-row: 1fr;
+
+    .rangeinput {
+        appearance: none;
+        background-color: rgb(65, 64, 64);
+        border: 1px solid #1189da;
+        &::-webkit-slider-thumb{
+            appearance: none;
+            width: 8px;
+            height: 24px;
+            display: block;
+            background-color: #1189da;
+            border-radius: 0;
+            &:hover{
+                background-color: #116fda;
+            }
+        }
+        &::-moz-range-thumb{
+            appearance: none;
+            width: 8px;
+            height: 24px;
+            display: block;
+            background-color: #1189da;
+            border-radius: 0;
+            &:hover {
+                background-color: #116fda;
+            }
+        }
+    }
+    
+    .rangeinput_number {
+        appearance: none;
+        -moz-appearance: textfield;
+        background-color: transparent;
+        color: whitesmoke;
+        text-align: center;
+        border: none;
+        &::-webkit-outer-spin-button,&::-webkit-inner-spin-button {
+            appearance: none;
+            margin: 0;
+        }
+    }
+}
