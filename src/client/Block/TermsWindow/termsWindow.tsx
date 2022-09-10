@@ -27,13 +27,13 @@ const TermsWindow: React.FC = (): JSX.Element => {
     }
     function acceptTerms(): void {
         console.log("acceptTerms");
-        
+
         const environment = JSON.parse(localStorage.getItem("environment")!);
         environment.termsVersion = version.TermsVersion
         environment.termsAccepted = true;
         localStorage.setItem("environment", JSON.stringify(environment));
         closeTermsWindow();
-        
+
     }
     function declineTerms(): void {
         closeTermsWindow();
@@ -50,7 +50,7 @@ const TermsWindow: React.FC = (): JSX.Element => {
                 </pre>
                 <div className={style.interaction_wrapper}>
                     <div className={style.interaction}>
-                        <ChamferdButton color="red" onClick={declineTerms}>
+                        <ChamferdButton accentColor="#ca1c1c" onClick={declineTerms}>
                             {translation("terms.button.decline")}
                         </ChamferdButton>
                         <ChamferdButton onClick={acceptTerms}>
