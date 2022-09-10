@@ -3,14 +3,11 @@ import { motion, useAnimation } from 'framer-motion';
 
 import style from './style.scss';
 
-interface selectboxContent{
-    value:string
-    label:string
-}
 
-const SelectBox: React.FC<{contents:Array<selectboxContent>,onChange:Function,value:selectboxContent}> = (props):JSX.Element => {
-    const [value, setValue] = React.useState(props.value.value);
-    const [label, setLabel] = React.useState(props.value.label);
+
+const SelectBox: React.FC<{contents:Array<inputContents>,onChange:Function,value:inputContents}> = (props):JSX.Element => {
+    const [value, setValue] = React.useState<string>(props.value.value);
+    const [label, setLabel] = React.useState<string>(props.value.label);
     const [isOpen, setIsOpen] = React.useState(false);
 
     return (
@@ -21,7 +18,7 @@ const SelectBox: React.FC<{contents:Array<selectboxContent>,onChange:Function,va
     )
 }
 
-const Selector: React.FC<{isOpen:boolean,setIsOpen:React.Dispatch<React.SetStateAction<boolean>>,contents:Array<selectboxContent>,onChange:Function,setValue:Function,setLabel:Function}> = (props):JSX.Element => {
+const Selector: React.FC<{isOpen:boolean,setIsOpen:React.Dispatch<React.SetStateAction<boolean>>,contents:Array<inputContents>,onChange:Function,setValue:Function,setLabel:Function}> = (props):JSX.Element => {
     const animationController = useAnimation();
     const [animating, setAnimating] = React.useState(false);
     const initialAnimation = {

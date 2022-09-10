@@ -1,0 +1,54 @@
+.horizonalSelect{
+    display: grid;
+        grid-template-columns: 48px 1fr 48px;
+        grid-template-rows: 38px;
+    max-height: 40px;
+    border: 1px solid whitesmoke;
+
+    .arrowBtn{
+        display: flex;
+            align-items: center;
+            justify-content: center;
+        border: 1px solid whitesmoke;
+        height: 100%;
+        &:hover{
+            border: 1px solid #1189da;
+            transition: 0.2s;
+            color: #1189da;
+        }
+    }
+    .label{
+        display: grid;
+            grid-template-rows: 28px 12px;
+            grid-template-columns: 1fr;
+            align-items: center;
+            justify-items: center;
+        
+            span{
+                line-height: 28px;
+                display: block;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+
+        .indexPoint{
+            height: 100%;
+            width: 100%;
+            display: grid;
+                grid-template-rows: 1fr;
+                grid-auto-columns: 1fr;
+                grid-auto-flow: column;
+                align-items: center;
+                justify-items: center;
+            div{
+                width: 100%;
+                height: 8px;
+                background-color: #36393f;
+                &[data-index="true"] {
+                    background-color: #1189da;
+                }
+            }
+        }
+    }
+}

@@ -41,6 +41,18 @@ const JASettingsPage = {
             "name":"ゲーム3D解像度",
             "description":"ゲームの3Dレンダリング品質を設定します。"
         },
+        "gameAntiAliasing":{
+            "name":"ゲームアンチエイリアス",
+            "description":"ゲームのアンチエイリアスを設定します。推奨:FXAA"
+        },
+        "gameAASampling":{
+            "name":"ゲームアンチエイリアスサンプリング",
+            "description":"ゲームのアンチエイリアス(SSAAまたはTAA)使用時のサンプリング倍率を設定します。"
+        },
+        "gameRenderType":{
+            "name":"ゲームレンダリングタイプ",
+            "description":"ゲームのレンダリング方法を選択します。"
+        },
         "gameFps":{
             "name": "ゲーム最大フレームレート",
             "description":"ゲームの最大フレームレートを設定します。この設定は判定精度に影響します。"
@@ -48,6 +60,10 @@ const JASettingsPage = {
         "enable3DBackground":{
             "name":"3Dバックグラウンドの使用",
             "description":"3Dバックグラウンドを使用するかどうかを設定します。"
+        },
+        "backgroundRenderType":{
+            "name": "背景レンダリングタイプ",
+            "description": "背景のレンダリング方法を選択します。"
         },
         "backgroundResolution":{
             "name":"背景3D解像度",

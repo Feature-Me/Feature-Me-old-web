@@ -7,7 +7,8 @@ interface gameConfig {
             fps: number
             postProcessing: {
                 enabled: boolean
-                antialias: false | "default" | "TAA" | "SMAA" | "SSAA"
+                antialias: AntiAliasType
+                AALevel:AALevel
                 ambientOcclusion: boolean
                 bloom: boolean
             }
@@ -19,7 +20,8 @@ interface gameConfig {
             fps: number
             postProcessing: {
                 enabled: boolean
-                antialias: false | "default" | "TAA" | "SMAA" | "SSAA"
+                antialias: AntiAliasType
+                AALevel:AALevel
                 ambientOcclusion: boolean
                 bloom: boolean
             }
@@ -65,3 +67,6 @@ interface gameConfig {
         effectVolume: number
     }
 }
+
+type AntiAliasType = false | "default" | "TAA" | "SMAA" | "SSAA" | "FXAA"
+type AALevel = 0 | 1 | 2 | 3 | 4 | 5
