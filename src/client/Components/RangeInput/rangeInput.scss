@@ -1,37 +1,54 @@
-.rangeinput_wrapper{
+.rangeinput_wrapper {
     display: grid;
     grid-template-columns: 1fr 64px;
     grid-row: 1fr;
+    align-items: center;
+    height: 40px;
 
     .rangeinput {
         appearance: none;
         background-color: rgb(65, 64, 64);
         border: 1px solid whitesmoke;
-        max-height: 40px;
-        &::-webkit-slider-thumb{
+
+        &.tiny {
+            height: 4px;
+        }
+
+        &.fit {
+            height: 24px;
+        }
+
+        &.large {
+            height: 36px;
+        }
+
+        &::-webkit-slider-thumb {
             appearance: none;
             width: 8px;
             height: 24px;
             display: block;
             background-color: #1189da;
             border-radius: 0;
-            &:hover{
+
+            &:hover {
                 background-color: #116fda;
             }
         }
-        &::-moz-range-thumb{
+
+        &::-moz-range-thumb {
             appearance: none;
             width: 8px;
             height: 24px;
             display: block;
             background-color: #1189da;
             border-radius: 0;
+
             &:hover {
                 background-color: #116fda;
             }
         }
     }
-    
+
     .rangeinput_number {
         appearance: none;
         -moz-appearance: textfield;
@@ -39,7 +56,9 @@
         color: whitesmoke;
         text-align: center;
         border: none;
-        &::-webkit-outer-spin-button,&::-webkit-inner-spin-button {
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
             appearance: none;
             margin: 0;
         }

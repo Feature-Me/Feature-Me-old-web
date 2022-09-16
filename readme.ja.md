@@ -4,7 +4,11 @@
 
 # パッチノート
 
-# 00045-beta(Version 0.5.2)
+## 00046-beta(Version 0.5.3)
+ファイルのリネーム
+入力コンポーネントの改善
+
+## 00045-beta(Version 0.5.2)
 
 Feature Me GUI Collections の作成 [Github Link](https://github.com/Feature-Me/Feature-Me-GUI)
 

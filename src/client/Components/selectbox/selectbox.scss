@@ -1,0 +1,46 @@
+@import "../../Assets/mixin.scss";
+.selectbox {
+    position: relative;
+    border: 1px solid whitesmoke;
+    background-color: #36393f;
+    margin: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+    line-height: 18px;
+    @include font-header;
+
+    .valuelabel {
+        padding: 0 4px;
+        height: 40px;
+        line-height: 40px;
+        margin: 0;
+    }
+
+    .selector {
+        position: absolute;
+        background-color: #36393f;
+        border: 1px solid whitesmoke;
+        border-radius: 4px;
+        padding: 4px;
+        box-sizing: border-box;
+        top: calc(100% + 8px);
+        width: 100%;
+        outline: none;
+        z-index: 100;
+        div{
+            transition: 0.2s;
+            p{
+                margin:0;
+                line-height: 24px;
+            }
+            padding: 4px;
+            &:hover{
+                background-color: #1189da;
+            }
+        }
+    }
+
+    .inactive {
+        pointer-events: none;
+    }
+}
