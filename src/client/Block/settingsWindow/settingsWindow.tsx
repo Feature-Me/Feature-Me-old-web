@@ -42,7 +42,7 @@ const SettingsWindow: React.FC = (): JSX.Element => {
                 </div>
                 <div className={style.content}>
                     <h3>{translation("title.settingsWindow.storageCache.all")}</h3>
-                    <ChamferdButton color="red">{translation("title.settingsWindow.delete")}</ChamferdButton>
+                    <ChamferdButton accentColor="#ca1c1c">{translation("title.settingsWindow.delete")}</ChamferdButton>
                 </div>
                 <div className={style.content}>
                     <h3>{translation("title.terms")}</h3>

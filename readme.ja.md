@@ -4,36 +4,71 @@
 
 # パッチノート
 
-# 00043-beta(Version 0.5.1)
+# 00045-beta(Version 0.5.2)
+
+Feature Me GUI Collections の作成 [Github Link](https://github.com/Feature-Me/Feature-Me-GUI)
+
+Readme.ja.md(本ファイル)の若干の修正
+
+ChamferedButtonをCollections用から移植したものへ更新
+
+高さの小さい端末での設定画面をスクロール可能に
+
+
+## 00044-beta(Version 0.5.2)
+
+INPUTコンポーネントの枠線を白に統一
+
+起動時のデバッグ表示
+
+水平セレクタ コンポーネントの追加
+
+範囲入力のUI調整
+
+ゲームのアンチエイリアスに関する項目を追加
+
+3D背景の設定を追加
+
+## 00043-beta(Version 0.5.1)
+
 UIの調整,ゲーム進捗バーに点の追加
+
 リザルトにスコア,Chain,ランク欄を追加
+
 モバイル版のヘッドバーのサイズを48pxへ(PC版と統一)
 
-# 00042-beta(Version 0.5.1)
+## 00042-beta(Version 0.5.1)
+
 リザルト画面ベース追加
+
 UIのバグ修正
+
 キャラクター移動エフェクトの調整
+
 フレームレート設定の調整精度を細分化
+
 ルーター設定の更新
+
 ステートの型の調整
 
-# 00041-beta(Version 0.5.1)
+## 00041-beta(Version 0.5.1)
 翻訳の更新
+
 音量設定,グラフィックス設定追加
 
-# 00040-beta(Version 0.5)
+## 00040-beta(Version 0.5)
 Google Search Consoleの設定
 
-# 00039-beta(Version 0.5)
+## 00039-beta(Version 0.5)
 Google Analyticsの更新
 
-# 00038-beta(Version 0.5)
+## 00038-beta(Version 0.5)
 リソースの調整とリバート
 
-# 00037-beta(Version 0.5)
+## 00037-beta(Version 0.5)
 ビルドの更新
 
-# 00036-beta(Version 0.5)
+## 00036-beta(Version 0.5)
 dist リソース更新。
 
 PWA マニフェスト追加
@@ -44,13 +79,13 @@ PWA マニフェスト追加
 
 ファビコン適用
 
-# 00035-beta(Version 0.5)
+## 00035-beta(Version 0.5)
 ファイルの再ビルド,軽量化
 
-# 00034-beta(Version 0.5)
+## 00034-beta(Version 0.5)
 サーバーの微調整
 
-# 00033-beta(Version 0.5)
+## 00033-beta(Version 0.5)
 **SBT/OBT前最終コミット**
 
 dist更新
@@ -65,7 +100,7 @@ dist更新
 
 型データの修正
 
-# 00032-beta(Version 0.5)
+## 00032-beta(Version 0.5)
 Commit A:
 
 package.jsonの更新

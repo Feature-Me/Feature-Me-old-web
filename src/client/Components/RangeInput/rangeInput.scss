@@ -6,7 +6,8 @@
     .rangeinput {
         appearance: none;
         background-color: rgb(65, 64, 64);
-        border: 1px solid #1189da;
+        border: 1px solid whitesmoke;
+        max-height: 40px;
         &::-webkit-slider-thumb{
             appearance: none;
             width: 8px;

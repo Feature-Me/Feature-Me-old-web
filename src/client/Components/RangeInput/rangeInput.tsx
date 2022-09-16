@@ -2,7 +2,7 @@ import React from "react";
 
 import style from "./rangeInput.scss";
 
-const RangeInput: React.FC<{ className?: string, children?: React.ReactNode, onChange?: Function ,min?:number,max?:number,step?:number,value:number}> = (props) => {
+const RangeInput: React.FC<{ className?: string, onChange?: Function ,min?:number,max?:number,step?:number,value:number}> = (props) => {
 
     const [value,setValue] = React.useState(props.value||50);
 

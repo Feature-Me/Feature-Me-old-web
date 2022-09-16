@@ -1,7 +1,13 @@
 @import "../../../Assets/mixin.scss";
 
 .settings_content_wrapper{
+    position: absolute;
     padding: 4px;
+    height: 100%;
+    width: 100%;
+    display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 56px 1fr;
 
     h1{
         margin: 4px;
@@ -10,10 +16,12 @@
     }
     .content{
         display: grid;
+        width: 100%;
+        height: calc(100% - 56px);
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: 1fr;
         column-gap: 16px;
-
+        overflow-y: auto;
         /* @media (max-width: 768px) {
             grid-template-columns: 1fr;
             grid-template-rows: 1fr 1fr;
@@ -21,6 +29,7 @@
                 display: none;
             }
         } */
+
         .details * {
             max-width: 100%;
         }
@@ -34,13 +43,15 @@
         }
 
         .list{
+            overflow-y: auto;
             .list_item{
                 padding: 1px;
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
                 grid-template-rows: 1fr;
+                margin: 4px;
                 h4{
-                    margin: 4px;
+                    margin: 8px 4px;
                 }
 
                 &:hover{
