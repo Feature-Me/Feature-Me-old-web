@@ -7,6 +7,7 @@ const http = require("http");
 const fs = require("fs");
 const crypto = require("crypto");
 const nedb = require("nedb");
+const bot_1 = require("./bot/bot");
 const app = express();
 const server = http.createServer(app);
 const basedir = path.join(__dirname, "../");
@@ -22,6 +23,7 @@ const db = {
 };
 server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
+    (0, bot_1.login)();
 });
 app.use(bodyParser.json());
 app.use("/scripts", express.static(scriptsdir));
@@ -34,9 +36,6 @@ app.get("/favicon", (req, res) => {
         res.sendFile(path.join(imagedir, "favicon.ico"));
     else
         res.sendFile(path.join(imagedir, "favicon.png"));
-});
-app.get("/", (req, res) => {
-    res.sendFile(path.join(viewsdir, "index.html"));
 });
 app.get("/update/map", (req, res) => {
     const modelUrl = "/resources/background/";

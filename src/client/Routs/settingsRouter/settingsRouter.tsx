@@ -1,8 +1,8 @@
-import AudioSettings from "Pages/settings/settingsContent/audioSettings/audioSettings";
-import GameplaySettings from "Pages/settings/settingsContent/gameplay/gameplaySettings";
-import GeneralSettings from "Pages/settings/settingsContent/general/generalSettings";
-import GraphicsSettings from "Pages/settings/settingsContent/graphics/graphicsSettings";
-import SettingsPage from "Pages/settings/settingsPage";
+import AudioSettings from "Pages/play/settings/settingsContent/audioSettings/audioSettings";
+import GameplaySettings from "Pages/play/settings/settingsContent/gameplay/gameplaySettings";
+import GeneralSettings from "Pages/play/settings/settingsContent/general/generalSettings";
+import GraphicsSettings from "Pages/play/settings/settingsContent/graphics/graphicsSettings";
+import SettingsPage from "Pages/play/settings/settingsPage";
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 

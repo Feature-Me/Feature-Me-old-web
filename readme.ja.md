@@ -4,6 +4,11 @@
 
 # パッチノート
 
+## 0047-beta(Version 0.5.3)
+フォルダ構造の変更
+discord API追加
+Discord-Feature Me間の相互連携の実装を目標に開発を進めます。
+
 ## 00046-beta(Version 0.5.3)
 ファイルのリネーム
 入力コンポーネントの改善
