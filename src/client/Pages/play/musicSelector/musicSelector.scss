@@ -41,7 +41,7 @@
                 clip-path: polygon(16px 0, calc(100% - 32px) 0%, 100% calc(100% - 16px), calc(100% - 16px) 100%, 32px 100%, 0 16px);
                 width: 60%;
                 height: 72px;
-                background-color: whitesmoke;
+                background-color: $textColor;
 
                 @media screen and (max-height: 540px) {
                     height: 48px;
@@ -64,12 +64,12 @@
 
                     &:focus {
                         outline: none;
-                        border-top: 2px solid #1189da;
+                        border-top: 2px solid $accentColor;
                     }
                 }
 
                 label {
-                    color: rgb(8, 14, 20);
+                    color: $blackTextColor;
                     font-style: italic;
                     padding: 0 32px;
                 }

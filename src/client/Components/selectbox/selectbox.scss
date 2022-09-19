@@ -1,8 +1,9 @@
 @import "../../Assets/mixin.scss";
+
 .selectbox {
     position: relative;
-    border: 1px solid whitesmoke;
-    background-color: #36393f;
+    border: 1px solid $borderColor;
+    background-color: $inputBackgroundColor;
     margin: 4px;
     box-sizing: border-box;
     font-size: 1em;
@@ -18,8 +19,8 @@
 
     .selector {
         position: absolute;
-        background-color: #36393f;
-        border: 1px solid whitesmoke;
+        background-color: $inputBackgroundColor;
+        border: 1px solid $borderColor;
         border-radius: 4px;
         padding: 4px;
         box-sizing: border-box;

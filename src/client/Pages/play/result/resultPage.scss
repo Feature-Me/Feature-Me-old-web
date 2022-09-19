@@ -1,3 +1,5 @@
+@import "../../../Assets/mixin.scss";
+
 .resultPage{
     display: grid;
         grid-template-columns: 1fr;
@@ -28,7 +30,7 @@
                     grid-template-columns: repeat(3, 1fr);
                     grid-template-rows: 140px 1fr;
                 .bigvalue{
-                    border:1px solid #1189da;
+                    border:1px solid $accentColor;
                     span {
                         text-align: center;
                         text-shadow: #5e5e5e 4px 4px 4px;

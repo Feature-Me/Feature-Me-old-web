@@ -4,6 +4,9 @@
 
 # パッチノート
 
+## 00049-beta(Version 0.5.4)
+SCSS 変数の更新
+
 ## 00048-beta(Version 0.5.3)
 SCSS インポートの更新
 タイトル画面テキストをChart EditorからEditorへ変更

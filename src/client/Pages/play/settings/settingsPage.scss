@@ -27,7 +27,7 @@
             transition: 0.2s;
             clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
             &:hover{
-                background-color: #1189da;
+                background-color: $accentColor;
             }
         }
     }

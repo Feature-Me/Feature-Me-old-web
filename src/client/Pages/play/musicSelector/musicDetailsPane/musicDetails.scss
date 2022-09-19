@@ -27,7 +27,7 @@
         @include font-body;
         line-height: 48px;
         background-image: linear-gradient(to right, black, transparent);
-        text-shadow: 0 0 4px whitesmoke;
+        text-shadow: 0 0 4px $textColor;
         clip-path: polygon(16px 0, 100% 0, 100% 100%, 0 100%, 0 16px);
         @include small-device-font-big;
     }
@@ -102,7 +102,7 @@
             font-weight: 900;
         }
         .diffbtn:hover{
-            background-color: #1189da;
+            background-color: $accentColor;
             background-image: none;
             
             &::before{
@@ -111,26 +111,26 @@
         }
 
         .memory{
-            background-color: rgb(139, 221, 17);
+            background-color: $memory;
             &:hover {
                 &::before{
-                    background-color: rgb(139, 221, 17);
+                    background-color: $memory;
                 }
             }
         }
         .advance{
-            background-color: rgb(226, 195, 21);
+            background-color: $advance;
             &:hover {
                 &::before{
-                    background-color: rgb(226, 195, 21);
+                    background-color: $advance;
                 }
             }
         }
         .prospects{
-            background-color: rgb(89, 10, 192);
+            background-color: $prospects;
             &:hover {
                 &::before{
-                    background-color: rgb(89, 10, 192);
+                    background-color: $prospects;
                 }
             }
         }

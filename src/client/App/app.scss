@@ -34,7 +34,7 @@ body {
     @include font-body;
     user-select: none;
     scroll-behavior: smooth;
-    cursor: url("../assets/Images/pointer.cur"), default;
+    cursor: url("../Assets/Images/pointer.cur"), default;
     form,select,input,textarea,button,label{
         cursor: inherit;
         outline: none;
@@ -49,7 +49,7 @@ body {
 a{
     text-decoration: none;
     color: whitesmoke;
-    cursor: url("../assets/Images/pointer.cur"), default;
+    cursor: url("../Assets/Images/pointer.cur"), default;
 }
 
 *{
@@ -64,5 +64,5 @@ a{
     background: transparent;
 }
 ::-webkit-scrollbar-thumb{
-    background: whitesmoke;
+    background: $borderColor
 }

@@ -3,10 +3,10 @@
 .head {
     background-color: rgba(245, 245, 245, 0.5);
     @include blur(16px);
-    @include no-support-background-blur(whitesmoke);
+    @include no-support-background-blur($borderColor);
 
-    color: rgb(8, 14, 20);
-    text-shadow: 0 0 4px white;
+    color: $blackTextColor;
+    text-shadow: 0 0 4px $borderColor;
     padding: 0 16px;
     display: grid;
     grid-template-columns: 48px auto 1fr auto 48px;
@@ -35,8 +35,8 @@
             transform: scale(1);
 
             &:hover {
-                fill: #1189da;
-                color: #1189da;
+                fill: $accentColor;
+                color: $accentColor;
                 transform: scale(1.5);
             }
         }

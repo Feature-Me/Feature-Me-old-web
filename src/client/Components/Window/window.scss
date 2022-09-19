@@ -23,7 +23,7 @@
     .wrapper {
         height: 100%;
         width: 100%;
-        background-color: #1189da;
+        background-color: $accentColor;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -32,7 +32,7 @@
     .window_inner {
         height: calc(100% - 4px);
         width: calc(100% - 4px);
-        background-color: rgb(7, 8, 14);
+        background-color: $pageBackgroundColor;
         clip-path: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 32px 100%, 0 calc(100% - 32px));
         padding: 8px 16px;
         box-sizing: border-box;
@@ -60,7 +60,7 @@
                     justify-content: center;
                 padding: 4px;
                 margin: 4px;
-                clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+                @include chamfered;
 
                 &:hover {
                     background-color: rgb(202, 28, 28);

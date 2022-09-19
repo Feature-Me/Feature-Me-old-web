@@ -3,7 +3,7 @@
 .musiclistcontent {
     transition: 0.2s;
     height: 72px;
-    background-color: rgb(245, 245, 245);
+    background-color: $textColor;
     @include blur(16px);
     clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 24px, calc(100% - 32px) 100%, 0 100%);
     position: relative;
@@ -13,7 +13,7 @@
 
     &:hover,&.selected {
         left: 0 !important;
-        background-color: #1189da;
+        background-color: $accentColor;
     }
 
     @media screen and (max-height: 540px) {
@@ -32,7 +32,7 @@
         clip-path: polygon(0 0, calc(100% - 20px) 0, calc(100% - 5px) 22px, calc(100% - 36px) 100%, 0 100%);
 
         @media screen and (max-height:540px) {
-            clip-path: polygon(0 0, calc(100% - 8px) 0, calc(100% - 4px) 10px, calc(100% - 20px) 100%, 0 100%) !important;
+            clip-path: $chamferedClip !important;
         }
     }
 

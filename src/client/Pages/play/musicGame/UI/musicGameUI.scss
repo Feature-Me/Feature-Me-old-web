@@ -17,7 +17,7 @@
         width: 400px;
         padding: 4px;
         /* clip-path: polygon(0% 0%, calc(100% - 64px) 0%, 100% 64px, calc(100% - 96px) 100%, 0% 100%); */
-        box-shadow: 0 0 4px 2px #1189da;
+        box-shadow: 0 0 4px 2px $accentColor;
         transform-origin: left top;
         display: grid;
             grid-template-rows: 48px 64px 4px 64px;
@@ -61,7 +61,7 @@
                 font-size: 36px;
                 line-height: 48px;
                 text-align: center;
-                border: 2px solid whitesmoke
+                border: 2px solid $borderColor;
             }
         }
 
@@ -93,7 +93,7 @@
             .progressPoint{
                 transform: rotate(45deg);
                 box-shadow: 0 0 4px 2px #1189da;
-                background-color: whitesmoke;
+                background-color: $textColor;
                 height: 8px;
                 width: 8px;
                 position: absolute;
@@ -131,7 +131,7 @@
         padding: 4px;
         background-image: linear-gradient(to right, rgba(20,20,30,0.5) 50%, rgba(17, 137, 218,0.5));
         clip-path: polygon(0% 0%, 100% 0%, calc(100% - 64px) 100%, 0% 100%);
-        box-shadow: 0 0 4px 2px #1189da;
+        box-shadow: 0 0 4px 2px $accentColor;
         transform-origin: left top;
         display: grid;
             grid-template-rows: repeat(4,32px);
@@ -158,7 +158,7 @@
         font-size: 0.8em;
         background-image: linear-gradient(to left, rgba(20,20,30,0.5) , rgba(17, 137, 218,0.5));
         /* clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 64px 100%); */
-        box-shadow: 0 0 4px 2px #1189da;
+        box-shadow: 0 0 4px 2px $accentColor;
         transform-origin: right top;
         display: grid;
             grid-template-rows: repeat(5,32px);
@@ -255,5 +255,5 @@
 }
 
 .other {
-    background-color: rgba(255, 227, 0, 1)
+    background-color: rgba(255, 227, 0, 0.5)
 }

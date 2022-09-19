@@ -1,3 +1,5 @@
+@import "../../Assets/mixin.scss";
+
 .horizonalSelect{
     display: grid;
         grid-template-columns: 48px 1fr 48px;
@@ -9,12 +11,12 @@
         display: flex;
             align-items: center;
             justify-content: center;
-        border: 1px solid whitesmoke;
+        border: 1px solid $borderColor;
         height: 100%;
         &:hover{
-            border: 1px solid #1189da;
+            border: 1px solid $accentColor;
             transition: 0.2s;
-            color: #1189da;
+            color: $accentColor;
         }
     }
     .label{
@@ -44,9 +46,9 @@
             div{
                 width: 100%;
                 height: 8px;
-                background-color: #36393f;
+                background-color: $inputBackgroundColor;
                 &[data-index="true"] {
-                    background-color: #1189da;
+                    background-color: $accentColor;
                 }
             }
         }

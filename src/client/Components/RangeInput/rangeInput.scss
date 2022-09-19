@@ -1,3 +1,5 @@
+@import "../../Assets/mixin.scss";
+
 .rangeinput_wrapper {
     display: grid;
     grid-template-columns: 1fr 64px;
@@ -7,8 +9,8 @@
 
     .rangeinput {
         appearance: none;
-        background-color: rgb(65, 64, 64);
-        border: 1px solid whitesmoke;
+        background-color: $inputBackgroundColor;
+        border: 1px solid $borderColor;
 
         &.tiny {
             height: 4px;
@@ -27,11 +29,11 @@
             width: 8px;
             height: 24px;
             display: block;
-            background-color: #1189da;
+            background-color: $accentColor;
             border-radius: 0;
 
             &:hover {
-                background-color: #116fda;
+                background-color: $clickedAccentColor;
             }
         }
 
@@ -40,11 +42,11 @@
             width: 8px;
             height: 24px;
             display: block;
-            background-color: #1189da;
+            background-color: $accentColor;
             border-radius: 0;
 
             &:hover {
-                background-color: #116fda;
+                background-color: $clickedAccentColor;
             }
         }
     }
