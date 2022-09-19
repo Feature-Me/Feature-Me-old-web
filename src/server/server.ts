@@ -42,6 +42,10 @@ app.get("/favicon",(req,res)=>{
     else res.sendFile(path.join(imagedir,"favicon.png"));
 })
 
+app.get("/", (req, res) => {
+    res.sendFile(path.join(viewsdir, "index.html"));
+});
+
 
 app.get("/update/map", (req, res) => {
     const modelUrl = "/resources/background/"

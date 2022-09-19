@@ -4,6 +4,9 @@
 
 # パッチノート
 
+## 00050-beta(Version 0.5.4)
+Music Room追加
+
 ## 00049-beta(Version 0.5.4)
 SCSS 変数の更新
 

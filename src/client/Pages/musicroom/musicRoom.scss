@@ -1,0 +1,84 @@
+@import "../../Assets/mixin.scss";
+
+.musicroom {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 48px 1fr 96px;
+
+    .musicList {
+        height: 100%;
+        width: 100%;
+        display: grid;
+            grid-template-columns: 1fr minmax(256px, 25%);
+            grid-template-rows: 1fr;
+        overflow-y: auto;
+    }
+
+    .categories {
+        overflow-y: auto;
+
+        .category {
+            margin-bottom: 16px;
+            padding: 4px 16px;
+
+            .categorycontent {
+                height: 100%;
+                display: grid;
+                    grid-template-columns: 96px 1fr;
+                    grid-template-rows: 1fr;
+                column-gap: 8px;
+
+                .thumbnail {
+                    height: 96px;
+                    width: 96px;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
+
+                p {
+                    margin: 4px;
+                    @include chamfered;
+                    position: relative;
+                    &::before{
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 100%;
+                        width: 100%;
+                        background: linear-gradient(to right, $accentColor, transparent);
+                        opacity: 0;
+                        z-index: -1;
+                        transition: 0.2s;
+                    }
+
+                    &:hover {
+                        &::before{
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+            h3,hr {
+                margin: 0;
+            }
+
+
+        }
+    }
+
+    .playqueue{
+        background-color: rgb(20, 20, 30, 0.75);
+        @include blur(16px);
+        @include no-support-background-blur($pageBackgroundColor);
+    }
+
+    .musicController{
+        background-color: $backgroundSubColor;
+    }
+
+}

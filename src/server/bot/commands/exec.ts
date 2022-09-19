@@ -27,7 +27,7 @@ const exec: commandModules = {
                 const startTime = Date.now();
                 const execData = eval(String(interaction.options.get("code")?.value))
                 const endTime = Date.now();
-                interaction.reply({ content: `${inspect(execData)}\nTime:${endTime - startTime}ms.`, ephemeral: true })
+                interaction.reply({ content: `${inspect(execData)}\nTime:${endTime - startTime}ms.`, ephemeral: true }).catch(e=>{throw Error(e)})
             } catch (error) {
                 interaction.reply({ content: `Failed to execute with Error : ${error}`, ephemeral: true })
             }
