@@ -3,7 +3,7 @@
 .selectbox {
     position: relative;
     border: 1px solid $borderColor;
-    background-color: $inputBackgroundColor;
+    background-color: $inputForegroundColor;
     margin: 4px;
     box-sizing: border-box;
     font-size: 1em;
@@ -19,7 +19,7 @@
 
     .selector {
         position: absolute;
-        background-color: $inputBackgroundColor;
+        background-color: $inputForegroundColor;
         border: 1px solid $borderColor;
         border-radius: 4px;
         padding: 4px;

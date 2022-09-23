@@ -10,7 +10,7 @@ const PageRouter: React.FC = () => {
             <Routes>
                 <Route path="/" element={<Title />} />
                 <Route path="/play/*" element={<PlayMenuRouter />} />
-                <Route path="/musicroom" element={<MusicRoomRouter />} />
+                <Route path="/musicroom/*" element={<MusicRoomRouter />} />
             </Routes>
         )
 }

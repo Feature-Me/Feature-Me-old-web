@@ -3,9 +3,9 @@
 .chamferedbutton {
     position: relative;
     transition: 0.2s;
-    color: whitesmoke;
+    color: $textColor;
     /* background-color: #36393f; */
-    background-color: whitesmoke;
+    background-color: $borderColor;
     margin: 4px;
     box-sizing: border-box;
     line-height: 24px;
@@ -24,7 +24,7 @@
         left: 0;
         @include chamfered;
         /* background-color: whitesmoke; */
-        background-color: #36393f;
+        background-color: $inputForegroundColor;
         margin: 2px;
 
         content: "";
