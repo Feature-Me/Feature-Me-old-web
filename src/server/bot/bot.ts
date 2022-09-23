@@ -5,7 +5,7 @@ import * as path from "path";
 
 import {commandModules} from "./command";
 
-dotenv.config();
+dotenv.config({path:path.join(__dirname,"../../../.env")});
 
 const client = new discord.Client({ intents: [discord.GatewayIntentBits.Guilds,discord.GatewayIntentBits.DirectMessages] });
 const rest = new discord.REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN||"");
