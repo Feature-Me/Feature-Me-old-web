@@ -4,6 +4,9 @@
 
 # パッチノート
 
+## 00054-beta(Version 0.5.6)
+git attributesの入力エラーを修正
+
 ## 00053-beta(Version 0.5.5)
 Music Roomで再生が可能になりました。
 開発時にDisocrd Botは起動しなくなります。(開発時にのみ影響)
