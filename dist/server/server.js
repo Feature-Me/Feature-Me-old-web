@@ -7,6 +7,7 @@ const http = require("http");
 const fs = require("fs");
 const crypto = require("crypto");
 const nedb = require("nedb");
+const bot_1 = require("./bot/bot");
 const app = express();
 const server = http.createServer(app);
 const basedir = path.join(__dirname, "../");
@@ -22,6 +23,9 @@ const db = {
 };
 server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
+    if (process.env.NODE_ENV == "production")
+        (0, bot_1.login)();
+    (0, bot_1.login)();
 });
 app.use(bodyParser.json());
 app.use("/scripts", express.static(scriptsdir));

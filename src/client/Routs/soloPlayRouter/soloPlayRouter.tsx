@@ -1,7 +1,7 @@
-import MusicGame from "Pages/musicGame/musicGame";
-import MusicSelector from "Pages/musicSelector/musicSelector";
-import SoloRelay from "Pages/relay/soloRelay";
-import ResultPage from "Pages/result/resultPage";
+import MusicGame from "Pages/play/musicGame/musicGame";
+import MusicSelector from "Pages/play/musicSelector/musicSelector";
+import SoloRelay from "Pages/play/relay/soloRelay";
+import ResultPage from "Pages/play/result/resultPage";
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 

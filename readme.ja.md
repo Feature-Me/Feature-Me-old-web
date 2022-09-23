@@ -4,7 +4,38 @@
 
 # パッチノート
 
-# 00045-beta(Version 0.5.2)
+## 00053-beta(Version 0.5.5)
+Music Roomで再生が可能になりました。
+開発時にDisocrd Botは起動しなくなります。(開発時にのみ影響)
+
+## 00052-beta(Version 0.5.5)
+カラーの変数とスタイリング規則を変更
+
+## 00051-beta(Version 0.5.5)
+dist更新。(使用中のバージョンによっては競合によりアップデートリソースをインストールできない場合があります)
+リソースフェッチの分岐削除
+データベースの初期化を常時実行するように変更
+
+## 00050-beta(Version 0.5.4)
+Music Room追加
+
+## 00049-beta(Version 0.5.4)
+SCSS 変数の更新
+
+## 00048-beta(Version 0.5.3)
+SCSS インポートの更新
+タイトル画面テキストをChart EditorからEditorへ変更
+
+## 00047-beta(Version 0.5.3)
+フォルダ構造の変更
+discord API追加
+Discord-Feature Me間の相互連携の実装を目標に開発を進めます。
+
+## 00046-beta(Version 0.5.3)
+ファイルのリネーム
+入力コンポーネントの改善
+
+## 00045-beta(Version 0.5.2)
 
 Feature Me GUI Collections の作成 [Github Link](https://github.com/Feature-Me/Feature-Me-GUI)
 

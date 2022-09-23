@@ -79,7 +79,6 @@ function fetchBackgroundUpdate(versionMap: versionMap) {
         let latestVersion: string = ResourcesDownloaded.background.version;
         let downloadCount = 0;
         let downloadSize = 0;
-        if (!JSON.parse(localStorage.getItem("ResourcesDownloaded")!).background.initialized) fetchUrl.push(versionMap.initialResources);
         for (const version in versionMap) {
             //compare and download if newer
             if (version == "initialResources") continue;
@@ -162,7 +161,6 @@ function fetchBehaviorUpdate(versionMap: versionMap) {
         let latestVersion: string = ResourcesDownloaded.behavior.version;
         let downloadCount = 0;
         let downloadSize = 0;
-        if (!JSON.parse(localStorage.getItem("ResourcesDownloaded")!).behavior.initialized) fetchUrl.push(versionMap.initialResources);
         for (const version in versionMap) {
             if (version == "initialResources") continue;
             if (compareVersions(version, JSON.parse(localStorage.getItem("ResourcesDownloaded")!).behavior.version) == 1) fetchUrl.push(versionMap[version]);
@@ -240,7 +238,6 @@ function fetchMusicUpdate(versionMap: versionMap) {
         let latestVersion: string = ResourcesDownloaded.music.version;
         let downloadCount = 0;
         let downloadSize = 0;
-        if (!JSON.parse(localStorage.getItem("ResourcesDownloaded")!).music.initialized) fetchUrl.push(versionMap.initialResources);
 
         for (const version in versionMap) {
             if (version == "initialResources") continue;

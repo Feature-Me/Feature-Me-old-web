@@ -1,0 +1,125 @@
+@import "../../Assets/mixin.scss";
+
+.musicroom {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 48px 1fr 96px;
+
+    .musicList {
+        height: 100%;
+        width: 100%;
+        display: grid;
+            grid-template-columns: 1fr minmax(256px, 25%);
+            grid-template-rows: 1fr;
+        overflow-y: auto;
+    }
+
+    .categories {
+        overflow-y: auto;
+
+        .category {
+            margin-bottom: 16px;
+            padding: 4px 16px;
+
+            .categorycontent {
+                height: 100%;
+                display: grid;
+                    grid-template-columns: 96px 1fr;
+                    grid-template-rows: 1fr;
+                column-gap: 8px;
+
+                .thumbnail {
+                    height: 96px;
+                    width: 96px;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
+
+                .music {
+                    margin: 4px;
+                    background-color: transparent;
+                    @include chamfered;
+                    transition: 0.2s;
+                    position: relative;
+
+                    .addQueue {
+                        display: flex;
+                        visibility: hidden;
+                        position: absolute;
+                        right: 16px;
+                        top: 0;
+                        background-color: $backgroundSubColor;
+                        height: 100%;
+                        width: 32px;
+                        svg{
+                            margin: auto;
+                        }
+
+                        &:hover{
+                            filter: brightness(0.8);
+                        }
+                    }
+
+                    &:hover{
+                        background-color:$accentColor;
+                        .addQueue {
+                            visibility: visible;
+                        }
+                    }
+                }
+            }
+            h3,hr {
+                margin: 0;
+            }
+
+
+        }
+    }
+
+    .playqueue{
+        background-color: rgb(20, 20, 30, 0.75);
+        @include blur(16px);
+        @include no-support-background-blur($pageBackgroundColor);
+    }
+
+    .musicController{
+        height: 100%;
+        width: 100%;
+        background-color: $backgroundSubColor;
+        display: grid;
+        grid-template-columns: 96px minmax(128px,1fr) minmax(260px,40%) minmax(128px, 1fr);
+        row-gap: 4px;
+        column-gap: 16px;
+
+        .thumbnail{
+            background-size: 72px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .title{
+            height: 100%;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(2,1fr);
+            align-items: center;
+            span{
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .name{
+                font-weight: bold;
+            }
+            .composer{
+                color: $secondaryText;
+                font-size: 0.9em;
+            }
+        }
+    }
+
+}

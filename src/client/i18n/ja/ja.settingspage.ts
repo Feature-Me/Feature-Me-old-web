@@ -72,6 +72,10 @@ const JASettingsPage = {
         "backgroundFps":{
             "name": "背景フレームレート",
             "description": "3D背景使用中の最大フレームレートを設定します。"
+        },
+        "autoFullScreen":{
+            "name": "自動フルスクリーン",
+            "description": "ゲーム本編開始時に自動的にフルスクリーンにします。"
         }
     },
     "audio": {

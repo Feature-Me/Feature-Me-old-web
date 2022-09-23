@@ -7,6 +7,7 @@ import * as fs from "fs";
 import * as crypto from "crypto";
 import * as nedb from "nedb";
 import * as url from "url";
+import { login } from "./bot/bot";
 
 const app = express();
 const server: http.Server = http.createServer(app);
@@ -26,7 +27,8 @@ const db = {
 
 server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
-
+    if(process.env.NODE_ENV=="production") login();
+    login()
 });
 
 app.use(bodyParser.json());
@@ -44,6 +46,8 @@ app.get("/favicon",(req,res)=>{
 app.get("/", (req, res) => {
     res.sendFile(path.join(viewsdir, "index.html"));
 });
+
+
 app.get("/update/map", (req, res) => {
     const modelUrl = "/resources/background/"
     const behaviorUrl = "/resources/behavior/"
@@ -84,8 +88,6 @@ app.get("/update/map", (req, res) => {
         behavior: behavior,
         music: music
     })
-
-
 })
 
 

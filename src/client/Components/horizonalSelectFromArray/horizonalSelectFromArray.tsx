@@ -2,10 +2,15 @@ import React from "react";
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
 import style from "./horizonalSelectFromArray.scss";
 
+interface horizonalSelectPropsType extends propsType {
+    contents: Array<selectContents>
+    onChange?: FunctionWithTypedProps<selectContents>
+    value: selectContents
+}
 
-const HorizonalSelectFromArray: React.FC<{ contents: Array<inputContents>, className?: string, onChange?: Function, value: inputContents }> = (props) =>{
-    const [value, setValue] = React.useState<string>(props.value.value);
-    const [label, setLabel] = React.useState<string>(props.value.label);
+const HorizonalSelectFromArray: React.FC<horizonalSelectPropsType> = (props) =>{
+    const [value, setValue] = React.useState<any>(props.value.value);
+    const [label, setLabel] = React.useState<React.ReactNode>(props.value.label);
     const [index,setIndex] = React.useState<number>(props.contents.findIndex(c=>c==props.value)||0);
 
     //when < or > button clicked,index is changed.after,value will be changed

@@ -1,0 +1,89 @@
+@import "../../../Assets/mixin.scss";
+
+.musicselect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 48px 1fr;
+
+    .selector_container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+
+        .list_container,
+        .details {
+            height: 100%;
+            width: 50%;
+        }
+
+        .list_container {
+            display: grid;
+            grid-template-rows: 84px 1fr;
+            overflow-y: auto;
+
+            @media screen and (max-height: 540px) {
+                grid-template-rows: 64px 1fr;
+
+            }
+
+            .search {
+                display: grid;
+                grid-template-rows: 32px 1fr;
+
+                margin: 8px;
+                /* clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); */
+                clip-path: polygon(16px 0, calc(100% - 32px) 0%, 100% calc(100% - 16px), calc(100% - 16px) 100%, 32px 100%, 0 16px);
+                width: 60%;
+                height: 72px;
+                background-color: $textColor;
+
+                @media screen and (max-height: 540px) {
+                    height: 48px;
+                    grid-template-rows: 16px 1fr;
+                    clip-path: polygon(16px 0, calc(100% - 16px) 0%, 100% calc(100% - 12px), calc(100% - 12px) 100%, 16px 100%, 0 16px);
+                    @include small-device-font;
+                    input {
+                        padding: 0 16px !important;
+                    }
+
+                    label {
+                        padding: 2px 16px !important;
+                    }
+                }
+
+                input {
+                    border: none;
+                    border-top: 1px solid #36393f;
+                    padding: 0 32px;
+
+                    &:focus {
+                        outline: none;
+                        border-top: 2px solid $accentColor;
+                    }
+                }
+
+                label {
+                    color: $blackTextColor;
+                    font-style: italic;
+                    padding: 0 32px;
+                }
+            }
+
+            .musiclist{
+                max-height: 100%;
+                width: 100%;
+                overflow-x: hidden;
+                overflow-y: auto;
+                display: flex;
+                flex-direction: column;
+                row-gap: 16px;
+            }
+        }
+    }
+}

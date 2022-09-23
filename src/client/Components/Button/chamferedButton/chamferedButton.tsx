@@ -2,7 +2,11 @@ import React from "react";
 
 import style from "./chamferedButton.scss";
 
-const ChamferdButton: React.FC<{ className?: string, children?: React.ReactNode, onClick?: React.MouseEventHandler<HTMLButtonElement>, accentColor?: string }> = (props) => {
+type buttonPropsType = JSX.IntrinsicElements["button"] & {
+    accentColor?: string
+}
+
+const ChamferdButton: React.FC<buttonPropsType> = (props) => {
 
     const chamferedButtonRef = React.useRef<HTMLButtonElement>(null);
 

@@ -92,7 +92,7 @@ const TitleText: React.FC = () => {
             <div className={style.selectmode}>
                 <div ref={modeSelectorRef}>
                     <p onClick={() => { handleClick("play/menu")}} data-link={"play/menu"}>Play</p>
-                    <p onClick={() => { handleClick("editor") }} data-link={"editor"}>Chart Editor</p>
+                    <p onClick={() => { handleClick("editor") }} data-link={"editor"}>Editor</p>
                     <p onClick={() => { handleClick("leaderboards") }} data-link={"leaderboards"}>Leaderboards</p>
                     <p onClick={() => { handleClick("musicroom") }} data-link={"musicroom"}>Music Room</p>
                 </div>

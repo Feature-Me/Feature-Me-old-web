@@ -66,7 +66,7 @@ const clickSound = new Howl({
 
 function init():void{
     initLocalStorage();
-    if (!JSON.parse(localStorage.getItem("DBVersion")!).initialized) initDatabase();
+    initDatabase();
     render();
 
     console.log("Feature Me initialized. the Game is Ready!");
