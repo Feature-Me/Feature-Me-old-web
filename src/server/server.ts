@@ -8,8 +8,8 @@ import * as crypto from "crypto";
 import * as nedb from "nedb";
 import * as url from "url";
 import * as dotenv from "dotenv"
-import * as discord from "discord.js"
-import { commandModules } from "./command";
+/* import * as discord from "discord.js"
+import { commandModules } from "./command"; */
 
 
 if (process.env.NODE_ENV != "production") dotenv.config({ path: path.join(__dirname, "../../../.env") });
