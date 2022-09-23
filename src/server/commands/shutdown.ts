@@ -14,7 +14,7 @@ const shutdown: commandModules = {
         if (interaction.user.id != process.env.OWNER_ID) {
             interaction.reply({ content: `Failed to execute : command can execute only bot developper.`, ephemeral: true })
         } else {
-            await interaction.reply({content:"Shut down.",ephemeral:true})
+            await interaction.reply({ content: "Shut down.", ephemeral: true })
             process.exit(0);
         }
     }
