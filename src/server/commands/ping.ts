@@ -1,12 +1,12 @@
 import { commandModules } from "../command";
 
-import { SlashCommandBuilder } from'discord.js';
+import { SlashCommandBuilder } from 'discord.js';
 
-const ping:commandModules = {
+const ping: commandModules = {
     command: new SlashCommandBuilder()
         .setName('ping')
         .setDescription('Returns gateway ping.'),
-    exec:(interaction)=>{
+    exec: (interaction) => {
         interaction.reply({ content: `Client Ping : ${interaction.client.ws.ping}ms.`, ephemeral: true })
     },
 };
