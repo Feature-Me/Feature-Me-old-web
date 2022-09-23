@@ -2,17 +2,17 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as path from "path";
 import * as http from "http";
-import * as socketIo from "socket.io";
+/* import * as socketIo from "socket.io"; */
 import * as fs from "fs";
 import * as crypto from "crypto";
 import * as nedb from "nedb";
-import * as url from "url";
-import * as dotenv from "dotenv"
+/* import * as url from "url";
+import * as dotenv from "dotenv" */
 /* import * as discord from "discord.js"
 import { commandModules } from "./command"; */
 
 
-if (process.env.NODE_ENV != "production") dotenv.config({ path: path.join(__dirname, "../../../.env") });
+//if (process.env.NODE_ENV != "production") dotenv.config({ path: path.join(__dirname, "../../../.env") });
 
 
 //express server
