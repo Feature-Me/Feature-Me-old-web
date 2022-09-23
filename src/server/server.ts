@@ -27,6 +27,7 @@ const db = {
 
 server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
+    if(process.env.NODE_ENV=="production") login();
     login()
 });
 
