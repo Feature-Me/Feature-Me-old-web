@@ -34,7 +34,7 @@ const db = {
 
 server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
-    if(process.env.NODE_ENV=="production") login();
+    //if(process.env.NODE_ENV=="production") login();
 });
 
 app.use(bodyParser.json());
@@ -102,7 +102,7 @@ app.use((req, res, next) => {
 });
 
 
-//discord
+/* //discord
 const client = new discord.Client({ intents: [discord.GatewayIntentBits.Guilds, discord.GatewayIntentBits.DirectMessages] });
 const rest = new discord.REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN || "");
 
@@ -155,3 +155,4 @@ function login() {
     if (!process.env.DISCORD_BOT_TOKEN) console.error("login Failed.")
     client.login(process.env.DISCORD_BOT_TOKEN)
 }
+ */
