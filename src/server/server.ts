@@ -2,17 +2,17 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as path from "path";
 import * as http from "http";
-/* import * as socketIo from "socket.io"; */
+import * as socketIo from "socket.io";
 import * as fs from "fs";
 import * as crypto from "crypto";
 import * as nedb from "nedb";
-/* import * as url from "url";
-import * as dotenv from "dotenv" */
-/* import * as discord from "discord.js"
-import { commandModules } from "./command"; */
+import * as url from "url";
+import * as dotenv from "dotenv"
+import * as discord from "discord.js"
+import { commandModules } from "./command";
 
 
-//if (process.env.NODE_ENV != "production") dotenv.config({ path: path.join(__dirname, "../../../.env") });
+dotenv.config({ path: path.join(__dirname, "../../../.env") });
 
 
 //express server
@@ -102,7 +102,7 @@ app.use((req, res, next) => {
 });
 
 
-/* //discord
+//discord
 const client = new discord.Client({ intents: [discord.GatewayIntentBits.Guilds, discord.GatewayIntentBits.DirectMessages] });
 const rest = new discord.REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN || "");
 
@@ -155,4 +155,3 @@ function login() {
     if (!process.env.DISCORD_BOT_TOKEN) console.error("login Failed.")
     client.login(process.env.DISCORD_BOT_TOKEN)
 }
- */

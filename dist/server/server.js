@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -8,10 +17,8 @@ const fs = require("fs");
 const crypto = require("crypto");
 const nedb = require("nedb");
 const dotenv = require("dotenv");
-/* import * as discord from "discord.js"
-import { commandModules } from "./command"; */
-if (process.env.NODE_ENV != "production")
-    dotenv.config({ path: path.join(__dirname, "../../../.env") });
+const discord = require("discord.js");
+dotenv.config({ path: path.join(__dirname, "../../../.env") });
 //express server
 const app = express();
 const server = http.createServer(app);
@@ -88,57 +95,58 @@ app.get("/update/map", (req, res) => {
 app.use((req, res, next) => {
     res.status(404).redirect("/");
 });
-/* //discord
+//discord
 const client = new discord.Client({ intents: [discord.GatewayIntentBits.Guilds, discord.GatewayIntentBits.DirectMessages] });
 const rest = new discord.REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN || "");
-
 const commandFiles = fs.readdirSync(path.join(__dirname, "./commands")).filter(file => file.endsWith('.js'));
-let commands = new discord.Collection<string, commandModules>();
+let commands = new discord.Collection();
 for (const file of commandFiles) {
-    const command: { default: commandModules } = require(`./commands/${file}`);
-
+    const command = require(`./commands/${file}`);
     commands.set(command.default.command.name, command.default);
 }
-
-async function register() {
-    if (!client.user?.id) return;
-    const commandData = commands.map(cmd => cmd.command)
-    const data = await rest.put(discord.Routes.applicationCommands(client.user.id), { body: commandData })
-    return client.application!.commands.set(commandData);
+function register() {
+    var _a;
+    return __awaiter(this, void 0, void 0, function* () {
+        if (!((_a = client.user) === null || _a === void 0 ? void 0 : _a.id))
+            return;
+        const commandData = commands.map(cmd => cmd.command);
+        const data = yield rest.put(discord.Routes.applicationCommands(client.user.id), { body: commandData });
+        return client.application.commands.set(commandData);
+    });
 }
-
-client.on("ready", async (e) => {
+client.on("ready", (e) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(`Logged in as ${e.user.tag}`);
     try {
-        await register();
-    } catch (error) {
+        yield register();
+    }
+    catch (error) {
         console.error(error);
     }
-
     client.users.fetch(process.env.OWNER_ID || "").then(user => {
-        if (!user) throw Error("user not found");
+        if (!user)
+            throw Error("user not found");
         //user.send(`logged in to discord.\nStarted:${new Date().toString()}`);
         const embed = new discord.EmbedBuilder()
             .setColor(0x1189da)
             .setTitle("Feature Me Server Started.")
-            .setTimestamp()
-        user.send({ embeds: [embed] })
-    })
-})
-
-client.on("interactionCreate", async (interaction) => {
-    if (!interaction.isCommand()) return;
+            .setTimestamp();
+        user.send({ embeds: [embed] });
+    });
+}));
+client.on("interactionCreate", (interaction) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!interaction.isCommand())
+        return;
     try {
         const command = commands.get(interaction.commandName);
-        command?.exec(interaction);
-    } catch (error) {
-        console.error(error);
-        interaction.reply("An Error has occured.")
+        command === null || command === void 0 ? void 0 : command.exec(interaction);
     }
-})
-
+    catch (error) {
+        console.error(error);
+        interaction.reply("An Error has occured.");
+    }
+}));
 function login() {
-    if (!process.env.DISCORD_BOT_TOKEN) console.error("login Failed.")
-    client.login(process.env.DISCORD_BOT_TOKEN)
+    if (!process.env.DISCORD_BOT_TOKEN)
+        console.error("login Failed.");
+    client.login(process.env.DISCORD_BOT_TOKEN);
 }
- */ 
