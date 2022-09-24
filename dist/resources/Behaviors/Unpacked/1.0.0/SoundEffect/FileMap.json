@@ -1,0 +1,13 @@
+{
+    "name": "Feature Me",
+    "sound":{
+        "tap": "tap.mp3",
+        "damage": "damage.mp3",
+        "hold": "tap.mp3",
+        "bright": "tap.mp3",
+        "seed": "tap.mp3",
+        "flick": "flick.mp3",
+        "assist": "assist.mp3"
+    },
+    "license": "tap : otologic.jp, flick: taira-komori.jpn.org "
+}
