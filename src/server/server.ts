@@ -33,8 +33,11 @@ const db = {
 }
 
 server.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
-    //if(process.env.NODE_ENV=="production") login();
+    console.log(`Server listening on port ${port}`)
+    console.log(`Node version:${process.version}`);
+    console.log(`PID:${process.pid}`);
+    console.log(`${process.env.NODE_ENV} mode,bot:${process.env.USE_BOT}`);
+    if(process.env.NODE_ENV=="production") login();
 });
 
 app.use(bodyParser.json());
