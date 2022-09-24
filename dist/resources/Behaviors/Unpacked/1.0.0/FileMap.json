@@ -1,0 +1,18 @@
+{
+    "version": "1.0.0",
+    "name": "Feature Me",
+    "type":"3d",
+    "models":{
+        "tap": "Model/Tapnote.glb",
+        "damageTap": "Model/DamageTapnote.glb",
+        "hold": "Model/Holdnote.glb",
+        "bright": "Model/Brightnote.glb",
+        "seed": "Model/Seednote.glb",
+        "flick": "Model/Flicknote.glb",
+        "character": "Model/Character.glb",
+        "ground": "Model/Ground.glb"
+    },
+    "soundEffect":"SoundEffect",
+    "font":"Font/Rajdhani-Regular.ttf",
+    "license":""
+}
