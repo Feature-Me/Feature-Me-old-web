@@ -1,0 +1,14 @@
+{
+    "version": "1.0.0",
+    "name": "Tidal Wreck",
+    "src": "tidal wreck.glb",
+    "alt": "tidal wreck.png",
+    "skydata":{
+        "turbidity":1,
+        "rayleigh":0.0075,
+        "mieCoefficient":0.003,
+        "mieDirectionalG":0.5,
+        "sunPhi":1.396263,
+        "sunTheta":3.141592
+    }
+}

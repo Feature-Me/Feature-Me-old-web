@@ -4,14 +4,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const http = require("http");
+const socketIo = require("socket.io");
+const admin_ui_1 = require("@socket.io/admin-ui");
 const fs = require("fs");
 const crypto = require("crypto");
 const nedb = require("nedb");
-const dotenv = require("dotenv");
 /* import * as discord from "discord.js"
 import { commandModules } from "./command"; */
-if (process.env.NODE_ENV != "production")
-    dotenv.config({ path: path.join(__dirname, "../../../.env") });
+//if (process.env.NODE_ENV != "production") dotenv.config({ path: path.join(__dirname, "../../../.env") });
 //express server
 const app = express();
 const server = http.createServer(app);
@@ -26,8 +26,28 @@ const db = {
     users: new nedb({ filename: path.join(dbdir, "users.db"), autoload: true }),
     leaderboard: new nedb({ filename: path.join(dbdir, "leaderboard.db"), autoload: true })
 };
+//web socket
+const io = new socketIo.Server(server, {
+    cors: {
+        origin: ["https://admin.socket.io"],
+        credentials: true
+    }
+});
+(0, admin_ui_1.instrument)(io, {
+    auth: false
+});
+const user = io.of("/user");
+const multiPlayer = io.of("/multiplayer");
+user.on("connection", (socket) => {
+    socket.emit("connected");
+    socket.on("disconnected", () => {
+    });
+});
 server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
+    console.log(`Node version:${process.version}`);
+    console.log(`PID:${process.pid}`);
+    console.log(`${process.env.NODE_ENV} mode,bot:${process.env.USE_BOT}`);
     //if(process.env.NODE_ENV=="production") login();
 });
 app.use(bodyParser.json());
@@ -36,6 +56,12 @@ app.use("/resources/background", express.static(path.join(resourcesdir, "Backgro
 app.use("/resources/behavior", express.static(path.join(resourcesdir, "Behaviors")));
 app.use("/resources/music", express.static(path.join(resourcesdir, "MusicResources")));
 app.use("/images", express.static(imagedir));
+//router for admin
+//const adminRouter = express.Router();
+app.use("/socketio", express.static(path.join(__dirname, "../../node_modules/@socket.io/admin-ui/ui/dist")));
+app.get("/admin", (req, res) => {
+    res.send("Admin Page");
+});
 app.get("/favicon", (req, res) => {
     if (req.headers["content-type"] == "image/x-icon")
         res.sendFile(path.join(imagedir, "favicon.ico"));
