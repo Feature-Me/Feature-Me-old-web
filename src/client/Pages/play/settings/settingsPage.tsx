@@ -1,4 +1,4 @@
-import Head from "Block/head/head";
+import Header from "Block/head/head";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -21,7 +21,7 @@ const SettingsPage: React.FC = (props) => {
 
     return (
         <div className={style.settingspage}>
-            <Head title="Settings" backFunc={() => sceneChangeNavigation("../menu")} />
+            <Header title="Settings" backFunc={() => sceneChangeNavigation("../menu")} />
             <div className={style.settings}>
                 <div className={style.sidebar}>
                     <Link className={style.sidebar_content} to={"./"}>{translate("settingsPage.general.title")}</Link>

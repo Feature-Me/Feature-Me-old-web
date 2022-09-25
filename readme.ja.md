@@ -12,7 +12,12 @@
 
 # パッチノート
 
+## 00056-beta(Version 0.5.6)
+Commit A:
+タグのリネーム
+
 ## 00055-beta(Version 0.5.6)
+Commit A~F:
 デプロイの不具合を解消したサーバー緊急アップデート。
 
 ## 00054-beta(Version 0.5.6)

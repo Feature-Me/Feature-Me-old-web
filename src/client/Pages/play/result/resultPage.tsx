@@ -1,4 +1,4 @@
-import Head from "Block/head/head";
+import Header from "Block/head/head";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 import React from "react";
 import { useRecoilValue } from "recoil";
@@ -7,7 +7,7 @@ import musicSelectorState from "State/musicSelector/musicSelectorState";
 
 import style from "./resultPage.scss";
 
-const ResultPage:React.FC = () =>{
+const ResultPage: React.FC = () => {
     const scenechange = useSeneChangeNavigation();
     const musicGameValue = useRecoilValue(musicGameValueState);
     const musicGameMode = useRecoilValue(musicGameModeState);
@@ -15,10 +15,10 @@ const ResultPage:React.FC = () =>{
     const musicData = selectedMusic.selectedData as MusicAssetContents;
     const chartMetaData = musicData.metadata.difficulties.find(diff => diff.name == musicGameMode.difficulty)
 
-    
-    return(
-    <div className={style.resultPage}>
-            <Head title="Reslut" backFunc={() => scenechange(-3)} />
+
+    return (
+        <div className={style.resultPage}>
+            <Header title="Reslut" backFunc={() => scenechange(-3)} />
             <div className={style.resultData}>
                 <div className={style.title}>
                     <p>{`${chartMetaData?.name} ${chartMetaData?.level}`} - {chartMetaData?.chartDesigner}</p>
@@ -42,7 +42,7 @@ const ResultPage:React.FC = () =>{
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
     )
 }
 
