@@ -1,0 +1,91 @@
+@import "../../Assets/mixin.scss";
+
+.quickmenu {
+    display: grid;
+    visibility: hidden;
+    background-color: rgba(20, 20, 30, 0.75);
+    position: absolute;
+    height: calc(100% - 48px);
+    width: 100%;
+    top: 48px;
+    left: 0;
+    outline: none;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: minmax(320px, 20%) 1fr minmax(320px, 20%);
+
+    .left,
+    .right {
+        background-color: $black;
+    }
+
+    h2 {
+        margin: 4px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .left {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 36px 24px 36px;
+
+        .chat {
+            height: 100%;
+            overflow-y: auto;
+
+            .chatMessage {
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: 24px 1fr;
+                border-bottom: 1px solid $secondaryText;
+                padding: 0 8px;
+
+                .author {
+                    height: 24px;
+                    font-weight: bold;
+
+                    .time {
+                        font-size: 0.8em;
+                        color: $secondaryText;
+                    }
+                }
+
+                p {
+                    margin: 2px 0;
+                }
+            }
+        }
+
+        .roomSelect {
+            overflow-x: scroll;
+            padding: 0;
+            .roomName {
+                background-color: $inputBackgroundColor;
+                border-radius: 4px;
+                display: inline-block;
+                line-height: 24px;
+                padding: 2px 4px;
+                margin: 0 4px;
+                &[data-active="true"] {
+                    border: 1px solid #1189da;
+                }
+            }
+        }
+
+        .chatText {
+            width: 100%;
+            border: 1px solid $borderColor;
+            background-color: $inputBackgroundColor;
+            color: $textColor;
+            &:disabled{
+                border: none;
+                background-color: $black;
+                &::placeholder{
+                    visibility: hidden;
+                }
+            }
+        }
+    }
+}

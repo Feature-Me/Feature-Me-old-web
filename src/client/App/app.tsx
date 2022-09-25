@@ -2,7 +2,7 @@ import React from 'react';
 import * as THREE from "three";
 import {createRoot} from 'react-dom/client';
 import { useTranslation } from 'react-i18next';
-import { RecoilRoot, useRecoilValue } from "recoil";
+import { RecoilRoot,  useSetRecoilState } from "recoil";
 import { BrowserRouter , Route } from 'react-router-dom';
 import { ToastContainer,Slide } from 'react-toastify';
 import { Howl, Howler } from 'howler';
@@ -22,9 +22,49 @@ import 'react-toastify/dist/ReactToastify.css';
 import style from './app.scss';
 
 import clicksound from 'Assets/Sounds/click.mp3';
+import useWebSocket from 'Hooks/webSocket/useWebSocket';
+import webSocketState from 'State/webSocket/webSocketState';
+import QuickMenu from 'Block/quickmenu/quickmenu';
 
 function App(): JSX.Element {
     const [translation, i18n] = useTranslation();
+    const setWebSocket = useSetRecoilState(webSocketState)
+
+    React.useEffect(()=>{
+        const socket = useWebSocket("/user");
+        socket.on("connect",()=>{
+            setWebSocket(ws=>{
+                socket.emit("login", ws.user);
+                return{
+                    ...ws,
+                    state:"online",
+                    connectedTime: Date.now()
+                }
+            })
+        })
+        socket.on("disconnect",()=>{
+            setWebSocket(ws => {
+                return {
+                    ...ws,
+                    state: "offline",
+                }
+            })
+        })
+        socket.on("loggedIn",data=>{
+            setWebSocket(ws =>{
+                return{
+                    ...ws,
+                    user:{
+                        name:data.name,
+                        id:data.id
+                    }
+                }
+            })
+        })
+        return ()=>{
+            socket.disconnect()
+        }
+    },[])
 
     React.useEffect(() => {
         const environment = JSON.parse(localStorage.getItem("environment")!);
@@ -39,6 +79,7 @@ function App(): JSX.Element {
                 <Background />
                 <PageRouter />
                 {/* <ToastContainer position='bottom-right' autoClose={3000} hideProgressBar closeOnClick draggable transition={Slide} theme="dark" /> */}
+                <QuickMenu />
                 <SceneChangeCover />
                 <DisplayDirectionCaution />
             </div>
@@ -81,5 +122,5 @@ window.addEventListener('load', init);
 window.addEventListener("contextmenu", (e) => e.preventDefault());
 window.addEventListener("popstate", (e) => { });
 window.addEventListener("click", () => {
-    clickSound.play();
+    /* clickSound.play(); */
 })

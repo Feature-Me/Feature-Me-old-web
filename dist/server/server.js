@@ -9,6 +9,7 @@ const admin_ui_1 = require("@socket.io/admin-ui");
 const fs = require("fs");
 const crypto = require("crypto");
 const nedb = require("nedb");
+const uuid_1 = require("uuid");
 /* import * as discord from "discord.js"
 import { commandModules } from "./command"; */
 //if (process.env.NODE_ENV != "production") dotenv.config({ path: path.join(__dirname, "../../../.env") });
@@ -37,10 +38,24 @@ const io = new socketIo.Server(server, {
     auth: false
 });
 const user = io.of("/user");
+const chat = io.of("/chat");
 const multiPlayer = io.of("/multiplayer");
 user.on("connection", (socket) => {
-    socket.emit("connected");
-    socket.on("disconnected", () => {
+    socket.on("login", (data) => {
+        if (!data.id || !data.name) {
+            const ns = (0, uuid_1.v4)();
+            const id = (0, uuid_1.v5)(String(Date.now()), ns);
+            data = {
+                name: `Guest#${id.slice(0, 4)}`,
+                id
+            };
+        }
+        socket.emit("loggedIn", data);
+    });
+});
+chat.on("connection", (socket) => {
+    socket.on("sendMessage", (message) => {
+        chat.emit("receiveMessage", message);
     });
 });
 server.listen(port, () => {
@@ -56,12 +71,6 @@ app.use("/resources/background", express.static(path.join(resourcesdir, "Backgro
 app.use("/resources/behavior", express.static(path.join(resourcesdir, "Behaviors")));
 app.use("/resources/music", express.static(path.join(resourcesdir, "MusicResources")));
 app.use("/images", express.static(imagedir));
-//router for admin
-//const adminRouter = express.Router();
-app.use("/socketio", express.static(path.join(__dirname, "../../node_modules/@socket.io/admin-ui/ui/dist")));
-app.get("/admin", (req, res) => {
-    res.send("Admin Page");
-});
 app.get("/favicon", (req, res) => {
     if (req.headers["content-type"] == "image/x-icon")
         res.sendFile(path.join(imagedir, "favicon.ico"));

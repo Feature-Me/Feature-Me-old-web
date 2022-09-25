@@ -14,7 +14,14 @@
 
 ## 00056-beta(Version 0.5.6)
 Commit A:
+
 タグのリネーム
+
+Commit B:
+クイック メニューの追加
+クイックメニュー内にチャットを実装
+WebSocketの対応
+サーバーの更新
 
 ## 00055-beta(Version 0.5.6)
 Commit A~F:
