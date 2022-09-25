@@ -32,7 +32,7 @@
     .window_inner {
         height: calc(100% - 4px);
         width: calc(100% - 4px);
-        background-color: $pageBackgroundColor;
+        background-color: $black;
         clip-path: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 32px 100%, 0 calc(100% - 32px));
         padding: 8px 16px;
         box-sizing: border-box;

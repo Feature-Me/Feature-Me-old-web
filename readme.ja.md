@@ -23,6 +23,10 @@ Commit B:
 WebSocketの対応
 サーバーの更新
 
+Commit C:
+エディターのルーティングを追加
+スタイルの調整 
+
 ## 00055-beta(Version 0.5.6)
 Commit A~F:
 デプロイの不具合を解消したサーバー緊急アップデート。

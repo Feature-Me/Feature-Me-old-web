@@ -19,6 +19,7 @@
 
     .categories {
         overflow-y: auto;
+        background-color: rgb(20, 20, 30, 0.5);
 
         .category {
             margin-bottom: 16px;
@@ -74,6 +75,7 @@
             }
             h3,hr {
                 margin: 0;
+                text-shadow: 0 0 4px $textColor;
             }
 
 
