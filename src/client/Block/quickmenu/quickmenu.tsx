@@ -22,63 +22,21 @@ const QuickMenu: React.FC = () => {
     const leftAnimationController = useAnimation();
     const rightAnimationcontroller = useAnimation();
 
-    const initialBg = {
-        opacity: 0,
-    }
-    const fadeInBg = {
-        opacity: 1,
-        transition: {
-            duration: 0.2,
-            ease: "easeIn",
-        }
-    }
-    const fadeOutBg = {
-        opacity: 0,
-        transition: {
-            duration: 0.2,
-            ease: "easeOut",
-        }
-    }
+    const initialBg = { opacity: 0 }
+    const fadeInBg = { opacity: 1, transition: { duration: 0.2, ease: "easeIn", } }
+    const fadeOutBg = { opacity: 0, transition: { duration: 0.2, ease: "easeOut", } }
 
-    const initialLeft = {
-        x: "-100%",
-    }
-    const inLeft = {
-        x: 0,
-        transition: {
-            duration: 0.15,
-            ease: "easeIn",
-        }
-    }
-    const outLeft = {
-        x: "-100%",
-        transition: {
-            duration: 0.15,
-            ease: "easeOut",
-        }
-    }
+    const initialLeft = { x: "-100%" }
+    const inLeft = { x: 0, transition: { duration: 0.15, ease: "easeIn", } }
+    const outLeft = { x: "-100%", transition: { duration: 0.15, ease: "easeOut" } }
 
-    const initialRight = {
-        x: "100%",
-    }
-    const inRight = {
-        x: 0,
-        transition: {
-            duration: 0.15,
-            ease: "easeIn",
-        }
-    }
-    const outRight = {
-        x: "100%",
-        transition: {
-            duration: 0.15,
-            ease: "easeOut",
-        }
-    }
+    const initialRight = { x: "100%" }
+    const inRight = { x: 0, transition: { duration: 0.15, ease: "easeIn", } }
+    const outRight = { x: "100%", transition: { duration: 0.15, ease: "easeOut", } }
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         //socket events
-        chatWs.on("connect",()=>{
+        chatWs.on("connect", () => {
             setChat(chat => {
                 let rooms = cloneDeep(chat.rooms)
                 rooms[chat.room].push({
@@ -92,7 +50,7 @@ const QuickMenu: React.FC = () => {
                 }
             })
         })
-        chatWs.on("disconnect",()=>{
+        chatWs.on("disconnect", () => {
             setChat(chat => {
                 let rooms = cloneDeep(chat.rooms)
                 rooms[chat.room].push({
@@ -106,7 +64,7 @@ const QuickMenu: React.FC = () => {
                 }
             })
         })
-        chatWs.on("receiveMessage",(message:chatMessageType)=>{
+        chatWs.on("receiveMessage", (message: chatMessageType) => {
             setChat(chat => {
                 let rooms = cloneDeep(chat.rooms)
                 rooms[chat.room].push({
@@ -120,7 +78,7 @@ const QuickMenu: React.FC = () => {
                 }
             })
         })
-    },[])
+    }, [])
 
     React.useEffect(() => {
         if (!quickmenuRef.current) return;
@@ -153,19 +111,19 @@ const QuickMenu: React.FC = () => {
     function hide() {
         setQuickmenu(false);
     }
-    function setRoom(room:string){
-        setChat(chat=>{
-            return{
+    function setRoom(room: string) {
+        setChat(chat => {
+            return {
                 ...chat,
                 room
             }
         })
     }
-    function sendMessage(){
-        if(!chatInputRef.current)return;
+    function sendMessage() {
+        if (!chatInputRef.current) return;
         const message = chatInputRef.current.value;
         if (message.startsWith("//")) chatWs.emit("command", { name: webSocket.user.name, time: Date.now(), content: message.substring(2) })
-        else chatWs.emit("sendMessage",{name:webSocket.user.name,time:Date.now(),content:message})
+        else chatWs.emit("sendMessage", { name: webSocket.user.name, time: Date.now(), content: message })
 
         chatInputRef.current.value = "";
     }
@@ -196,8 +154,8 @@ const QuickMenu: React.FC = () => {
                 {/* chat room selector*/}
                 <div className={style.roomSelect}>
                     {
-                        Object.keys(chat.rooms).map((room,index)=>{
-                            return(
+                        Object.keys(chat.rooms).map((room, index) => {
+                            return (
                                 <div className={style.roomName} onClick={e => setRoom(room)} data-active={String(Boolean(chat.room == room))} key={index}># {room}</div>
                             )
                         })
@@ -208,8 +166,8 @@ const QuickMenu: React.FC = () => {
                     @{webSocket.user.name}
                 </div>
                 {/*input field*/}
-                <form onSubmit={(e) => {e.preventDefault();sendMessage();return false;}}>
-                    <input type="text" className={style.chatText} onBlur={e => e.stopPropagation()} placeholder={`Message #${chat.room}`} disabled={chat.room=="room"} ref={chatInputRef}/>
+                <form onSubmit={(e) => { e.preventDefault(); sendMessage(); return false; }}>
+                    <input type="text" className={style.chatText} onBlur={e => e.stopPropagation()} placeholder={`Message #${chat.room}`} disabled={chat.room == "room"} ref={chatInputRef} />
                 </form>
             </motion.div>
             {/*center transparent space*/}

@@ -58,39 +58,14 @@ const MusicGameUI: React.FC = () => {
 
     }
 
-    const initialRightBoard = {
-        x: "20%",
-        opacity: 0,
-    }
-    const slideFadeInFromRight = {
-        x: 0,
-        opacity: 1,
-        transition: {
-            duration: 1,
-            ease: "circOut",
-        }
-    }
+    const initialRightBoard = { x: "20%", opacity: 0, }
+    const slideFadeInFromRight = { x: 0, opacity: 1, transition: { duration: 1, ease: "circOut", } }
 
-    const initPauseMenu = {
-        opacity: 0,
-        scale: 0.8,
-    }
+    const initPauseMenu = { opacity: 0, scale: 0.8, }
 
-    const pauseMenuAnimation = {
-        opacity: 1,
-        scale: 1,
-        transition: {
-            duration: 0.2,
-        }
-    }
+    const pauseMenuAnimation = { opacity: 1, scale: 1, transition: { duration: 0.2, } }
 
-    const pauseMenuAnimationOut = {
-        opacity: 0,
-        scale: 0.8,
-        transition: {
-            duration: 0.2,
-        }
-    }
+    const pauseMenuAnimationOut = { opacity: 0, scale: 0.8, transition: { duration: 0.2, } }
 
     const thumbnail = `data:${musicData.metadata.thumbnail.mime};base64,${arrayBufferToBase64(musicData.metadata.thumbnail.data)}`;
 

@@ -12,6 +12,10 @@
 
 # パッチノート
 
+## 00057-beta(Version 0.5.6)
+Commit A:
+アニメーションに関するコードのフォーマット
+
 ## 00056-beta(Version 0.5.6)
 Commit A:
 

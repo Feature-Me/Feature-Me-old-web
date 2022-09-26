@@ -34,27 +34,10 @@ const SelectBox: React.FC<selectBoxPropsType> = (props): JSX.Element => {
 const Selector: React.FC<selectBoxSelectorPropsType> = (props): JSX.Element => {
     const animationController = useAnimation();
     const [animating, setAnimating] = React.useState(false);
-    const initialAnimation = {
-        opacity: 0,
-        y: -50,
-    }
+    const initialAnimation = { opacity: 0, y: -50, }
 
-    const showSelector = {
-        opacity: 1,
-        y: 0,
-        transition: {
-            duration: 0.3,
-            ease: "easeOut",
-        }
-    }
-    const hideSelector = {
-        opacity: 0,
-        y: -50,
-        transition: {
-            duration: 0.3,
-            ease: "easeOut",
-        }
-    }
+    const showSelector = { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut", } }
+    const hideSelector = { opacity: 0, y: -50, transition: { duration: 0.3, ease: "easeOut", } }
 
     React.useEffect(() => {
         let animationTimeout: NodeJS.Timeout;

@@ -10,7 +10,7 @@ import style from "./sceneChangeCover.scss";
 
 
 
-const SceneChangeCover:React.FC = () => {
+const SceneChangeCover: React.FC = () => {
     const location = useLocation();
     const sceneChanger = useRecoilValue(sceneChangerState);
     const BlueAnimationController = useAnimation();
@@ -18,43 +18,19 @@ const SceneChangeCover:React.FC = () => {
     const sceneChangerRef = React.useRef<HTMLDivElement>(null);
 
 
-    const BlueAnimationOpen = {
-        x: "-100%",
-        transition: {
-            duration: 0.5,
-            ease: "easeIn"
-        }
-    }
-    const GreenAnimationOpen = {
-        x: "100%",
-        transition: {
-            duration: 0.5,
-            ease: "easeIn"
-        }
-    }
+    const BlueAnimationOpen = { x: "-100%", transition: { duration: 0.5, ease: "easeIn" } }
+    const GreenAnimationOpen = { x: "100%", transition: { duration: 0.5, ease: "easeIn" } }
 
-    const BlueAnimationClose = {
-        x: 0,
-        transition: {
-            duration: 0.5,
-            ease: "easeOut"
-        }
-    }
-    const GreenAnimationClose = {
-        x: 0,
-        transition: {
-            duration: 0.5,
-            ease: "easeOut"
-        }
-    }
+    const BlueAnimationClose = { x: 0, transition: { duration: 0.5, ease: "easeOut" } }
+    const GreenAnimationClose = { x: 0, transition: { duration: 0.5, ease: "easeOut" } }
 
-    
+
 
     React.useEffect(() => {
         console.log(location.pathname);
     }, [location]);
     React.useEffect(() => {
-    new Promise<void>(async (resolve) => {
+        new Promise<void>(async (resolve) => {
             if (sceneChangerRef.current) sceneChangerRef.current.style.display = "block";
             BlueAnimationController.start(BlueAnimationClose);
             GreenAnimationController.start(GreenAnimationClose);
