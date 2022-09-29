@@ -15,6 +15,7 @@ import sceneChangerState from "State/sceneChanger/sceneChangerstate";
 import fetchResourcesUpdate from "../../../Utils/fetchUpdate/fetchResourcesUpdate";
 import backgroundState from "State/background/backgroundState";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
+import TranslateText from "Components/TranslateText/TranslateText";
 
 
 
@@ -104,7 +105,7 @@ const TitleText: React.FC = () => {
                 <p>Feature Me {version.version} - {version.build} <br /> Mksk and Rae The Feature Me Project  ©2022 Feature Me All rights reserved.
                 </p>
                 <div className={style.setlang}>
-                    {translation("title.language")}
+                    <TranslateText content="title.language" />
                 </div>
                 <div className={style.settings} onClick={() => { setShowSettingsWindow(!showSettingsWindow) }}>
                     <FiSettings className={style.settings_icon} />

@@ -1,10 +1,9 @@
 import React from "react";
 import style from './displayDirectionCaution.scss';
 import { BsPhone } from 'react-icons/bs';
-import { useTranslation } from 'react-i18next';
+import TranslateText from "Components/TranslateText/TranslateText";
 
 const DisplayDirectionCaution: React.FC = () => {
-    const [translation, i18n] = useTranslation();
     const displayDirectionCautionRef = React.useRef<HTMLDivElement>(null);
     const [isDirectionLandscape, setIsDirectionLandscape] = React.useState(true);
 
@@ -29,7 +28,7 @@ const DisplayDirectionCaution: React.FC = () => {
     return (
         <div className={style.caution_screen} ref={displayDirectionCautionRef}>
             <div className={style.display_direction_caution}>
-                <h1>{translation("cautions.displayDirection")}</h1>
+                <h1><TranslateText content="cautions.displayDirection" /></h1>
                 <BsPhone className={style.caution_phone_icon} />
             </div>
         </div>

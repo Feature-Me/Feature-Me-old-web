@@ -24,32 +24,32 @@ const GeneralSettings: React.FC = () => {
     const settings:Array<{details:settingDetailsData,input:React.ReactNode}> = [
         {
             details: {
-                title: <TranslateText contentData="settingsPage.general.language.name" />,
+                title: <TranslateText content="settingsPage.general.language.name" />,
                 processingLoad: "none",
-                description: <TranslateText contentData="settingsPage.general.language.description" />
+                description: <TranslateText content="settingsPage.general.language.description" />
             },
             input: <SelectBox contents={selectLanguageOptions} onChange={(value: { value: string, label: string }) => { i18n.changeLanguage(value.value) }} value={selectLanguageOptions.find(e => e.value == i18n.language)!} />
         },
         {
             details: {
-                title: <TranslateText contentData="settingsPage.general.benchmark.name" />,
+                title: <TranslateText content="settingsPage.general.benchmark.name" />,
                 processingLoad: "medium",
-                description: <TranslateText contentData="settingsPage.general.benchmark.description" />
+                description: <TranslateText content="settingsPage.general.benchmark.description" />
             },
             input: <ChamferdButton>{translate("settingsPage.general.benchmark.button")}</ChamferdButton>
         },{
             details: {
-                title: <TranslateText contentData="settingsPage.general.terms.name" />,
+                title: <TranslateText content="settingsPage.general.terms.name" />,
                 processingLoad: "none",
-                description: <TranslateText contentData="settingsPage.general.terms.description" />
+                description: <TranslateText content="settingsPage.general.terms.description" />
             },
             input: <ChamferdButton>{translate("settingsPage.general.terms.button")}</ChamferdButton>
         },
         {
             details: {
-                title: <TranslateText contentData="settingsPage.general.credit.name" />,
+                title: <TranslateText content="settingsPage.general.credit.name" />,
                 processingLoad: "none",
-                description: <TranslateText contentData="settingsPage.general.credit.description" />
+                description: <TranslateText content="settingsPage.general.credit.description" />
             },
             input: <></>
         }

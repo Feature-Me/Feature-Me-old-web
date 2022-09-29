@@ -19,25 +19,25 @@ const AudioSettings: React.FC = () => {
     const settings: Array<{ details: settingDetailsData, input: React.ReactNode }> = [
         {
             details: {
-                title: <TranslateText contentData="settingsPage.audio.masterVolume.name" />,
+                title: <TranslateText content="settingsPage.audio.masterVolume.name" />,
                 processingLoad: "none",
-                description: <TranslateText contentData="settingsPage.audio.masterVolume.description" />
+                description: <TranslateText content="settingsPage.audio.masterVolume.description" />
             },
             input: <RangeInput min={0} max={1} step={0.01} value={gameConfig.audio.masterVolume} onChange={(value: number) => setGameConfig(config => { return { ...config, audio: { ...config.audio,masterVolume:value } } })} />
         },
         {
             details: {
-                title: <TranslateText contentData="settingsPage.audio.musicVolume.name" />,
+                title: <TranslateText content="settingsPage.audio.musicVolume.name" />,
                 processingLoad: "none",
-                description: <TranslateText contentData="settingsPage.audio.musicVolume.description" />
+                description: <TranslateText content="settingsPage.audio.musicVolume.description" />
             },
             input: <RangeInput min={0} max={1} step={0.01} value={gameConfig.audio.musicVolume} onChange={(value: number) => setGameConfig(config => { return { ...config, audio: { ...config.audio, musicVolume: value } } })} />
         },
         {
             details: {
-                title: <TranslateText contentData="settingsPage.audio.effectVolume.name" />,
+                title: <TranslateText content="settingsPage.audio.effectVolume.name" />,
                 processingLoad: "none",
-                description: <TranslateText contentData="settingsPage.audio.effectVolume.description" />
+                description: <TranslateText content="settingsPage.audio.effectVolume.description" />
             },
             input: <RangeInput min={0} max={1} step={0.01} value={gameConfig.audio.effectVolume} onChange={(value: number) => setGameConfig(config => { return { ...config, audio: { ...config.audio, effectVolume: value } } })} />
         },

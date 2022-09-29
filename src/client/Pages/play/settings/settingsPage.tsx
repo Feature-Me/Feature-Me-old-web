@@ -1,4 +1,5 @@
 import Header from "Block/head/head";
+import TranslateText from "Components/TranslateText/TranslateText";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -24,11 +25,11 @@ const SettingsPage: React.FC = (props) => {
             <Header title="Settings" backFunc={() => sceneChangeNavigation("../menu")} />
             <div className={style.settings}>
                 <div className={style.sidebar}>
-                    <Link className={style.sidebar_content} to={"./"}>{translate("settingsPage.general.title")}</Link>
-                    <Link className={style.sidebar_content} to={"./gameplay"}>{translate("settingsPage.gameplay.title")}</Link>
-                    <Link className={style.sidebar_content} to={"./graphics"}>{translate("settingsPage.graphics.title")}</Link>
-                    <Link className={style.sidebar_content} to={"./audio"}>{translate("settingsPage.audio.title")}</Link>
-                    <Link className={style.sidebar_content} to={"./storage"}>{translate("settingsPage.storage.title")}</Link>
+                    <Link className={style.sidebar_content} to={"./"}><TranslateText content="settingsPage.general.title" /></Link>
+                    <Link className={style.sidebar_content} to={"./gameplay"}><TranslateText content="settingsPage.gameplay.title" /></Link>
+                    <Link className={style.sidebar_content} to={"./graphics"}><TranslateText content="settingsPage.graphics.title" /></Link>
+                    <Link className={style.sidebar_content} to={"./audio"}><TranslateText content="settingsPage.audio.title" /></Link>
+                    <Link className={style.sidebar_content} to={"./storage"}><TranslateText content="settingsPage.storage.title" /></Link>
                 </div>
                 <div className={style.content}>
                     <SettingsRouter />

@@ -8,6 +8,8 @@ import chatState from "State/chat/chatState";
 import useWebSocket from "Hooks/webSocket/useWebSocket";
 import { cloneDeep } from "lodash";
 import webSocketState from "State/webSocket/webSocketState";
+import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
+import { useTranslation } from "react-i18next";
 
 const QuickMenu: React.FC = () => {
     const [quickmenu, setQuickmenu] = useRecoilState(quickmenuState);
@@ -15,6 +17,7 @@ const QuickMenu: React.FC = () => {
     const [chat, setChat] = useRecoilState(chatState);
     const webSocket = useRecoilValue(webSocketState);
     const chatWs = useWebSocket("/chat");
+    const sceneChangeNavigation = useSeneChangeNavigation();
 
     const chatInputRef = React.useRef<HTMLInputElement>(null);
 
@@ -166,7 +169,7 @@ const QuickMenu: React.FC = () => {
                     @{webSocket.user.name}
                 </div>
                 {/*input field*/}
-                <form onSubmit={(e) => { e.preventDefault(); sendMessage(); return false; }}>
+                <form onSubmit={(e) => { e.preventDefault(); sendMessage(); }}>
                     <input type="text" className={style.chatText} onBlur={e => e.stopPropagation()} placeholder={`Message #${chat.room}`} disabled={chat.room == "room"} ref={chatInputRef} />
                 </form>
             </motion.div>
@@ -174,6 +177,15 @@ const QuickMenu: React.FC = () => {
             <div onClick={hide}></div>
             {/*left quick menu(social)*/}
             <motion.div className={style.right} animate={rightAnimationcontroller} initial={initialRight}>
+                <h2>Quick Menu</h2>
+                <div className={style.modes}>
+                    <h3>Quick Jump</h3>
+                    <p className={style.pageText} onClick={() => { sceneChangeNavigation("/"); hide(); }} data-link={"/"}>Title</p>
+                    <p className={style.pageText} onClick={() => { sceneChangeNavigation("play/menu"); hide(); }}  data-link={"play/menu"}>Home</p>
+                    <p className={style.pageText} onClick={() => { sceneChangeNavigation("editor"); hide(); }} data-link={"editor"}>Editor</p>
+                    <p className={style.pageText} onClick={() => { sceneChangeNavigation("leaderboards"); hide(); }} data-link={"leaderboards"}>Leaderboards</p>
+                    <p className={style.pageText} onClick={() => { sceneChangeNavigation("musicroom"); hide(); }} data-link={"musicroom"}>Music Room</p>
+                </div>
             </motion.div>
         </motion.div>
     );

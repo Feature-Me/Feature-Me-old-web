@@ -27,7 +27,7 @@ import version from "Config/versions.json";
 import { chartType } from "Features/parseChart/chartSample";
 import acceptBehavior from "Features/acceptBehavior/acceptBehavior";
 import { brightNote, holdNote, note, seedNote, tapNote } from "Features/chartClass/notes";
-import { musicGameVariablesType } from "Types/game/gameVariables";
+import { musicGameVariablesType } from "Types/play/game/gameVariables";
 import { match } from "ts-pattern";
 import easings from "Utils/easing/easing";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";

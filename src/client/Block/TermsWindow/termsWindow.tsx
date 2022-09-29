@@ -11,6 +11,7 @@ import { termsWindowAtomState } from "State/window/windowState";
 import ChamferdButton from "Components/Button/chamferedButton/chamferedButton";
 
 import style from './termsWindow.scss';
+import TranslateText from "Components/TranslateText/TranslateText";
 //import { deleteEnvironmentData } from "../cacheController/deleteData";
 
 
@@ -51,10 +52,10 @@ const TermsWindow: React.FC = (): JSX.Element => {
                 <div className={style.interaction_wrapper}>
                     <div className={style.interaction}>
                         <ChamferdButton accentColor="#ca1c1c" onClick={declineTerms}>
-                            {translation("terms.button.decline")}
+                            <TranslateText content="terms.button.decline" />
                         </ChamferdButton>
                         <ChamferdButton onClick={acceptTerms}>
-                            {translation("terms.button.accept")}
+                            <TranslateText content="terms.button.accept" />
                         </ChamferdButton>
                     </div>
                 </div>
