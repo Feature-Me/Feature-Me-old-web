@@ -8,7 +8,7 @@ import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation"
 const LinkWrapper: React.FC<{children?:React.ReactNode,to:string,className?:string}> = (props): JSX.Element => {
     const navigate = useSeneChangeNavigation();
 
-    function handleClick(e: React.MouseEvent<HTMLAnchorElement>): void {
+    function handleClick(e: React.MouseEvent<HTMLDivElement>): void {
         navigate(props.to);
     }
 

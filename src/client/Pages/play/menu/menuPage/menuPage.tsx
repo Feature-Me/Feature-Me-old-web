@@ -39,12 +39,12 @@ const MenuPage: React.FC = () => {
             <Header title="Home" backFunc={() => sceneChangeNavigation("/")} />
             <div className={style.menu}>
                 {
-                    menu.map((content,index)=>{
+                    menu.map((menu,index)=>{
                         const direction = index%2==0?"left":"right";
                         return(
-                            <LinkWrapper to={content.to}>
+                            <LinkWrapper to={menu.to} key={index}>
                                 <div className={style[direction]}>
-                                    <TranslateText content={content.content} />
+                                    <TranslateText content={menu.content} />
                                 </div>
                             </LinkWrapper>
                         )
