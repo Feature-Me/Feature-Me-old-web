@@ -1,12 +1,12 @@
 import ENUSTitleTranslation from "./en-us.title";
-import ENUSTermsTranslation from "./en-us.terms";
-import ENUSResourcesManagerTranslation from "./en-us.resourcesmanager";
-import ENUSCacheController from "./en-us.cachecontroller";
-import ENUSCautions from "./en-us.cautions";
-import ENUSMenuTranslation from "./en-us.menu";
-import ENUSHeadTranslation from "./en-us.head";
-import ENUSMusicSelectTranslation from "./en-us.musicselect";
-import ENUSSettingsPage from "./en-us.settingspage";
+import ENUSTermsTranslation from "./others/en-us.terms";
+import ENUSResourcesManagerTranslation from "./others/en-us.resourcesmanager";
+import ENUSCacheController from "./others/en-us.cachecontroller";
+import ENUSCautions from "./others/en-us.cautions";
+import ENUSMenuTranslation from "./play/en-us.menu";
+import ENUSHeadTranslation from "./components/en-us.head";
+import ENUSMusicSelectTranslation from "./play/en-us.musicselect";
+import ENUSSettingsPage from "./settings/en-us.settingspage";
 
 const ENUStranslation = {
     title: ENUSTitleTranslation,

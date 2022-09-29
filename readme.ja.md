@@ -12,9 +12,19 @@
 
 # パッチノート
 
+
 ## 00057-beta(Version 0.5.6)
 Commit A:
 アニメーションに関するコードのフォーマット
+
+Commit B:
+TranslateTextコンポーネントの修正
+メニューのリファクタリング
+クイックメニューにタイトルへ戻るを追加
+ファイルの移動
+
+Commit C:
+翻訳の更新
 
 ## 00056-beta(Version 0.5.6)
 Commit A:

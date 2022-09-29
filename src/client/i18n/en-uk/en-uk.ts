@@ -1,12 +1,12 @@
-import ENUKTitleTranslation from "./en-uk.title";
-import ENUKTermsTranslation from "./en-uk.terms";
-import ENUKResourcesManagerTranslation from "./en-uk.resourcesmanager";
-import ENUKCacheController from "./en-uk.cachecontroller";
-import ENUKCautions from "./en-uk.cautions";
-import ENUKMenuTranslation from "./en-uk.menu";
-import ENUKHeadTranslation from "./en-uk.head";
-import ENUKMusicSelectTranslation from "./en-uk.musicselect";
-import ENUKSettingsPage from "./en-uk.settingspage";
+import ENUKTitleTranslation from "./title/en-uk.title";
+import ENUKTermsTranslation from "./others/en-uk.terms";
+import ENUKResourcesManagerTranslation from "./others/en-uk.resourcesmanager";
+import ENUKCacheController from "./others/en-uk.cachecontroller";
+import ENUKCautions from "./others/en-uk.cautions";
+import ENUKMenuTranslation from "./play/en-uk.menu";
+import ENUKHeadTranslation from "./components/en-uk.head";
+import ENUKMusicSelectTranslation from "./play/en-uk.musicselect";
+import ENUKSettingsPage from "./settings/en-uk.settingspage";
 
 const ENUKtranslation = {
     title: ENUKTitleTranslation,

@@ -1,12 +1,13 @@
-import JATitleTranslation from "./ja.title";
-import JATermsTranslation from "./ja.terms";
-import JAResourcesManagerTranslation from "./ja.resourcesmanager";
-import JACacheController from "./ja.cachecontroller";
-import JACautions from "./ja.cautions";
-import JAMenuTranslation from "./ja.menu";
-import JAHeadTranslation from "./ja.head";
-import JAMusicSelectTranslation from "./ja.musicselect";
-import JASettingsPage from "./ja.settingspage";
+import JATitleTranslation from "./title/ja.title";
+import JATermsTranslation from "./components/ja.terms";
+import JAResourcesManagerTranslation from "./others/ja.resourcesmanager";
+import JACacheController from "./others/ja.cachecontroller";
+import JACautions from "./others/ja.cautions";
+import JAMenuTranslation from "./play/ja.menu";
+import JAHeadTranslation from "./components/ja.head";
+import JAMusicSelectTranslation from "./play/ja.musicselect";
+import JASettingsPage from "./settings/ja.settingspage";
+import JAEditorTranslation from "./editor/ja.editor";
 
 const JAtranslation = {
     title: JATitleTranslation,
@@ -18,6 +19,7 @@ const JAtranslation = {
     head: JAHeadTranslation,
     musicSelect: JAMusicSelectTranslation,
     settingsPage: JASettingsPage,
+    editor:JAEditorTranslation,
 }
 
 export default JAtranslation;
