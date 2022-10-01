@@ -129,6 +129,8 @@ const MusicGame: React.FC = () => {
         preparingGame();
         window.addEventListener("keydown", keyInput);
         window.addEventListener("resize",resizeCanvas);
+
+        document.title = `Play - ${selectedMusic.selectedName} - Feature Me`;
         return () => {
             clearTimeout(ResultNavigationInterval);
             clearInterval(gameRenderInterval);

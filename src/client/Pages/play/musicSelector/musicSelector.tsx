@@ -85,6 +85,10 @@ const MusicSelector: React.FC = () => {
         })
     }, [musicIndex])
 
+    React.useEffect(() => {
+        document.title = `Select Music - Feature Me`;
+    }, [])
+
 
 
     return (

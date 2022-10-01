@@ -1,14 +1,12 @@
 type FunctionWithTypedProps<T> = { exec(value: T): void }["exec"];
 
-interface inputContents {
-    value: any
-    label: string
-}
 interface propsType {
     className?: string
 }
 
-interface selectContents {
-    value: any
+type selectContents<T = any> = {
+    value: T
     label: React.ReactNode
 }
+
+type selectContentsArray<T = any> = Array<selectContents<T>>

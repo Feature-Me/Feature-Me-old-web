@@ -8,7 +8,7 @@ import { useRecoilState } from "recoil";
 import version from "Config/versions.json";
 import Window from "Components/Window/window";
 import { termsWindowAtomState } from "State/window/windowState";
-import ChamferdButton from "Components/Button/chamferedButton/chamferedButton";
+import ChamferedButton from "Components/Button/chamferedButton/chamferedButton";
 
 import style from './termsWindow.scss';
 import TranslateText from "Components/TranslateText/TranslateText";
@@ -51,12 +51,12 @@ const TermsWindow: React.FC = (): JSX.Element => {
                 </pre>
                 <div className={style.interaction_wrapper}>
                     <div className={style.interaction}>
-                        <ChamferdButton accentColor="#ca1c1c" onClick={declineTerms}>
+                        <ChamferedButton accentColor="#ca1c1c" onClick={declineTerms}>
                             <TranslateText content="terms.button.decline" />
-                        </ChamferdButton>
-                        <ChamferdButton onClick={acceptTerms}>
+                        </ChamferedButton>
+                        <ChamferedButton onClick={acceptTerms}>
                             <TranslateText content="terms.button.accept" />
-                        </ChamferdButton>
+                        </ChamferedButton>
                     </div>
                 </div>
             </div>

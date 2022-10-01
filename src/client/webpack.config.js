@@ -2,7 +2,6 @@ const path = require("path");
 const TsConfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const compressionWebpackPlugin = require("compression-webpack-plugin");
 
-
 module.exports = {
     entry: path.resolve(__dirname,"App","app.tsx"),
     mode: "development",

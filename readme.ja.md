@@ -12,6 +12,12 @@
 
 # パッチノート
 
+## 00058-beta(Version 0.5.6)
+Commit A:
+誤字修正
+スタイルの調整
+SelectBoxの型の変更
+タイトルが動的に更新されるように変更
 
 ## 00057-beta(Version 0.5.6)
 Commit A:

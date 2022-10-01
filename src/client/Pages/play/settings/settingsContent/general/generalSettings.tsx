@@ -1,4 +1,4 @@
-import ChamferdButton from "Components/Button/chamferedButton/chamferedButton";
+import ChamferedButton from "Components/Button/chamferedButton/chamferedButton";
 import SelectBox from "Components/SelectBox/selectBox";
 import TranslateText from "Components/TranslateText/TranslateText";
 import React from "react";
@@ -36,14 +36,14 @@ const GeneralSettings: React.FC = () => {
                 processingLoad: "medium",
                 description: <TranslateText content="settingsPage.general.benchmark.description" />
             },
-            input: <ChamferdButton>{translate("settingsPage.general.benchmark.button")}</ChamferdButton>
+            input: <ChamferedButton>{translate("settingsPage.general.benchmark.button")}</ChamferedButton>
         },{
             details: {
                 title: <TranslateText content="settingsPage.general.terms.name" />,
                 processingLoad: "none",
                 description: <TranslateText content="settingsPage.general.terms.description" />
             },
-            input: <ChamferdButton>{translate("settingsPage.general.terms.button")}</ChamferdButton>
+            input: <ChamferedButton>{translate("settingsPage.general.terms.button")}</ChamferedButton>
         },
         {
             details: {

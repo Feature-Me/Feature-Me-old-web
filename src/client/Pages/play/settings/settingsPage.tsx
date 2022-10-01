@@ -20,6 +20,10 @@ const SettingsPage: React.FC = (props) => {
         localStorage.setItem("gameConfig", config);
     }, [gameConfig]);
 
+    React.useEffect(() => {
+        document.title = `Settings - Feature Me`;
+    }, []);
+
     return (
         <div className={style.settingspage}>
             <Header title="Settings" backFunc={() => sceneChangeNavigation("../menu")} />

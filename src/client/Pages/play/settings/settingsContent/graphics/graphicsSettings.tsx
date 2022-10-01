@@ -18,7 +18,7 @@ const GraphicsSettings: React.FC = () => {
     const settingListRef = React.useRef<HTMLDivElement>(null);
 
     //render type
-    const renderType: Array<inputContents> = [
+    const renderType: Array<selectContents> = [
         {
             label: "2D",
             value: "2D"
@@ -30,7 +30,7 @@ const GraphicsSettings: React.FC = () => {
     ]
 
     //Anti-Aliasing type
-    const AAType:Array<inputContents> = [
+    const AAType:Array<selectContents> = [
         {label:"Disabled",value:false},
         {label:"System",value:"default"},
         {label:"FXAA",value:"FXAA"},
@@ -39,7 +39,7 @@ const GraphicsSettings: React.FC = () => {
         {label:"TAA",value:"TAA"}
     ]
     //AA subpixel
-    const AASampling: Array<inputContents> = [
+    const AASampling: Array<selectContents> = [
         {label:"1X",value:0},
         {label:"2X",value:1},
         {label:"4X",value:2},
@@ -55,7 +55,7 @@ const GraphicsSettings: React.FC = () => {
                 processingLoad: "high",
                 description: <TranslateText content="settingsPage.graphics.gameRenderType.description" />
             },
-            input: <HorizonalSelectFromArray contents={renderType} value={renderType.find(c => c.value == gameConfig.graphics.musicgame.renderType) || renderType[0]} onChange={(value: inputContents) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, musicgame: { ...gameConfig.graphics.musicgame, renderType: value.value as "2D" | "3D" } } } })} />
+            input: <HorizonalSelectFromArray contents={renderType} value={renderType.find(c => c.value == gameConfig.graphics.musicgame.renderType) || renderType[0]} onChange={(value: selectContents) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, musicgame: { ...gameConfig.graphics.musicgame, renderType: value.value as "2D" | "3D" } } } })} />
         },
         {
             details: {
@@ -63,7 +63,7 @@ const GraphicsSettings: React.FC = () => {
                 processingLoad: "medium",
                 description: <TranslateText content="settingsPage.graphics.gameAntiAliasing.description" />
             },
-            input: <HorizonalSelectFromArray contents={AAType} value={AAType.find(c => c.value == gameConfig.graphics.musicgame.postProcessing.antialias) || AAType[0]} onChange={(value: inputContents) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, musicgame: { ...gameConfig.graphics.musicgame, postProcessing:{...gameConfig.graphics.musicgame.postProcessing,antialias:value.value as AntiAliasType}} } } })} />
+            input: <HorizonalSelectFromArray contents={AAType} value={AAType.find(c => c.value == gameConfig.graphics.musicgame.postProcessing.antialias) || AAType[0]} onChange={(value: selectContents) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, musicgame: { ...gameConfig.graphics.musicgame, postProcessing:{...gameConfig.graphics.musicgame.postProcessing,antialias:value.value as AntiAliasType}} } } })} />
         },
         {
             details: {
@@ -71,7 +71,7 @@ const GraphicsSettings: React.FC = () => {
                 processingLoad: "medium",
                 description: <TranslateText content="settingsPage.graphics.gameAASampling.description" />
             },
-            input: <HorizonalSelectFromArray contents={AASampling} value={AASampling.find(c => c.value == gameConfig.graphics.musicgame.postProcessing.AALevel) || AASampling[0]} onChange={(value: inputContents) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, musicgame: { ...gameConfig.graphics.musicgame, postProcessing: { ...gameConfig.graphics.musicgame.postProcessing, AALevel: value.value as AALevel } } } } })} />
+            input: <HorizonalSelectFromArray contents={AASampling} value={AASampling.find(c => c.value == gameConfig.graphics.musicgame.postProcessing.AALevel) || AASampling[0]} onChange={(value: selectContents) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, musicgame: { ...gameConfig.graphics.musicgame, postProcessing: { ...gameConfig.graphics.musicgame.postProcessing, AALevel: value.value as AALevel } } } } })} />
         },
         {
             details: {
@@ -95,7 +95,7 @@ const GraphicsSettings: React.FC = () => {
                 processingLoad: "high",
                 description: <TranslateText content="settingsPage.graphics.backgroundRenderType.description" />
             },
-            input: <HorizonalSelectFromArray contents={renderType} value={renderType.find(c => c.value == gameConfig.graphics.background.renderType) || renderType[0]} onChange={(value: inputContents) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, background: { ...gameConfig.graphics.background, renderType: value.value as "2D" | "3D" } } } })} />
+            input: <HorizonalSelectFromArray contents={renderType} value={renderType.find(c => c.value == gameConfig.graphics.background.renderType) || renderType[0]} onChange={(value: selectContents) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, background: { ...gameConfig.graphics.background, renderType: value.value as "2D" | "3D" } } } })} />
         },
         {
             details: {

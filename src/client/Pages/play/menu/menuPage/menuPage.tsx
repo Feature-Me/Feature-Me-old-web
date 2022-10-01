@@ -32,6 +32,8 @@ const MenuPage: React.FC = () => {
     React.useEffect(() => {
         const config = JSON.parse(localStorage.getItem("gameConfig") || "{}");
         useSetGameConfig(config);
+
+        document.title = `Menu - Feature Me`;
     }, []);
 
     return (

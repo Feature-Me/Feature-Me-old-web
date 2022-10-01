@@ -15,6 +15,9 @@ const ResultPage: React.FC = () => {
     const musicData = selectedMusic.selectedData as MusicAssetContents;
     const chartMetaData = musicData.metadata.difficulties.find(diff => diff.name == musicGameMode.difficulty)
 
+    React.useEffect(()=>{
+        document.title = `Result ${selectedMusic.selectedName} - Feature Me`;
+    },[])
 
     return (
         <div className={style.resultPage}>

@@ -7,9 +7,10 @@ import { useRecoilState } from "recoil";
 import SelectBox from "Components/SelectBox/selectBox";
 import Window from "Components/Window/window";
 import { settingsWindowAtomState, termsWindowAtomState } from "State/window/windowState";
-import ChamferdButton from "Components/Button/chamferedButton/chamferedButton";
+
 
 import style from './settingsWindow.scss';
+import ChamferedButton from "Components/Button/chamferedButton/chamferedButton";
 
 const selectLanguageOptions = [
     { value: "en_us", label: "English(EN-US)" },
@@ -42,11 +43,11 @@ const SettingsWindow: React.FC = (): JSX.Element => {
                 </div>
                 <div className={style.content}>
                     <h3>{translation("title.settingsWindow.storageCache.all")}</h3>
-                    <ChamferdButton accentColor="#ca1c1c">{translation("title.settingsWindow.delete")}</ChamferdButton>
+                    <ChamferedButton accentColor="#ca1c1c">{translation("title.settingsWindow.delete")}</ChamferedButton>
                 </div>
                 <div className={style.content}>
                     <h3>{translation("title.terms")}</h3>
-                    <ChamferdButton onClick={() => { setShowTermsWindow(true) }}>{translation("title.read")}</ChamferdButton>
+                    <ChamferedButton onClick={() => { setShowTermsWindow(true) }}>{translation("title.read")}</ChamferedButton>
                 </div>
             </div>
         </Window>

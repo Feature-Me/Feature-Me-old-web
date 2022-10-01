@@ -18,6 +18,11 @@
     }
 }
 
+@mixin blur-background{
+    background-color: $transparent-bg;
+    @include blur(16px);
+}
+
 @mixin small-device-font {
     @media screen and (max-height: 540px) {
         font-size: 14px;
@@ -51,6 +56,7 @@ $pageBackgroundColor:#14141e;
 $inputBackgroundColor: #414040;
 $inputForegroundColor:#36393f;
 $backgroundSubColor:#25282c;
+$transparent-bg:rgb(7,8,14,0.75);
 $black:rgb(7,8,14);
 $accentColor: #1189da;
 $clickedAccentColor :#116fda;
