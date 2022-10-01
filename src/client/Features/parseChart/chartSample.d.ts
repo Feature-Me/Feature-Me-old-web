@@ -6,7 +6,7 @@ interface chartNote {
     time: number
     //lane: 1 | 2 | 3 | 4 | "left" | "right"
     script?: Array<string>
-    speed:{
+    speed?:{
         type: "absolute" | "relative" | "fixedTime"
         value: number
     }
@@ -81,6 +81,8 @@ interface chartBpmEffect extends chartEffect {
 
 type chartNoteType = chartTapNote | chartDamageTapNote | chartHoldNote | chartBrightNote | chartSeedNote | chartFlickNote
 type chartEffectType = chartCameraEffect | chartSpeedEffect | chartTextEffect | chartBpmEffect
+
+
 interface chartJsonType {
     metadata: {
         offset: number

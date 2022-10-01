@@ -14,10 +14,22 @@
 
 ## 00058-beta(Version 0.5.6)
 Commit A:
+
 誤字修正
+
 スタイルの調整
+
 SelectBoxの型の変更
+
 タイトルが動的に更新されるように変更
+
+Commit B:
+
+チャート変換の追加
+
+エディタの変更
+ 
+Ace Editorの追加
 
 ## 00057-beta(Version 0.5.6)
 Commit A:
