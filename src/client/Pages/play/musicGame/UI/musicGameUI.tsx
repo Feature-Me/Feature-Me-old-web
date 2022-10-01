@@ -9,7 +9,7 @@ import musicSelectorState from "State/musicSelector/musicSelectorState";
 import * as musicGame from "State/musicGame/musicGameState"
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 
-import Head from "Block/head/head";
+import Header from "Block/head/head";
 
 import style from "./musicGameUI.scss";
 import MusicGameTitle from "./musicGameTitle";
@@ -58,39 +58,14 @@ const MusicGameUI: React.FC = () => {
 
     }
 
-    const initialRightBoard = {
-        x: "20%",
-        opacity: 0,
-    }
-    const slideFadeInFromRight = {
-        x: 0,
-        opacity: 1,
-        transition: {
-            duration: 1,
-            ease: "circOut",
-        }
-    }
+    const initialRightBoard = { x: "20%", opacity: 0, }
+    const slideFadeInFromRight = { x: 0, opacity: 1, transition: { duration: 1, ease: "circOut", } }
 
-    const initPauseMenu = {
-        opacity: 0,
-        scale: 0.8,
-    }
+    const initPauseMenu = { opacity: 0, scale: 0.8, }
 
-    const pauseMenuAnimation = {
-        opacity: 1,
-        scale: 1,
-        transition: {
-            duration: 0.2,
-        }
-    }
+    const pauseMenuAnimation = { opacity: 1, scale: 1, transition: { duration: 0.2, } }
 
-    const pauseMenuAnimationOut = {
-        opacity: 0,
-        scale: 0.8,
-        transition: {
-            duration: 0.2,
-        }
-    }
+    const pauseMenuAnimationOut = { opacity: 0, scale: 0.8, transition: { duration: 0.2, } }
 
     const thumbnail = `data:${musicData.metadata.thumbnail.mime};base64,${arrayBufferToBase64(musicData.metadata.thumbnail.data)}`;
 
@@ -111,10 +86,10 @@ const MusicGameUI: React.FC = () => {
     function setPause(e: KeyboardEvent) {
         if (musicGameMode.mode == "multi-royale" || musicGameMode.mode == "multi-team" || !musicGamePause.ready) return;
         if (e.code == "Escape") {
-            setMusicGamePause(game=>{
-                return{
+            setMusicGamePause(game => {
+                return {
                     ...game,
-                    paused:!game.paused
+                    paused: !game.paused
                 }
             })
         }
@@ -154,17 +129,17 @@ const MusicGameUI: React.FC = () => {
                 rightBoardAnimationController.start(slideFadeInFromRight);
             }
         }, 3500);
-        return()=>{
+        return () => {
             clearTimeout(uiTimeout)
         }
-        
+
     }, [musicGamePause.ready])
 
     React.useEffect(() => {
         if (musicGameTime.totalTime == 0) return;
-        console.log("Total Time:",musicGameTime.totalTime);
-        
-        let changeSceneTimeout:NodeJS.Timeout
+        console.log("Total Time:", musicGameTime.totalTime);
+
+        let changeSceneTimeout: NodeJS.Timeout
         const progressInterval = setInterval(() => {
             if (!progressRef.current || !progressPointRef.current) return;
             const progress = (performance.now() - musicGameTime.startedTime) / musicGameTime.totalTime * 100
@@ -174,10 +149,10 @@ const MusicGameUI: React.FC = () => {
 
             }
             if (progress >= 100 && !musicGamePause.paused) {
-                setMusicGamePause(pause=>{
-                    return{
+                setMusicGamePause(pause => {
+                    return {
                         ...pause,
-                        paused:true
+                        paused: true
                     }
                 });
             }
@@ -188,7 +163,7 @@ const MusicGameUI: React.FC = () => {
     }, [musicGameTime.totalTime])
 
     React.useEffect(() => {
-        if(!musicGamePause.ready)return;
+        if (!musicGamePause.ready) return;
         console.log("paused", musicGamePause.paused);
         let timeout: NodeJS.Timeout;
         if (!pauseOverlayRef.current) return;
@@ -256,7 +231,7 @@ const MusicGameUI: React.FC = () => {
             </motion.div>
 
             <motion.div className={style.pause_overlay} ref={pauseOverlayRef} animate={pauseMenuAnimationController} initial={initPauseMenu}>
-                <Head title={`Paused - ${musicData.metadata.title}`} backFunc={() => setMusicGameMode(game => { return { ...game, paused: false } })} />
+                <Header title={`Paused - ${musicData.metadata.title}`} backFunc={() => setMusicGameMode(game => { return { ...game, paused: false } })} />
                 <div className={style.pause_content}>
                     <p>Resume</p>
                     <p onClick={() => scenechange(-1)}>Restart</p>

@@ -2,15 +2,16 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as path from "path";
 import * as http from "http";
-/* import * as socketIo from "socket.io"; */
+import * as socketIo from "socket.io";
+import {instrument} from "@socket.io/admin-ui"
 import * as fs from "fs";
 import * as crypto from "crypto";
 import * as nedb from "nedb";
-/* import * as url from "url";
-import * as dotenv from "dotenv" */
+import * as url from "url";
+import * as dotenv from "dotenv"
+import {v4 as uuidv4, v5 as uuidv5} from "uuid";
 /* import * as discord from "discord.js"
 import { commandModules } from "./command"; */
-
 
 //if (process.env.NODE_ENV != "production") dotenv.config({ path: path.join(__dirname, "../../../.env") });
 
@@ -32,8 +33,49 @@ const db = {
     leaderboard: new nedb({ filename: path.join(dbdir, "leaderboard.db"), autoload: true })
 }
 
+//web socket
+const io = new socketIo.Server(server,{
+    cors: {
+        origin: ["https://admin.socket.io"],
+        credentials: true
+    }
+});
+
+instrument(io, {
+    auth: false
+});
+
+const user = io.of("/user");
+const chat = io.of("/chat")
+const multiPlayer = io.of("/multiplayer");
+
+
+user.on("connection",(socket)=>{
+    socket.on("login",(data:user)=>{
+        if(!data.id||!data.name) {
+            const ns = uuidv4()
+            const id = uuidv5(String(Date.now()),ns)
+            data = {
+                name:`Guest#${id.slice(0,4)}`,
+                id
+            }
+        }
+        socket.emit("loggedIn",data)
+    })
+})
+
+chat.on("connection",(socket)=>{
+    socket.on("sendMessage",(message:chatMessage)=>{
+        chat.emit("receiveMessage",message);
+    })
+})
+
 server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
+    console.log(`Node version:${process.version}`);
+    console.log(`PID:${process.pid}`)
+    console.log(`${process.env.NODE_ENV} mode,bot:${process.env.USE_BOT}`);
+    
     //if(process.env.NODE_ENV=="production") login();
 });
 
@@ -100,6 +142,8 @@ app.get("/update/map", (req, res) => {
 app.use((req, res, next) => {
     res.status(404).redirect("/");
 });
+
+
 
 
 /* //discord

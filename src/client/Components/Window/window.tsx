@@ -5,29 +5,12 @@ import { SetterOrUpdater } from "recoil";
 
 import style from "./window.scss";
 
-const Window: React.FC<{className?: Array<string>|string,title:string,children:React.ReactNode,showed:boolean,setShowed:React.Dispatch<React.SetStateAction<boolean>>|SetterOrUpdater<boolean>}> = (props) => {
+const Window: React.FC<{ className?: Array<string> | string, title: string, children: React.ReactNode, showed: boolean, setShowed: React.Dispatch<React.SetStateAction<boolean>> | SetterOrUpdater<boolean> }> = (props) => {
     const animationController = useAnimation();
     const WindowRef = React.useRef<HTMLDivElement>(null);
-    const initialAnimation = {
-        opacity: 0,
-        y: 100,
-    }
-    const animation = {
-        opacity: 1,
-        y: 0,
-        transition: {
-            duration: 0.3,
-            ease: "easeOut",
-        }
-    }
-    const exitAnimation = {
-        opacity: 0,
-        y: 100,
-        transition: {
-            duration: 0.3,
-            ease: "easeOut",
-        }
-    }
+    const initialAnimation = { opacity: 0, y: 100, }
+    const animation = { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut", } }
+    const exitAnimation = { opacity: 0, y: 100, transition: { duration: 0.3, ease: "easeOut", } }
     React.useEffect(() => {
         try {
             if (props.showed) {
@@ -53,7 +36,7 @@ const Window: React.FC<{className?: Array<string>|string,title:string,children:R
                         <div className={style.titlebar}>
                             <h1>{props.title}</h1>
                             <div className={style.closebtn}>
-                                <VscClose className={style.close_icon} onClick={() => {props.setShowed(false)}} />
+                                <VscClose className={style.close_icon} onClick={() => { props.setShowed(false) }} />
                             </div>
                         </div>
                         <div className={style.window_content}>

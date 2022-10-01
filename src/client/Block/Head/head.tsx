@@ -9,16 +9,23 @@ import sceneChangerState from "State/sceneChanger/sceneChangerstate";
 import timeState from "State/timeState/timeState";
 
 import style from "./head.scss";
+import webSocketState from "State/webSocket/webSocketState";
+import quickmenuState from "State/quickmenu/quickmenuState";
 
-const Head: React.FC<{ title: string, backFunc?: Function }> = (props) => {
+const Header: React.FC<{ title: string, backFunc?: Function }> = (props) => {
     const [translation, i18n] = useTranslation();
+    const navigate = useNavigate();
+    const setSceneChanger = useSetRecoilState(sceneChangerState);
+    const setQuickmenu = useSetRecoilState(quickmenuState);
+    const webSocket = useRecoilValue(webSocketState);
+
     const [clock, setClock] = React.useState(new Date().toLocaleTimeString());
     let nowTime: Date = new Date();
     const hr = React.useRef<number>();
     const min = React.useRef<number>();
     const startedTime = useRecoilValue(timeState);
-    const navigate = useNavigate();
-    const setSceneChanger = useSetRecoilState(sceneChangerState);
+
+    
 
     React.useEffect(() => {
         const timeInterval = setInterval(() => {
@@ -43,24 +50,35 @@ const Head: React.FC<{ title: string, backFunc?: Function }> = (props) => {
         }
     }
 
+    function setQuickMenuState(){
+        setQuickmenu(menu=>{
+            return !menu
+        })
+    }
+
 
     return (
-        <div className={style.head}>
-            <div className={style.icon_wrapper} onClick={backFunc}>
-                <MdOutlineArrowBackIosNew className={style.icon} />
+        <header className={style.header}>
+            <div className={style.headbar}>
+                <div className={style.icon_wrapper} onClick={backFunc}>
+                    <MdOutlineArrowBackIosNew className={style.icon} />
+                </div>
+                <h4>
+                    {props.title}
+                </h4>
+                <div></div>
+                <h4>
+                    {clock} ({hr.current}{translation("head.hr")}:{min.current}{translation("head.min")} {translation("head.sessiontime")})
+                </h4>
+                <div className={style.wsStateWrapper}>
+                    <div className={style[webSocket.state]}></div>
+                </div>
+                <div className={style.icon_wrapper} onClick={setQuickMenuState}>
+                    <CgMenuGridR className={style.icon} />
+                </div>
             </div>
-            <h4>
-                {props.title}
-            </h4>
-            <div></div>
-            <h4>
-                {clock} ({hr.current}{translation("head.hr")}:{min.current}{translation("head.min")} {translation("head.sessiontime")})
-            </h4>
-            <div className={style.icon_wrapper}>
-                <CgMenuGridR className={style.icon} />
-            </div>
-        </div>
+        </header>
     )
 }
 
-export default Head;
+export default Header;

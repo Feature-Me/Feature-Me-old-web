@@ -51,65 +51,65 @@ const GraphicsSettings: React.FC = () => {
     const settings: Array<{ details: settingDetailsData, input: React.ReactNode }> = [
         {
             details: {
-                title: <TranslateText contentData="settingsPage.graphics.gameRenderType.name" />,
+                title: <TranslateText content="settingsPage.graphics.gameRenderType.name" />,
                 processingLoad: "high",
-                description: <TranslateText contentData="settingsPage.graphics.gameRenderType.description" />
+                description: <TranslateText content="settingsPage.graphics.gameRenderType.description" />
             },
             input: <HorizonalSelectFromArray contents={renderType} value={renderType.find(c => c.value == gameConfig.graphics.musicgame.renderType) || renderType[0]} onChange={(value: inputContents) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, musicgame: { ...gameConfig.graphics.musicgame, renderType: value.value as "2D" | "3D" } } } })} />
         },
         {
             details: {
-                title: <TranslateText contentData="settingsPage.graphics.gameAntiAliasing.name" />,
+                title: <TranslateText content="settingsPage.graphics.gameAntiAliasing.name" />,
                 processingLoad: "medium",
-                description: <TranslateText contentData="settingsPage.graphics.gameAntiAliasing.description" />
+                description: <TranslateText content="settingsPage.graphics.gameAntiAliasing.description" />
             },
             input: <HorizonalSelectFromArray contents={AAType} value={AAType.find(c => c.value == gameConfig.graphics.musicgame.postProcessing.antialias) || AAType[0]} onChange={(value: inputContents) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, musicgame: { ...gameConfig.graphics.musicgame, postProcessing:{...gameConfig.graphics.musicgame.postProcessing,antialias:value.value as AntiAliasType}} } } })} />
         },
         {
             details: {
-                title: <TranslateText contentData="settingsPage.graphics.gameAASampling.name" />,
+                title: <TranslateText content="settingsPage.graphics.gameAASampling.name" />,
                 processingLoad: "medium",
-                description: <TranslateText contentData="settingsPage.graphics.gameAASampling.description" />
+                description: <TranslateText content="settingsPage.graphics.gameAASampling.description" />
             },
             input: <HorizonalSelectFromArray contents={AASampling} value={AASampling.find(c => c.value == gameConfig.graphics.musicgame.postProcessing.AALevel) || AASampling[0]} onChange={(value: inputContents) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, musicgame: { ...gameConfig.graphics.musicgame, postProcessing: { ...gameConfig.graphics.musicgame.postProcessing, AALevel: value.value as AALevel } } } } })} />
         },
         {
             details: {
-                title: <TranslateText contentData="settingsPage.graphics.gameResolution.name" />,
+                title: <TranslateText content="settingsPage.graphics.gameResolution.name" />,
                 processingLoad: "high",
-                description: <TranslateText contentData="settingsPage.graphics.gameResolution.description" />
+                description: <TranslateText content="settingsPage.graphics.gameResolution.description" />
             },
             input: <RangeInput min={0.1} max={3} step={0.01} value={gameConfig.graphics.musicgame.resolution} onChange={(value: number) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, musicgame: { ...config.graphics.musicgame, resolution: value } } } })} />
         },
         {
             details: {
-                title: < TranslateText contentData="settingsPage.graphics.gameFps.name" />,
+                title: < TranslateText content="settingsPage.graphics.gameFps.name" />,
                 processingLoad: "high",
-                description: <TranslateText contentData="settingsPage.graphics.gameFps.description" />,
+                description: <TranslateText content="settingsPage.graphics.gameFps.description" />,
             },
             input: <RangeInput min={30} max={480} step={1} value={gameConfig.graphics.musicgame.fps} onChange={(value: number) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, musicgame: { ...config.graphics.musicgame, fps: value } } } })} />
         },
         {
             details: {
-                title: <TranslateText contentData="settingsPage.graphics.backgroundRenderType.name" />,
+                title: <TranslateText content="settingsPage.graphics.backgroundRenderType.name" />,
                 processingLoad: "high",
-                description: <TranslateText contentData="settingsPage.graphics.backgroundRenderType.description" />
+                description: <TranslateText content="settingsPage.graphics.backgroundRenderType.description" />
             },
             input: <HorizonalSelectFromArray contents={renderType} value={renderType.find(c => c.value == gameConfig.graphics.background.renderType) || renderType[0]} onChange={(value: inputContents) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, background: { ...gameConfig.graphics.background, renderType: value.value as "2D" | "3D" } } } })} />
         },
         {
             details: {
-                title: <TranslateText contentData="settingsPage.graphics.backgroundResolution.name" />,
+                title: <TranslateText content="settingsPage.graphics.backgroundResolution.name" />,
                 processingLoad: "high",
-                description: <TranslateText contentData="settingsPage.graphics.backgroundResolution.description" />
+                description: <TranslateText content="settingsPage.graphics.backgroundResolution.description" />
             },
             input: <RangeInput min={0.1} max={3} step={0.01} value={gameConfig.graphics.background.resolution} onChange={(value: number) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, background: { ...config.graphics.background, resolution: value } } } })} />
         },
         {
             details: {
-                title: < TranslateText contentData="settingsPage.graphics.backgroundFps.name" />,
+                title: < TranslateText content="settingsPage.graphics.backgroundFps.name" />,
                 processingLoad: "high",
-                description: <TranslateText contentData="settingsPage.graphics.backgroundFps.description" />,
+                description: <TranslateText content="settingsPage.graphics.backgroundFps.description" />,
             },
             input: <RangeInput min={1} max={480} step={1} value={gameConfig.graphics.background.fps} onChange={(value: number) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, background: { ...config.graphics.background, fps: value } } } })} />
         }

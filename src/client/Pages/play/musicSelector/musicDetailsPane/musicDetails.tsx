@@ -140,19 +140,15 @@ const MusicDetails: React.FC = () => {
                 </div>
             </div>
             <Window title="Select Music" showed={showWindow} setShowed={setShowWindow} >
-                <form onSubmit={e => e.preventDefault()} >
                     {data.music.map((audio, index) => {
                         const flag = data.metadata.selectedMusic == audio.name;
                         return (
-                            <div key={index}>
-                                <label>
-                                    <input type="radio" name="music" value={audio.name} onChange={() => { setMusic(audio.name) }} defaultChecked={flag} />
+                            <div style={{backgroundColor:flag?"#1189da":"transparent"}} key={index} onClick={(e) => setMusic(audio.name)}>
                                     {audio.name}
-                                </label>
-                            </div>)
+                            </div>
+                        )
                     }
                     )}
-                </form>
             </Window>
         </div>
     )

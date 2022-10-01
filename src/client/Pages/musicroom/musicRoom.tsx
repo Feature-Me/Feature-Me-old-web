@@ -1,4 +1,4 @@
-import Head from "Block/head/head";
+import Header from "Block/head/head";
 import React from "react";
 
 import databaseInfo from "Config/databaseinfo.json";
@@ -15,7 +15,6 @@ import gameConfigState from "State/gameConfig/gameConfig";
 const MusicRoom: React.FC<{}> = () => {
     const [musicRoom, setMusicRoom] = useRecoilState(musicRoomState)
     const gameConfig = useRecoilValue(gameConfigState);
-
 
     const musics = React.useMemo(async () => {
         let musicData: Array<MusicRoomCategories> = []
@@ -110,7 +109,7 @@ const MusicRoom: React.FC<{}> = () => {
 
     return (
         <div className={style.musicroom}>
-            <Head title={"Music room"} />
+            <Header title={"Music room"} />
             <div className={style.musicList}>
                 <div className={style.categories}>
                     {
@@ -151,13 +150,27 @@ const MusicRoom: React.FC<{}> = () => {
 
                 <div className={style.playqueue}>
                     <h1>Play Queue</h1>
+                    <div className={style.queue}>
+                        {
+                            musicRoom.playList.map((music,index)=>{
+                                return(
+                                    <div>
+                                        {music.name}
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
                 </div>
             </div>
             <div className={style.musicController}>
                 <div className={style.thumbnail} style={{ backgroundImage: `url(data:${musicRoom.playing?.category.thumbnail.mime || "image/png"};base64,${arrayBufferToBase64(musicRoom.playing?.category.thumbnail.data || new ArrayBuffer(0))})` }}></div>
                 <div className={style.title}>
-                    <span className={style.name}>{musicRoom.playing?.category.title||""} - {musicRoom.playing?.name||""}</span>
-                    <span className={style.composer}>{musicRoom.playing?.category.composer||""}</span>
+                    <span className={style.name}>{musicRoom.playing?.category.title || ""} - {musicRoom.playing?.name || ""}</span>
+                    <span className={style.composer}>{musicRoom.playing?.category.composer || ""}</span>
+                </div>
+                <div className={style.playcontrol}>
+
                 </div>
             </div>
 

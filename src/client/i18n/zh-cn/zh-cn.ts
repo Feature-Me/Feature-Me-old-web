@@ -1,12 +1,12 @@
-import ZHCNTitleTranslation from "./zh-cn.title";
-import ZHCNTermsTranslation from "./zh-cn.terms";
-import ZHCNResourcesManagerTranslation from "./zh-cn.resourcesmanager";
-import ZHCNCacheController from "./zh-cn.cachecontroller";
-import ZHCNCautions from "./zh-cn.cautions";
-import ZHCNMenuTranslation from "./zh-cn.menu";
-import ZHCNHeadTranslation from "./zh-cn.head";
-import ZHCNMusicSelectTranslation from "./zh-cn.musicselect";
-import ZHCNSettingsPage from "./zh-cn.settingspage";
+import ZHCNTitleTranslation from "./title/zh-cn.title";
+import ZHCNTermsTranslation from "./others/zh-cn.terms";
+import ZHCNResourcesManagerTranslation from "./others/zh-cn.resourcesmanager";
+import ZHCNCacheController from "./others/zh-cn.cachecontroller";
+import ZHCNCautions from "./others/zh-cn.cautions";
+import ZHCNMenuTranslation from "./play/zh-cn.menu";
+import ZHCNHeadTranslation from "./components/zh-cn.head";
+import ZHCNMusicSelectTranslation from "./play/zh-cn.musicselect";
+import ZHCNSettingsPage from "./settings/zh-cn.settingspage";
 
 const ZHCNtranslation = {
     title: ZHCNTitleTranslation,

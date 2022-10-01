@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import sceneChangerState from "State/sceneChanger/sceneChangerstate";
 import musicSelectorState from "State/musicSelector/musicSelectorState";
-import Head from "Block/head/head";
+import Header from "Block/head/head";
 import MusicListContent from "./musicListContent/musicListContent";
 
 import databaseInfo from "Config/databaseinfo.json";
@@ -76,8 +76,8 @@ const MusicSelector: React.FC = () => {
             indexFlag = true;
             return;
         }
-        setMusicSelector(data=>{
-            return{
+        setMusicSelector(data => {
+            return {
                 ...data,
                 selectedMusic: showList[musicIndex],
                 selectedName: showList[musicIndex]?.metadata?.title
@@ -89,7 +89,7 @@ const MusicSelector: React.FC = () => {
 
     return (
         <div className={style.musicselect}>
-            <Head title="Select Music" />
+            <Header title="Select Music" />
             <div className={style.selector_container}>
                 <div className={style.list_container}>
                     <div className={style.search}>

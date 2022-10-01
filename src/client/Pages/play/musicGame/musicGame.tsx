@@ -27,7 +27,7 @@ import version from "Config/versions.json";
 import { chartType } from "Features/parseChart/chartSample";
 import acceptBehavior from "Features/acceptBehavior/acceptBehavior";
 import { brightNote, holdNote, note, seedNote, tapNote } from "Features/chartClass/notes";
-import { musicGameVariablesType } from "Types/game/gameVariables";
+import { musicGameVariablesType } from "Types/play/game/gameVariables";
 import { match } from "ts-pattern";
 import easings from "Utils/easing/easing";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
@@ -67,6 +67,7 @@ const MusicGame: React.FC = () => {
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 87.5)
     const composer = new EffectComposer(gameRenderer);
     let character: THREE.Object3D = new THREE.Object3D();
+    let gameRenderInterval:NodeJS.Timer;
 
     let musicGameVariables: musicGameVariablesType = {
         activeRange: 250,
@@ -130,6 +131,7 @@ const MusicGame: React.FC = () => {
         window.addEventListener("resize",resizeCanvas);
         return () => {
             clearTimeout(ResultNavigationInterval);
+            clearInterval(gameRenderInterval);
             gameRenderer.dispose();
             window.removeEventListener("keydown", keyInput);
             window.removeEventListener("resize",resizeCanvas);
@@ -258,7 +260,7 @@ const MusicGame: React.FC = () => {
 
         await setGround();
         await setCharacter();
-        setInterval(render, (gameConfig.graphics.musicgame.fps || 120) / 1000)
+        gameRenderInterval = setInterval(render, (gameConfig.graphics.musicgame.fps || 120) / 1000)
     }
 
     async function setGround() {
