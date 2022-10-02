@@ -33,7 +33,6 @@ const GraphicsSettings: React.FC = () => {
     const AAType:Array<selectContents> = [
         {label:"Disabled",value:false},
         {label:"System",value:"default"},
-        {label:"FXAA",value:"FXAA"},
         {label:"SSAA",value:"SSAA"},
         {label:"SMAA",value:"SMAA"},
         {label:"TAA",value:"TAA"}

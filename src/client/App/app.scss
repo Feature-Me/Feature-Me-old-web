@@ -33,6 +33,7 @@ body {
     color: whitesmoke;
     @include font-body;
     user-select: none;
+    @include font-size;
     scroll-behavior: smooth;
     cursor: url("../Assets/Images/pointer.cur"), default;
     form,select,input,textarea,button,label{

@@ -4,7 +4,7 @@ interface propsType {
     className?: string
 }
 
-type selectContents<T = any> = {
+interface selectContents<T = any> {
     value: T
     label: React.ReactNode
 }

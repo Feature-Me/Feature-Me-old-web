@@ -33,6 +33,14 @@ const JASettingsPage = {
         "scrollSpeed":{
             "name":"スクロールスピード",
             "description":"ゲームのスクロールスピードを設定します",
+        },
+        "offset":{
+            "name":"オフセット調整",
+            "description":"音楽に対するノートの位置を調整します。\nFuture(Fast)が多い場合は-に,Past(Late)が多い場合は+に調整してください。"
+        },
+        "judgeTiming":{
+            "name":"判定タイミング調整",
+            "description":"ノートの判定のずれを調整します。\nFuture(Fast)が多い場合は-に,Past(Late)が多い場合は+に調整してください。"
         }
     },
     "graphics": {
@@ -43,7 +51,7 @@ const JASettingsPage = {
         },
         "gameAntiAliasing":{
             "name":"ゲームアンチエイリアス",
-            "description":"ゲームのアンチエイリアスを設定します。推奨:FXAA"
+            "description":"ゲームのアンチエイリアスを設定します。\n推奨:System"
         },
         "gameAASampling":{
             "name":"ゲームアンチエイリアスサンプリング",
@@ -55,7 +63,7 @@ const JASettingsPage = {
         },
         "gameFps":{
             "name": "ゲーム最大フレームレート",
-            "description":"ゲームの最大フレームレートを設定します。この設定は判定精度に影響します。"
+            "description":"ゲームの最大フレームレートを設定します。\nこの設定は判定精度に影響します。"
         },
         "enable3DBackground":{
             "name":"3Dバックグラウンドの使用",

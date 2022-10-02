@@ -11,6 +11,7 @@ import KeybindSettings from "./keybindSettings/keybindSettings";
 
 import keybindImage from "Assets/Images/keybindmap.png";
 import RangeInput from "Components/RangeInput/RangeInput";
+import NumberInput from "Components/numberInput/numberInput";
 
 const GameplaySettings: React.FC = () => {
     const [translate, i18n] = useTranslation();
@@ -23,7 +24,7 @@ const GameplaySettings: React.FC = () => {
             details: {
                 title: <TranslateText content="settingsPage.gameplay.keybind.name" />,
                 processingLoad: "none",
-                description: <><TranslateText content="settingsPage.gameplay.keybind.description" /><img src={keybindImage}/></>
+                description: <><TranslateText content="settingsPage.gameplay.keybind.description" /><img src={keybindImage} /></>
             },
             input: <KeybindSettings />
         },
@@ -33,8 +34,25 @@ const GameplaySettings: React.FC = () => {
                 processingLoad: "low",
                 description: <TranslateText content="settingsPage.gameplay.scrollSpeed.description" />
             },
-            input: <RangeInput min={0} max={20} step={0.1} value={gameConfig.gameplay.scrollSpeed} onChange={(value:number) => setGameConfig(config => { return { ...config, gameplay: { ...config.gameplay, scrollSpeed: value } } })} />
+            input: <RangeInput min={0} max={20} step={0.1} value={gameConfig.gameplay.scrollSpeed} onChange={(value: number) => setGameConfig(config => { return { ...config, gameplay: { ...config.gameplay, scrollSpeed: value } } })} />
+        },
+        {
+            details: {
+                title: <TranslateText content="settingsPage.gameplay.offset.name" />,
+                processingLoad: "none",
+                description: <TranslateText content="settingsPage.gameplay.offset.description" />
+            },
+            input: <NumberInput min={-2500} max={2500} step={1} value={gameConfig.gameplay.timing.offset} onChange={(value: number) => setGameConfig(config => { return { ...config, gameplay: { ...config.gameplay, timing: { ...config.gameplay.timing, offset: value } } } })} />
+        },
+        {
+            details: {
+                title: <TranslateText content="settingsPage.gameplay.judgeTiming.name" />,
+                processingLoad: "none",
+                description: <TranslateText content="settingsPage.gameplay.judgeTiming.description" />
+            },
+            input: <NumberInput min={-250} max={250} step={1} value={gameConfig.gameplay.timing.judge} onChange={(value: number) => setGameConfig(config => { return { ...config, gameplay: { ...config.gameplay, timing: { ...config.gameplay.timing, judge: value } } } })} />
         }
+
     ]
 
 

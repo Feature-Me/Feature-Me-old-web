@@ -12,6 +12,19 @@
 
 # パッチノート
 
+## 00059-beta(Version 0.5.6)
+Commit A:
+設定画面のディレクトリ変更
+MusicGameをMusicGame3dに変更
+
+Commit B:
+設定画面の説明が開業されるように変更
+NumberInputコンポーネント追加
+判定調整設定追加
+スタイル調整と一部アイコン等の変更
+アンチエイリアスが動作するようになりました
+
+
 ## 00058-beta(Version 0.5.6)
 Commit A:
 

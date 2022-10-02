@@ -30,7 +30,7 @@ const settingDetails: React.FC<{data:settingDetailsData}> = (props) => {
             <p>
                 {translate("settingsPage.details.processingLoad.name")} : <span className={processingLoad.className}>{translate(processingLoad.text)}</span>
             </p>
-            <p>{props.data.description}</p>
+            <p className={style.description}>{props.data.description}</p>
         </div>
     )
 }

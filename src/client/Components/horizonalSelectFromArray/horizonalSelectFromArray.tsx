@@ -1,5 +1,5 @@
 import React from "react";
-import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
+import { VscChevronLeft, VscChevronRight } from "react-icons/vsc";
 import style from "./horizonalSelectFromArray.scss";
 
 interface horizonalSelectPropsType extends propsType {
@@ -35,7 +35,7 @@ const HorizonalSelectFromArray: React.FC<horizonalSelectPropsType> = (props) =>{
     return(
         <div className={`${style.horizonalSelect} ${props.className || ""}`}>
             <div className={style.arrowBtn} onClick={()=>handleClick(-1)}>
-                <MdOutlineArrowBackIos />
+                <VscChevronLeft />
             </div>
             <div className={style.label}>
                 <span>{label}</span>
@@ -51,7 +51,7 @@ const HorizonalSelectFromArray: React.FC<horizonalSelectPropsType> = (props) =>{
                 </div>
             </div>
             <div className={style.arrowBtn} onClick={() => handleClick(1)}>
-                <MdOutlineArrowForwardIos />
+                <VscChevronRight />
             </div>
         </div>
     )

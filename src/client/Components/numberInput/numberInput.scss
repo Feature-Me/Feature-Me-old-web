@@ -1,0 +1,40 @@
+@import "../../Assets/mixin.scss";
+
+.numberinput_wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 40px) 1fr repeat(2, 40px);
+    grid-row: 1fr;
+    align-items: center;
+    height: 40px;
+
+    .icon {
+        border: 1px solid $borderColor;
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            border: 1px solid $accentColor;
+            transition: 0.2s;
+            color: $accentColor;
+        }
+    }
+
+    .number {
+        appearance: none;
+        -moz-appearance: textfield;
+        background-color: transparent;
+        color: whitesmoke;
+        text-align: center;
+        border: none;
+        height: 100%;
+        @include font-size;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            appearance: none;
+            margin: 0;
+        }
+    }
+}

@@ -55,6 +55,7 @@ function initLocalStorage(): void {
                         resolution: 0.7,
                         fps: 30,
                         postProcessing: {
+                            AALevel:0,
                             enabled: false,
                             antialias: "default",
                             ambientOcclusion: false,
@@ -67,8 +68,9 @@ function initLocalStorage(): void {
                         resolution: 1,
                         fps: 120,
                         postProcessing: {
+                            AALevel:0,
                             antialias: "default",
-                            enabled: false,
+                            enabled: true,
                             ambientOcclusion: false,
                             bloom: false,
                         }
@@ -123,7 +125,7 @@ function initLocalStorage(): void {
             }
             localStorage.setItem("musicSelect", JSON.stringify(musicSelect));
         }
-        if(fixedCount > 0) toast.success(<TranslateText contentData = { "resourcesManager.cache.notifications.fixed"} start = { fixedCount.toString() } />);
+        if(fixedCount > 0) toast.success(<TranslateText content = { "resourcesManager.cache.notifications.fixed"} start = { fixedCount.toString() } />);
     //toast.success(<TranslateText contentData={"resourcesManager.cache.notifications.fixed"} />);
 } catch (error) {
     console.error(error);
