@@ -7,15 +7,20 @@ import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { motion, useAnimation } from "framer-motion";
 import { Howl, Howler } from "howler";
 
-import style from "./musicGame.scss";
+import { SSAARenderPass } from "three/examples/jsm/postprocessing/SSAARenderPass"
+import { SMAAPass } from "three/examples/jsm/postprocessing/SMAAPass";
+import { TAARenderPass } from "three/examples/jsm/postprocessing/TAARenderPass";
 
-import MusicGameUI from "./UI/musicGameUI";
+import style from "./musicGame3d.scss";
+
+import MusicGameUI from "../UI/musicGameUI";
 
 import loadBehavior from "Utils/resourcesLoader/loadBehavior";
 import loadSoundEffect from "Utils/resourcesLoader/loadSoundEffect";
 import arrayBufferToBase64 from "Utils/ArrayBufferToBase64/ArrayBufferToBase64";
 import parseChart from "Features/parseChart/parseChart";
 import sleep from "Utils/sleep/sleep";
+
 import renderingStatus from "Utils/getRenderingStatus/renderingStatus";
 
 import gameConfigState from "State/gameConfig/gameConfig";
@@ -33,7 +38,7 @@ import easings from "Utils/easing/easing";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 
 
-const MusicGame: React.FC = () => {
+const MusicGame3D: React.FC = () => {
     const scenechange = useSeneChangeNavigation();
     const selectedMusic = useRecoilValue(musicSelectorState);
     const gameConfig = useRecoilValue(gameConfigState);
@@ -67,7 +72,7 @@ const MusicGame: React.FC = () => {
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 87.5)
     const composer = new EffectComposer(gameRenderer);
     let character: THREE.Object3D = new THREE.Object3D();
-    let gameRenderInterval:NodeJS.Timer;
+    let gameRenderInterval: NodeJS.Timer;
 
     let musicGameVariables: musicGameVariablesType = {
         activeRange: 250,
@@ -84,7 +89,7 @@ const MusicGame: React.FC = () => {
             elapsedTime: 0,
             gameTime: 0,
             judgeTime: 0,
-            totalTime:0
+            totalTime: 0
         }
     }
 
@@ -95,7 +100,7 @@ const MusicGame: React.FC = () => {
         volume: (gameConfig.audio.masterVolume * gameConfig.audio.musicVolume) || 1,
     });
 
-    let ResultNavigationInterval:NodeJS.Timeout;
+    let ResultNavigationInterval: NodeJS.Timeout;
 
     const getBehavior = React.useMemo(async () => {
 
@@ -128,7 +133,7 @@ const MusicGame: React.FC = () => {
     React.useEffect(() => {
         preparingGame();
         window.addEventListener("keydown", keyInput);
-        window.addEventListener("resize",resizeCanvas);
+        window.addEventListener("resize", resizeCanvas);
 
         document.title = `Play - ${selectedMusic.selectedName} - Feature Me`;
         return () => {
@@ -136,7 +141,7 @@ const MusicGame: React.FC = () => {
             clearInterval(gameRenderInterval);
             gameRenderer.dispose();
             window.removeEventListener("keydown", keyInput);
-            window.removeEventListener("resize",resizeCanvas);
+            window.removeEventListener("resize", resizeCanvas);
             musicAudio.stop();
             musicAudio.unload();
         }
@@ -161,8 +166,8 @@ const MusicGame: React.FC = () => {
     }
 
     //when resized window, resize canvas to fit window size
-    function resizeCanvas(){
-        gameRenderer.setSize(window.innerWidth,window.innerHeight)
+    function resizeCanvas() {
+        gameRenderer.setSize(window.innerWidth, window.innerHeight)
     }
 
     //accept behavior , load chart and play assist sound
@@ -203,16 +208,16 @@ const MusicGame: React.FC = () => {
                     return {
                         ...time,
                         totalTime: totalTime,
-                        startedTime:performance.now()
+                        startedTime: performance.now()
                     }
                 })
 
                 musicGameVariables.time.initialVoidTime = (((60 / chartData.metadata.initialBpm) * 1000) * 4)
                 musicGameVariables.time.startTime = performance.now() + (((60 / chartData.metadata.initialBpm) * 1000) * 4) + 3500 + chartData.metadata.offset;
                 musicGameVariables.ready = true;
-                ResultNavigationInterval = setInterval(()=>{
+                ResultNavigationInterval = setInterval(() => {
                     scenechange("../result");
-                },totalTime+musicGameVariables.time.initialVoidTime+2000);
+                }, totalTime + musicGameVariables.time.initialVoidTime + 2000);
 
                 await sleep(3500);
                 const sound = (await getBehavior).sound.sound.assist;
@@ -236,9 +241,11 @@ const MusicGame: React.FC = () => {
 
     //initialize game scene
     async function initRenderer() {
+        //light and game objects
         const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
         const directionalLight = new THREE.DirectionalLight(0xffffff, 7);
 
+        //renderer settings 
         gameRenderer.outputEncoding = THREE.sRGBEncoding;
         gameRenderer.physicallyCorrectLights = true;
         gameRenderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -257,14 +264,29 @@ const MusicGame: React.FC = () => {
 
         gameScene.add(ambientLight, directionalLight, notesContainer);
 
+        //post process
         const renderPass = new RenderPass(gameScene, camera);
         composer.addPass(renderPass);
+        let AAPass: SSAARenderPass | SMAAPass | undefined = undefined;
+        if (gameConfig.graphics.musicgame.postProcessing.enabled) {
+            if (gameConfig.graphics.musicgame.postProcessing.antialias == "SSAA") {
+                AAPass = new SSAARenderPass(gameScene, camera);
+                AAPass.sampleLevel = gameConfig.graphics.musicgame.postProcessing.AALevel;
+            }
+            if (gameConfig.graphics.musicgame.postProcessing.antialias == "SMAA") AAPass = new SMAAPass(window.innerWidth, window.innerHeight);
+            if (gameConfig.graphics.musicgame.postProcessing.antialias == "TAA") {
+                AAPass = new TAARenderPass(gameScene, camera, "black", 1)
+                AAPass.sampleLevel = gameConfig.graphics.musicgame.postProcessing.AALevel;
+            }
+            if (AAPass) composer.addPass(AAPass)
+        }
 
         await setGround();
         await setCharacter();
         gameRenderInterval = setInterval(render, (gameConfig.graphics.musicgame.fps || 120) / 1000)
     }
 
+    //ground
     async function setGround() {
         const groundGltf = (await getBehavior).model.models.ground;
         const gltf = await new GLTFLoader().loadFromArrayBufferAsync(groundGltf)
@@ -273,6 +295,8 @@ const MusicGame: React.FC = () => {
         model.receiveShadow = true;
         gameScene.add(model)
     }
+
+    //character
     async function setCharacter() {
         const characterGltf = (await getBehavior).model.models.character;
         const gltf = await new GLTFLoader().loadFromArrayBufferAsync(characterGltf);
@@ -300,7 +324,7 @@ const MusicGame: React.FC = () => {
         composer.render();
         updateGame();
     }
-    
+
     //update notes position
     function updateGame() {
         if (!musicGameVariables.ready) return;
@@ -338,12 +362,15 @@ const MusicGame: React.FC = () => {
         const judgeTime = musicGameVariables.time.judgeTime;
         const activeRange = musicGameVariables.activeRange;
 
+
         if (pos < 4) {
+            //find tap note and judge
             const note = musicGameVariables.activeNotes.find(note => note instanceof tapNote && note.lane == pos + 1 && Math.abs(note.time - judgeTime) < activeRange);
             console.log(note);
 
             if (note) managementJudge(note.judge(judgeTime));
         } else if (pos == 4) {
+            //bright note
             const note = musicGameVariables.activeNotes.find(note => note instanceof brightNote && Math.abs(note.time - judgeTime) < activeRange);
             if (note) managementJudge(note.judge(judgeTime));
         }
@@ -357,6 +384,8 @@ const MusicGame: React.FC = () => {
         else if (judge.judge == "moderate") score *= 0.5;
         else if (judge.judge == "lost") score = 0;
 
+
+        //update score and some values
         setMusicGameNotesJudge(noteJudge => {
             return {
                 ...noteJudge,
@@ -398,4 +427,4 @@ const MusicGame: React.FC = () => {
     )
 }
 
-export default MusicGame;
+export default MusicGame3D;
