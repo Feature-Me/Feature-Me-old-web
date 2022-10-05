@@ -1,5 +1,8 @@
 # Feature Me
-The new shape of Music Game.
+
+The new shape of Music Game from Music gamers.
+
+![image](./title_screen_shot.png)
 
 see here
 

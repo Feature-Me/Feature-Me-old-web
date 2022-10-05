@@ -31,7 +31,7 @@ function initDatabase() {
                 db.createObjectStore(databaseInfo.storyStore, { keyPath: "id" });
 
             if(!db.objectStoreNames.contains(databaseInfo.replayStore))
-                db.createObjectStore(databaseInfo.replayStore, { keyPath: "id", autoIncrement: true });
+                db.createObjectStore(databaseInfo.replayStore, { keyPath: "id",});
             
             if(!db.objectStoreNames.contains(databaseInfo.editorStore))
                 db.createObjectStore(databaseInfo.editorStore, { keyPath: "id"});
@@ -43,7 +43,7 @@ function initDatabase() {
             localStorage.setItem("DBVersion", JSON.stringify({ version: DBVersion, initialized: true, updated: Date.now() }));
         } catch (error) {
             console.error(error);
-            toast.error(`${<TranslateText contentData= { "resourcesManager.database.notifications.initializingFailed"} />} : ${ error } `);
+            toast.error(`${<TranslateText content= { "resourcesManager.database.notifications.initializingFailed"} />} : ${ error } `);
         }
     }
 }

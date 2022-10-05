@@ -1,29 +1,26 @@
 {
     "title": "Ours",
     "composer": "Goners",
-    "bpm":"80",
-    "time":{
-        "ms":99000,
-        "display": "01:39"
-    },
-    "demo":{
-        "start":60000,
-        "end":75000
+    "bpm": "80",
+    "time": 99000,
+    "demo": {
+        "start": 60000,
+        "end": 75000
     },
     "backgroundData": null,
     "backgroundType": "image",
-    "music":[
+    "music": [
         {
             "name": "Ours",
             "src": "Music/ours.mp3"
         }
     ],
-    "defaultMusic":"Ours",
+    "defaultMusic": "Ours",
     "license": "2021 Goners. All rights reserved.",
     "thumbnail": "Image/music.png",
-    "behavior":null,
-    "difficulties":[
-/*         {
+    "behavior": null,
+    "difficulties": [
+        /*         {
             "name": "memory",
             "level":3,
             "constant":0,
@@ -52,5 +49,4 @@
             "chartFile": "Chart/ozma.fmc"
         }
     ]
-
 }
