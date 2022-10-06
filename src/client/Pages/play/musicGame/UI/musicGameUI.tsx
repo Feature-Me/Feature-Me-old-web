@@ -5,8 +5,8 @@ import { match } from "ts-pattern";
 
 import arrayBufferToBase64 from "Utils/ArrayBufferToBase64/ArrayBufferToBase64";
 import gameConfigState from "State/gameConfig/gameConfig";
-import musicSelectorState from "State/musicSelector/musicSelectorState";
-import * as musicGame from "State/musicGame/musicGameState"
+import musicSelectorState from "State/play/musicSelector/musicSelectorState";
+import * as musicGame from "State/play/game/musicGame/musicGameState"
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 
 import Header from "Block/head/head";

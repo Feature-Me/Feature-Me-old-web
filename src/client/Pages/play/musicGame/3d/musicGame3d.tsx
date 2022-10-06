@@ -24,9 +24,9 @@ import sleep from "Utils/sleep/sleep";
 import renderingStatus from "Utils/getRenderingStatus/renderingStatus";
 
 import gameConfigState from "State/gameConfig/gameConfig";
-import musicSelectorState from "State/musicSelector/musicSelectorState";
+import musicSelectorState from "State/play/musicSelector/musicSelectorState";
 
-import * as musicGame from "State/musicGame/musicGameState"
+import * as musicGame from "State/play/game/musicGame/musicGameState"
 
 import version from "Config/versions.json";
 import { chartType } from "Features/parseChart/chartSample";
@@ -202,7 +202,7 @@ const MusicGame3D: React.FC = () => {
                         }
                     }
                 })
-                const totalTime = musicData.metadata.time.ms + (((60 / chartData.metadata.initialBpm) * 1000) * 4) + 1000;
+                const totalTime = musicData.metadata.time + (((60 / chartData.metadata.initialBpm) * 1000) * 4) + 1000;
                 musicGameVariables.time.totalTime = totalTime;
                 setMusicGameTime(time => {
                     return {

@@ -16,9 +16,9 @@ import compareVersions from "compare-versions";
 import arrayBufferToBase64 from "Utils/ArrayBufferToBase64/ArrayBufferToBase64";
 import getMime from "Utils/getMime/getMime";
 import databaseInfo from "Config/databaseinfo.json";
-import versions from  "Config/versions.json";
+import versions from "Config/versions.json";
 import backgroundNameState from "State/background/backgroundState";
-import gameConfigState from "State/gameConfig/gameConfig";
+import gameConfigState from "State/play/game/gameConfig/gameConfig";
 
 
 
@@ -27,10 +27,10 @@ import style from "./background.scss"
 const Background: React.FC<{ onload?: Function }> = (props) => {
     const backgroundCanvas = React.useRef<HTMLDivElement>(null);
     const backgroundImage = React.useRef<HTMLImageElement>(null);
-    const backgroundRenderer = React.useRef<THREE.WebGLRenderer|null>();
-    const backgroundScene = React.useRef<THREE.Scene|null>();
+    const backgroundRenderer = React.useRef<THREE.WebGLRenderer | null>();
+    const backgroundScene = React.useRef<THREE.Scene | null>();
     const backgroundState = useRecoilValue(backgroundNameState);
-    const backgroundCamera = React.useRef<THREE.PerspectiveCamera|null>();
+    const backgroundCamera = React.useRef<THREE.PerspectiveCamera | null>();
     const gameConfig = useRecoilValue(gameConfigState);
 
     const backgroundData = React.useMemo(async () => {
@@ -64,7 +64,7 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
                 }
                 model.onerror = (event) => {
                     console.log(event);
-                    
+
                     resolve();
                 }
             }
@@ -103,7 +103,7 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
         renderer.setPixelRatio(gameConfig.graphics.background.resolution || 0.7);
 
         if (backgroundCanvas.current) backgroundCanvas.current.appendChild(renderer.domElement);
-        
+
 
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
         camera.position.set(0, 3, 25);
@@ -119,7 +119,7 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
         scene.add(directionalLight);
 
         console.log(background.data);
-        
+
 
         const gltf = await new GLTFLoader().loadFromArrayBufferAsync(
             background.data
@@ -127,7 +127,7 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
         const model = gltf.scene;
         model.matrixAutoUpdate = false;
         model.position.set(0, 0, 0);
-        scene.add(model); 
+        scene.add(model);
 
         const sky = new Sky();
         const sun = new THREE.Vector3();
@@ -169,11 +169,11 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
         render();
 
 
-        function resizeRenderer(){
+        function resizeRenderer() {
             camera.aspect = window.innerWidth / window.innerHeight;
             renderer.setSize(window.innerWidth, window.innerHeight);
         }
-        function mousemove(e:any){
+        function mousemove(e: any) {
             const mouse = [e.clientX, e.clientY];
             const diff = [-(mouse[0] - window.innerWidth / 2), -(mouse[1] - window.innerHeight / 2)];
             camera.rotation.set(diff[1] * 0.0001, diff[0] * 0.0001, 0);
@@ -187,28 +187,28 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
     }
 
     React.useEffect(() => {
-        if(!backgroundState.showed) return;
-        if(backgroundState.renderer=="2D" && backgroundRenderer.current) disposeRenderer();
-        if(backgroundImage.current){
-            (async ()=> {
-                const background =(await backgroundData).alt
-                
-                if(backgroundImage.current)
+        if (!backgroundState.showed) return;
+        if (backgroundState.renderer == "2D" && backgroundRenderer.current) disposeRenderer();
+        if (backgroundImage.current) {
+            (async () => {
+                const background = (await backgroundData).alt
+
+                if (backgroundImage.current)
                     backgroundImage.current.src = background ? `data:${background.mime};base64,` + arrayBufferToBase64(background.data) : "data:image/png;base64," + new ArrayBuffer(0)
             })();
         }
-        if(backgroundState.renderer=="3D" && backgroundCanvas.current && !backgroundRenderer.current) {
+        if (backgroundState.renderer == "3D" && backgroundCanvas.current && !backgroundRenderer.current) {
             renderBackground();
         }
-    },[backgroundState]);
+    }, [backgroundState]);
 
 
     return (
         <div className={style.backgroundvanvas}>
-            <img src={""} alt="" ref={backgroundImage}  className={style.backgroundimg}/>
+            <img src={""} alt="" ref={backgroundImage} className={style.backgroundimg} />
             <div ref={backgroundCanvas} className={style.renderer} />
         </div>
-        )
+    )
 }
 
 export default Background;

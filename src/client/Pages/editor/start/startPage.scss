@@ -7,7 +7,8 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 48px 1fr;
-    *{
+
+    * {
         min-width: 0px;
         min-height: 0px;
     }
@@ -41,6 +42,27 @@
         .contentWrapper {
             overflow-x: hidden;
             overflow-y: scroll;
+        }
+    }
+
+    .projectCard {
+        height: 128px;
+        width: 75%;
+        margin: 8px;
+        padding: 8px;
+        border: 1px solid $borderColor;
+        background-color: $backgroundSubColor;
+        transition: 0.2s;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 26px 48px 36px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:hover {
+            border-color: $accentColor;
+            background-color: $inputBackgroundColor;
         }
     }
 

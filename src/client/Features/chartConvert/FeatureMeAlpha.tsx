@@ -1,6 +1,6 @@
-import { chartBrightNote, chartSeedNote, chartTapNote} from "Features/parseChart/chartSample";
+import { chartBrightNote, chartJsonType, chartSeedNote, chartTapNote} from "Features/parseChart/chartSample";
 import json5 from "json5"
-import { alphaChartType, chartJsonFromAlpha, chartNoteFromAlpha } from "Types/features/chartConvert/FeatureMeAlpha";
+import { alphaChartType, alphaNote, chartJsonFromAlpha, chartNoteFromAlpha } from "Types/features/chartConvert/FeatureMeAlpha";
 
 
 function convertAlphaChart(convertType: boolean, chart: string): string {
@@ -14,27 +14,16 @@ function convertAlphaChart(convertType: boolean, chart: string): string {
 
 //alpha json to fm json(fmc)
 function FMAlphaToFM(chart: string): string {
-    console.log(chart);
-    
-    const alphaChart:alphaChartType = json5.parse(chart);
-    const newChart: chartJsonFromAlpha = {
-        metadata: {
-            offset: alphaChart.offset || 0,
-            initialBpm:alphaChart.BPM
-        },
-        notes: [] ,
-        effects: []
-    };
     let chartString:string = "";
 
-    function getType (track:number):"tap"|"bright"|"seed" {
+    function getType (track:alphaNote["track"]):"tap"|"bright"|"seed" {
         if(track<4) return "tap";
         if(track==4)return "bright";
         else return "seed"
     }
 
-    function getLane(track: number): chartNoteFromAlpha["lane"]{
-        if (track < 4) return track+1 as 1|2|3|4|5|6;
+    function getLane(track: alphaNote["track"]): chartNoteFromAlpha["lane"]{
+        if (track < 4) return track+1 as 1|2|3|4;
         else if (track == 4) return undefined;
         else if(track == 5) return "left";
         else if(track==6) return "right";
@@ -42,6 +31,15 @@ function FMAlphaToFM(chart: string): string {
     }
 
     try {
+        const alphaChart: alphaChartType = json5.parse(chart);
+        const newChart: chartJsonFromAlpha = {
+            metadata: {
+                offset: alphaChart.offset || 0,
+                initialBpm: alphaChart.BPM
+            },
+            notes: [],
+            effects: []
+        };
         for (const note of alphaChart.notes) {
             const newNotetype = getType(note.track)
             const newNote:chartNoteFromAlpha = {
@@ -64,7 +62,38 @@ function FMAlphaToFM(chart: string): string {
 
 //fm json(fmc) to alpha json
 function FMToFMAlpha(chart: string): string {
-    return ""
+    let chartString:string = "";
+
+    function convertNoteType(note: chartTapNote | chartBrightNote | chartSeedNote):alphaNote["track"]{
+        if(note.type=="tap") return note.lane-1 as 0|1|2|3;
+        if(note.type=="bright") return 4;
+        else return (note.lane=="left"?5:6)
+    }
+    try {
+        const FMChart: chartJsonType = json5.parse(chart);
+        const AlphaChart: alphaChartType = {
+            BPM:FMChart.metadata.initialBpm,
+            offset:FMChart.metadata.offset,
+            notes:[]
+        }
+
+        for (const note of FMChart.notes) {
+            if(note.type=="tap"||note.type=="bright"||note.type=="seed"){
+                const pos = convertNoteType(note)
+                const alphaNote:alphaNote = {
+                    track: pos,
+                    count: note.time/500
+                }
+                AlphaChart.notes.push(alphaNote)
+            }
+        }
+        chartString = json5.stringify(AlphaChart,null,4);
+
+    } catch (error) {
+        console.log(error);
+        if (error instanceof Error) throw error
+    }
+    return chartString
 }
 
 export default convertAlphaChart;

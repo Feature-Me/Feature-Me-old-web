@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import * as musicGame from "State/musicGame/musicGameState";
-import musicSelectorState from "State/musicSelector/musicSelectorState";
+import * as musicGame from "State/play/game/musicGame/musicGameState";
+import musicSelectorState from "State/play/musicSelector/musicSelectorState";
 import { musicGameModeType } from "Types/State/musicGameStateType";
 
 const SoloRelay: React.FC = () => {
@@ -19,7 +19,7 @@ const SoloRelay: React.FC = () => {
     const setMusicGameTime = useSetRecoilState(musicGame.musicGameTimeState);
 
     React.useEffect(() => {
-        
+
         setMusicGameValue(musicGame.defaultMusicGameValue);
         setMusicGameNotesJudge(musicGame.defaultMusicGameNotesJudge);
         setMusicGamePrediction(musicGame.defaultMusicGamePrediction);
@@ -38,10 +38,10 @@ const SoloRelay: React.FC = () => {
             }
         }) */
 
-        setMusicGameMode(game=>{
-            return{
+        setMusicGameMode(game => {
+            return {
                 ...game,
-                mode:"solo",
+                mode: "solo",
                 difficulty: params["diff"] as musicGameModeType["difficulty"]
             }
         })

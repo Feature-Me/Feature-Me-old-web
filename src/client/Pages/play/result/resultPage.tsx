@@ -2,8 +2,8 @@ import Header from "Block/head/head";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { musicGameModeState, musicGameValueState } from "State/musicGame/musicGameState";
-import musicSelectorState from "State/musicSelector/musicSelectorState";
+import { musicGameModeState, musicGameValueState } from "State/play/game/musicGame/musicGameState";
+import musicSelectorState from "State/play/musicSelector/musicSelectorState";
 
 import style from "./resultPage.scss";
 
@@ -15,9 +15,9 @@ const ResultPage: React.FC = () => {
     const musicData = selectedMusic.selectedData as MusicAssetContents;
     const chartMetaData = musicData.metadata.difficulties.find(diff => diff.name == musicGameMode.difficulty)
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         document.title = `Result ${selectedMusic.selectedName} - Feature Me`;
-    },[])
+    }, [])
 
     return (
         <div className={style.resultPage}>

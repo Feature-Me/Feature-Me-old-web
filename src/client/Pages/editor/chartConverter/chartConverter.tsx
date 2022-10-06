@@ -12,6 +12,8 @@ import { useTranslation } from "react-i18next";
 import TranslateText from "Components/TranslateText/TranslateText";
 import SelectBox from "Components/SelectBox/selectBox";
 import convertAlphaChart from "Features/chartConvert/FeatureMeAlpha";
+import { useRecoilState } from "recoil";
+import chartConverterState from "State/editor/chartConverterState";
 
 const ChartConverter: React.FC = () => {
     const [translate, i18n] = useTranslation()
@@ -22,6 +24,7 @@ const ChartConverter: React.FC = () => {
     const [convertType, setConvertType] = React.useState<string>("");
     const [convertDirection, setConvertDirection] = React.useState<boolean>(true);
     const [resultText, setResultText] = React.useState<string>("");
+    const [chartConvert, setChartConvert] = useRecoilState(chartConverterState)
 
     const directionSelect: selectContentsArray<boolean> = [
         { label: "Others → Feature Me", value: true },
@@ -36,13 +39,17 @@ const ChartConverter: React.FC = () => {
     ]
 
     const convertFunctions = [
-        {name:"FMAlphaJson",exec:convertAlphaChart}
+        { name: "FMAlphaJson", exec: convertAlphaChart }
     ]
 
     React.useEffect(() => {
-        setConvertType(convertTypeSelect[0].value);
-        setConvertDirection(directionSelect[0].value);
-
+        setChartConvert(convert => {
+            return {
+                ...convert,
+                convertType: convertTypeSelect[0].value,
+                convertDirection: directionSelect[0].value
+            }
+        })
         document.title = `Convert Chart - Feature Me`;
     }, [])
 
@@ -50,26 +57,38 @@ const ChartConverter: React.FC = () => {
         if (!inputFileRef.current) return;
         const file = inputFileRef.current.files?.item(0);
         if (!file) return;
-        if (file.name) setInputFileName(file.name);
+        if (file.name) {
+            setChartConvert(convert => {
+                return {
+                    ...convert,
+                    inputFileName: file.name
+                }
+            })
+        }
         file.text().then(str => setChartText(str))
     }
 
     function convert() {
-        console.log("convert");
 
         if (!chartText) return;
-
+        let resultString:string = "";
         try {
-            const chart = convertFunctions.find(f=>f.name==convertType)?.exec(convertDirection, chartText)
-            if(!chart) throw new Error("cant exec convert: unsolved function.")
-            setResultText(chart)
+            const chart = convertFunctions.find(f => f.name == chartConvert.convertType)?.exec(convertDirection, chartText)
+            if (!chart) throw new Error("cant exec convert: unsolved function.")
+            resultString = chart
         } catch (error) {
             console.log(error);
-            setResultText(String(error));
+             resultString = String(error);
         }
+        setChartConvert(convert=>{
+            return{
+                ...convert,
+                resultText:resultString
+            }
+        })
     }
 
-    function copyChart(){
+    function copyChart() {
         if (navigator.clipboard) {
             navigator.clipboard.writeText(resultText)
         }

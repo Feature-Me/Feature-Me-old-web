@@ -14,6 +14,14 @@
 
 # パッチノート
 
+## 00061-Beta(Version 0.5.6)
+Commit A:
+Stateファイルのディレクトリ変更
+CSS調整
+ファイル移動に伴う変更など
+newProjectRouter newProjectコンポーネントを廃止。Utilsへ移動。
+Utilsのリネーム
+
 ## 00060-beta(Version 0.5.6)
 Utilsの変更
 
