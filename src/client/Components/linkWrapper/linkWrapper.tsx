@@ -4,12 +4,18 @@ import { useRecoilState } from "recoil";
 
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 
+interface linkWrapperPropsType {
+    children?: React.ReactNode,
+    to: string,
+    className?: string,
+    state?:any;
+}
 
-const LinkWrapper: React.FC<{children?:React.ReactNode,to:string,className?:string}> = (props): JSX.Element => {
+const LinkWrapper: React.FC<linkWrapperPropsType> = (props): JSX.Element => {
     const navigate = useSeneChangeNavigation();
 
     function handleClick(e: React.MouseEvent<HTMLDivElement>): void {
-        navigate(props.to);
+        navigate(props.to,{state:props.state});
     }
 
     return (

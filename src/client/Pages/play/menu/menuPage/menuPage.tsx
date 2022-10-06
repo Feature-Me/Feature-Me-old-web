@@ -23,8 +23,8 @@ const MenuPage: React.FC = () => {
         { content: "menu.story", to: "../story" },
         { content: "menu.collection", to: "../collection" },
         { content: "menu.settings", to: "../settings" },
-        {content:"menu.about",to:"../about"},
-        {content:"menu.viewbg",to:"../background"}
+        { content: "menu.about", to: "../about" },
+        { content: "menu.viewbg", to: "../background" }
 
 
     ]
@@ -41,9 +41,9 @@ const MenuPage: React.FC = () => {
             <Header title="Home" backFunc={() => sceneChangeNavigation("/")} />
             <div className={style.menu}>
                 {
-                    menu.map((menu,index)=>{
-                        const direction = index%2==0?"left":"right";
-                        return(
+                    menu.map((menu, index) => {
+                        const direction = index % 2 == 0 ? "left" : "right";
+                        return (
                             <LinkWrapper to={menu.to} key={index}>
                                 <div className={style[direction]}>
                                     <TranslateText content={menu.content} />

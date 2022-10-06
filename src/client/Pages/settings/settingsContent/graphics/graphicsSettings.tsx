@@ -30,21 +30,21 @@ const GraphicsSettings: React.FC = () => {
     ]
 
     //Anti-Aliasing type
-    const AAType:Array<selectContents> = [
-        {label:"Disabled",value:false},
-        {label:"System",value:"default"},
-        {label:"SSAA",value:"SSAA"},
-        {label:"SMAA",value:"SMAA"},
-        {label:"TAA",value:"TAA"}
+    const AAType: Array<selectContents> = [
+        { label: "Disabled", value: false },
+        { label: "System", value: "default" },
+        { label: "SSAA", value: "SSAA" },
+        { label: "SMAA", value: "SMAA" },
+        { label: "TAA", value: "TAA" }
     ]
     //AA subpixel
     const AASampling: Array<selectContents> = [
-        {label:"1X",value:0},
-        {label:"2X",value:1},
-        {label:"4X",value:2},
-        {label:"8X",value:3},
-        {label:"16X",value:4},
-        {label:"32X",value:5}
+        { label: "1X", value: 0 },
+        { label: "2X", value: 1 },
+        { label: "4X", value: 2 },
+        { label: "8X", value: 3 },
+        { label: "16X", value: 4 },
+        { label: "32X", value: 5 }
     ]
 
     const settings: Array<{ details: settingDetailsData, input: React.ReactNode }> = [
@@ -62,7 +62,7 @@ const GraphicsSettings: React.FC = () => {
                 processingLoad: "medium",
                 description: <TranslateText content="settingsPage.graphics.gameAntiAliasing.description" />
             },
-            input: <HorizonalSelectFromArray contents={AAType} value={AAType.find(c => c.value == gameConfig.graphics.musicgame.postProcessing.antialias) || AAType[0]} onChange={(value: selectContents) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, musicgame: { ...gameConfig.graphics.musicgame, postProcessing:{...gameConfig.graphics.musicgame.postProcessing,antialias:value.value as AntiAliasType}} } } })} />
+            input: <HorizonalSelectFromArray contents={AAType} value={AAType.find(c => c.value == gameConfig.graphics.musicgame.postProcessing.antialias) || AAType[0]} onChange={(value: selectContents) => setGameConfig(config => { return { ...config, graphics: { ...config.graphics, musicgame: { ...gameConfig.graphics.musicgame, postProcessing: { ...gameConfig.graphics.musicgame.postProcessing, antialias: value.value as AntiAliasType } } } } })} />
         },
         {
             details: {

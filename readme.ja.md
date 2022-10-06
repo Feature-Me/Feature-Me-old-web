@@ -16,11 +16,24 @@
 
 ## 00061-Beta(Version 0.5.6)
 Commit A:
+
 Stateファイルのディレクトリ変更
+
 CSS調整
+
 ファイル移動に伴う変更など
+
 newProjectRouter newProjectコンポーネントを廃止。Utilsへ移動。
+
 Utilsのリネーム
+
+選曲画面での楽曲の長さを表示するロジックを変更
+
+コード整形
+
+Commit B:
+コード整形
+Typesの更新
 
 ## 00060-beta(Version 0.5.6)
 Utilsの変更

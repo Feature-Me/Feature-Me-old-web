@@ -1,7 +1,7 @@
 import { chartBrightNote, chartJsonType, chartSeedNote, chartTapNote } from "Features/parseChart/chartSample"
 
 interface alphaNote {
-    track: 1|2|3|4|5|6
+    track: 0|1|2|3|4|5|6
     count:number
     speed?:{
         type:"absolute"|"relative"|"fixed"

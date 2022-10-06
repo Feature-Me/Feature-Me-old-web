@@ -23,7 +23,7 @@ const AudioSettings: React.FC = () => {
                 processingLoad: "none",
                 description: <TranslateText content="settingsPage.audio.masterVolume.description" />
             },
-            input: <RangeInput min={0} max={1} step={0.01} value={gameConfig.audio.masterVolume} onChange={(value: number) => setGameConfig(config => { return { ...config, audio: { ...config.audio,masterVolume:value } } })} />
+            input: <RangeInput min={0} max={1} step={0.01} value={gameConfig.audio.masterVolume} onChange={(value: number) => setGameConfig(config => { return { ...config, audio: { ...config.audio, masterVolume: value } } })} />
         },
         {
             details: {

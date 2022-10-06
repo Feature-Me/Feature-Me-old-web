@@ -10,9 +10,9 @@ import SettingDetails, { settingDetailsData } from "../detailsPane/settingDetail
 import style from "../settingsContent.scss"
 
 const GeneralSettings: React.FC = () => {
-    const [translate,i18n] = useTranslation();
+    const [translate, i18n] = useTranslation();
     const [gameConfig, setGameConfig] = useRecoilState(gameConfigState);
-    const [settingDetailsData,setiSettingDetailsData] = React.useState<settingDetailsData>({ title: "", processingLoad: "none", description: "" });
+    const [settingDetailsData, setiSettingDetailsData] = React.useState<settingDetailsData>({ title: "", processingLoad: "none", description: "" });
     const settingListRef = React.useRef<HTMLDivElement>(null);
     const selectLanguageOptions = [
         { value: "en_us", label: "English(EN-US)" },
@@ -21,7 +21,7 @@ const GeneralSettings: React.FC = () => {
         { value: "zh_cn", label: "简体中文(ZH-CN)" },
     ];
 
-    const settings:Array<{details:settingDetailsData,input:React.ReactNode}> = [
+    const settings: Array<{ details: settingDetailsData, input: React.ReactNode }> = [
         {
             details: {
                 title: <TranslateText content="settingsPage.general.language.name" />,
@@ -37,7 +37,7 @@ const GeneralSettings: React.FC = () => {
                 description: <TranslateText content="settingsPage.general.benchmark.description" />
             },
             input: <ChamferedButton>{translate("settingsPage.general.benchmark.button")}</ChamferedButton>
-        },{
+        }, {
             details: {
                 title: <TranslateText content="settingsPage.general.terms.name" />,
                 processingLoad: "none",
@@ -56,7 +56,7 @@ const GeneralSettings: React.FC = () => {
     ]
 
 
-    return(
+    return (
         <div className={style.settings_content_wrapper}>
             <h1>{translate("settingsPage.general.title")}</h1>
             <div className={style.content}>
@@ -64,14 +64,14 @@ const GeneralSettings: React.FC = () => {
                     {settings.map((setting, index) => {
                         const details = { ...setting.details };
                         return (
-                            <div className={style.list_item} key={index} onMouseOver={()=>setiSettingDetailsData(details)}>
+                            <div className={style.list_item} key={index} onMouseOver={() => setiSettingDetailsData(details)}>
                                 <h4>{setting.details.title}</h4>
                                 {setting.input}
                             </div>
                         )
                     })}
                 </div>
-                
+
                 <div className={style.details}>
                     <SettingDetails data={settingDetailsData} />
                 </div>

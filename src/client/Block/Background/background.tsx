@@ -18,7 +18,7 @@ import getMime from "Utils/getMime/getMime";
 import databaseInfo from "Config/databaseinfo.json";
 import versions from "Config/versions.json";
 import backgroundNameState from "State/background/backgroundState";
-import gameConfigState from "State/play/game/gameConfig/gameConfig";
+import gameConfigState from "State/gameConfig/gameConfig";
 
 
 
