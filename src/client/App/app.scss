@@ -12,7 +12,11 @@
     src: url("../Assets/Fonts/NOTOSANSJP-REGULAR.OTF");
 }
 @font-face {
-    font-family: "Appli Mincho";
+    font-family: "Noto Sans JP Bold";
+    src: url("../Assets/Fonts/NotoSansJP-Black.otf");
+}
+@font-face {
+    font-family: "AppliMincho";
     src: url("../Assets/Fonts/appliMincho.otf");
 }
 @font-face {
@@ -33,6 +37,7 @@ body {
     color: whitesmoke;
     @include font-body;
     user-select: none;
+    @include font-size;
     scroll-behavior: smooth;
     cursor: url("../Assets/Images/pointer.cur"), default;
     form,select,input,textarea,button,label{
@@ -45,17 +50,24 @@ body {
 
 .app {
     height: 100vh;
+    width: 100vw;
+    position: relative;
 }
+
+
 a{
     text-decoration: none;
     color: whitesmoke;
     cursor: url("../Assets/Images/pointer.cur"), default;
 }
 
+
 *{
     box-sizing: border-box;
 }
-
+h1,h2,h3,h4,h5,h6,p {
+    margin: 0;
+}
 
 
 ::-webkit-scrollbar {

@@ -10,9 +10,10 @@ import ChamferedButton from "Components/Button/chamferedButton/chamferedButton";
 
 import arrayBufferToBase64 from "Utils/ArrayBufferToBase64/ArrayBufferToBase64";
 import databaseInfo from "Config/databaseInfo.json";
-import musicSelectorState from "State/musicSelector/musicSelectorState";
+import musicSelectorState from "State/play/musicSelector/musicSelectorState";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 import gameConfigState from "State/gameConfig/gameConfig";
+import msToStringTime from "Utils/msToStringTime/msToStringTime";
 
 const MusicDetails: React.FC = () => {
     const scenechange = useSeneChangeNavigation();
@@ -26,7 +27,7 @@ const MusicDetails: React.FC = () => {
     let data = musicSelector.selectedData as MusicAssetContents;
     let audio: Howl;
 
-    
+
 
     const imageAnimation = {
         opacity: 1,
@@ -48,10 +49,10 @@ const MusicDetails: React.FC = () => {
 
     React.useEffect(() => {
         if (data?.metadata?.title != musicSelector.selectedName) return;
-        if (!imageRef.current||!selectionsRef) return;
+        if (!imageRef.current || !selectionsRef) return;
 
         let fadeOutTimeout: NodeJS.Timeout;
-        let musicTimeout:NodeJS.Timeout;
+        let musicTimeout: NodeJS.Timeout;
 
         animationController.start(imageAnimation);
         imageRef.current.style.backgroundImage = `url(data:${data.metadata.thumbnail.mime || "image/png"};base64,${arrayBufferToBase64(data.metadata.thumbnail.data)})`;
@@ -59,14 +60,14 @@ const MusicDetails: React.FC = () => {
 
         if (location.pathname.includes("solo")) selectionsRef.current!.querySelector<HTMLDivElement>(`.${style.multi}`)!.style.display = "none";
         else selectionsRef.current!.querySelector<HTMLDivElement>(`.${style.solo}`)!.style.display = "none";
-        
+
 
         const sound = data.music.find(audio => audio.name == data.metadata.selectedMusic) || data.music[0];
         const audioUri = `data:${sound.mime || "audio/mp3"};base64,${arrayBufferToBase64(sound.data)}`;
         audio = new Howl({
             src: [audioUri],
             loop: true,
-            volume: (gameConfig.audio.masterVolume * gameConfig.audio.musicVolume) ,
+            volume: (gameConfig.audio.masterVolume * gameConfig.audio.musicVolume),
             sprite: {
                 music: [data.metadata.demo.start - 3000, data.metadata.demo.end + 3000]
             }
@@ -113,6 +114,8 @@ const MusicDetails: React.FC = () => {
 
     }
 
+
+
     if (data?.metadata?.title != musicSelector.selectedName) return <></>;
 
 
@@ -122,14 +125,14 @@ const MusicDetails: React.FC = () => {
             <div className={style.details}>
                 <h1>{data.metadata.title}</h1>
                 <h2>{data.metadata.composer}</h2>
-                <p>BPM:{data.metadata.bpm} , Time:{data.metadata.time.display} , <span className={style.license}>{data.metadata.license}</span></p>
+                <p>BPM:{data.metadata.bpm} , Time:{msToStringTime(data.metadata.time)} , <span className={style.license}>{data.metadata.license}</span></p>
                 <motion.div className={style.image} ref={imageRef} animate={animationController} initial={{ "--rotateZ": "-10deg" } as any} style={{ transform: "rotateZ(var(--rotateZ))" }}>
                     {/* <img src={"data:image/png;base64," + arrayBufferToBase64(data.metadata.thumbnail)} alt="" height={512} width={512}/> */}
                 </motion.div>
                 <div className={style.selections} ref={selectionsRef}>
                     <div className={style.solo}>
                         <ChamferedButton onClick={() => { setShowWindow(!showWindow) }}>Change Music</ ChamferedButton>
-                        <ChamferedButton onClick={()=> { scenechange("../relay/memory")}} className={`${style.diffbtn} ${style.memory} ${!(difficulties?.memory) ? style.disabled : ""}`}>Memory {(difficulties?.memory) || "-"}</ChamferedButton>
+                        <ChamferedButton onClick={() => { scenechange("../relay/memory") }} className={`${style.diffbtn} ${style.memory} ${!(difficulties?.memory) ? style.disabled : ""}`}>Memory {(difficulties?.memory) || "-"}</ChamferedButton>
                         <ChamferedButton onClick={() => { scenechange("../relay/advance") }} className={`${style.diffbtn} ${style.advance} ${!(difficulties?.advance) ? style.disabled : ""}`}>Advance {(difficulties?.advance) || "-"}</ChamferedButton>
                         <ChamferedButton onClick={() => { scenechange("../relay/prospects") }} className={`${style.diffbtn} ${style.prospects} ${!(difficulties?.prospects) ? style.disabled : ""}`}>Prospects {(difficulties?.prospects) || "-"}</ChamferedButton>
                         <ChamferedButton onClick={() => { scenechange("../relay/ozma") }} className={`${style.diffbtn} ${style.ozma} ${!(difficulties?.ozma) ? style.disabled : ""}`}>Ozma {(difficulties?.ozma) || "-"}</ChamferedButton>
@@ -140,15 +143,15 @@ const MusicDetails: React.FC = () => {
                 </div>
             </div>
             <Window title="Select Music" showed={showWindow} setShowed={setShowWindow} >
-                    {data.music.map((audio, index) => {
-                        const flag = data.metadata.selectedMusic == audio.name;
-                        return (
-                            <div style={{backgroundColor:flag?"#1189da":"transparent"}} key={index} onClick={(e) => setMusic(audio.name)}>
-                                    {audio.name}
-                            </div>
-                        )
-                    }
-                    )}
+                {data.music.map((audio, index) => {
+                    const flag = data.metadata.selectedMusic == audio.name;
+                    return (
+                        <div style={{ backgroundColor: flag ? "#1189da" : "transparent" }} key={index} onClick={(e) => setMusic(audio.name)}>
+                            {audio.name}
+                        </div>
+                    )
+                }
+                )}
             </Window>
         </div>
     )

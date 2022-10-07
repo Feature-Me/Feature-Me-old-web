@@ -8,11 +8,11 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 
-import version from "../../../Config/versions.json";
+import version from "Config/versions.json";
 
-import { settingsWindowAtomState } from "../../../State/window/windowState";
+import { settingsWindowAtomState } from "State/window/windowState";
 import sceneChangerState from "State/sceneChanger/sceneChangerstate";
-import fetchResourcesUpdate from "../../../Utils/fetchUpdate/fetchResourcesUpdate";
+import fetchResourcesUpdate from "Utils/fetchUpdate/fetchResourcesUpdate";
 import backgroundState from "State/background/backgroundState";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 import TranslateText from "Components/TranslateText/TranslateText";
@@ -102,7 +102,7 @@ const TitleText: React.FC = () => {
                 </div>
             </div>
             <div className={style.footer}>
-                <p>Feature Me {version.version} - {version.build} <br /> Mksk and Rae The Feature Me Project  ©2022 Feature Me All rights reserved.
+                <p>Feature Me {version.version} - {version.build} <br /> Mksk and Rae The Feature Me Project  ©{new Date().getFullYear()} Feature Me All rights reserved.
                 </p>
                 <div className={style.setlang}>
                     <TranslateText content="title.language" />
@@ -114,12 +114,5 @@ const TitleText: React.FC = () => {
         </motion.div>
     )
 }
-
-function renderBackground(onload?: Function): void {
-    /*     const containerRef = gameData.background.renderer.container;
-        
-        if(gameData.background.renderer.engine == null) createRoot(containerRef.current).render(<Background onload={onload||null}/>); */
-}
-
 
 export default TitleText;

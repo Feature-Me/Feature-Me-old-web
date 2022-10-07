@@ -6,7 +6,7 @@ import style from './selectbox.scss';
 interface selectBoxPropsType extends propsType {
     contents: Array<selectContents>,
     onChange?: FunctionWithTypedProps<selectContents>
-    value: inputContents
+    value: selectContents
 }
 
 interface selectBoxSelectorPropsType {

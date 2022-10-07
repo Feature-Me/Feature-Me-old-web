@@ -2,10 +2,7 @@
     "title": "Feat you.",
     "composer": "Rae",
     "bpm": "120",
-    "time": {
-        "ms": 95000,
-        "display": "01:35"
-    },
+    "time": 95000,
     "demo": {
         "start":56500,
         "end":79000

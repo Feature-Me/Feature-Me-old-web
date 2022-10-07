@@ -3,13 +3,22 @@
     -webkit-backdrop-filter: blur($amount);
 }
 
-@mixin font-header {
+@mixin font-title {
     font-family: "Julius Sans One", "Noto Sans JP", "Noto Sans chinese", sans-serif;
+    font-weight: bold;
+}
+
+@mixin font-header {
+    font-family: "Noto Sans JP Bold", "Noto Sans chinese", sans-serif;
     font-weight: bold;
 }
 
 @mixin font-body {
     font-family: "IBM Plex Sans JP", "Noto Sans Chinese", sans-serif;
+}
+
+@mixin font-serif {
+    font-family: "appliMincho",serif;    
 }
 
 @mixin no-support-background-blur($color) {
@@ -18,10 +27,19 @@
     }
 }
 
+@mixin blur-background{
+    background-color: $transparent-bg;
+    @include blur(16px);
+}
+
+@mixin font-size {
+    font-size: $fontSize;
+}
+
 @mixin small-device-font {
     @media screen and (max-height: 540px) {
-        font-size: 14px;
-        line-height: 14px;
+        font-size: $smallFontSize;
+        line-height: $smallLineHeight;
     }
 }
 
@@ -51,6 +69,7 @@ $pageBackgroundColor:#14141e;
 $inputBackgroundColor: #414040;
 $inputForegroundColor:#36393f;
 $backgroundSubColor:#25282c;
+$transparent-bg:rgb(7,8,14,0.75);
 $black:rgb(7,8,14);
 $accentColor: #1189da;
 $clickedAccentColor :#116fda;
@@ -58,6 +77,12 @@ $textColor: #f5f5f5;
 $secondaryText: #a0a0a0;
 $blackTextColor:#080e14;
 $borderColor: #f5f5f5;
+$red:rgb(202, 28, 28);
+$redSecondary:#ca1c1c;
+
+$fontSize:16px;
+$smallFontSize:14px;
+$smallLineHeight:14px;
 
 $memory:rgb(139, 221, 17);
 $advance:rgb(226, 195, 21);

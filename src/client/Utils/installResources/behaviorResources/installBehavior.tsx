@@ -19,7 +19,7 @@ import { installSoundEffect } from "./installSoundEffect";
 function installBehavior(zip: JSZip) {
     return new Promise<void | Error>(async (resolve, reject) => {
         if (!zip.file("FileMap.json")) {
-            toast.error(<TranslateText contentData={"resourcesManager.database.notifications.installFailed"} />);
+            toast.error(<TranslateText content={"resourcesManager.database.notifications.installFailed"} />);
             resolve(new Error("FileMap.json not found"));
         }
 
@@ -86,13 +86,15 @@ function installBehavior(zip: JSZip) {
             const db = dbOpenRequest.result;
             const ModelStore = db.transaction(databaseInfo.behaviorStore, "readwrite").objectStore(databaseInfo.behaviorStore);
 
-            const put = ModelStore.put({
+            const behavior = {
                 name: fileMapJsonData.name,
                 models: data,
                 soundEffect: soundEffectName || "",
                 font: fontName || "",
                 type: "3d"
-            });
+            }
+
+            const put = ModelStore.put(behavior);
             put.onsuccess = e => {
                 db.close();
                 resolve();

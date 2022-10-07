@@ -86,6 +86,10 @@ const MusicRoom: React.FC<{}> = () => {
         }
     }, [musicRoom.playing])
 
+    React.useEffect(() => {
+        document.title = `Music room - Feature Me`;
+    }, [])
+
     function setQueue(music: MusicRoomContents, overwrite: boolean) {
         if (musicRoom.playList.length == 0) overwrite = true;
         if (overwrite) {
@@ -152,8 +156,8 @@ const MusicRoom: React.FC<{}> = () => {
                     <h1>Play Queue</h1>
                     <div className={style.queue}>
                         {
-                            musicRoom.playList.map((music,index)=>{
-                                return(
+                            musicRoom.playList.map((music, index) => {
+                                return (
                                     <div>
                                         {music.name}
                                     </div>

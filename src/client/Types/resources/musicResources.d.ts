@@ -39,10 +39,7 @@ interface MusicAssetMap {
     title: string
     composer: string
     bpm: string
-    time: {
-        ms: number
-        display: string
-    }
+    time: number
     demo: {
         start: number
         end: number
@@ -91,10 +88,7 @@ interface MusicAssetContents {
         title: string
         composer: string
         bpm: string,
-        time: {
-            ms: number
-            display: string
-        }
+        time: number
         demo: {
             start: number
             end: number

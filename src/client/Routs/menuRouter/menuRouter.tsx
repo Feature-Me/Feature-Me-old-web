@@ -1,4 +1,4 @@
-import SettingsPage from "Pages/play/settings/settingsPage";
+import SettingsPage from "Pages/settings/settingsPage";
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import MenuPage from "../../Pages/play/menu/menuPage/menuPage";

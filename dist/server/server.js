@@ -8,7 +8,6 @@ const socketIo = require("socket.io");
 const admin_ui_1 = require("@socket.io/admin-ui");
 const fs = require("fs");
 const crypto = require("crypto");
-const nedb = require("nedb");
 const uuid_1 = require("uuid");
 /* import * as discord from "discord.js"
 import { commandModules } from "./command"; */
@@ -23,10 +22,10 @@ const scriptsdir = path.join(basedir, "scripts");
 const imagedir = path.join(basedir, "images");
 const dbdir = path.join(basedir, "db");
 const port = Number(process.env.PORT) || 3000;
-const db = {
+/* const db = {
     users: new nedb({ filename: path.join(dbdir, "users.db"), autoload: true }),
     leaderboard: new nedb({ filename: path.join(dbdir, "leaderboard.db"), autoload: true })
-};
+} */
 //web socket
 const io = new socketIo.Server(server, {
     cors: {

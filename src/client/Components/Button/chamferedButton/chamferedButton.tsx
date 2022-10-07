@@ -6,7 +6,7 @@ type buttonPropsType = JSX.IntrinsicElements["button"] & {
     accentColor?: string
 }
 
-const ChamferdButton: React.FC<buttonPropsType> = (props) => {
+const ChamferedButton: React.FC<buttonPropsType> = (props) => {
 
     const chamferedButtonRef = React.useRef<HTMLButtonElement>(null);
 
@@ -35,4 +35,4 @@ const ChamferdButton: React.FC<buttonPropsType> = (props) => {
     )
 }
 
-export default ChamferdButton;
+export default ChamferedButton;

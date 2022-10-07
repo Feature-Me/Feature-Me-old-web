@@ -1,0 +1,76 @@
+@import "../../../Assets/mixin.scss";
+
+.settings_content_wrapper {
+    padding: 4px;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 64px 1fr;
+    * {
+        min-width: 0px;
+        min-height: 0px;
+    }
+
+    h1 {
+        margin: 4px;
+        line-height: 48px;
+        @include font-header;
+    }
+
+    .content {
+        display: grid;
+        width: 100%;
+        height: calc(100% - 56px);
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr;
+        column-gap: 16px;
+        /* @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr;
+            .details{
+                display: none;
+            }
+        } */
+
+        .details * {
+            max-width: 100%;
+        }
+
+        &.full {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+
+            .details {
+                display: none;
+            }
+        }
+
+        .list {
+            overflow-y: auto;
+
+            .list_item {
+                padding: 1px;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: 1fr;
+                align-items: center;
+                margin: 4px;
+
+                h4 {
+                    margin: 8px 4px;
+                }
+
+                &:hover {
+                    padding: 0;
+                    border-radius: 4px;
+                    border: 1px solid $accentColor;
+                }
+
+            }
+        }
+
+
+
+    }
+}

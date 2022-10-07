@@ -1,0 +1,27 @@
+.details{
+
+    .description{
+        white-space: pre-line;
+    }
+
+    .processing_load_critial{
+        color: rgb(233, 50, 18);
+    }
+
+    .processing_load_high {
+            color: rgb(89, 10, 192);
+    }
+
+    .processing_load_medium {
+            color: rgb(226, 195, 21);
+    }
+
+    .processing_load_low {
+            color: rgb(139, 221, 17);
+    }
+
+    .processing_load_none {
+            color: whitesmoke;
+    }
+}
+

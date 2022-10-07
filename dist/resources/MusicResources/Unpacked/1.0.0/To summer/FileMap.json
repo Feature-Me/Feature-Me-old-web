@@ -2,32 +2,29 @@
     "title": "To Summer",
     "composer": "Goners",
     "bpm": "120",
-    "time":{
-        "ms":117000,
-        "display": "01:57"
-    },
-    "demo":{
-        "start":71000,
-        "end":100000
+    "time": 11700,
+    "demo": {
+        "start": 71000,
+        "end": 100000
     },
     "backgroundData": null,
     "backgroundType": "image",
-    "music":[
+    "music": [
         {
             "name": "To Summer",
             "src": "Music/To_Summer.mp3"
         },
-/*         {
+        /*         {
             "name":"To Summer-2022",
             "src":"Music/To_Summer_2022.mp3"
         } */
     ],
-    "defaultMusic":"To Summer-2022",
+    "defaultMusic": "To Summer-2022",
     "license": "2021 Goners. All rights reserved.",
     "thumbnail": "Image/music.png",
-    "behavior":null,
-    "difficulties":[
-/*         {
+    "behavior": null,
+    "difficulties": [
+        /*         {
             "name": "memory",
             "level":6,
             "constant":0,
@@ -48,7 +45,5 @@
             "chartDesigner": "Mksk",
             "chartFile": "Chart/prospects.fmc"
         } */
-
     ]
-
 }

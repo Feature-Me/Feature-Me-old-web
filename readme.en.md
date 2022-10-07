@@ -4,6 +4,43 @@
 
 # Patch Notes
 
+## 00030-beta(Version 0.5)
+Commit A:
+
+Updated resources
+
+getExtension module deleted
+
+changed database
+
+changed Types files directory
+
+modified libraries
+
+Commit B:
+
+updated router
+
+added settings page
+
+added musicgame page
+
+modified utils
++ database initializer
++ easing functions
++ updater
++ local storage initializer
++ chart parser
++ notes classes
+
+changed state 
+
+updated dist
+## 00029-beta(Version 0.5)
+SCSS modified
+
+changed webpack config
+
 ## 00028-beta(Version 0.5)
 Largely refactored.
 

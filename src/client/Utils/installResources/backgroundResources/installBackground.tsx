@@ -15,7 +15,7 @@ function installBackground(zip: JSZip) {
     return new Promise<void|Error>(async (resolve, reject) => {
 
         if (!zip.file("FileMap.json")) {
-            toast.error(<TranslateText contentData={"resourcesManager.database.notifications.installFailed"} />);
+            toast.error(<TranslateText content={"resourcesManager.database.notifications.installFailed"} />);
             resolve(new Error("FileMap.json not found"));
         }
 

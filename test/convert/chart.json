@@ -1,9 +1,7 @@
 {
     "metadata": {
         "offset": 75,
-        "initialBpm": 80,
-        "scorePerNote": 0,
-        "chain": 0
+        "initialBpm": 80
     },
     "notes": [
         {

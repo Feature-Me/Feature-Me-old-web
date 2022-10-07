@@ -1,12 +1,11 @@
 import * as express from "express";
-import * as bodyParser from "body-parser";
 import * as path from "path";
 import * as http from "http";
 import * as socketIo from "socket.io";
 import {instrument} from "@socket.io/admin-ui"
 import * as fs from "fs";
 import * as crypto from "crypto";
-import * as nedb from "nedb";
+//import * as nedb from "nedb";
 import * as url from "url";
 import * as dotenv from "dotenv"
 import {v4 as uuidv4, v5 as uuidv5} from "uuid";
@@ -28,10 +27,10 @@ const imagedir: string = path.join(basedir, "images");
 const dbdir: string = path.join(basedir, "db");
 const port: number = Number(process.env.PORT) || 3000;
 
-const db = {
+/* const db = {
     users: new nedb({ filename: path.join(dbdir, "users.db"), autoload: true }),
     leaderboard: new nedb({ filename: path.join(dbdir, "leaderboard.db"), autoload: true })
-}
+} */
 
 //web socket
 const io = new socketIo.Server(server,{
@@ -79,7 +78,7 @@ server.listen(port, () => {
     //if(process.env.NODE_ENV=="production") login();
 });
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use("/scripts", express.static(scriptsdir));
 app.use("/resources/background", express.static(path.join(resourcesdir, "Backgrounds")));
 app.use("/resources/behavior", express.static(path.join(resourcesdir, "Behaviors")));

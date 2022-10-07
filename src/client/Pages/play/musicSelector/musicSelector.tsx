@@ -3,7 +3,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { useTranslation } from "react-i18next";
 
 import sceneChangerState from "State/sceneChanger/sceneChangerstate";
-import musicSelectorState from "State/musicSelector/musicSelectorState";
+import musicSelectorState from "State/play/musicSelector/musicSelectorState";
 import Header from "Block/head/head";
 import MusicListContent from "./musicListContent/musicListContent";
 
@@ -31,32 +31,28 @@ const MusicSelector: React.FC = () => {
             dbOpenRequest.onsuccess = (event) => {
                 const db = dbOpenRequest.result;
                 const musicStore = db.transaction(databaseInfo.musicStore, "readonly").objectStore(databaseInfo.musicStore);
-                const musics = musicStore.getAllKeys();
+                const allMusic = musicStore.getAll();
 
-                musics.onsuccess = e => {
-                    const musicNames = musics.result;
-                    if (musicNames) {
-                        for (let i = 0; i < musicNames.length; i++) {
-                            const data = musicStore.get(musicNames[i]);
-                            data.onsuccess = e => {
-                                const musicAsset = data.result as { name: string, data: MusicAssetContents };
-                                if (musicAsset) {
-                                    musicData.push(musicAsset.data);
-                                    if (i == musicNames.length - 1) {
-                                        musicData.sort();
-                                        musicData.unshift(musicData.splice(musicData.findIndex(music => music.metadata.title == "Tutorial"), 1)[0])
-                                        resolve();
-                                    }
-                                }
+                allMusic.onsuccess = e => {
+                    const musics = allMusic.result;
+                    if (musics) {
+                        for (let i = 0; i < musics.length; i++) {
+                            const music = musics[i] as { name: string, data: MusicAssetContents };
+                            if (music) {
+                                musicData.push(music.data);
                             }
                         }
+                        musicData.sort();
+                        musicData.unshift(musicData.splice(musicData.findIndex(music => music.metadata.title == "Tutorial"), 1)[0]);
+                        resolve();
+                        
                     }
                 }
             }
         })
 
         return musicData;
-    }, []).then(musicData => musicData);
+    }, []);
 
     React.useEffect(() => {
         (async () => {
@@ -84,6 +80,10 @@ const MusicSelector: React.FC = () => {
             }
         })
     }, [musicIndex])
+
+    React.useEffect(() => {
+        document.title = `Select Music - Feature Me`;
+    }, [])
 
 
 
