@@ -36,6 +36,7 @@ import { musicGameVariablesType } from "Types/play/game/gameVariables";
 import { match } from "ts-pattern";
 import easings from "Utils/easing/easing";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
+import { cloneDeep } from "lodash";
 
 
 const MusicGame3D: React.FC = () => {
@@ -155,11 +156,11 @@ const MusicGame3D: React.FC = () => {
     }
     function keyAction(keyPos: 0 | 1 | 2 | 3 | 4 | 5 | 6) {
         return match(keyPos)
-            .with(0, () => { judge(0) })
-            .with(1, () => { judge(1) })
-            .with(2, () => { judge(2) })
-            .with(3, () => { judge(3) })
-            .with(4, () => { judge(4) })
+            .with(0, () => { judgeKeyPush(0) })
+            .with(1, () => { judgeKeyPush(1) })
+            .with(2, () => { judgeKeyPush(2) })
+            .with(3, () => { judgeKeyPush(3) })
+            .with(4, () => { judgeKeyPush(4) })
             .with(5, () => { musicGameVariables.inputs.position = "left"; moveCharacter("left") })
             .with(6, () => { musicGameVariables.inputs.position = "right"; moveCharacter("right") })
             .exhaustive();
@@ -358,10 +359,10 @@ const MusicGame3D: React.FC = () => {
         }
     }
 
-    function judge(pos: 0 | 1 | 2 | 3 | 4) {
+    //find note and judge.
+    function judgeKeyPush(pos: 0 | 1 | 2 | 3 | 4) {
         const judgeTime = musicGameVariables.time.judgeTime;
         const activeRange = musicGameVariables.activeRange;
-
 
         if (pos < 4) {
             //find tap note and judge
@@ -376,6 +377,10 @@ const MusicGame3D: React.FC = () => {
         }
     }
 
+    function keyTouch(posX:number){
+
+    }
+
     //set score and some info
     function managementJudge(judge: { judge: judgeText, accuracy: number } | undefined) {
         if (!judge) return;
@@ -387,20 +392,17 @@ const MusicGame3D: React.FC = () => {
 
         //update score and some values
         setMusicGameNotesJudge(noteJudge => {
+            const accuracy = ((noteJudge.accuracy * noteJudge.notesCount.current) + judge.accuracy) / (noteJudge.notesCount.current + 1)
+            const judgeType = cloneDeep(noteJudge.judge);
+            judgeType[judge.judge] = judgeType[judge.judge]+1
             return {
                 ...noteJudge,
                 notesCount: {
                     ...noteJudge.notesCount,
                     current: noteJudge.notesCount.current + 1
                 },
-                accuracy: ((noteJudge.accuracy * noteJudge.notesCount.current) + noteJudge.accuracy) / (noteJudge.notesCount.current + 1),
-                judge: {
-                    ...noteJudge.judge,
-                    stunning: noteJudge.judge.stunning + (judge.judge == "stunning" ? 1 : 0),
-                    glossy: noteJudge.judge.glossy + (judge.judge == "glossy" ? 1 : 0),
-                    moderate: noteJudge.judge.moderate + (judge.judge == "moderate" ? 1 : 0),
-                    lost: noteJudge.judge.lost + (judge.judge == "lost" ? 1 : 0),
-                },
+                accuracy: accuracy,
+                judge: judgeType,
                 timing: {
                     ...noteJudge.timing,
                     future: noteJudge.timing.future + (judge.accuracy < 0 ? 1 : 0),

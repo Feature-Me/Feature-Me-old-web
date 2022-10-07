@@ -3,13 +3,22 @@
     -webkit-backdrop-filter: blur($amount);
 }
 
-@mixin font-header {
+@mixin font-title {
     font-family: "Julius Sans One", "Noto Sans JP", "Noto Sans chinese", sans-serif;
+    font-weight: bold;
+}
+
+@mixin font-header {
+    font-family: "Noto Sans JP Bold", "Noto Sans chinese", sans-serif;
     font-weight: bold;
 }
 
 @mixin font-body {
     font-family: "IBM Plex Sans JP", "Noto Sans Chinese", sans-serif;
+}
+
+@mixin font-serif {
+    font-family: "appliMincho",serif;    
 }
 
 @mixin no-support-background-blur($color) {
@@ -68,6 +77,8 @@ $textColor: #f5f5f5;
 $secondaryText: #a0a0a0;
 $blackTextColor:#080e14;
 $borderColor: #f5f5f5;
+$red:rgb(202, 28, 28);
+$redSecondary:#ca1c1c;
 
 $fontSize:16px;
 $smallFontSize:14px;

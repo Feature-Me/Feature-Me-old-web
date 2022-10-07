@@ -17,6 +17,7 @@
 .startPage {
     height: 100%;
     width: 100%;
+    padding: 16px;
     display: grid;
     position: relative;
     grid-template-columns: 1fr;
@@ -56,9 +57,12 @@
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 26px 48px 36px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        
+        h2{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
         &:hover {
             border-color: $accentColor;

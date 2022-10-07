@@ -221,7 +221,7 @@ const MusicGameUI: React.FC = () => {
                 <p><span>Future :</span> <span>{musicGameNotesJudge.timing.future}</span></p>
                 <p><span>Past :</span> <span>{musicGameNotesJudge.timing.past}</span></p>
                 <p><span>Max Chain :</span> <span>{musicGameValue.maxChain}</span></p>
-                <p><span>Accuracy :</span> <span>{musicGameNotesJudge.accuracy}</span></p>
+                <p><span>Accuracy :</span> <span>{musicGameNotesJudge.accuracy.toFixed(1)}</span></p>
                 <p><span>Prediction Score :</span>{musicGamePrediction.score}</p>
                 <p><span>Prediction Rating :</span>{musicGamePrediction.rating}</p>
                 <p><span>Scroll Speed :</span> <span>{0}</span></p>

@@ -18,7 +18,7 @@
 
     h4 {
         margin: 0;
-        @include font-header;
+        @include font-title;
         font-size: 1.25em;
 /*         @include small-device-font; */
     }

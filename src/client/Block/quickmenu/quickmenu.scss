@@ -24,6 +24,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        @include font-header
     }
 
     .left {
@@ -34,6 +35,9 @@
         .chat {
             height: 100%;
             overflow-y: auto;
+            h2{
+                height: 48px;
+            }
 
             .chatMessage {
                 display: grid;
@@ -92,7 +96,7 @@
     .right{
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 48px repeat(2,1fr);
+        grid-template-rows: 56px repeat(2,1fr);
 
         .pageText{
                 position: relative;

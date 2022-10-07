@@ -8,11 +8,11 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 
-import version from "../../../Config/versions.json";
+import version from "Config/versions.json";
 
-import { settingsWindowAtomState } from "../../../State/window/windowState";
+import { settingsWindowAtomState } from "State/window/windowState";
 import sceneChangerState from "State/sceneChanger/sceneChangerstate";
-import fetchResourcesUpdate from "../../../Utils/fetchUpdate/fetchResourcesUpdate";
+import fetchResourcesUpdate from "Utils/fetchUpdate/fetchResourcesUpdate";
 import backgroundState from "State/background/backgroundState";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 import TranslateText from "Components/TranslateText/TranslateText";

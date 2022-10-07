@@ -55,7 +55,7 @@ const EditorStartPage: React.FC = () => {
 
     function newChartProject(){
         createNewProject().then(id=>{
-            navigate(`./editor/${id}`)
+            navigate(`./charteditor/${id}`)
         })
     }
 
@@ -83,7 +83,7 @@ const EditorStartPage: React.FC = () => {
                             {
                                 newProjectMenu.map((menu, index) => {
                                     return (
-                                            <div className={style.newprojectCard} onClick={newChartProject}>
+                                            <div className={style.newprojectCard} onClick={newChartProject} key={index}>
                                                 <h2><TranslateText content={menu.content} /></h2>
                                             </div>
                                     )
@@ -96,14 +96,15 @@ const EditorStartPage: React.FC = () => {
                         <div className={style.contentWrapper}>
                             {
                                 projects.map(project => {
+                                    const basePath = project.type == "chart"?"charteditor":"";
                                     return (
-                                        <div className={style.projectCard} key={project.id}>
-                                            <div>
+                                        <LinkWrapper to={`./${basePath}/${project.id}`} key={project.id}>
+                                            <div className={style.projectCard}>
                                                 <span>{project.type}</span>
+                                                <h2>{project.name}</h2>
+                                                <p>Last Saved:{new Date(project.saved).toLocaleString()} / {project.id}</p>
                                             </div>
-                                            <h2>{project.name}</h2>
-                                            <p>Last Saved:{new Date(project.saved).toLocaleString()} / {project.id}</p>
-                                        </div>
+                                        </LinkWrapper>
                                     )
                                 })
                             }

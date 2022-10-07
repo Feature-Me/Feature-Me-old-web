@@ -37,14 +37,15 @@ const MusicSelector: React.FC = () => {
                     const musics = allMusic.result;
                     if (musics) {
                         for (let i = 0; i < musics.length; i++) {
-                            const music = musics[i] as MusicAssetContents;
+                            const music = musics[i] as { name: string, data: MusicAssetContents };
                             if (music) {
-                                musicData.push(music);
+                                musicData.push(music.data);
                             }
                         }
                         musicData.sort();
-                        musicData.unshift(musicData.splice(musicData.findIndex(music => music.metadata.title == "Tutorial"), 1)[0])
+                        musicData.unshift(musicData.splice(musicData.findIndex(music => music.metadata.title == "Tutorial"), 1)[0]);
                         resolve();
+                        
                     }
                 }
             }

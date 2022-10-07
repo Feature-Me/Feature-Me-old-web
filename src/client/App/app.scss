@@ -12,7 +12,11 @@
     src: url("../Assets/Fonts/NOTOSANSJP-REGULAR.OTF");
 }
 @font-face {
-    font-family: "Appli Mincho";
+    font-family: "Noto Sans JP Bold";
+    src: url("../Assets/Fonts/NotoSansJP-Black.otf");
+}
+@font-face {
+    font-family: "AppliMincho";
     src: url("../Assets/Fonts/appliMincho.otf");
 }
 @font-face {
@@ -46,6 +50,8 @@ body {
 
 .app {
     height: 100vh;
+    width: 100vw;
+    position: relative;
 }
 
 

@@ -63,7 +63,7 @@
                 @include chamfered;
 
                 &:hover {
-                    background-color: rgb(202, 28, 28);
+                    background-color: $red;
                 }
 
                 .close_icon {
