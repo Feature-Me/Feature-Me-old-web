@@ -1,4 +1,4 @@
-import databaseInfo from "../../Config/databaseinfo.json"
+import databaseInfo from "Config/databaseinfo.json"
 
 function loadBehavior(behaviorName:string) {
     return new Promise<behaviorAssetContents>((resolve, reject) => {

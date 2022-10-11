@@ -1,6 +1,6 @@
 import { FontObject } from "three/examples/jsm/loaders/TTFLoader";
 
-import databaseInfo from "../../../Config/databaseinfo.json";
+import databaseInfo from "Config/databaseinfo.json";
 
 async function installFont(font:FontObject){
     return new Promise<void>((resolve, reject) => {

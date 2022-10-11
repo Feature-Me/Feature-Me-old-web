@@ -9,7 +9,7 @@ import { installMusic } from "./installMusic";
 function parseMusicCollection(zip: JSZip) {
     return new Promise<void>(async (resolve, reject) => {
         if (!zip.file("FileMap.json")) {
-            toast.error(<TranslateText contentData={"resourcesManager.database.notifications.installFailed"} />);
+            toast.error(<TranslateText content={"resourcesManager.database.notifications.installFailed"} />);
             resolve();
         }
         const folders = json5.parse(await zip.file("FileMap.json")!.async("string"))

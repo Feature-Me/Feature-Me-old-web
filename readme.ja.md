@@ -14,6 +14,14 @@
 
 # パッチノート
 
+## 00065-beta(Version 0.5.7)
+Commit A:
+一部Utilsのディレクトリ変更
+TermsWindowとSettingsWindowのディレクトリ変更
+
+## 00064-beta(Version 0.5.7)
+設定画面の英語サポートの拡充
+
 ## 00063-beta(Version 0.5.6)
 ヘッダーフォント(Julius Sans One)→タイトル専用フォントに変更
 ヘッダータイトルをNoto Sans JP Blackに変更

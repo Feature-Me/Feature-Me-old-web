@@ -4,9 +4,9 @@ import { toast } from "react-toastify";
 import mimedb from "mime-db";
 import json5 from "json5";
 
-import TranslateText from "../../../Components/TranslateText/TranslateText";
-import databaseInfo from "../../../Config/databaseinfo.json";
-import getMime from "../../getMime/getMime";
+import TranslateText from "Components/TranslateText/TranslateText";
+import databaseInfo from "Config/databaseinfo.json";
+import getMime from "Utils/getMime/getMime";
 
 
 

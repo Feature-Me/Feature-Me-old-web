@@ -1,5 +1,5 @@
 import { FontObject } from "three/examples/jsm/loaders/TTFLoader"
-import databaseInfo from "../../Config/databaseinfo.json"
+import databaseInfo from "Config/databaseinfo.json"
 
 function loadFont(fontName:string){
     return new Promise<FontObject>((resolve, reject) => {

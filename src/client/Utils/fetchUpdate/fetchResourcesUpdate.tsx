@@ -5,10 +5,10 @@ import React from "react";
 import filesize from "filesize";
 
 import TranslateText from "../../Components/TranslateText/TranslateText";
-import { installBackground } from "../installResources/backgroundResources/installBackground";
+import { installBackground } from "../Storage/installResources/backgroundResources/installBackground";
 import databaseInfo from "../../Config/databaseInfo.json";
-import { parseMusicCollection } from "../installResources/musicResources/parseMusicCollection";
-import { installBehavior } from "../installResources/behaviorResources/installBehavior";
+import { parseMusicCollection } from "../Storage/installResources/musicResources/parseMusicCollection";
+import { installBehavior } from "../Storage/installResources/behaviorResources/installBehavior";
 
 
 type versionMap = {

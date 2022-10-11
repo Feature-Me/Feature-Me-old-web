@@ -1,9 +1,9 @@
 import React from "react";
 import { toast } from "react-toastify";
 
-import TranslateText from "../../Components/TranslateText/TranslateText";
+import TranslateText from "Components/TranslateText/TranslateText";
 
-import databaseInfo from "../../Config/databaseinfo.json";
+import databaseInfo from "Config/databaseinfo.json";
 
 let DBVersion = (localStorage.getItem("DBVersion") && JSON.parse(localStorage.getItem("DBVersion")!).version + 1) || 1;
 function initDatabase() {

@@ -6,8 +6,8 @@ import style from './title.scss';
 import TitleText from '../titleText/titleText';
 import GlitchImage from 'Components/glitchImage/glitchImage';
 import background from 'Assets/Images/tidal wreck.png';
-import TermsWindow from 'Block/TermsWindow/termsWindow';
-import SettingsWindow from 'Block/settingsWindow/settingsWindow';
+import TermsWindow from 'Pages/title/title/TermsWindow/termsWindow';
+import SettingsWindow from 'Pages/title/title/settingsWindow/settingsWindow';
 
 
 const Title: React.FC = () => {

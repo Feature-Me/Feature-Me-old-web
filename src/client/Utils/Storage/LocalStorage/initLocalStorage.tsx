@@ -1,6 +1,6 @@
 import React from "react";
 import { toast } from "react-toastify";
-import TranslateText from "../../Components/TranslateText/TranslateText";
+import TranslateText from "Components/TranslateText/TranslateText";
 import { enviroment, resourcesDownloaded, DBVersion, gameConfig, musicSelect } from "./defaultValue";
 
 
@@ -14,9 +14,9 @@ function initLocalStorage(): void {
             fixedCount++;
         }
 
-        if (!localStorage.getItem("ResourcesDownloaded")) {
+        if (!localStorage.getItem("resourcesDownloaded")) {
             
-            localStorage.setItem("ResourcesDownloaded", JSON.stringify(resourcesDownloaded));
+            localStorage.setItem("resourcesDownloaded", JSON.stringify(resourcesDownloaded));
             fixedCount++;
         }
 

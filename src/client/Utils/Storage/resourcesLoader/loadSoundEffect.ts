@@ -1,4 +1,4 @@
-import databaseInfo from "../../Config/databaseinfo.json"
+import databaseInfo from "Config/databaseinfo.json"
 
 function loadSoundEffect(behaviorName: string) {
     return new Promise<soundEffectAssetContents>((resolve, reject) => {

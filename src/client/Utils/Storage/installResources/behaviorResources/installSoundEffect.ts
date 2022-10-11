@@ -2,8 +2,8 @@ import JSZip from "jszip";
 import path from "path-browserify";
 import json5 from "json5";
 
-import databaseInfo from "../../../Config/databaseinfo.json";
-import getMime from "../../../Utils/getMime/getMime";
+import databaseInfo from "Config/databaseinfo.json";
+import getMime from "Utils/getMime/getMime";
 
 function installSoundEffect(zip:JSZip) {
     return new Promise<void|Error>(async (resolve, reject) => {

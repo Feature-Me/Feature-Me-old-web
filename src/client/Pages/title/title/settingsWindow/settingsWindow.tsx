@@ -11,6 +11,8 @@ import { settingsWindowAtomState, termsWindowAtomState } from "State/window/wind
 
 import style from './settingsWindow.scss';
 import ChamferedButton from "Components/Button/chamferedButton/chamferedButton";
+import { deleteLocalStorage } from "Utils/Storage/LocalStorage/deleteLocalStorage";
+import deleteDatabase from "Utils/Storage/database/deleteDatabase";
 
 const selectLanguageOptions = [
     { value: "en_us", label: "English(EN-US)" },
@@ -20,18 +22,16 @@ const selectLanguageOptions = [
 ];
 
 
-
-
 const SettingsWindow: React.FC = (): JSX.Element => {
     const [translation, i18n] = useTranslation();
     const animationController = useAnimation();
     const [showSettingsWindow, setShowSettingsWindow] = useRecoilState(settingsWindowAtomState);
     const [showTermsWindow, setShowTermsWindow] = useRecoilState(termsWindowAtomState);
 
-    function closeSettingsWindow(): void {
-        setTimeout(() => {
-            setShowSettingsWindow(false);
-        }, 500);
+    function clearData(){
+        deleteLocalStorage();
+        deleteDatabase();
+        
     }
 
     return (
@@ -42,8 +42,8 @@ const SettingsWindow: React.FC = (): JSX.Element => {
                     <SelectBox contents={selectLanguageOptions} onChange={(value: { value: string, label: string }) => { i18n.changeLanguage(value.value) }} value={selectLanguageOptions.find(e => e.value == i18n.language)!} />
                 </div>
                 <div className={style.content}>
-                    <h3>{translation("title.settingsWindow.storageCache.all")}</h3>
-                    <ChamferedButton accentColor="#ca1c1c">{translation("title.settingsWindow.delete")}</ChamferedButton>
+                    <h3>{translation("title.settingsWindow.clear")}</h3>
+                    <ChamferedButton accentColor="#ca1c1c" onClick={clearData}>{translation("title.settingsWindow.delete")}</ChamferedButton>
                 </div>
                 <div className={style.content}>
                     <h3>{translation("title.terms")}</h3>
