@@ -14,13 +14,20 @@
         max-height: 100%;
         padding: 16px 0;
 
-        div {
+        .left,.right {
             height: 72px;
             margin: 16px 0;
             position: relative;
             transition: 0.2s;
             color: white;
             text-decoration: none;
+            display: flex;
+            font-size: 36px;
+            line-height: 36px;
+            @include font-body;
+            font-weight: bold;
+            @include small-device-font-big;
+
             @media screen and (max-height:540px) {
                 height: 48px;
             }
@@ -31,13 +38,7 @@
             background: linear-gradient(to right, rgb(9, 26, 51), #0e4f7a);
             left: -32px;
             padding-left: 64px;
-            font-size: 36px;
-            line-height: 36px;
-            @include font-body;
-            font-weight: bold;
-            @include small-device-font-big;
-            display: flex;
-                align-items: center;
+            align-items: center;
 
             &:hover {
                 left: 0;
@@ -52,14 +53,9 @@
             background: linear-gradient(to left, rgb(7, 39, 17), #025216);
             right: -32px;
             padding-right: 64px;
-            font-size: 36px;
-            line-height: 36px;
-            @include font-header;
-            @include small-device-font-big;
-            display: flex;
-                flex-direction: row-reverse;
-                align-items: center;
-                justify-items: right;
+            flex-direction: row-reverse;
+            align-items: center;
+            justify-items: right;
 
             &:hover {
                 right: 0;
@@ -68,4 +64,4 @@
             }
         }
     }
-} 
+}

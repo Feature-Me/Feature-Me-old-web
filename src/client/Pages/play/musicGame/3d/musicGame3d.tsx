@@ -15,8 +15,8 @@ import style from "./musicGame3d.scss";
 
 import MusicGameUI from "../UI/musicGameUI";
 
-import loadBehavior from "Utils/resourcesLoader/loadBehavior";
-import loadSoundEffect from "Utils/resourcesLoader/loadSoundEffect";
+import loadBehavior from "Utils/Storage/resourcesLoader/loadBehavior";
+import loadSoundEffect from "Utils/Storage/resourcesLoader/loadSoundEffect";
 import arrayBufferToBase64 from "Utils/ArrayBufferToBase64/ArrayBufferToBase64";
 import parseChart from "Features/parseChart/parseChart";
 import sleep from "Utils/sleep/sleep";
@@ -377,7 +377,7 @@ const MusicGame3D: React.FC = () => {
         }
     }
 
-    function keyTouch(posX:number){
+    function keyTouch(posX: number) {
 
     }
 
@@ -394,7 +394,7 @@ const MusicGame3D: React.FC = () => {
         setMusicGameNotesJudge(noteJudge => {
             const accuracy = ((noteJudge.accuracy * noteJudge.notesCount.current) + judge.accuracy) / (noteJudge.notesCount.current + 1)
             const judgeType = cloneDeep(noteJudge.judge);
-            judgeType[judge.judge] = judgeType[judge.judge]+1
+            judgeType[judge.judge] = judgeType[judge.judge] + 1
             return {
                 ...noteJudge,
                 notesCount: {

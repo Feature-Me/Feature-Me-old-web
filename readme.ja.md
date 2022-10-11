@@ -16,8 +16,18 @@
 
 ## 00065-beta(Version 0.5.7)
 Commit A:
+
 一部Utilsのディレクトリ変更
+
 TermsWindowとSettingsWindowのディレクトリ変更
+
+Commit B:
+
+フォント追加
+
+コード整形
+
+LinkWrapperコンポーネント更新
 
 ## 00064-beta(Version 0.5.7)
 設定画面の英語サポートの拡充

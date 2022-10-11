@@ -36,14 +36,15 @@ const GeneralSettings: React.FC = () => {
                 processingLoad: "medium",
                 description: <TranslateText content="settingsPage.general.benchmark.description" />
             },
-            input: <ChamferedButton>{translate("settingsPage.general.benchmark.button")}</ChamferedButton>
-        }, {
+            input: <ChamferedButton><TranslateText content="settingsPage.general.benchmark.button"/></ChamferedButton>
+        },
+        {
             details: {
                 title: <TranslateText content="settingsPage.general.terms.name" />,
                 processingLoad: "none",
                 description: <TranslateText content="settingsPage.general.terms.description" />
             },
-            input: <ChamferedButton>{translate("settingsPage.general.terms.button")}</ChamferedButton>
+            input: <ChamferedButton><TranslateText content="settingsPage.general.terms.button" /></ChamferedButton>
         },
         {
             details: {
