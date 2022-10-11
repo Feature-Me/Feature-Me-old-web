@@ -1,13 +1,13 @@
-const ENUKTitleTranslation = {
-    "language": "English-EN_UK",
+const ENUSTitleTranslation = {
+    "language": "English-EN_US",
     "terms": "Terms of Service",
     "read": "Read",
-    "settingsWindow": {
+    "settingsWindow":{
         "title": "Settings",
         "selectLanguage": "Language",
         "delete": "Delete",
-        "clear":"Clear All Data"
+        "clear": "Clear All Data"
     }
 }
 
-export default ENUKTitleTranslation;
+export default ENUSTitleTranslation;

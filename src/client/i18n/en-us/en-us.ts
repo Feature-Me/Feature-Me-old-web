@@ -1,4 +1,4 @@
-import ENUSTitleTranslation from "./en-us.title";
+import ENUSTitleTranslation from "./title/en-us.title";
 import ENUSTermsTranslation from "./others/en-us.terms";
 import ENUSResourcesManagerTranslation from "./others/en-us.resourcesmanager";
 import ENUSCacheController from "./others/en-us.cachecontroller";
@@ -12,7 +12,7 @@ const ENUStranslation = {
     title: ENUSTitleTranslation,
     terms: ENUSTermsTranslation,
     resourcesManager: ENUSResourcesManagerTranslation,
-    cacheController : ENUSCacheController,
+    cacheController: ENUSCacheController,
     cautions: ENUSCautions,
     menu: ENUSMenuTranslation,
     head: ENUSHeadTranslation,

@@ -29,6 +29,10 @@ Commit B:
 
 LinkWrapperコンポーネント更新
 
+Commit C:
+
+翻訳の更新
+
 ## 00064-beta(Version 0.5.7)
 設定画面の英語サポートの拡充
 
