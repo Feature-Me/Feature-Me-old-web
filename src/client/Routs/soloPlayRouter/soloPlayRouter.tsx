@@ -1,4 +1,4 @@
-import MusicGame3D from "Pages/play/musicGame/3d/musicGame3d";
+import SoloMusicGame from "Pages/play/musicGame/solo/soloMusicGame";
 import MusicSelector from "Pages/play/musicSelector/musicSelector";
 import SoloRelay from "Pages/play/relay/soloRelay";
 import ResultPage from "Pages/play/result/resultPage";
@@ -10,7 +10,7 @@ const SoloPlayRouter: React.FC = () => {
         <Routes>
             <Route path="/select" element={<MusicSelector />} />
             <Route path="/relay/:diff" element={<SoloRelay />} />
-            <Route path="/game" element={<MusicGame3D />} />
+            <Route path="/game" element={<SoloMusicGame />} />
             <Route path="/result" element={<ResultPage />} />
         </Routes>
     )

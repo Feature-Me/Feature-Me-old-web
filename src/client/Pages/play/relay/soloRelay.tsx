@@ -50,8 +50,9 @@ const SoloRelay: React.FC = () => {
     }, []);
 
     return (
-        <div>
-        </div>
+        <>
+            Loading...
+        </>
     )
 }
 

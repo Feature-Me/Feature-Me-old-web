@@ -8,6 +8,7 @@ import JAHeadTranslation from "./components/ja.head";
 import JAMusicSelectTranslation from "./play/ja.musicselect";
 import JASettingsPage from "./settings/ja.settingspage";
 import JAEditorTranslation from "./editor/ja.editor";
+import JASplashScreenTranslate from "./others/ja.splashScreen";
 
 const JAtranslation = {
     title: JATitleTranslation,
@@ -20,6 +21,7 @@ const JAtranslation = {
     musicSelect: JAMusicSelectTranslation,
     settingsPage: JASettingsPage,
     editor: JAEditorTranslation,
+    splashScreen:JASplashScreenTranslate
 }
 
 export default JAtranslation;
