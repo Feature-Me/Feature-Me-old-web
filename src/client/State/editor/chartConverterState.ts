@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-const defaultChartConverterState:chartConverterStateTyoe = {
+const defaultChartConverterState: chartConverterType = {
     chartText: "",
     inputFileName: "",
     convertType: "",
@@ -9,8 +9,8 @@ const defaultChartConverterState:chartConverterStateTyoe = {
 }
 
 const chartConverterState = atom({
-    key:"chartConverterState",
-    default:defaultChartConverterState
+    key: "chartConverterState",
+    default: defaultChartConverterState
 })
 
 export default chartConverterState;

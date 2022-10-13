@@ -2,7 +2,7 @@ interface chartProjectType extends editorProjectBase {
     name: string
     type: "chart"
     metadata: {
-        bpm: string
+        bpm: number
         composer: string
         license: string
         thumbnail: ArrayBuffer

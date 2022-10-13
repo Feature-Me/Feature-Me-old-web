@@ -10,7 +10,7 @@ function createNewProject() {
             type: "chart",
             id: uuid,
             metadata: {
-                bpm: "0",
+                bpm: 0,
                 composer: "",
                 license: "",
                 thumbnail: new ArrayBuffer(0),

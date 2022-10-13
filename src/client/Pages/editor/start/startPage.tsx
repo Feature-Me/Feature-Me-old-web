@@ -34,8 +34,7 @@ const EditorStartPage: React.FC = () => {
                     for (let i = 0; i < projects.length; i++) {
                         const project = projects[i] as getEditorProject;
                         const url = project.type == "chart" ? "charteditor" : "";
-                        const to = `./${url}/${project.id}`
-                        console.log(project);
+                        const to = `./${url}/${project.id}/`
                         
                         const data = {
                             name: project.name,

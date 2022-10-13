@@ -1,0 +1,103 @@
+@import "../../../Assets/mixin.scss";
+
+.chartEditor {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 48px 48px 1fr 20px;
+
+    @include blur-background;
+    @include no-support-background-blur($transparent-bg);
+
+    .head {
+        display: grid;
+        grid-template-columns: auto 1fr auto 200px;
+        grid-template-rows: 1fr;
+        align-items: center;
+        gap: 8px;
+        padding: 0 8px;
+        background-color: $backgroundSubColor;
+
+        .modeSelect {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: 1fr;
+            align-items: center;
+            text-align: center;
+            height: 40px;
+            margin-top: 8px;
+            gap: 8px;
+            .tab {
+                flex: 1 1;
+                transition: 0.2s;
+                height: 100%;
+                padding: 0 4px;
+                border-radius: 4px 4px 0 0;
+                line-height: 40px;
+                background-color: $grayBackgrund;
+
+                &:hover {
+                    background-color: $inputForegroundColor;
+                }
+
+                &:active {
+                    filter: brightness(0.8);
+                }
+
+                &[data-selected="true"] {
+                    background-color: $accentColor;
+                }
+            }
+        }
+
+        .testplay {
+            margin: 4px;
+            display: grid;
+            grid-template-columns: 40px auto;
+            grid-template-rows: 1fr;
+            align-items: center;
+            border: none;
+            border-radius: 4px;
+            background-color: rgb(19, 196, 42);
+            transition: 0.2s;
+            color: $textColor;
+            box-shadow: 0 0 4px 2px black ;
+
+            &:hover {
+                background-color: rgb(27, 172, 46);
+            }
+
+            &:active {
+                filter: brightness(0.8);
+            }
+        }
+    }
+
+    .footer {
+        background-color: $accentColor;
+
+        span {
+            height: 20px;
+            line-height: 20px;
+            font-size: 12px;
+        }
+    }
+
+    .editorWrapper{
+        padding: 16px;
+    }
+}
+
+.iconWrapper {
+    margin: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+
+    &:hover {
+        fill: $accentColor;
+        color: $accentColor;
+    }
+}

@@ -15,6 +15,13 @@
 # パッチノート
 
 ## 00066-beta(Version 0.5.7)
+
+Commit A:
+
+Cardコンポーネント追加
+
+Commit B:
+
 一部表現の修正
 
 ChartEditorのルーティングの変更
@@ -24,8 +31,6 @@ ChartEditor 概要画面追加
 誤字修正
 
 チャートプロジェクトのBPMを文字列型から数値型へ変更
-
-Cardコンポーネント追加
 
 ## 00065-beta(Version 0.5.7)
 Commit A:

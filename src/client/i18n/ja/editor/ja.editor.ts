@@ -14,6 +14,14 @@ const JAEditorTranslation = {
             "metadata":"メタデータ",
             "music":"楽曲",
             "chart":"譜面"
+        },
+        "overView":{
+            "title":"概要(読み取り専用)",
+            "stats":{
+                "title":"統計",
+                "musics":"楽曲",
+                "charts":"チャート"
+            }
         }
     },
     "converter":{
