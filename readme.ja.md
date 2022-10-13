@@ -14,6 +14,14 @@
 
 # パッチノート
 
+## 00067-beta(Version 0.5.7)
+Commit A:
+
+MusicGameを細分化しMusicGameEngineへ変更し,ディレクトリ変更。(今後さらに細分化予定)
+
+
+パッチノートの誤字修正
+
 ## 00066-beta(Version 0.5.7)
 
 Commit A:
@@ -107,7 +115,7 @@ MusicGameをMusicGame3dに変更
 
 Commit B:
 
-設定画面の説明が開業されるように変更
+設定画面の説明が改行されるように変更
 
 NumberInputコンポーネント追加
 
