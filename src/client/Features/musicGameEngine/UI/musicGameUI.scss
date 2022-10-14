@@ -1,0 +1,259 @@
+@import "../../../Assets/mixin.scss";
+
+
+.musicgameUI {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    
+    .primary_board {
+        @include blur(16px);
+        position: absolute;
+        top: 32px;
+        left: 0;
+        height: 200px;
+        width: 400px;
+        padding: 4px;
+        /* clip-path: polygon(0% 0%, calc(100% - 64px) 0%, 100% 64px, calc(100% - 96px) 100%, 0% 100%); */
+        box-shadow: 0 0 4px 2px $accentColor;
+        transform-origin: left top;
+        display: grid;
+            grid-template-rows: 48px 64px 4px 64px;
+            grid-template-columns: 1fr;
+            row-gap: 4px;
+        h2 {
+            margin: 0;
+            padding: 0;
+            line-height: 64px;
+            font-size: 48px;
+            text-shadow: 2px 2px 2px #5e5e5e;
+        }
+
+        h3{
+            margin: 0;
+            padding: 0;
+            line-height: 32px;
+            font-size: 28px;
+            text-shadow: 2px 2px #3d6264;
+        }
+
+        p{
+            margin: 0;
+            padding: 0;
+            line-height: 24px;
+            font-size: 16px;
+        }
+
+
+        .difficulty {
+            display: grid;
+                grid-template-rows: 1fr;
+                grid-template-columns: 48px 1fr;
+                align-items: center;
+                justify-items: center;
+            height: 48px;
+
+            .level{
+                height: 48px;
+                width: 48px;
+                font-size: 36px;
+                line-height: 48px;
+                text-align: center;
+                border: 2px solid $borderColor;
+            }
+        }
+
+        .musicData{
+            display: grid;
+                grid-template-rows: 1fr;
+                grid-template-columns: 64px 1fr;
+                align-items: center;
+                column-gap: 4px;
+
+            img{
+                height: 64px;
+                width: 64px;
+            }
+
+            .title{
+                display: grid;
+                    grid-template-rows: 24px 40px;
+                    grid-template-columns: 1fr;
+                    align-items: center;
+            }
+        }
+
+        .progress{
+            background-image:linear-gradient(to right, rgb(200, 200, 200), rgb(245, 245, 245));
+            background-repeat: no-repeat;
+            background-size: 0%;
+            position: relative;
+            .progressPoint{
+                transform: rotate(45deg);
+                box-shadow: 0 0 4px 2px #1189da;
+                background-color: $textColor;
+                height: 8px;
+                width: 8px;
+                position: absolute;
+                top: -2px;
+                z-index: 50;
+            }
+        }
+
+        .score {
+            position: relative;
+
+            h2{
+                text-align: center;
+            }
+
+            span {
+                font-size: 0.8em;
+                opacity: 0.8;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    .secondary_board{
+        @include blur(16px);
+        position: absolute;
+        top: 280px;
+        left: 0;
+        height: 128px;
+        width: 400px;
+        padding: 4px;
+        background-image: linear-gradient(to right, rgba(20,20,30,0.5) 50%, rgba(17, 137, 218,0.5));
+        clip-path: polygon(0% 0%, 100% 0%, calc(100% - 64px) 100%, 0% 100%);
+        box-shadow: 0 0 4px 2px $accentColor;
+        transform-origin: left top;
+        display: grid;
+            grid-template-rows: repeat(4,32px);
+        p{
+            margin: 0;
+            padding: 0;
+            line-height: 24px;
+            font-size: 16px;
+            display: grid;
+                grid-template-rows: 1fr;
+                grid-template-columns: 96px 1fr;
+                align-items: center;
+        }
+    }
+
+    .tertiary_board{
+        @include blur(16px);
+        position: absolute;
+        top: 280px;
+        right: 0;
+        height: 160px;
+        width: 400px;
+        padding: 4px;
+        font-size: 0.8em;
+        background-image: linear-gradient(to left, rgba(20,20,30,0.5) , rgba(17, 137, 218,0.5));
+        /* clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 64px 100%); */
+        box-shadow: 0 0 4px 2px $accentColor;
+        transform-origin: right top;
+        display: grid;
+            grid-template-rows: repeat(5,32px);
+            grid-template-columns: repeat(2,1fr);
+            column-gap: 4px;
+        p{
+            margin: 0;
+            padding: 0;
+            line-height: 24px;
+            font-size: 16px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            
+            display: grid;
+                grid-template-rows: 1fr;
+                grid-template-columns: 120px 1fr;
+                align-items: center;
+        }
+    }
+
+    .pause_overlay {
+        @include blur(16px);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(20, 20, 20, 0.5);
+        visibility: hidden;
+        pointer-events: all;
+    }
+}
+
+.musicgameTitle {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(128px, 50%) repeat(2, auto);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(20, 20, 20, 0.75);
+    @include blur(16px);
+
+    .thumbnail {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        width: 100%;
+        height: 100%;
+    }
+
+    h1,
+    h2 {
+        text-shadow: #5e5e5e 4px 4px 4px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    p::first-letter {
+        text-transform: uppercase;
+    }
+}
+
+
+.memory {
+    background-color: rgba(139, 221, 17, 0.5);
+}
+
+.advance {
+    background-color: rgba(226, 195, 21 ,0.5);
+}
+
+.prospects {
+    background-color: rgba(89, 10, 192, 0.5);
+}
+
+.ozma {
+    @include ozma-background;
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(20, 20, 20, 0.3);
+        z-index: -1;
+    }
+}
+
+.other {
+    background-color: rgba(255, 227, 0, 0.5)
+}

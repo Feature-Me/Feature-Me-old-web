@@ -7,6 +7,27 @@ const JAEditorTranslation = {
         "convertChart":"チャートを変換",
         "newBehavior":"新しいビヘイビア"
     },
+    "chartEditor":{
+        "testPlay":"テストプレイ",
+        "menuTab":{
+            "overView":"概要",
+            "metadata":"メタデータ",
+            "music":"楽曲",
+            "chart":"譜面"
+        },
+        "overView":{
+            "title":"概要(読み取り専用)",
+            "stats":{
+                "title":"統計",
+                "musics":"楽曲",
+                "charts":"チャート"
+            }
+        },
+        "metadata":{
+            "title":"メタデータ",
+            
+        }
+    },
     "converter":{
         "input":{
             "convert":"チャートを変換",

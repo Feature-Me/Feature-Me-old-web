@@ -9,7 +9,7 @@
     text-shadow: 0 0 4px $borderColor;
     padding: 0 16px;
     display: grid;
-    grid-template-columns: 48px auto 1fr auto repeat(2,48px);
+    grid-template-columns: 48px auto 1fr auto repeat(2, 48px);
     grid-template-rows: 1fr;
     align-items: center;
     column-gap: 8px;
@@ -20,43 +20,45 @@
         margin: 0;
         @include font-title;
         font-size: 1.25em;
-/*         @include small-device-font; */
+        /*         @include small-device-font; */
     }
 
-    .icon_wrapper {
-        margin: 4px;
+    .wsStateWrapper {
         display: flex;
         align-items: center;
         justify-content: center;
 
-        .icon {
-            transition: 0.3s;
-            margin: 0 auto;
-            transform: scale(1);
-
-            &:hover {
-                fill: $accentColor;
-                color: $accentColor;
-                transform: scale(1.5);
-            }
-        }
-    }
-
-    .wsStateWrapper{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        div{
+        div {
             height: 16px;
             width: 16px;
             border-radius: 50%;
         }
-        .online{
+
+        .online {
             background-color: rgb(75, 175, 75);
         }
-        .offline{
+
+        .offline {
             background-color: #a0a0a0;
         }
     }
 }
 
+.icon_wrapper {
+    margin: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .icon {
+        transition: 0.3s;
+        margin: 0 auto;
+        transform: scale(1);
+
+        &:hover {
+            fill: $accentColor;
+            color: $accentColor;
+            transform: scale(1.5);
+        }
+    }
+}

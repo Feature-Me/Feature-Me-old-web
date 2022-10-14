@@ -1,0 +1,101 @@
+@import "../../../../Assets/mixin.scss";
+
+.overview {
+    display: grid;
+    grid-template-rows: 64px 1fr;
+    grid-template-columns: 1fr;
+    height: 100%;
+
+    .view {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr;
+        height: 100%;
+
+        .preview {
+            height: 100%;
+            padding: 8px;
+            display: grid;
+            align-items: center;
+            row-gap: 16px;
+            grid-template-columns: 1fr;
+            grid-template-rows: 56px 32px 24px 1fr;
+
+            @media screen and (max-height: 540px) {
+                grid-template-rows: 32px 24px 16px 1fr;
+                row-gap: 8px;
+            }
+
+            h1 {
+                padding: 8px;
+                margin: 0;
+                @include font-body;
+                line-height: 48px;
+                background-image: linear-gradient(to right, black, transparent);
+                text-shadow: 0 0 4px $textColor;
+                clip-path: polygon(16px 0, 100% 0, 100% 100%, 0 100%, 0 16px);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                @include small-device-font-big;
+            }
+
+            p {
+                margin: 0;
+                padding: 0 8px;
+                @include font-body;
+                @include small-device-font;
+                line-height: 24px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                .license {
+                    font-size: 12px;
+                    line-height: 12px;
+                }
+            }
+
+            h2 {
+                margin: 0;
+                padding: 0 8px;
+                @include font-body;
+                line-height: 32px;
+
+                @media screen and (max-height: 540px) {
+                    line-height: 24px;
+                }
+            }
+
+            .image {
+                height: 100%;
+                width: 100%;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                opacity: 0.5;
+            }
+        }
+
+        .stats {
+            display: grid;
+            grid-template-rows: 64px 1fr;
+            grid-template-columns: 1fr;
+            height: 100%;
+
+            .details {
+                display: grid;
+                grid-template-rows: 128px 1fr;
+                grid-template-columns: 1fr;
+                height: 100%;
+
+                .chartInfo {
+                    display: grid;
+                    grid-auto-rows: 1fr;
+                    grid-template-columns: 1fr;
+                    height: 100%;
+                }
+            }
+        }
+    }
+}

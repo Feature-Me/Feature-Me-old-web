@@ -8,7 +8,7 @@
     box-sizing: border-box;
     font-size: 1em;
     line-height: 18px;
-    @include font-header;
+    @include font-body;
 
     .valuelabel {
         padding: 0 4px;

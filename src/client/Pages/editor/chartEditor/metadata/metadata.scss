@@ -1,0 +1,16 @@
+@import "../../../../Assets/mixin.scss";
+
+.metadata {
+    display: grid;
+    grid-template-rows: 64px 1fr;
+    grid-template-columns: 1fr;
+    height: 100%;
+
+    .metadataEdit {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: repeat(2,1fr);
+        height: 100%;
+    }
+
+}

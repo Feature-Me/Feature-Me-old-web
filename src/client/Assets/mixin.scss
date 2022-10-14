@@ -4,12 +4,12 @@
 }
 
 @mixin font-title {
-    font-family: "Julius Sans One", "Noto Sans JP", "Noto Sans chinese", sans-serif;
+    font-family: "Julius Sans One", "Noto Sans JP", "Noto Sans Chinese Bold", sans-serif;
     font-weight: bold;
 }
 
 @mixin font-header {
-    font-family: "Noto Sans JP Bold", "Noto Sans chinese", sans-serif;
+    font-family: "Noto Sans JP Bold", "Noto Sans Chinese Bold", sans-serif;
     font-weight: bold;
 }
 
@@ -18,7 +18,7 @@
 }
 
 @mixin font-serif {
-    font-family: "appliMincho",serif;    
+    font-family: "appliMincho", serif;
 }
 
 @mixin no-support-background-blur($color) {
@@ -27,7 +27,7 @@
     }
 }
 
-@mixin blur-background{
+@mixin blur-background {
     background-color: $transparent-bg;
     @include blur(16px);
 }
@@ -65,31 +65,34 @@
 }
 
 $chamferedClip: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
-$pageBackgroundColor:#14141e;
+$pageBackgroundColor: #14141e;
 $inputBackgroundColor: #414040;
-$inputForegroundColor:#36393f;
-$backgroundSubColor:#25282c;
-$transparent-bg:rgb(7,8,14,0.75);
-$black:rgb(7,8,14);
+$inputForegroundColor: #36393f;
+$backgroundSubColor: #25282c;
+$grayBackgrund: rgb(114, 116, 117);
+$transparent-bg: rgb(7, 8, 14, 0.75);
+$cardBackground:rgba(73,73,96,0.5);
+$black: rgb(7, 8, 14);
 $accentColor: #1189da;
 $clickedAccentColor :#116fda;
 $textColor: #f5f5f5;
 $secondaryText: #a0a0a0;
-$blackTextColor:#080e14;
+$blackTextColor: #080e14;
 $borderColor: #f5f5f5;
-$red:rgb(202, 28, 28);
-$redSecondary:#ca1c1c;
+$red: rgb(202, 28, 28);
+$redSecondary: #ca1c1c;
 
-$fontSize:16px;
-$smallFontSize:14px;
-$smallLineHeight:14px;
 
-$memory:rgb(139, 221, 17);
-$advance:rgb(226, 195, 21);
-$prospects:rgb(89, 10, 192);
-$ozma:linear-gradient(45deg,
-    hsl(0, 100%, 50%), hsl(40, 100%, 50%),
-    hsl(80, 100%, 50%), hsl(120, 100%, 50%),
-    hsl(160, 100%, 50%), hsl(200, 100%, 50%),
-    hsl(240, 100%, 50%), hsl(280, 100%, 50%),
-    hsl(320, 100%, 50%))
+$fontSize: 16px;
+$smallFontSize: 14px;
+$smallLineHeight: 14px;
+
+$memory: rgb(139, 221, 17);
+$advance: rgb(226, 195, 21);
+$prospects: rgb(89, 10, 192);
+$ozma: linear-gradient(45deg,
+        hsl(0, 100%, 50%), hsl(40, 100%, 50%),
+        hsl(80, 100%, 50%), hsl(120, 100%, 50%),
+        hsl(160, 100%, 50%), hsl(200, 100%, 50%),
+        hsl(240, 100%, 50%), hsl(280, 100%, 50%),
+        hsl(320, 100%, 50%))

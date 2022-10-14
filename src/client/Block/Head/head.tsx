@@ -68,7 +68,7 @@ const Header: React.FC<{ title: string, backFunc?: Function }> = (props) => {
                 </h4>
                 <div></div>
                 <h4>
-                    {clock} ({hr.current}{translation("head.hr")}:{min.current}{translation("head.min")} {translation("head.sessiontime")})
+                    {clock} ({hr.current}{translation("head.hr")}:{min.current}{translation("head.min")} {translation("head.sessionTime")})
                 </h4>
                 <div className={style.wsStateWrapper}>
                     <div className={style[webSocket.state]}></div>

@@ -65,10 +65,6 @@ const JASettingsPage = {
             "name": "ゲーム最大フレームレート",
             "description":"ゲームの最大フレームレートを設定します。\nこの設定は判定精度に影響します。"
         },
-        "enable3DBackground":{
-            "name":"3Dバックグラウンドの使用",
-            "description":"3Dバックグラウンドを使用するかどうかを設定します。"
-        },
         "backgroundRenderType":{
             "name": "背景レンダリングタイプ",
             "description": "背景のレンダリング方法を選択します。"

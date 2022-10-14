@@ -15,10 +15,10 @@ const EditorStartPage: React.FC = () => {
     const navigate = useSeneChangeNavigation();
     const [projects, setProjects] = React.useState<editorVisibleProjects>([])
 
-    const newProjectMenu: menuContentsArray = [
-        { content: "editor.projects.newChart", to: "./new/chart" },
-        { content: "editor.projects.convertChart", to: "./chartconverter" },
-        { content: "editor.projects.newBehavior", to: "./new/behavior" }
+    const newProjectMenu: Array<{ content: string, onClick: Function }> = [
+        { content: "editor.projects.newChart", onClick:newChartProject },
+        { content: "editor.projects.convertChart", onClick: ()=>navigate("./chartconverter") },
+        { content: "editor.projects.newBehavior", onClick: () => navigate("./new/behavior") }
     ]
 
     const getProject = React.useMemo(async () => {
@@ -34,8 +34,7 @@ const EditorStartPage: React.FC = () => {
                     for (let i = 0; i < projects.length; i++) {
                         const project = projects[i] as getEditorProject;
                         const url = project.type == "chart" ? "charteditor" : "";
-                        const to = `./${url}/${project.id}`
-                        console.log(project);
+                        const to = `./${url}/${project.id}/`
                         
                         const data = {
                             name: project.name,
@@ -83,7 +82,7 @@ const EditorStartPage: React.FC = () => {
                             {
                                 newProjectMenu.map((menu, index) => {
                                     return (
-                                            <div className={style.newprojectCard} onClick={newChartProject} key={index}>
+                                            <div className={style.newprojectCard} onClick={()=>menu.onClick()} key={index}>
                                                 <h2><TranslateText content={menu.content} /></h2>
                                             </div>
                                     )

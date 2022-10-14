@@ -12,6 +12,7 @@
     align-items: center;
     justify-items: center;
     justify-content: center;
+    @include font-title;
 
     @media screen and (max-height: 540px) {
         grid-template-rows: 16px 1fr 1fr 32px 4px;
@@ -20,12 +21,11 @@
     .title {
         grid-row: 2;
         text-align: center;
-        @include font-title;
-
         h1 {
             font-size: 2.5em;
             margin: 0;
             text-shadow: #141414 4px 4px 0px;
+            @include font-title;
         }
 
     }

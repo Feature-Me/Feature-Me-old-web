@@ -19,9 +19,9 @@ const LinkWrapper: React.FC<linkWrapperPropsType> = (props): JSX.Element => {
     }
 
     return (
-        <span onClick={handleClick} className={props.className}>
+        <div onClick={handleClick} className={props.className}>
         {props.children}
-        </span>
+        </div>
     )
 }
 

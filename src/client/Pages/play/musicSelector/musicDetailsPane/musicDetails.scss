@@ -29,6 +29,9 @@
         background-image: linear-gradient(to right, black, transparent);
         text-shadow: 0 0 4px $textColor;
         clip-path: polygon(16px 0, 100% 0, 100% 100%, 0 100%, 0 16px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         @include small-device-font-big;
     }
 
@@ -69,79 +72,89 @@
     }
 
     .selections {
-        
-        .solo{
+
+        .solo {
             height: 100%;
-                width: 100%;
-                overflow-x: auto;
-                overflow-y: hidden;
-                display: grid;
-                grid-template-columns: repeat(5, 1fr);
-                grid-template-rows: 1fr;
-                column-gap: 16px;
-                align-items: center;
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: 1fr;
+            column-gap: 16px;
+            align-items: center;
         }
 
-        .multi{
+        .multi {
             height: 100%;
-                width: 100%;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-            button{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            button {
                 width: 80%;
             }
 
         }
 
 
-        button{
+        button {
             display: inline-block;
             height: 48px;
             line-height: 24px;
             font-weight: 900;
         }
-        .diffbtn:hover{
+
+        .diffbtn:hover {
             background-color: $accentColor;
             background-image: none;
-            
-            &::before{
+
+            &::before {
                 transition: 0.2s;
             }
         }
 
-        .memory{
+        .memory {
             background-color: $memory;
+
             &:hover {
-                &::before{
+                &::before {
                     background-color: $memory;
                 }
             }
         }
-        .advance{
+
+        .advance {
             background-color: $advance;
+
             &:hover {
-                &::before{
+                &::before {
                     background-color: $advance;
                 }
             }
         }
-        .prospects{
+
+        .prospects {
             background-color: $prospects;
+
             &:hover {
-                &::before{
+                &::before {
                     background-color: $prospects;
                 }
             }
         }
-        .ozma{
+
+        .ozma {
             @include ozma-background;
-            &::before{
+
+            &::before {
                 background-image: none;
             }
+
             &:hover {
-                &::before{
+                &::before {
                     @include ozma-background;
                 }
             }
