@@ -12,8 +12,9 @@ import { chartProjectState } from "State/editor/chartProjectState";
 import style from "./chartEditor.scss"
 
 const ChartEditor: React.FC = () => {
-    const navigate = useSeneChangeNavigation();
-    const [chartProject,setChartProject] = useRecoilState(chartProjectState);
+    const navigate = useNavigate();
+    const sceneChange = useSeneChangeNavigation();
+    const [chartProject, setChartProject] = useRecoilState(chartProjectState);
 
     const menuTabs: menuContentsArray = [
         { content: "editor.chartEditor.menuTab.overView", to: "./overview" },
@@ -24,7 +25,7 @@ const ChartEditor: React.FC = () => {
 
     return (
         <div className={style.chartEditor}>
-            <Header title="Chart Editor" backFunc={()=>navigate(-2)} />
+            <Header title="Chart Editor" backFunc={() => sceneChange(-2)} />
             <div className={style.head}>
                 <h2>{chartProject.project.name}</h2>
                 {/*space*/}
@@ -34,7 +35,7 @@ const ChartEditor: React.FC = () => {
                     {
                         menuTabs.map((menu, index) => {
                             return (
-                                <div className={style.tab} key={index} onClick={()=>navigate(menu.to)}><TranslateText content={menu.content} /></div>
+                                <div className={style.tab} key={index} onClick={() => navigate(menu.to)}><TranslateText content={menu.content} /></div>
                             )
                         })
                     }
@@ -49,7 +50,7 @@ const ChartEditor: React.FC = () => {
 
             </div>
             <div className={style.editorWrapper}>
-                    <ChartEditorViewRouter />
+                <ChartEditorViewRouter />
             </div>
             <div className={style.footer}>
 

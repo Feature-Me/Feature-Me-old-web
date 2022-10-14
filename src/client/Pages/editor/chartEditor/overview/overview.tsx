@@ -9,6 +9,11 @@ import style from "./overview.scss";
 
 const ChartEditorOverView: React.FC = () => {
     const chartEditorProject = useRecoilValue(chartProjectState);
+
+    React.useEffect(()=>{
+        document.title = `Editor - Overview - Feature Me`;
+    },[])
+
     return (
         <div className={style.overview}>
             <h1><TranslateText content="editor.chartEditor.overView.title" /></h1>

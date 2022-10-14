@@ -22,6 +22,10 @@ const JAEditorTranslation = {
                 "musics":"楽曲",
                 "charts":"チャート"
             }
+        },
+        "metadata":{
+            "title":"メタデータ",
+            
         }
     },
     "converter":{
