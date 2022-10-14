@@ -28,7 +28,7 @@ function sumArray(array: Array<number>): number {
 
 function fetchResourcesUpdate() {
     return new Promise<string>((resolve, reject) => {
-        toast.info(<TranslateText contentData={"resourcesManager.resources.notifications.downloading"} />);
+        toast.info(<TranslateText content={"resourcesManager.resources.notifications.downloading"} />);
         fetch("/update/map", {
             method: "GET",
             headers: {
@@ -40,16 +40,16 @@ function fetchResourcesUpdate() {
                 fetchBehaviorUpdate(res.behavior),
                 fetchMusicUpdate(res.music)
             ]).then(values => {
-                const ResourcesDownloaded = JSON.parse(localStorage.getItem("ResourcesDownloaded")!);
+                const resourcesDownloaded = JSON.parse(localStorage.getItem("resourcesDownloaded")!);
                 for (const name of values) {
                     if (name[2]) {
-                        ResourcesDownloaded[name[2]] = {
+                        resourcesDownloaded[name[2]] = {
                             initialized: true,
                             version: name[1]
                         }
                     }
                 }
-                localStorage.setItem("ResourcesDownloaded", JSON.stringify(ResourcesDownloaded));
+                localStorage.setItem("resourcesDownloaded", JSON.stringify(resourcesDownloaded));
 
                 resolve("Successfully initialized resources");
             }).catch(err => {
@@ -57,7 +57,7 @@ function fetchResourcesUpdate() {
             })
         }).catch(err => {
             console.log(err);
-            toast.error(`${<TranslateText contentData={"resourcesManager.resources.notifications.downloadingFailed"} />}: ${err.message}`);
+            toast.error(`${<TranslateText content={"resourcesManager.resources.notifications.downloadingFailed"} />}: ${err.message}`);
             reject(err);
         })
     })
@@ -66,23 +66,23 @@ function fetchResourcesUpdate() {
 
 
 function fetchBackgroundUpdate(versionMap: versionMap) {
-    const ResourcesDownloaded = JSON.parse(localStorage.getItem("ResourcesDownloaded")!);
+    const resourcesDownloaded = JSON.parse(localStorage.getItem("resourcesDownloaded")!);
     return new Promise<[number, string, string]>(async (resolve, reject) => {
         if (!versionMap) {
-            toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.noMap"} />);
+            toast.error(<TranslateText content={"resourcesManager.resources.notifications.noMap"} />);
             reject();
             return;
         }
 
         //download update from url list
         const fetchUrl = [];
-        let latestVersion: string = ResourcesDownloaded.background.version;
+        let latestVersion: string = resourcesDownloaded.background.version;
         let downloadCount = 0;
         let downloadSize = 0;
         for (const version in versionMap) {
             //compare and download if newer
             if (version == "initialResources") continue;
-            if (compareVersions(version, JSON.parse(localStorage.getItem("ResourcesDownloaded")!).background.version) == 1) fetchUrl.push(versionMap[version]);
+            if (compareVersions(version, JSON.parse(localStorage.getItem("resourcesDownloaded")!).background.version) == 1) fetchUrl.push(versionMap[version]);
         }
 
         if (fetchUrl.length == 0) {
@@ -107,7 +107,7 @@ function fetchBackgroundUpdate(versionMap: versionMap) {
                     const hash = await window.crypto.subtle.digest("SHA-256", res);
                     const hashString = Array.from(new Uint8Array(hash)).map(x => x.toString(16).padStart(2, "0")).join("");
                     if (hashString != version.hash) {
-                        toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.model.hashMismatch"} />);
+                        toast.error(<TranslateText content={"resourcesManager.resources.notifications.model.hashMismatch"} />);
                         return;
                     }
 
@@ -117,7 +117,7 @@ function fetchBackgroundUpdate(versionMap: versionMap) {
                     JSZip.loadAsync(res).then(async zip => {
                         //
                         if (!zip.file("FileMap.json")) {
-                            toast.error(<TranslateText contentData={"resourcesManager.resources.notificationsmodel.music.noFileMap"} />);
+                            toast.error(<TranslateText content={"resourcesManager.resources.notificationsmodel.music.noFileMap"} />);
                             //reject("Error fetching resources update: FileMap.json not found");
                             return;
                         }
@@ -130,7 +130,7 @@ function fetchBackgroundUpdate(versionMap: versionMap) {
                                 }
                             }
                             catch (error) {
-                                toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.model.extractFailed"} />);
+                                toast.error(<TranslateText content={"resourcesManager.resources.notifications.model.extractFailed"} />);
                                 console.log(error);
 
                                 reject(error);
@@ -139,7 +139,7 @@ function fetchBackgroundUpdate(versionMap: versionMap) {
                     });
                 }).catch(err => {
                     console.log(err);
-                    toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.downloadingFailed"} end={err} />);
+                    toast.error(<TranslateText content={"resourcesManager.resources.notifications.downloadingFailed"} end={err} />);
                 })
         }
     })
@@ -148,22 +148,22 @@ function fetchBackgroundUpdate(versionMap: versionMap) {
 //below, logic is the same as background. Just changed the some variables and some other things.
 
 function fetchBehaviorUpdate(versionMap: versionMap) {
-    const ResourcesDownloaded = JSON.parse(localStorage.getItem("ResourcesDownloaded")!);
+    const resourcesDownloaded = JSON.parse(localStorage.getItem("resourcesDownloaded")!);
     return new Promise<[number, string, string]>(async (resolve, reject) => {
 
         if (!versionMap) {
-            toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.noMap"} />);
+            toast.error(<TranslateText content={"resourcesManager.resources.notifications.noMap"} />);
             reject();
             return;
         }
 
         const fetchUrl = [];
-        let latestVersion: string = ResourcesDownloaded.behavior.version;
+        let latestVersion: string = resourcesDownloaded.behavior.version;
         let downloadCount = 0;
         let downloadSize = 0;
         for (const version in versionMap) {
             if (version == "initialResources") continue;
-            if (compareVersions(version, JSON.parse(localStorage.getItem("ResourcesDownloaded")!).behavior.version) == 1) fetchUrl.push(versionMap[version]);
+            if (compareVersions(version, JSON.parse(localStorage.getItem("resourcesDownloaded")!).behavior.version) == 1) fetchUrl.push(versionMap[version]);
         }
 
         if (fetchUrl.length == 0) {
@@ -188,7 +188,7 @@ function fetchBehaviorUpdate(versionMap: versionMap) {
                 const hash = await window.crypto.subtle.digest("SHA-256", res);
                 const hashString = Array.from(new Uint8Array(hash)).map(x => x.toString(16).padStart(2, "0")).join("");
                 if (hashString != version.hash) {
-                    toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.model.hashMismatch"} />);
+                    toast.error(<TranslateText content={"resourcesManager.resources.notifications.model.hashMismatch"} />);
                     return;
                 }
 
@@ -197,7 +197,7 @@ function fetchBehaviorUpdate(versionMap: versionMap) {
                 JSZip.loadAsync(res).then(async zip => {
 
                     if (!zip.file("FileMap.json")) {
-                        toast.error(<TranslateText contentData={"resourcesManager.resources.notificationsmodel.music.noFileMap"} />);
+                        toast.error(<TranslateText content={"resourcesManager.resources.notificationsmodel.music.noFileMap"} />);
                         console.error("Error fetching resources update: FileMap.json not found");
                         reject("Error fetching resources update: FileMap.json not found");
                     }
@@ -210,7 +210,7 @@ function fetchBehaviorUpdate(versionMap: versionMap) {
                             }
                         }
                         catch (error) {
-                            toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.model.extractFailed"} />);
+                            toast.error(<TranslateText content={"resourcesManager.resources.notifications.model.extractFailed"} />);
                             console.log(error);
 
                             reject(error);
@@ -219,23 +219,23 @@ function fetchBehaviorUpdate(versionMap: versionMap) {
                 });
             }).catch(err => {
                 console.log(err);
-                toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.downloadingFailed"} end={err} />);
+                toast.error(<TranslateText content={"resourcesManager.resources.notifications.downloadingFailed"} end={err} />);
             })
         }
     })
 }
 
 function fetchMusicUpdate(versionMap: versionMap) {
-    const ResourcesDownloaded = JSON.parse(localStorage.getItem("ResourcesDownloaded")!);
+    const resourcesDownloaded = JSON.parse(localStorage.getItem("resourcesDownloaded")!);
     return new Promise<[number, string, string]>(async (resolve, reject) => {
         if (!versionMap) {
-            toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.noMap"} />);
+            toast.error(<TranslateText content={"resourcesManager.resources.notifications.noMap"} />);
             reject();
             return;
         }
 
         const fetchUrl = [];
-        let latestVersion: string = ResourcesDownloaded.music.version;
+        let latestVersion: string = resourcesDownloaded.music.version;
         let downloadCount = 0;
         let downloadSize = 0;
 
@@ -264,7 +264,7 @@ function fetchMusicUpdate(versionMap: versionMap) {
                 JSZip.loadAsync(res).then(async zip => {
 
                     if (!zip.file("FileMap.json")) {
-                        toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.music.noFileMap"} />);
+                        toast.error(<TranslateText content={"resourcesManager.resources.notifications.music.noFileMap"} />);
                         reject("Error fetching resources update: FileMap.json not found");
                     }
                     else {
@@ -272,11 +272,11 @@ function fetchMusicUpdate(versionMap: versionMap) {
                             const fileMap = JSON.parse(await zip.file("FileMap.json")!.async("string"));
                             await parseMusicCollection(zip);
                             if (i == fetchUrl.length - 1) {
-                                localStorage.setItem("ResourcesDownloaded", JSON.stringify(ResourcesDownloaded));
+                                localStorage.setItem("resourcesDownloaded", JSON.stringify(resourcesDownloaded));
                                 resolve([downloadSize, compareVersions(fileMap.version, latestVersion) == 1 ? fileMap.version : latestVersion, "music"]);
                             }
                         } catch (error) {
-                            toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.music.extractFailed"} />);
+                            toast.error(<TranslateText content={"resourcesManager.resources.notifications.music.extractFailed"} />);
                             console.log(error);
                             reject(error);
                         }
@@ -285,7 +285,7 @@ function fetchMusicUpdate(versionMap: versionMap) {
             })
                 .catch(err => {
                     console.log(err);
-                    toast.error(<TranslateText contentData={"resourcesManager.resources.notifications.downloadingFailed"} end={err} />);
+                    toast.error(<TranslateText content={"resourcesManager.resources.notifications.downloadingFailed"} end={err} />);
                 })
         }
 
