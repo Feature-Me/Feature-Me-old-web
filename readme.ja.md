@@ -14,6 +14,10 @@
 
 # パッチノート
 
+## 00068-beta(Version 0.5.7)
+Commit A:
+チャートプロジェクトの型,初期値を変更
+
 ## 00067-beta(Version 0.5.7)
 Commit A:
 

@@ -1,3 +1,4 @@
+import { m } from "framer-motion";
 import { atom } from "recoil";
 
 const defaultChartProjectState: chartEditorType= {
@@ -11,7 +12,12 @@ const defaultChartProjectState: chartEditorType= {
             thumbnail: new ArrayBuffer(0),
             time: 0,
             created: 0,
-            saved: 0
+            saved: 0,
+            defaultMusic:"",
+            demo:{
+                start:0,
+                end:0,
+            },
         },
         music: [],
         chart: [],

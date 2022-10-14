@@ -22,8 +22,13 @@ const ChartLoader: React.FC = () => {
                 license: "",
                 thumbnail: new ArrayBuffer(0),
                 time: 0,
+                demo:{
+                    start:0,
+                    end:0
+                },
                 created: 0,
-                saved: 0
+                saved: 0,
+                defaultMusic:""
             },
             music: [],
             chart: [],
