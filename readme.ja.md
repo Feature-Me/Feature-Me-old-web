@@ -23,6 +23,14 @@ metadata,overviewページの更新
 
 日本語 言語リソースの更新
 
+Commit B:
+
+musicページの追加
+
+コンバーターの更新
+
+エディター ページの更新
+
 ## 00071-beta(Version 0.5.8)
 Commit A:
 
