@@ -1,12 +1,12 @@
 import { tapNote, damageTapNote, holdNote, brightNote, seedNote, flickNote } from "../chartClass/notes";
-import easing from "../../Utils/easing/easing";
+import easing from "../../../Utils/easing/easing";
 
 interface chartNote {
     type: "tap" | "damagetap" | "hold" | "bright" | "seed" | "flick"
     time: number
     //lane: 1 | 2 | 3 | 4 | "left" | "right"
     script?: Array<string>
-    speed?:{
+    speed?: {
         type: "absolute" | "relative" | "fixedTime"
         value: number
     }
@@ -40,7 +40,7 @@ interface chartSeedNote extends chartNote {
 
 interface chartFlickNote extends chartNote {
     type: "flick"
-    lane: "left" |"center" | "right"
+    lane: "left" | "center" | "right"
     direction: "left" | "right"
 }
 
@@ -70,7 +70,7 @@ interface chartTextEffect extends chartEffect {
     type: "text"
     time: number
     duration: number
-    textType : "string" | "lng"
+    textType: "string" | "lng"
     data: string
 }
 
@@ -99,6 +99,6 @@ interface chartType {
         scorePerNote: number
         chain: number
     }
-    notes: Array<tapNote|damageTapNote|holdNote|brightNote|seedNote|flickNote>
+    notes: Array<tapNote | damageTapNote | holdNote | brightNote | seedNote | flickNote>
     effects: Array<chartEffect>
 }

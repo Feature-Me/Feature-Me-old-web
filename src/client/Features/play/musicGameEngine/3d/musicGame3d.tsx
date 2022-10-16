@@ -18,7 +18,7 @@ import MusicGameUI from "../UI/musicGameUI";
 import loadBehavior from "Utils/Storage/resourcesLoader/loadBehavior";
 import loadSoundEffect from "Utils/Storage/resourcesLoader/loadSoundEffect";
 import arrayBufferToBase64 from "Utils/ArrayBufferToBase64/ArrayBufferToBase64";
-import parseChart from "Features/parseChart/parseChart";
+import parseChart from "Features/play/parseChart/parseChart";
 import sleep from "Utils/sleep/sleep";
 
 import renderingStatus from "Utils/getRenderingStatus/renderingStatus";
@@ -29,9 +29,9 @@ import musicSelectorState from "State/play/musicSelector/musicSelectorState";
 import * as musicGame from "State/play/game/musicGame/musicGameState"
 
 import version from "Config/versions.json";
-import { chartType } from "Features/parseChart/chartSample";
-import acceptBehavior from "Features/acceptBehavior/acceptBehavior";
-import { brightNote, holdNote, note, seedNote, tapNote } from "Features/chartClass/notes";
+import { chartType } from "Features/play/parseChart/chartSample";
+import acceptBehavior from "Features/play/acceptBehavior/acceptBehavior";
+import { brightNote, holdNote, note, seedNote, tapNote } from "Features/play/chartClass/notes";
 import { musicGameVariablesType } from "Types/play/game/gameVariables";
 import { match } from "ts-pattern";
 import easings from "Utils/easing/easing";

@@ -2,12 +2,12 @@ import { Howl } from "howler";
 import * as THREE from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import scrollSpeedToScrollTime from "Utils/scrollSpeedToScrollTime/scrollSpeedToScrollTime";
-import easing from "../../Utils/easing/easing";
+import easing from "../../../Utils/easing/easing";
 
 import { chartBrightNote, chartDamageTapNote, chartFlickNote, chartHoldNote, chartNote, chartSeedNote, chartTapNote } from "../parseChart/chartSample";
 
 class note {
-    type:chartNote["type"];
+    type: chartNote["type"];
     time: number;
     script: Array<string>;
     note: THREE.Object3D;
@@ -31,13 +31,13 @@ class note {
             loop: false
         });
     }
-    judge(judgeTime: number): { judge: judgeText, accuracy:number}| undefined{
-        if(this.judged) return;
+    judge(judgeTime: number): { judge: judgeText, accuracy: number } | undefined {
+        if (this.judged) return;
         this.judged = true;
-        let judgeText:judgeText;
+        let judgeText: judgeText;
         if (Math.abs(judgeTime - this.time) > 150) judgeText = "lost"
-        else if(Math.abs(judgeTime - this.time) < 40) judgeText = "stunning";
-        else if(Math.abs(judgeTime - this.time) < 75) judgeText = "glossy";
+        else if (Math.abs(judgeTime - this.time) < 40) judgeText = "stunning";
+        else if (Math.abs(judgeTime - this.time) < 75) judgeText = "glossy";
         else judgeText = "moderate";
 
         if (judgeText != "lost") this.audio.play();
@@ -52,7 +52,7 @@ class note {
         this.note = behavior;
         this.note.position.set(0, 0.1, 100);
     }
-    setAudio(audioUrl: string,volume:number) {
+    setAudio(audioUrl: string, volume: number) {
         this.audio = new Howl({
             src: [audioUrl]
         });
@@ -71,8 +71,8 @@ class note {
         this.note.position.z = z;
     }
     getPositionFromEasing(progress: number) {
-        if(typeof this.transitionEase === "function") return this.transitionEase(progress);
-        else if(this.transitionEase in easing) return easing[this.transitionEase as keyof typeof easing](progress);
+        if (typeof this.transitionEase === "function") return this.transitionEase(progress);
+        else if (this.transitionEase in easing) return easing[this.transitionEase as keyof typeof easing](progress);
         else return easing.linear(progress);
     }
 }
@@ -118,14 +118,14 @@ class holdNote extends note {
         super.setBehavior(model);
         const x = 4 * this.lane - 6;
         this.note.position.x = x;
-        
-        const fromZ = -(0/this.scrollTime) * 87.5;
-        const toZ = -(this.duration/this.scrollTime) * 87.5;
-        this.note.position.z = (fromZ - toZ) /8;
+
+        const fromZ = -(0 / this.scrollTime) * 87.5;
+        const toZ = -(this.duration / this.scrollTime) * 87.5;
+        this.note.position.z = (fromZ - toZ) / 8;
         this.note.name = "hold";
     }
-    getChain(bpm:number): number{
-        this.chainCount = Math.floor(this.duration / (60 / bpm)*2);
+    getChain(bpm: number): number {
+        this.chainCount = Math.floor(this.duration / (60 / bpm) * 2);
         return this.chainCount;
     }
 }
@@ -138,11 +138,11 @@ class brightNote extends note {
         super.setBehavior(model);
         this.note.name = "bright";
     }
-     judge(judgeTime: number){
-        if(this.judged) return;
+    judge(judgeTime: number) {
+        if (this.judged) return;
         this.judged = true;
-        let judgeText:judgeText;
-        if(Math.abs(judgeTime - this.time) > 150) judgeText = "lost";
+        let judgeText: judgeText;
+        if (Math.abs(judgeTime - this.time) > 150) judgeText = "lost";
         else judgeText = "stunning";
         if (judgeText != "lost") this.audio.play();
         return {
@@ -165,15 +165,15 @@ class seedNote extends note {
         this.note.name = "seed";
     }
     judge(judgeTime: number) {
-        if(this.judged) return;
+        if (this.judged) return;
         this.judged = true;
-        console.log(judgeTime,this.time);
-        
-        if(judgeTime - this.time > 100)
-            return{
-                judge:"lost" as judgeText,
-                accuracy:0
-        }
+        console.log(judgeTime, this.time);
+
+        if (judgeTime - this.time > 100)
+            return {
+                judge: "lost" as judgeText,
+                accuracy: 0
+            }
         this.audio.play();
         return {
             judge: "stunning" as judgeText,
@@ -186,7 +186,7 @@ class seedNote extends note {
 }
 
 class flickNote extends note {
-    lane: "left" | "center" |"right";
+    lane: "left" | "center" | "right";
     direction: "left" | "right";
     constructor(note: chartFlickNote) {
         super(note);
@@ -198,7 +198,7 @@ class flickNote extends note {
         const x = this.lane === "left" ? -4 : this.lane === "right" ? 4 : 0;
         this.note.position.x = x;
 
-        if(this.direction === "right") {
+        if (this.direction === "right") {
             this.note.rotation.y = Math.PI;
         }
         this.note.name = "flick";

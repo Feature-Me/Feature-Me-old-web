@@ -25,6 +25,14 @@ Number inputでいずれかのpropsの入力値が0のときにバグが怒ら�
 
 Textinputコンポーネントでmixinのパスを修正
 
+package.jsonとライブラリの更新
+
+Commit B:
+
+Featuresディレクトリの移動と整理
+
+一部UtilsをFeaturesへ移動
+
 
 ## 00070-beta(Version 0.5.8)
 NumberInputの修正

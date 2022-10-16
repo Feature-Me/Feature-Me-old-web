@@ -1,4 +1,4 @@
-import { chartBrightNote, chartJsonType, chartSeedNote, chartTapNote } from "Features/parseChart/chartSample";
+import { chartBrightNote, chartJsonType, chartSeedNote, chartTapNote } from "Features/play/parseChart/chartSample";
 import json5 from "json5"
 import { alphaChartType, alphaNote, chartJsonFromAlpha, chartNoteFromAlpha } from "Types/features/chartConvert/FeatureMeAlpha";
 

@@ -13,7 +13,10 @@ function createNewProject() {
             bpm: 0,
             composer: "",
             license: "",
-            thumbnail: new ArrayBuffer(0),
+            thumbnail: {
+                data:new ArrayBuffer(0),
+                mime:"image/png"
+            },
             time: 0,
             demo: {
                 start: 0,
