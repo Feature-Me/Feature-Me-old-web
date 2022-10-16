@@ -1,5 +1,5 @@
-import MusicGame3D from "Features/musicGameEngine/3d/musicGame3d";
-import MusicGameUI from "Features/musicGameEngine/UI/musicGameUI";
+import MusicGame3D from "Features/play/musicGameEngine/3d/musicGame3d";
+import MusicGameUI from "Features/play/musicGameEngine/UI/musicGameUI";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 import React from "react";
 

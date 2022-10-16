@@ -5,7 +5,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useRecoilState } from "recoil";
 import gameConfigState from "State/gameConfig/gameConfig";
-import SettingDetails, { settingDetailsData } from "../detailsPane/settingDetails";
+import SettingDetails, { settingDetailsData, settingsData } from "../detailsPane/settingDetails";
 
 import style from "../settingsContent.scss"
 
@@ -21,7 +21,7 @@ const GeneralSettings: React.FC = () => {
         { value: "zh_cn", label: "简体中文(ZH-CN)" },
     ];
 
-    const settings: Array<{ details: settingDetailsData, input: React.ReactNode }> = [
+    const settings: settingsData = [
         {
             details: {
                 title: <TranslateText content="settingsPage.general.language.name" />,

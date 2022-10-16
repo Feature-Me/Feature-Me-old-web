@@ -5,7 +5,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useRecoilState } from "recoil";
 import gameConfigState from "State/gameConfig/gameConfig";
-import SettingDetails, { settingDetailsData } from "../detailsPane/settingDetails";
+import SettingDetails, { settingDetailsData, settingsData } from "../detailsPane/settingDetails";
 import style from "../settingsContent.scss"
 import KeybindSettings from "./keybindSettings/keybindSettings";
 
@@ -19,7 +19,7 @@ const GameplaySettings: React.FC = () => {
     const [settingDetailsData, setiSettingDetailsData] = React.useState<settingDetailsData>({ title: "", processingLoad: "none", description: "" });
     const settingListRef = React.useRef<HTMLDivElement>(null);
 
-    const settings: Array<{ details: settingDetailsData, input: React.ReactNode }> = [
+    const settings: settingsData = [
         {
             details: {
                 title: <TranslateText content="settingsPage.gameplay.keybind.name" />,
