@@ -36,7 +36,6 @@ body {
     background-color: rgb(20, 20, 30);
     height: 100vh;
     width: 100vw;
-    overflow: hidden;
     margin: 0;
     color: whitesmoke;
     @include font-body;
@@ -44,11 +43,6 @@ body {
     @include font-size;
     scroll-behavior: smooth;
     cursor: url("../Assets/Images/pointer.cur"), default;
-    form,select,input,textarea,button,label{
-        cursor: inherit;
-        outline: none;
-        @include font-body;
-    }
 
 }
 
@@ -56,19 +50,30 @@ body {
     height: 100vh;
     width: 100vw;
     position: relative;
+        overflow: hidden;
 }
 
+
+* {
+    box-sizing: border-box;
+}
 
 a{
     text-decoration: none;
     color: whitesmoke;
     cursor: url("../Assets/Images/pointer.cur"), default;
 }
+ form,
+ select,
+ input,
+ textarea,
+ button,
+ label {
+     cursor: inherit;
+     outline: none;
+     @include font-body;
+ }
 
-
-*{
-    box-sizing: border-box;
-}
 h1,h2,h3,h4,h5,h6,p {
     margin: 0;
 }

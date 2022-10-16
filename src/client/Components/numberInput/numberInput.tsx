@@ -15,16 +15,16 @@ interface rangeInputPropsType extends propsType {
 
 const NumberInput: React.FC<rangeInputPropsType> = (props) => {
 
-    const min = props.min || 0;
-    const max = props.max || 100;
-    const step = props.step || 1;
-    const [value, setValue] = React.useState(props.value || ((max-min)/2+min));
+    const min = props.min ?? 0;
+    const max = props.max ?? 100;
+    const step = props.step ?? 1;
+    const [value, setValue] = React.useState(props.value ?? ((max-min)/2+min));
 
     function handleChange(num: number) {
         let newValue = value
         newValue+=num;
-        if (num < min) newValue = min
-        else if (num > max) num = max
+        if (newValue < min) newValue = min
+        else if (newValue > max) num = max
 
         setValue(newValue);
 
