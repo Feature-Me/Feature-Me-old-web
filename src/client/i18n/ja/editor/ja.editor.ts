@@ -9,6 +9,8 @@ const JAEditorTranslation = {
     },
     "chartEditor":{
         "testPlay":"テストプレイ",
+        "export":"エクスポート",
+        "save":"保存",
         "menuTab":{
             "overView":"概要",
             "metadata":"メタデータ",
@@ -25,7 +27,16 @@ const JAEditorTranslation = {
         },
         "metadata":{
             "title":"メタデータ",
-            
+            "bpm":"BPM",
+            "name":"タイトル",
+            "composer":"楽曲コンポーザ",
+            "license":"ライセンス",
+            "time":"時間(秒)",
+            "thumbnail":"サムネイル画像",
+            "changeimg":"変更"
+        },
+        "music":{
+            "title":"楽曲"
         }
     },
     "converter":{

@@ -14,6 +14,15 @@
 
 # パッチノート
 
+## 00072-beta(Version 0.5.8)
+Commit A:
+
+metadata,overviewページの更新
+
+エディター スタートページ の更新
+
+日本語 言語リソースの更新
+
 ## 00071-beta(Version 0.5.8)
 Commit A:
 
