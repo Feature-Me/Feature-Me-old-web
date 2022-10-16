@@ -31,6 +31,10 @@ musicページの追加
 
 エディター ページの更新
 
+Commit C:
+
+ルーター,型,ステートの更新
+
 ## 00071-beta(Version 0.5.8)
 Commit A:
 
