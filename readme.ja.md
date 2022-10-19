@@ -14,6 +14,9 @@
 
 # パッチノート
 
+## 00075-beta(Version 0.5.8)
+Features/editor内のディレクトリ変更
+
 ## 00074-beta(Version 0.5.8)
 エディター ローダーの修正
 

@@ -8,7 +8,7 @@ import { v4 as uuidv4, v5 as uuidv5 } from "uuid";
 import databaseInfo from "Config/databaseinfo.json";
 import style from "./startPage.scss"
 import msToStringTime from "Utils/msToStringTime/msToStringTime";
-import createNewProject from "Features/editor/createNewEditorProject/createChart";
+import createNewProject from "Features/editor/chartEditor/createNewEditorProject/createChart";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 
 const EditorStartPage: React.FC = () => {
