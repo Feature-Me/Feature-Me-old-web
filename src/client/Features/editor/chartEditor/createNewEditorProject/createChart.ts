@@ -44,7 +44,6 @@ function createNewProject() {
             put.onsuccess = () => {
                 resolve(newChartProject.id)
             }
-
         }
         dbOpenRequest.onerror = () => {
             reject();

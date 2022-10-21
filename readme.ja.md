@@ -14,6 +14,10 @@
 
 # パッチノート
 
+## 00076-beta(Version 0.5.8)
+ChartEditor関連の細かな修正
+保存機能追加
+
 ## 00075-beta(Version 0.5.8)
 Features/editor内のディレクトリ変更
 

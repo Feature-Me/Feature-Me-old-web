@@ -1,6 +1,7 @@
 import Header from "Block/head/head";
 import LinkWrapper from "Components/linkWrapper/linkWrapper";
 import TranslateText from "Components/TranslateText/TranslateText";
+import saveChartProject from "Features/editor/chartEditor/save/saveChart";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 import React from "react";
 import { MdPlayArrow, MdSave } from "react-icons/md";
@@ -16,7 +17,7 @@ const ChartEditor: React.FC = () => {
     const navigate = useNavigate();
     const sceneChange = useSeneChangeNavigation();
     const [chartProject, setChartProject] = useRecoilState(chartProjectState);
-    const lastSaved = React.useRef<number>(Date.now())
+
 
     const menuTabs: menuContentsArray = [
         { content: "editor.chartEditor.menuTab.overView", to: "./overview" },
@@ -29,8 +30,7 @@ const ChartEditor: React.FC = () => {
         let saveInterval: NodeJS.Timer;
         saveInterval = setInterval(() => {
             if(chartProject.saved) return;
-            lastSaved.current = Date.now();
-            //setChartProject(proj => { return { ...proj, project: { ...proj.project, metadata: { ...proj.project.metadata, saved: Date.now() } } } })
+            saveChartProject(chartProject.project);
         }, 30000)
 
         return () => {
@@ -39,14 +39,6 @@ const ChartEditor: React.FC = () => {
 
     }, [])
 
-    React.useEffect(()=>{
-        setChartProject(proj=>{
-            return{
-                ...proj,
-                saved:false
-            }
-        })
-    },[chartProject.project])
 
     return (
         <div className={style.chartEditor}>
@@ -67,7 +59,7 @@ const ChartEditor: React.FC = () => {
                 </div>
 
                 {/* save button */}
-                <button className={`${style.save} ${style.headButton}`}>
+                <button className={`${style.save} ${style.headButton}`} onClick={()=>saveChartProject(chartProject.project)}>
                     <div className={style.iconWrapper}>
                         <MdSave />
                     </div>
@@ -95,7 +87,6 @@ const ChartEditor: React.FC = () => {
                 <ChartEditorViewRouter />
             </div>
             <div className={style.footer}>
-                <span>{chartProject.saved ? "Saved" : "Unsaved changes"}</span>
             </div>
         </div>
     )
