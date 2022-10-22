@@ -14,6 +14,9 @@
 
 # パッチノート
 
+## 00077-beta(Version 0.5.9)
+Editor 楽曲管理画面追加。
+
 ## 00076-beta(Version 0.5.8)
 ChartEditor関連の細かな修正
 保存機能追加

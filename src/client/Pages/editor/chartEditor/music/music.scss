@@ -3,4 +3,18 @@
     grid-template-rows: 64px 1fr;
     grid-template-columns: 1fr;
     height: 100%;
+
+    .view {
+        display: grid;
+        grid-template-rows: repeat(2,48px) 1fr;
+        grid-template-columns: 1fr;
+        row-gap: 8px;
+        height: 100%;
+
+        .interaction{
+            display: grid;
+            grid-template-rows: 1fr;
+            grid-template-columns: repeat(2,1fr);
+        }
+    }
 }
