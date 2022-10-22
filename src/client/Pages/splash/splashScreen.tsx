@@ -9,11 +9,13 @@ import slpashImage2 from "Assets/Images/splash-logo-2.png";
 import sleep from "Utils/sleep/sleep";
 import TranslateText from "Components/TranslateText/TranslateText";
 import { useNavigate } from "react-router";
+import { BsChevronDoubleRight } from "react-icons/bs";
 
 const SplashScreen: React.FC = () => {
     const navigate = useNavigate();
     const logoRef = React.useRef<HTMLDivElement>(null);
     const cautionTextRef = React.useRef<HTMLDivElement>(null);
+    const skipRef = React.useRef<HTMLDivElement>(null);
 
     const logoImages = [splashImage1, slpashImage2];
 
@@ -54,19 +56,28 @@ const SplashScreen: React.FC = () => {
             cautionTextRef.current.style.visibility = "visible";
             cautionTextAnimationController.start(fadeInOut);
             await sleep(6000);
-            navigate("../title")
-            resolve()
+            sessionStorage.setItem("splashScreen", "true");
+            navigate("../title");
+            resolve();
         })
+    }, [])
 
-    })
+    React.useEffect(() => {
+        if (sessionStorage.getItem("splashScreen") && skipRef.current) {
+            skipRef.current.style.visibility = "visible";
+        }
+    }, [])
 
     return (
-        <div className={style.splashScreen}>
+        <div className={style.splashScreen} >
             <motion.div className={style.logo} ref={logoRef} animate={logoAnimationController} initial={initial} />
             <motion.div className={style.cautionText} ref={cautionTextRef} animate={cautionTextAnimationController} initial={initial} >
                 <h1><TranslateText content="splashScreen.caution.title" /></h1>
                 <p><TranslateText content="splashScreen.caution.description" /></p>
             </motion.div>
+            <div className={style.skip} ref={skipRef} onClick={() => navigate("../title")}>
+                <h2>skip</h2> <div className={style.iconWrapper}><BsChevronDoubleRight /></div>
+            </div>
         </div>
     )
 }

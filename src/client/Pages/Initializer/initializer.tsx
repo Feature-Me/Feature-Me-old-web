@@ -1,21 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router";
 
+import style from "./initializer.scss";
 
 const Initializer:React.FC  = ()=>{
     const navigate = useNavigate();
 
 
     React.useEffect(()=>{
-        if(sessionStorage.getItem("splashScreen")){
-            navigate("./title");
-        }else{
-            sessionStorage.setItem("splashScreen","true");
-            navigate("./splash");
-        }
+        navigate("./splash");
     })
     return(
-        <div></div>
+        <div className={style.initializer}></div>
     )
 
 }

@@ -1,3 +1,5 @@
+@import "../../Assets/mixin.scss";
+
 .splashScreen {
     position: absolute;
     height: 100%;
@@ -48,4 +50,29 @@
             padding: 16px;
         }
     }
+
+    .skip{
+        visibility: hidden;
+        position: absolute;
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr auto;
+        top: 16px;
+        right: 16px;
+        opacity: 0.8;
+        transition: 0.2s;
+        &:hover {
+                opacity: 1;
+            }
+        h2{
+            @include font-title;
+        }
+    }
+}
+
+.iconWrapper {
+    margin: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
