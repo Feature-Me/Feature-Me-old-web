@@ -9,6 +9,8 @@ interface settingDetailsData {
     description: React.ReactNode
 }
 
+type settingsData = Array<{ details: settingDetailsData, input: React.ReactNode }>
+
 const settingDetails: React.FC<{data:settingDetailsData}> = (props) => {
     const [translate,i18n] = useTranslation();
     const checkProcessingLoad  = (type:settingDetailsData["processingLoad"]) => {
@@ -36,4 +38,4 @@ const settingDetails: React.FC<{data:settingDetailsData}> = (props) => {
 }
 
 export default settingDetails;
-export type { settingDetailsData };
+export type { settingDetailsData,settingsData };

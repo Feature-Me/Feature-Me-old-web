@@ -5,7 +5,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useRecoilState } from "recoil";
 import gameConfigState from "State/gameConfig/gameConfig";
-import SettingDetails, { settingDetailsData } from "../detailsPane/settingDetails";
+import SettingDetails, { settingDetailsData, settingsData } from "../detailsPane/settingDetails";
 import style from "../settingsContent.scss"
 
 import RangeInput from "Components/RangeInput/RangeInput";
@@ -47,7 +47,7 @@ const GraphicsSettings: React.FC = () => {
         { label: "32X", value: 5 }
     ]
 
-    const settings: Array<{ details: settingDetailsData, input: React.ReactNode }> = [
+    const settings: settingsData = [
         {
             details: {
                 title: <TranslateText content="settingsPage.graphics.gameRenderType.name" />,

@@ -98,12 +98,12 @@ function render(): void {
 }
 
 
-const clickSound = new Howl({
+/* const clickSound = new Howl({
     src: clicksound,
     volume: 0.5,
     loop: false,
     autoplay: false,
-});
+}); */
 
 function init(): void {
     initLocalStorage();

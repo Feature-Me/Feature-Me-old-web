@@ -11,14 +11,13 @@ import ChamferedButton from "Components/Button/chamferedButton/chamferedButton";
 import { useTranslation } from "react-i18next";
 import TranslateText from "Components/TranslateText/TranslateText";
 import SelectBox from "Components/SelectBox/selectBox";
-import convertAlphaChart from "Features/chartConvert/FeatureMeAlpha";
+import convertAlphaChart from "Features/editor/chartConvert/FeatureMeAlpha";
 import { useRecoilState } from "recoil";
 import chartConverterState from "State/editor/chartConverterState";
 
 const ChartConverter: React.FC = () => {
     const [translate, i18n] = useTranslation()
     let inputEditor: Ace.Editor;
-    const inputFileRef = React.useRef<HTMLInputElement>(null);
     const [chartText, setChartText] = React.useState<string>("");
     const [inputFileName, setInputFileName] = React.useState<string>(translate("editor.converter.input.selectedFile"))
     const [convertType, setConvertType] = React.useState<string>("");
@@ -53,9 +52,9 @@ const ChartConverter: React.FC = () => {
         document.title = `Convert Chart - Feature Me`;
     }, [])
 
-    function inputFile(e: React.FormEvent<HTMLInputElement>) {
-        if (!inputFileRef.current) return;
-        const file = inputFileRef.current.files?.item(0);
+    function inputFile(e: React.ChangeEvent<HTMLInputElement>) {
+        if (!e.target.files) return;
+        const file = e.target.files.item(0);
         if (!file) return;
         if (file.name) {
             setChartConvert(convert => {
@@ -71,19 +70,19 @@ const ChartConverter: React.FC = () => {
     function convert() {
 
         if (!chartText) return;
-        let resultString:string = "";
+        let resultString: string = "";
         try {
             const chart = convertFunctions.find(f => f.name == chartConvert.convertType)?.exec(convertDirection, chartText)
             if (!chart) throw new Error("cant exec convert: unsolved function.")
             resultString = chart
         } catch (error) {
             console.log(error);
-             resultString = String(error);
+            resultString = String(error);
         }
-        setChartConvert(convert=>{
-            return{
+        setChartConvert(convert => {
+            return {
                 ...convert,
-                resultText:resultString
+                resultText: resultString
             }
         })
     }
@@ -108,9 +107,9 @@ const ChartConverter: React.FC = () => {
                         <h2><TranslateText content="editor.converter.input.file" /></h2>
                         <div>
                             {/* input file button */}
-                            <ChamferedButton onClick={() => inputFileRef.current?.click()}>Upload</ChamferedButton>
+                            <ChamferedButton ><label htmlFor="convertChartFileInput" >Upload</label></ChamferedButton>
                             <span><TranslateText content="editor.converter.input.fileName" /> {inputFileName} </span>
-                            <input type={"file"} className={style.fileInput} ref={inputFileRef} onInput={inputFile} />
+                            <input type="file" id="convertChartFileInput" className={style.fileInput} onChange={inputFile} />
                         </div>
                     </div>
                 </div>
@@ -131,9 +130,9 @@ const ChartConverter: React.FC = () => {
                         <ChamferedButton className={style.convetBtn} onClick={convert}>Convert</ChamferedButton>
                     </div>
                     <div>
-                        <a href="https://github.com/setchi/NoteEditor">Unity Note Editor</a> <br />
-                        <a href="https://github.com/TinyTany/M4ple-Editor">M4ple SUS Editor</a> <br />
-                        <a href="https://github.com/cnSchwarzer/Arcade.Launcher">Arcade AFF Editor</a>
+                        <a href="https://github.com/setchi/NoteEditor" target="_blank" >Unity Note Editor</a> <br />
+                        <a href="https://github.com/TinyTany/M4ple-Editor" target="_blank" >M4ple SUS Editor</a> <br />
+                        <a href="https://github.com/cnSchwarzer/Arcade.Launcher" target="_blank" >Arcade AFF Editor</a>
                     </div>
 
 

@@ -8,7 +8,7 @@ import { v4 as uuidv4, v5 as uuidv5 } from "uuid";
 import databaseInfo from "Config/databaseinfo.json";
 import style from "./startPage.scss"
 import msToStringTime from "Utils/msToStringTime/msToStringTime";
-import createNewProject from "Utils/createNewEditorProject/createChart";
+import createNewProject from "Features/editor/chartEditor/createNewEditorProject/createChart";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 
 const EditorStartPage: React.FC = () => {
@@ -16,8 +16,8 @@ const EditorStartPage: React.FC = () => {
     const [projects, setProjects] = React.useState<editorVisibleProjects>([])
 
     const newProjectMenu: Array<{ content: string, onClick: Function }> = [
-        { content: "editor.projects.newChart", onClick:newChartProject },
-        { content: "editor.projects.convertChart", onClick: ()=>navigate("./chartconverter") },
+        { content: "editor.projects.newChart", onClick: newChartProject },
+        { content: "editor.projects.convertChart", onClick: () => navigate("./chartconverter") },
         { content: "editor.projects.newBehavior", onClick: () => navigate("./new/behavior") }
     ]
 
@@ -35,13 +35,13 @@ const EditorStartPage: React.FC = () => {
                         const project = projects[i] as getEditorProject;
                         const url = project.type == "chart" ? "charteditor" : "";
                         const to = `./${url}/${project.id}/`
-                        
+
                         const data = {
                             name: project.name,
                             id: project.id,
                             saved: project.metadata.saved,
                             to: to,
-                            type:project.type
+                            type: project.type
                         }
                         projectsData.push(data)
                     }
@@ -52,8 +52,8 @@ const EditorStartPage: React.FC = () => {
         return projectsData;
     }, [])
 
-    function newChartProject(){
-        createNewProject().then(id=>{
+    function newChartProject() {
+        createNewProject().then(id => {
             navigate(`./charteditor/${id}`)
         })
     }
@@ -82,9 +82,9 @@ const EditorStartPage: React.FC = () => {
                             {
                                 newProjectMenu.map((menu, index) => {
                                     return (
-                                            <div className={style.newprojectCard} onClick={()=>menu.onClick()} key={index}>
-                                                <h2><TranslateText content={menu.content} /></h2>
-                                            </div>
+                                        <div className={style.newprojectCard} onClick={() => menu.onClick()} key={index}>
+                                            <h2><TranslateText content={menu.content} /></h2>
+                                        </div>
                                     )
                                 })
                             }
@@ -95,7 +95,7 @@ const EditorStartPage: React.FC = () => {
                         <div className={style.contentWrapper}>
                             {
                                 projects.map(project => {
-                                    const basePath = project.type == "chart"?"charteditor":"";
+                                    const basePath = project.type == "chart" ? "charteditor" : "";
                                     return (
                                         <LinkWrapper to={`./${basePath}/${project.id}`} key={project.id}>
                                             <div className={style.projectCard}>

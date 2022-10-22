@@ -1,9 +1,11 @@
 import Header from "Block/head/head";
 import LinkWrapper from "Components/linkWrapper/linkWrapper";
 import TranslateText from "Components/TranslateText/TranslateText";
+import saveChartProject from "Features/editor/chartEditor/save/saveChart";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 import React from "react";
-import { MdPlayArrow } from "react-icons/md";
+import { MdPlayArrow, MdSave } from "react-icons/md";
+import { TbPackgeExport } from "react-icons/tb";
 import { Route, useNavigate, useParams } from "react-router";
 import { useRecoilState } from "recoil";
 import ChartEditorViewRouter from "Routs/editorRouter/chartEditor/chartEditorViewRouter";
@@ -16,12 +18,27 @@ const ChartEditor: React.FC = () => {
     const sceneChange = useSeneChangeNavigation();
     const [chartProject, setChartProject] = useRecoilState(chartProjectState);
 
+
     const menuTabs: menuContentsArray = [
         { content: "editor.chartEditor.menuTab.overView", to: "./overview" },
         { content: "editor.chartEditor.menuTab.metadata", to: "./metadata" },
         { content: "editor.chartEditor.menuTab.music", to: "./music" },
         { content: "editor.chartEditor.menuTab.chart", to: "./chart" },
     ]
+
+    React.useEffect(() => {
+        let saveInterval: NodeJS.Timer;
+        saveInterval = setInterval(() => {
+            if(chartProject.saved) return;
+            saveChartProject(chartProject.project);
+        }, 30000)
+
+        return () => {
+            clearInterval(saveInterval)
+        }
+
+    }, [])
+
 
     return (
         <div className={style.chartEditor}>
@@ -40,8 +57,25 @@ const ChartEditor: React.FC = () => {
                         })
                     }
                 </div>
+
+                {/* save button */}
+                <button className={`${style.save} ${style.headButton}`} onClick={()=>saveChartProject(chartProject.project)}>
+                    <div className={style.iconWrapper}>
+                        <MdSave />
+                    </div>
+                    <TranslateText content="editor.chartEditor.save" />
+                </button>
+
+                {/* export button */}
+                <button className={`${style.export} ${style.headButton}`}>
+                    <div className={style.iconWrapper}>
+                        <TbPackgeExport />
+                    </div>
+                    <TranslateText content="editor.chartEditor.export" />
+                </button>
+
                 {/*test play button*/}
-                <button className={style.testplay}>
+                <button className={`${style.testplay} ${style.headButton}`}>
                     <div className={style.iconWrapper}>
                         <MdPlayArrow />
                     </div>
@@ -53,7 +87,6 @@ const ChartEditor: React.FC = () => {
                 <ChartEditorViewRouter />
             </div>
             <div className={style.footer}>
-
             </div>
         </div>
     )

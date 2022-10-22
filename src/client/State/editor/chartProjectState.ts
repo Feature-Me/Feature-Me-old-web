@@ -9,7 +9,10 @@ const defaultChartProjectState: chartEditorType= {
             bpm: 0,
             composer: "",
             license: "",
-            thumbnail: new ArrayBuffer(0),
+            thumbnail: {
+                data: new ArrayBuffer(0),
+                mime: "image/png"
+            },
             time: 0,
             created: 0,
             saved: 0,
@@ -24,6 +27,8 @@ const defaultChartProjectState: chartEditorType= {
         id: ""
     },
     page:"overview",
+    saved:true,
+    statusbar:[]
 }
 
 const chartProjectState = atom<chartEditorType>({

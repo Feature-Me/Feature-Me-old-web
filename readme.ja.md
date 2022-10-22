@@ -14,11 +14,74 @@
 
 # パッチノート
 
+## 00076-beta(Version 0.5.8)
+ChartEditor関連の細かな修正
+保存機能追加
+
+## 00075-beta(Version 0.5.8)
+Features/editor内のディレクトリ変更
+
+## 00074-beta(Version 0.5.8)
+エディター ローダーの修正
+
+## 00073-beta(Version 0.5.8)
+設定ページの更新
+
+パスの修正
+
+## 00072-beta(Version 0.5.8)
+Commit A:
+
+metadata,overviewページの更新
+
+エディター スタートページ の更新
+
+日本語 言語リソースの更新
+
+Commit B:
+
+musicページの追加
+
+コンバーターの更新
+
+エディター ページの更新
+
+Commit C:
+
+ルーター,型,ステートの更新
+
+## 00071-beta(Version 0.5.8)
+Commit A:
+
+モバイル ビューでページがオーバーフローしないように修正
+
+クリック音削除
+
+Number inputでいずれかのpropsの入力値が0のときにバグが怒らないように修正
+
+Textinputコンポーネントでmixinのパスを修正
+
+package.jsonとライブラリの更新
+
+Commit B:
+
+Featuresディレクトリの移動と整理
+
+一部UtilsをFeaturesへ移動
+
+
+## 00070-beta(Version 0.5.8)
+NumberInputの修正
+
+Views関連の修正
+
+サービスワーカー/ウェブマニフェストの変更
+
+
 ## 00069-beta(Version 0.5.7)
 ローカルストレージのキーと読み取りに使用するキーのペアを正しくしました。
 
 Threejsのアップデート
-
 
 ## 00068-beta(Version 0.5.7)
 Commit A:

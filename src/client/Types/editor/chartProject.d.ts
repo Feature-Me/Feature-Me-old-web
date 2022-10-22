@@ -5,7 +5,10 @@ interface chartProjectType extends editorProjectBase {
         bpm: number
         composer: string
         license: string
-        thumbnail: ArrayBuffer
+        thumbnail: {
+            data:ArrayBuffer
+            mime:string
+        }
         license?: string
         time: number
         demo: {
@@ -24,6 +27,7 @@ interface chartEditorMusic {
     name: string
     data: ArrayBuffer
     mime: string
+    time: number
 }
 
 interface chartEditorChart {

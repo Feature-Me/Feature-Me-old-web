@@ -20,15 +20,18 @@ const ChartLoader: React.FC = () => {
                 bpm: 0,
                 composer: "",
                 license: "",
-                thumbnail: new ArrayBuffer(0),
+                thumbnail: {
+                    data: new ArrayBuffer(0),
+                    mime: "image/png"
+                },
                 time: 0,
-                demo:{
-                    start:0,
-                    end:0
+                demo: {
+                    start: 0,
+                    end: 0
                 },
                 created: 0,
                 saved: 0,
-                defaultMusic:""
+                defaultMusic: ""
             },
             music: [],
             chart: [],
@@ -55,7 +58,12 @@ const ChartLoader: React.FC = () => {
 
     React.useEffect(() => {
         getChart.then(project => {
-            setChartProject({project,page:"overview"});
+            setChartProject(proj=>{
+                return {
+                    ...proj,
+                    project
+                }
+            });
             navigate("../edit/overview")
         }).catch((error) => {
             console.error(error);
