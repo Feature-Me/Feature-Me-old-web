@@ -10,4 +10,5 @@
     "lib": ["ES6","ES2015","DOM"],
     "moduleResolution": "node",
   },
+  "exclude": ["./commands","./router"]
 }

@@ -1,6 +1,6 @@
 {
   "name": "feature-me-webgl-ts",
-  "version": "0.5.8",
+  "version": "0.6.0",
   "description": "Music Game Feature Me",
   "main": "./dist/server/server.js",
   "scripts": {
