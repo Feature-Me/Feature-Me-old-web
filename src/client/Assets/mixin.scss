@@ -17,6 +17,10 @@
     font-family: "IBM Plex Sans JP", "Noto Sans Chinese", sans-serif;
 }
 
+@mixin font-gameText {
+    font-family: "Rajdhani Regular", helvetica, sans-serif;
+}
+
 @mixin font-serif {
     font-family: "appliMincho", serif;
 }
