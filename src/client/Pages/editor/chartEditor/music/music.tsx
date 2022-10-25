@@ -22,7 +22,7 @@ const ChartEditorMusic: React.FC = () => {
                 <div className={style.interaction}>
                     <h2><TranslateText content="editor.chartEditor.music.all" /> ({chartEditorProject.project.music.length})</h2>
                     <ChamferedButton><label htmlFor="editorMusicAddFileInput"><TranslateText content="editor.chartEditor.music.add" /></label></ChamferedButton>
-                    <input type="file" id="editorMusicAddFileInput" hidden />
+                    <input type="file" id="editorMusicAddFileInput" accept="audio/*" hidden />
                 </div>
                 <div className={style.musicList}>
 

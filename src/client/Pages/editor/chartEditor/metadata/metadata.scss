@@ -12,6 +12,14 @@
         min-width: 0;
     }
 
+    button {
+        display: flex;
+        align-items: center;
+        label {
+            width: 100%;
+        }
+    }
+
     .metadataEdit {
         height: 100%;
         width: 100%;
@@ -51,6 +59,8 @@
     }
 
 }
+
+
 
 .textInput {
     border: 1px solid $borderColor;

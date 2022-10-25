@@ -12,6 +12,15 @@
         color: $accentColor;
     }
 
+        button {
+            display: flex;
+            align-items: center;
+    
+            label {
+                width: 100%;
+            }
+        }
+
     .convert {
         display: grid;
         grid-template-rows: 1fr;
