@@ -1,15 +1,16 @@
 import React from "react";
 import { motion, useAnimation } from "framer-motion";
 
-import style from "./splashScreen.scss";
-
-import splashImage1 from "Assets/Images/splash-logo-1.png";
-
-import slpashImage2 from "Assets/Images/splash-logo-2.png";
 import sleep from "Utils/sleep/sleep";
 import TranslateText from "Components/TranslateText/TranslateText";
 import { useNavigate } from "react-router";
 import { BsChevronDoubleRight } from "react-icons/bs";
+import { Howl } from "howler";
+import style from "./splashScreen.scss";
+
+import splashImage1 from "Assets/Images/splash-logo-1.png";
+import slpashImage2 from "Assets/Images/splash-logo-2.png";
+import startup from "Assets/Sounds/startup.mp3";
 
 const SplashScreen: React.FC = () => {
     const navigate = useNavigate();
@@ -18,6 +19,11 @@ const SplashScreen: React.FC = () => {
     const skipRef = React.useRef<HTMLDivElement>(null);
 
     const logoImages = [splashImage1, slpashImage2];
+
+    const startupAudio = new Howl({
+        src: startup,
+        volume:0.5,
+    })
 
     const logoAnimationController = useAnimation();
     const cautionTextAnimationController = useAnimation();
