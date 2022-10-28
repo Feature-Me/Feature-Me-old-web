@@ -28,6 +28,7 @@ interface chartEditorMusic {
     data: ArrayBuffer
     mime: string
     time: number
+    id:string
 }
 
 interface chartEditorChart {

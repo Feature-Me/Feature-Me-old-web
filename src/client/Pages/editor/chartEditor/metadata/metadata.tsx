@@ -74,7 +74,7 @@ const ChartEditorMetadata: React.FC = () => {
 
     function setThumbnail(files: FileList | null) {
         if(!files)return;
-        const file = files.item(0);
+        const file = files[0]
         if(!file)return;
         file.arrayBuffer().then(buffer=>setMetadata("thumbnail",{data:buffer,mime:file.type}));
         file.arrayBuffer().then(buffer => console.log({ data: buffer, mime: file.type }));
