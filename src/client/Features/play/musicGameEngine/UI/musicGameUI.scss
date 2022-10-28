@@ -7,7 +7,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    
+
     .primary_board {
         @include blur(16px);
         position: absolute;
@@ -20,26 +20,26 @@
         box-shadow: 0 0 4px 2px $accentColor;
         transform-origin: left top;
         display: grid;
-            grid-template-rows: 48px 64px 4px 64px;
-            grid-template-columns: 1fr;
-            row-gap: 4px;
+        grid-template-rows: 48px 64px 4px 64px;
+        grid-template-columns: 1fr;
+        row-gap: 4px;
+
         h2 {
-            margin: 0;
-            padding: 0;
             line-height: 64px;
             font-size: 48px;
             text-shadow: 2px 2px 2px #5e5e5e;
+            @include font-gameText;
         }
 
-        h3{
-            margin: 0;
-            padding: 0;
+        h3 {
             line-height: 32px;
             font-size: 28px;
             text-shadow: 2px 2px #3d6264;
+            @include font-gameText;
+            font-weight: bold;
         }
 
-        p{
+        p {
             margin: 0;
             padding: 0;
             line-height: 24px;
@@ -49,13 +49,13 @@
 
         .difficulty {
             display: grid;
-                grid-template-rows: 1fr;
-                grid-template-columns: 48px 1fr;
-                align-items: center;
-                justify-items: center;
+            grid-template-rows: 1fr;
+            grid-template-columns: 48px 1fr;
+            align-items: center;
+            justify-items: center;
             height: 48px;
 
-            .level{
+            .level {
                 height: 48px;
                 width: 48px;
                 font-size: 36px;
@@ -65,32 +65,36 @@
             }
         }
 
-        .musicData{
+        .musicData {
             display: grid;
-                grid-template-rows: 1fr;
-                grid-template-columns: 64px 1fr;
-                align-items: center;
-                column-gap: 4px;
+            grid-template-rows: 1fr;
+            grid-template-columns: 64px 1fr;
+            align-items: center;
+            column-gap: 4px;
 
-            img{
+            img {
                 height: 64px;
                 width: 64px;
             }
 
-            .title{
+            .title {
                 display: grid;
-                    grid-template-rows: 24px 40px;
-                    grid-template-columns: 1fr;
-                    align-items: center;
+                grid-template-rows: 24px 40px;
+                grid-template-columns: 1fr;
+                align-items: center;
+                h3{
+                    @include font-body;
+                }
             }
         }
 
-        .progress{
-            background-image:linear-gradient(to right, rgb(200, 200, 200), rgb(245, 245, 245));
+        .progress {
+            background-image: linear-gradient(to right, rgb(200, 200, 200), rgb(245, 245, 245));
             background-repeat: no-repeat;
             background-size: 0%;
             position: relative;
-            .progressPoint{
+
+            .progressPoint {
                 transform: rotate(45deg);
                 box-shadow: 0 0 4px 2px #1189da;
                 background-color: $textColor;
@@ -105,7 +109,7 @@
         .score {
             position: relative;
 
-            h2{
+            h2 {
                 text-align: center;
             }
 
@@ -121,7 +125,7 @@
         }
     }
 
-    .secondary_board{
+    .secondary_board {
         @include blur(16px);
         position: absolute;
         top: 280px;
@@ -129,25 +133,26 @@
         height: 128px;
         width: 400px;
         padding: 4px;
-        background-image: linear-gradient(to right, rgba(20,20,30,0.5) 50%, rgba(17, 137, 218,0.5));
+        background-image: linear-gradient(to right, rgba(20, 20, 30, 0.5) 50%, rgba(17, 137, 218, 0.5));
         clip-path: polygon(0% 0%, 100% 0%, calc(100% - 64px) 100%, 0% 100%);
         box-shadow: 0 0 4px 2px $accentColor;
         transform-origin: left top;
         display: grid;
-            grid-template-rows: repeat(4,32px);
-        p{
+        grid-template-rows: repeat(4, 32px);
+
+        p {
             margin: 0;
             padding: 0;
             line-height: 24px;
             font-size: 16px;
             display: grid;
-                grid-template-rows: 1fr;
-                grid-template-columns: 96px 1fr;
-                align-items: center;
+            grid-template-rows: 1fr;
+            grid-template-columns: 96px 1fr;
+            align-items: center;
         }
     }
 
-    .tertiary_board{
+    .tertiary_board {
         @include blur(16px);
         position: absolute;
         top: 280px;
@@ -156,15 +161,16 @@
         width: 400px;
         padding: 4px;
         font-size: 0.8em;
-        background-image: linear-gradient(to left, rgba(20,20,30,0.5) , rgba(17, 137, 218,0.5));
+        background-image: linear-gradient(to left, rgba(20, 20, 30, 0.5), rgba(17, 137, 218, 0.5));
         /* clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 64px 100%); */
         box-shadow: 0 0 4px 2px $accentColor;
         transform-origin: right top;
         display: grid;
-            grid-template-rows: repeat(5,32px);
-            grid-template-columns: repeat(2,1fr);
-            column-gap: 4px;
-        p{
+        grid-template-rows: repeat(5, 32px);
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 4px;
+
+        p {
             margin: 0;
             padding: 0;
             line-height: 24px;
@@ -172,11 +178,11 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-            
+
             display: grid;
-                grid-template-rows: 1fr;
-                grid-template-columns: 120px 1fr;
-                align-items: center;
+            grid-template-rows: 1fr;
+            grid-template-columns: 120px 1fr;
+            align-items: center;
         }
     }
 
@@ -233,7 +239,7 @@
 }
 
 .advance {
-    background-color: rgba(226, 195, 21 ,0.5);
+    background-color: rgba(226, 195, 21, 0.5);
 }
 
 .prospects {
@@ -242,6 +248,7 @@
 
 .ozma {
     @include ozma-background;
+
     &::after {
         content: "";
         position: absolute;

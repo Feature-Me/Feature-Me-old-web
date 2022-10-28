@@ -49,7 +49,7 @@ const ChartEditorMetadata: React.FC = () => {
         },
         {
             label: <TranslateText content="editor.chartEditor.metadata.thumbnail" />,
-            input: <div className={style.thumbnail} style={{backgroundImage: `url(data:${projectMetadata.thumbnail.mime};base64,${arrayBufferToBase64(projectMetadata.thumbnail.data)})` }}><ChamferedButton><label htmlFor="editorMetadataFileInput"><TranslateText content="editor.chartEditor.metadata.changeimg" /></label></ChamferedButton><input type="file" id="editorMetadataFileInput" accept="image" hidden onChange={e => setThumbnail(e.target.files)} /></div>,
+            input: <div className={style.thumbnail} style={{backgroundImage: `url(data:${projectMetadata.thumbnail.mime};base64,${arrayBufferToBase64(projectMetadata.thumbnail.data)})` }}><ChamferedButton><label htmlFor="editorMetadataFileInput"><TranslateText content="editor.chartEditor.metadata.changeimg" /></label></ChamferedButton><input type="file" id="editorMetadataFileInput" accept="image/*" hidden onChange={e => setThumbnail(e.target.files)} /></div>,
         }
 
     ]
@@ -74,7 +74,7 @@ const ChartEditorMetadata: React.FC = () => {
 
     function setThumbnail(files: FileList | null) {
         if(!files)return;
-        const file = files.item(0);
+        const file = files[0]
         if(!file)return;
         file.arrayBuffer().then(buffer=>setMetadata("thumbnail",{data:buffer,mime:file.type}));
         file.arrayBuffer().then(buffer => console.log({ data: buffer, mime: file.type }));

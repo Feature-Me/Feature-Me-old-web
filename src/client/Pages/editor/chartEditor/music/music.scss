@@ -3,4 +3,50 @@
     grid-template-rows: 64px 1fr;
     grid-template-columns: 1fr;
     height: 100%;
+
+    button {
+        display: flex;
+        align-items: center;
+
+        label {
+            width: 100%;
+        }
+    }
+
+
+    .view {
+        display: grid;
+        grid-template-rows: repeat(2, 48px) 1fr;
+        grid-template-columns: 1fr;
+        row-gap: 8px;
+        height: 100%;
+
+        .interaction {
+            display: grid;
+            grid-template-rows: 1fr;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+    }
+
+    .musicList {
+        display: grid;
+        grid-auto-flow: row;
+        grid-auto-rows: 64px;
+        grid-template-columns: 1fr;
+        row-gap: 8px;
+        height: 100%;
+        padding: 0 16px;
+
+        .musicListContent{
+            height: 100%;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 96px;
+            grid-template-rows: 1fr;
+            .buttons{
+
+            }
+        }
+    }
 }

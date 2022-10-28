@@ -162,7 +162,7 @@ const MusicGameUI: React.FC = () => {
         }
     }, [musicGameTime.totalTime])
 
-    React.useEffect(() => {
+/*     React.useEffect(() => {
         if (!musicGamePause.ready) return;
         console.log("paused", musicGamePause.paused);
         let timeout: NodeJS.Timeout;
@@ -181,7 +181,7 @@ const MusicGameUI: React.FC = () => {
             clearTimeout(timeout);
         }
     }, [musicGamePause.paused])
-
+ */
 
 
     return (
@@ -230,14 +230,14 @@ const MusicGameUI: React.FC = () => {
                 <p><span>Notes :</span> <span>{musicGameNotesJudge.notesCount.current}/{musicGameNotesJudge.notesCount.all}</span></p>
             </motion.div>
 
-            <motion.div className={style.pause_overlay} ref={pauseOverlayRef} animate={pauseMenuAnimationController} initial={initPauseMenu}>
+{/*             <motion.div className={style.pause_overlay} ref={pauseOverlayRef} animate={pauseMenuAnimationController} initial={initPauseMenu}>
                 <Header title={`Paused - ${musicData.metadata.title}`} backFunc={() => setMusicGameMode(game => { return { ...game, paused: false } })} />
                 <div className={style.pause_content}>
                     <p>Resume</p>
                     <p onClick={() => scenechange(-1)}>Restart</p>
                     <p onClick={() => scenechange(-2)}>Quit</p>
                 </div>
-            </motion.div>
+            </motion.div> */}
 
             <MusicGameTitle />
         </div>

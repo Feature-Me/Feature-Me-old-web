@@ -1,10 +1,10 @@
 {
   "name": "feature-me-webgl-ts",
-  "version": "0.5.8",
+  "version": "0.6.0",
   "description": "Music Game Feature Me",
   "main": "./dist/server/server.js",
   "scripts": {
-    "test": "cd ./dist/server/ && node server.js",
+    "start": "cd ./dist/server/ && node server.js",
     "server-build": "tsc -b && node server/server.js",
     "devbuild": "npx webpack --mode development --watch",
     "devbuildrun": "cd ./development/client/app && npm run devbuild && cd ../../../ && npm run test",

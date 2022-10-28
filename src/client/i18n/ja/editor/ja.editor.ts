@@ -36,7 +36,10 @@ const JAEditorTranslation = {
             "changeimg":"変更"
         },
         "music":{
-            "title":"楽曲"
+            "title":"楽曲",
+            "default":"デフォルト楽曲",
+            "all":"すべての楽曲",
+            "add":"追加"
         }
     },
     "converter":{

@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-const bodyParser = require("body-parser");
 const path = require("path");
 const http = require("http");
 const socketIo = require("socket.io");
@@ -9,9 +8,7 @@ const admin_ui_1 = require("@socket.io/admin-ui");
 const fs = require("fs");
 const crypto = require("crypto");
 const uuid_1 = require("uuid");
-/* import * as discord from "discord.js"
-import { commandModules } from "./command"; */
-//if (process.env.NODE_ENV != "production") dotenv.config({ path: path.join(__dirname, "../../../.env") });
+const os = require("os");
 //express server
 const app = express();
 const server = http.createServer(app);
@@ -22,10 +19,6 @@ const scriptsdir = path.join(basedir, "scripts");
 const imagedir = path.join(basedir, "images");
 const dbdir = path.join(basedir, "db");
 const port = Number(process.env.PORT) || 3000;
-/* const db = {
-    users: new nedb({ filename: path.join(dbdir, "users.db"), autoload: true }),
-    leaderboard: new nedb({ filename: path.join(dbdir, "leaderboard.db"), autoload: true })
-} */
 //web socket
 const io = new socketIo.Server(server, {
     cors: {
@@ -64,7 +57,7 @@ server.listen(port, () => {
     console.log(`${process.env.NODE_ENV} mode,bot:${process.env.USE_BOT}`);
     //if(process.env.NODE_ENV=="production") login();
 });
-app.use(bodyParser.json());
+app.use(express.json());
 app.use("/scripts", express.static(scriptsdir));
 app.use("/resources/background", express.static(path.join(resourcesdir, "Backgrounds")));
 app.use("/resources/behavior", express.static(path.join(resourcesdir, "Behaviors")));
@@ -119,60 +112,18 @@ app.get("/update/map", (req, res) => {
         music: music
     });
 });
+app.get("/health", (req, res) => {
+    res.status(200).end("Server online.");
+    console.log({
+        memory: {
+            used: process.memoryUsage().heapUsed,
+            all: os.totalmem(),
+            free: os.freemem()
+        },
+        upTime: process.uptime(),
+        usedCpu: process.cpuUsage()
+    });
+});
 app.use((req, res, next) => {
     res.status(404).redirect("/");
 });
-/* //discord
-const client = new discord.Client({ intents: [discord.GatewayIntentBits.Guilds, discord.GatewayIntentBits.DirectMessages] });
-const rest = new discord.REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN || "");
-
-const commandFiles = fs.readdirSync(path.join(__dirname, "./commands")).filter(file => file.endsWith('.js'));
-let commands = new discord.Collection<string, commandModules>();
-for (const file of commandFiles) {
-    const command: { default: commandModules } = require(`./commands/${file}`);
-
-    commands.set(command.default.command.name, command.default);
-}
-
-async function register() {
-    if (!client.user?.id) return;
-    const commandData = commands.map(cmd => cmd.command)
-    const data = await rest.put(discord.Routes.applicationCommands(client.user.id), { body: commandData })
-    return client.application!.commands.set(commandData);
-}
-
-client.on("ready", async (e) => {
-    console.log(`Logged in as ${e.user.tag}`);
-    try {
-        await register();
-    } catch (error) {
-        console.error(error);
-    }
-
-    client.users.fetch(process.env.OWNER_ID || "").then(user => {
-        if (!user) throw Error("user not found");
-        //user.send(`logged in to discord.\nStarted:${new Date().toString()}`);
-        const embed = new discord.EmbedBuilder()
-            .setColor(0x1189da)
-            .setTitle("Feature Me Server Started.")
-            .setTimestamp()
-        user.send({ embeds: [embed] })
-    })
-})
-
-client.on("interactionCreate", async (interaction) => {
-    if (!interaction.isCommand()) return;
-    try {
-        const command = commands.get(interaction.commandName);
-        command?.exec(interaction);
-    } catch (error) {
-        console.error(error);
-        interaction.reply("An Error has occured.")
-    }
-})
-
-function login() {
-    if (!process.env.DISCORD_BOT_TOKEN) console.error("login Failed.")
-    client.login(process.env.DISCORD_BOT_TOKEN)
-}
- */ 

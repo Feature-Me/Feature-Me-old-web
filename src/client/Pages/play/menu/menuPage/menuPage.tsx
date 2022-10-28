@@ -38,7 +38,7 @@ const MenuPage: React.FC = () => {
 
     return (
         <div className={style.menupage}>
-            <Header title="Home" backFunc={() => sceneChangeNavigation("/")} />
+            <Header title="Home" backFunc={() => sceneChangeNavigation("/title")} />
             <div className={style.menu}>
                 {
                     menu.map((menu, index) => {

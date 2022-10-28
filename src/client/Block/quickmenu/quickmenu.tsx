@@ -180,7 +180,7 @@ const QuickMenu: React.FC = () => {
                 <h2>Quick Menu</h2>
                 <div className={style.modes}>
                     <h3>Quick Jump</h3>
-                    <p className={style.pageText} onClick={() => { sceneChangeNavigation("/"); hide(); }} data-link={"/"}>Title</p>
+                    <p className={style.pageText} onClick={() => { sceneChangeNavigation("/title"); hide(); }} data-link={"/"}>Title</p>
                     <p className={style.pageText} onClick={() => { sceneChangeNavigation("play/menu"); hide(); }}  data-link={"play/menu"}>Home</p>
                     <p className={style.pageText} onClick={() => { sceneChangeNavigation("editor"); hide(); }} data-link={"editor"}>Editor</p>
                     <p className={style.pageText} onClick={() => { sceneChangeNavigation("leaderboards"); hide(); }} data-link={"leaderboards"}>Leaderboards</p>
