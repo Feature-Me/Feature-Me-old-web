@@ -19,6 +19,7 @@ const ChartEditorMusic: React.FC = () => {
     const metadata = chartEditorProject.project.metadata;
 
     const defaultBoxList = music.map(m=>{return{label:m.name,value:m.id}})
+    
 
     async function addMusic(files: FileList | null) {
         if (!files) return;
@@ -65,7 +66,7 @@ const ChartEditorMusic: React.FC = () => {
                 {/* Default Music Selector */}
                 <div className={style.interaction}>
                     <h2><TranslateText content="editor.chartEditor.music.default" /></h2>
-                    <SelectBox contents={defaultBoxList} value={defaultBoxList.find(m=>m.value==metadata.defaultMusic)||defaultBoxList[0]} />
+                    <SelectBox contents={defaultBoxList} value={defaultBoxList.find(m=>m.value==metadata.defaultMusic)||defaultBoxList[0]||{value:"",label:""}} />
                 </div>
                 {/*Head text and add button*/}
                 <div className={style.interaction}>
@@ -77,7 +78,7 @@ const ChartEditorMusic: React.FC = () => {
                     {
                         music.map((music, index) => {
                             return (
-                                <MusicCard music={music} index={index} key={index} />
+                                <MusicCard music={music} key={index} />
                             )
                         })
                     }
