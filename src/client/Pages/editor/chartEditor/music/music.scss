@@ -47,7 +47,7 @@
             height: 100%;
             width: 100%;
             display: grid;
-            grid-template-columns: 1fr 320px;
+            grid-template-columns: 1fr 160px;
             grid-template-rows: 1fr;
             align-items: center;
             background-color: $inputBackgroundColor;
@@ -88,16 +88,41 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    .icon{
+
+                    .icon {
                         height: 36px;
                         width: 36px;
                         transition: 0.2s;
-                        &:hover{
+
+                        &:hover {
                             color: $accentColor;
                         }
                     }
-                    .danger:hover{
+
+                    .danger:hover {
                         color: $red;
+                    }
+                }
+            }
+
+            .player {
+                &[data-playing="true"] {
+                    .play {
+                        display: none;
+                    }
+
+                    .pause {
+                        display: initial;
+                    }
+                }
+
+                &[data-playing="false"] {
+                    .play {
+                        display: initial;
+                    }
+
+                    .pause {
+                        display: none;
                     }
                 }
             }
