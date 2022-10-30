@@ -87,6 +87,13 @@ const ChartEditor: React.FC = () => {
                 <ChartEditorViewRouter />
             </div>
             <div className={style.footer}>
+                {
+                    chartProject.statusbar.map((status,index)=>{
+                        return(
+                            <span onClick={()=>{if(status.onClick) status.onClick()}}>{status.label}</span>
+                        )
+                    })
+                }
             </div>
         </div>
     )

@@ -8,5 +8,6 @@ interface chartEditorType {
 interface stausbarContent {
     id:string
     label:string
-    onClick:Function
+    onClick?:Function
+    customValue:any
 }
