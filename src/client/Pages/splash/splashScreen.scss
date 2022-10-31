@@ -6,66 +6,80 @@
     width: 100%;
     background-color: rgb(20, 20, 20);
 
-    .logo {
+    .background {
         position: absolute;
-        top: 0;
-        left: 0;
-        visibility: hidden;
         height: 100%;
         width: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
     }
 
-    .cautionText {
+    .content {
         position: absolute;
-        top: 50%;
-        left: 0;
-        transform: translate(0, -50%);
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 128px 1fr;
-        visibility: hidden;
+        height: 100%;
         width: 100%;
-        text-align: center;
-        font-size: 2em;
-        padding: 16px;
 
-        h1 {
-            position: relative;
+        .logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            visibility: hidden;
+            height: 100%;
+            width: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
-            &::after {
-                content: "";
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                height: 4px;
-                width: 100%;
-                background: linear-gradient(to right, transparent, whitesmoke, transparent)
+        .cautionText {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translate(0, -50%);
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 128px 1fr;
+            visibility: hidden;
+            width: 100%;
+            text-align: center;
+            font-size: 2em;
+            padding: 16px;
+
+            h1 {
+                position: relative;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    height: 4px;
+                    width: 100%;
+                    background: linear-gradient(to right, transparent, whitesmoke, transparent)
+                }
+            }
+
+            p {
+                white-space: pre-line;
+                padding: 16px;
             }
         }
 
-        p {
-            white-space: pre-line;
-            padding: 16px;
-        }
-    }
+        .skip {
+            visibility: hidden;
+            position: absolute;
+            display: grid;
+            grid-template-rows: 1fr;
+            grid-template-columns: 1fr auto;
+            top: 16px;
+            right: 16px;
+            opacity: 0.8;
+            transition: 0.2s;
 
-    .skip{
-        visibility: hidden;
-        position: absolute;
-        display: grid;
-        grid-template-rows: 1fr;
-        grid-template-columns: 1fr auto;
-        top: 16px;
-        right: 16px;
-        opacity: 0.8;
-        transition: 0.2s;
-        &:hover {
+            &:hover {
                 opacity: 1;
             }
-        h2{
-            @include font-title;
+
+            h2 {
+                @include font-title;
+            }
         }
     }
 }
