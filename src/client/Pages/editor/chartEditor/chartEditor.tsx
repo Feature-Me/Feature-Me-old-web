@@ -24,6 +24,7 @@ const ChartEditor: React.FC = () => {
         { content: "editor.chartEditor.menuTab.metadata", to: "./metadata" },
         { content: "editor.chartEditor.menuTab.music", to: "./music" },
         { content: "editor.chartEditor.menuTab.chart", to: "./chart" },
+        { content: "Docs", to:"./docs"}
     ]
 
     React.useEffect(() => {
