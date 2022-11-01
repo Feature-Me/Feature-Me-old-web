@@ -24,13 +24,13 @@ const ChartEditor: React.FC = () => {
         { content: "editor.chartEditor.menuTab.metadata", to: "./metadata" },
         { content: "editor.chartEditor.menuTab.music", to: "./music" },
         { content: "editor.chartEditor.menuTab.chart", to: "./chart" },
-        { content: "Docs", to:"./docs"}
+        { content: "Docs", to: "./docs" }
     ]
 
     React.useEffect(() => {
         let saveInterval: NodeJS.Timer;
         saveInterval = setInterval(() => {
-            if(chartProject.saved) return;
+            if (chartProject.saved) return;
             saveChartProject(chartProject.project);
         }, 30000)
 
@@ -53,14 +53,14 @@ const ChartEditor: React.FC = () => {
                     {
                         menuTabs.map((menu, index) => {
                             return (
-                                <div className={style.tab} key={index} onClick={() => navigate(menu.to)}><TranslateText content={menu.content} /></div>
+                                <div className={style.tabContent} key={index} onClick={() => navigate(menu.to)}><TranslateText content={menu.content} /></div>
                             )
                         })
                     }
                 </div>
 
                 {/* save button */}
-                <button className={`${style.save} ${style.headButton}`} onClick={()=>saveChartProject(chartProject.project)}>
+                <button className={`${style.save} ${style.headButton}`} onClick={() => saveChartProject(chartProject.project)}>
                     <div className={style.iconWrapper}>
                         <MdSave />
                     </div>
@@ -89,9 +89,9 @@ const ChartEditor: React.FC = () => {
             </div>
             <div className={style.footer}>
                 {
-                    chartProject.statusbar.map((status,index)=>{
-                        return(
-                            <span onClick={()=>{if(status.onClick) status.onClick()}}>{status.label}</span>
+                    chartProject.statusbar.map((status, index) => {
+                        return (
+                            <span onClick={() => { if (status.onClick) status.onClick() }}>{status.label}</span>
                         )
                     })
                 }
