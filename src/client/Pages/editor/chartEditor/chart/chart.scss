@@ -1,0 +1,47 @@
+@import "../../../../Assets/mixin.scss";
+
+.editorPageView {
+    display: grid;
+    grid-template-rows: 64px 1fr;
+    grid-template-columns: 1fr;
+    height: 100%;
+
+    .view {
+        display: grid;
+        grid-template-rows: 28px 1fr;
+        grid-template-columns: 1fr;
+        height: 100%;
+        min-height: 0;
+    }
+
+    .tab {
+        background-color: $inputBackgroundColor;
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(96px, 192px);
+        grid-template-rows: 1fr;
+        gap: 8px;
+        overflow-y: auto;
+
+        .tabContent {
+            text-overflow: ellipsis;
+            background-color: $grayBackgrund;
+            transition: 0.2s;
+            height: 100%;
+            padding: 0 4px;
+            line-height: 28px;
+            white-space: nowrap;
+            overflow: hidden;
+
+            &:hover {
+                background-color: $inputForegroundColor;
+            }
+
+            &:active {
+                filter: brightness(0.8);
+            }
+        }
+
+    }
+
+}
