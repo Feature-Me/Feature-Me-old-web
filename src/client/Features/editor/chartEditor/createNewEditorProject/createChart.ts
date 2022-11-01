@@ -2,8 +2,7 @@ import { v4 as uuidv4, v5 as uuidv5 } from "uuid";
 import databaseInfo from "Config/databaseinfo.json";
 
 function createNewProject() {
-    const ns = uuidv4()
-    const uuid = uuidv5(String(Date.now()), ns);
+    const uuid = uuidv5(String(Date.now()), uuidv4());
 
     const newChartProject: chartProjectType = {
         name: `Untitled Project ${uuid}`,
@@ -28,10 +27,10 @@ function createNewProject() {
         },
         music: [],
         chart: [
-            { name: "memory", level: 0, constant: 0, data: "" },
-            { name: "advance", level: 0, constant: 0, data: "" },
-            { name: "prospects", level: 0, constant: 0, data: "" },
-            { name: "ozma", level: 0, constant: 0, data: "" }
+            { name: "memory", level: 0, constant: 0, data: "", id: uuidv5(String(Date.now()), uuidv4()) },
+            { name: "advance", level: 0, constant: 0, data: "", id: uuidv5(String(Date.now()), uuidv4()) },
+            { name: "prospects", level: 0, constant: 0, data: "", id: uuidv5(String(Date.now()), uuidv4()) },
+            { name: "ozma", level: 0, constant: 0, data: "", id: uuidv5(String(Date.now()), uuidv4()) }
         ]
     }
 

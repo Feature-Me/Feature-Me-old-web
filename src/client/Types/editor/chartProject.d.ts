@@ -36,4 +36,5 @@ interface chartEditorChart {
     level:number
     constant:number
     data: string
+    id:string
 }
