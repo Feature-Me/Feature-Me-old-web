@@ -87,6 +87,10 @@ const ChartEditorMusic: React.FC = () => {
     }
 
     React.useEffect(()=>{
+        document.title = "Editor - Music - Feature Me"
+    },[])
+
+    React.useEffect(()=>{
         const times = music.map(m=>m.time);
         const longest = Math.max(...times);
         setChartEditorProject(proj => {
@@ -121,9 +125,9 @@ const ChartEditorMusic: React.FC = () => {
                 </div>
                 <div className={style.musicList}>
                     {
-                        music.map((music, index) => {
+                        music.map(music => {
                             return (
-                                <MusicCard music={music} key={index} />
+                                <MusicCard music={music} key={music.id} />
                             )
                         })
                     }
