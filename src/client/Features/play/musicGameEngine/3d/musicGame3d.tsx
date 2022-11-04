@@ -37,6 +37,7 @@ import { match } from "ts-pattern";
 import easings from "Utils/easing/easing";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 import { cloneDeep } from "lodash";
+import loadFont from "Utils/Storage/resourcesLoader/loadFont";
 
 
 const MusicGame3D: React.FC = () => {
@@ -117,11 +118,11 @@ const MusicGame3D: React.FC = () => {
             behaviorName.sound = behaviordata.soundEffect || version.defaultBehavior;
         }
         if (behaviorName.font == "default" || behaviorName.font == "auto") {
-            behaviorName.font = behaviordata.font || version.defaultFont;
+            behaviorName.font = behaviordata.fontName || version.defaultFont;
         }
 
         const soundEffectdata = await loadSoundEffect(behaviorName.sound);
-        const fontdata = await loadBehavior(behaviorName.font);
+        const fontdata = await loadFont(behaviorName.font);
 
         return {
             model: behaviordata,
@@ -177,7 +178,7 @@ const MusicGame3D: React.FC = () => {
                 await initRenderer();
 
                 const volume = (gameConfig.audio.masterVolume * gameConfig.audio.effectVolume) || 1;
-                chart = await acceptBehavior(chartData, behavior.model, behavior.sound, volume);
+                chart = await acceptBehavior(chartData, behavior.model, behavior.font, behavior.sound, volume);
                 setMusicGameValue(value => {
                     return {
                         ...value,
