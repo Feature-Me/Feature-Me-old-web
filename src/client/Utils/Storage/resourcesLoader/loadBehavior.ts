@@ -1,6 +1,6 @@
 import databaseInfo from "Config/databaseinfo.json"
 
-function loadBehavior(behaviorName:string) {
+function loadBehavior(behaviorName: string) {
     return new Promise<behaviorAssetContents>((resolve, reject) => {
         const dbOpenRequest = indexedDB.open(databaseInfo.DBName);
         dbOpenRequest.onsuccess = (e) => {
@@ -9,8 +9,8 @@ function loadBehavior(behaviorName:string) {
             const getRequest = behaviorStore.get(behaviorName);
             getRequest.onsuccess = (e) => {
                 const behaviorAssetContents = getRequest.result;
-                console.log(behaviorAssetContents,behaviorName);
-                
+                console.log(behaviorAssetContents, behaviorName);
+
                 resolve(behaviorAssetContents);
             }
             getRequest.onerror = (e) => {
