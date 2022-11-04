@@ -32,7 +32,7 @@ interface behaviorAssetContents {
         ground: ArrayBuffer
     }
     soundEffect: string
-    font?: any
+    fontName?: string
 }
 
 interface soundEffectContentMap {
@@ -52,31 +52,31 @@ interface soundEffectContentMap {
 interface soundEffectAssetContents {
     name: string
     sound: {
-        tap:{
+        tap: {
             data: ArrayBuffer
             mime: string
         }
-        damage:{
+        damage: {
             data: ArrayBuffer
             mime: string
         }
-        hold:{
+        hold: {
             data: ArrayBuffer
             mime: string
         }
-        bright:{
+        bright: {
             data: ArrayBuffer
             mime: string
         }
-        seed:{
+        seed: {
             data: ArrayBuffer
             mime: string
         }
-        flick:{
+        flick: {
             data: ArrayBuffer
             mime: string
         }
-        assist:{
+        assist: {
             data: ArrayBuffer
             mime: string
         }
