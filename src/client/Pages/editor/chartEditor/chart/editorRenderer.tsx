@@ -6,3 +6,5 @@ const ChartEditorRenderer:React.FC<{}> = (props) =>{
         <div></div>
     )
 }
+
+export default ChartEditorRenderer;

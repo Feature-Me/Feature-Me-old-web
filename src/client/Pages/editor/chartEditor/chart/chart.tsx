@@ -37,7 +37,9 @@ const ChartEditorChartEditPage: React.FC = () => {
                         })
                     }
                 </div>
-
+                    <div className={style.editor}>
+                        
+                    </div>
             </div>
         </div>
     )
