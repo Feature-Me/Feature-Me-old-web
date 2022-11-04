@@ -1,9 +1,10 @@
 import { chartType } from "Features/play/parseChart/chartSample";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { match } from "ts-pattern";
+import { fontAssetContents, fontTable, FPTable } from "Types/resources/fontResources";
 import arrayBufferToBase64 from "Utils/ArrayBufferToBase64/ArrayBufferToBase64";
 
-async function acceptBehavior(chart: chartType, models: behaviorAssetContents, sound: soundEffectAssetContents, volume: number) {
+async function acceptBehavior(chart: chartType, models: behaviorAssetContents, font: fontAssetContents, sound: soundEffectAssetContents, volume: number) {
 
     let behaviors = {
         tap: new GLTFLoader().loadFromArrayBufferAsync(models.models.tap),
@@ -21,6 +22,17 @@ async function acceptBehavior(chart: chartType, models: behaviorAssetContents, s
         bright: `data:${sound.sound.bright.mime};base64,${arrayBufferToBase64(sound.sound.bright.data)}`,
         seed: `data:${sound.sound.seed.mime};base64,${arrayBufferToBase64(sound.sound.seed.data)}`,
         flick: `data:${sound.sound.flick.mime};base64,${arrayBufferToBase64(sound.sound.flick.data)}`,
+    }
+
+    let table: fontTable = [
+        { name: "stunning", label: "Stunning", color: "#e5e537" },
+        { name: "glossy", label: "Glossy", color: "#1feaf4" },
+        { name: "moderate", label: "Moderate", color: "#3dbf2a" },
+        { name: "lost", label: "Lost", color: "#aaaaaa" }
+    ]
+    let timeTable:FPTable = {
+        future:"#1f5ff4",
+        past:"#f4751f"
     }
 
     /*     const getBehavior = (type:keyof typeof behaviors) => {
@@ -53,6 +65,7 @@ async function acceptBehavior(chart: chartType, models: behaviorAssetContents, s
 
         note.setBehavior(model);
         note.setAudio(sounds[note.type], volume);
+        note.setFont(font, table,timeTable)
         /* getBehavior(note.type).then((behavior)=>{
             note.setBehavior(behavior.scene.clone());
         }); */
