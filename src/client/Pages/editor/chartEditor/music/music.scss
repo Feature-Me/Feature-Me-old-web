@@ -1,3 +1,5 @@
+@import "../../../../Assets/mixin.scss";
+
 .music {
     display: grid;
     grid-template-rows: 64px 1fr;
@@ -20,6 +22,7 @@
         grid-template-columns: 1fr;
         row-gap: 8px;
         height: 100%;
+        min-height: 0;
 
         .interaction {
             display: grid;
@@ -32,20 +35,96 @@
     .musicList {
         display: grid;
         grid-auto-flow: row;
-        grid-auto-rows: 64px;
+        grid-auto-rows: 96px;
         grid-template-columns: 1fr;
         row-gap: 8px;
         height: 100%;
         padding: 0 16px;
+        min-height: 0;
+        overflow-y: auto;
 
-        .musicListContent{
+        .musicListContent {
             height: 100%;
             width: 100%;
             display: grid;
-            grid-template-columns: 1fr 96px;
+            grid-template-columns: 1fr 160px;
             grid-template-rows: 1fr;
-            .buttons{
+            align-items: center;
+            background-color: $inputBackgroundColor;
+            padding: 4px;
 
+            .title {
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 20px;
+
+                .nameInput {
+                    font-size: 24px;
+                    font-weight: bold;
+                    border: 1px solid $borderColor;
+                    background-color: $inputForegroundColor;
+                    color: $textColor;
+
+                    &:active,
+                    &:focus {
+                        border: 1px solid $accentColor;
+                    }
+                }
+
+                .id {
+                    font-size: 0.8em;
+                    color: $secondaryText;
+                }
+            }
+
+            .buttons {
+                display: grid;
+                grid-template-rows: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                height: 100%;
+
+                .iconWrapper {
+                    margin: 4px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    .icon {
+                        height: 36px;
+                        width: 36px;
+                        transition: 0.2s;
+
+                        &:hover {
+                            color: $accentColor;
+                        }
+                    }
+
+                    .danger:hover {
+                        color: $red;
+                    }
+                }
+            }
+
+            .player {
+                &[data-playing="true"] {
+                    .play {
+                        display: none;
+                    }
+
+                    .pause {
+                        display: initial;
+                    }
+                }
+
+                &[data-playing="false"] {
+                    .play {
+                        display: initial;
+                    }
+
+                    .pause {
+                        display: none;
+                    }
+                }
             }
         }
     }
