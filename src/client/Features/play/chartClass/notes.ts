@@ -1,6 +1,7 @@
 import { Howl } from "howler";
 import * as THREE from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
+import { fontAssetContents, fontTable, FPTable } from "Types/resources/fontResources";
 import scrollSpeedToScrollTime from "Utils/scrollSpeedToScrollTime/scrollSpeedToScrollTime";
 import easing from "../../../Utils/easing/easing";
 
@@ -20,12 +21,15 @@ class note {
     scrollSpeed: number = 10;
     scrollTime: number = scrollSpeedToScrollTime(this.scrollSpeed);
 
+    font: { font: fontAssetContents, table: fontTable, FPTable: FPTable } | undefined;
+
     constructor(note: chartNote) {
         this.type = note.type;
         this.time = note.time;
         this.script = note.script || [];
         this.note = new THREE.Object3D();
         this.transitionEase = note.transitionEase || easing.linear;
+
         this.audio = new Howl({
             src: ["data:audio/mp3;base64,"],
             loop: false
@@ -51,6 +55,9 @@ class note {
         const behavior = model.scene.clone();
         this.note = behavior;
         this.note.position.set(0, 0.1, 100);
+    }
+    setFont(font: fontAssetContents, table: fontTable, FPTable: FPTable): void {
+        this.font = { font, table, FPTable }
     }
     setAudio(audioUrl: string, volume: number) {
         this.audio = new Howl({
@@ -89,6 +96,7 @@ class tapNote extends note {
         this.note.position.x = x;
         this.note.name = "tap";
     }
+
 }
 
 class damageTapNote extends note {
