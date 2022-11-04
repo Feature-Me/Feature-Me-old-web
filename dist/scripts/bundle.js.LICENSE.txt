@@ -47,6 +47,16 @@ https://github.com/nodeca/pako/blob/main/LICENSE
  * MIT Licensed
  */
 
+/*!
+* Proton v5.4.5
+* https://github.com/drawcall/Proton
+*
+* Copyright 2013-2022, drawcall
+* Licensed under the MIT license
+* http://www.opensource.org/licenses/mit-license
+*
+*/
+
 /*! @license
 ==========================================================================
 SproutCore -- JavaScript Application Framework

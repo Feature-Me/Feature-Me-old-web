@@ -1,6 +1,6 @@
 {
   "name": "feature-me-webgl-ts",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Music Game Feature Me",
   "main": "./dist/server/server.js",
   "scripts": {
@@ -63,6 +63,7 @@
     "path-browserify": "^1.0.1",
     "pixi.js": "^6.5.1",
     "postcss-loader": "^6.2.1",
+    "proton-engine": "^5.4.5",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-i18next": "^11.18.6",

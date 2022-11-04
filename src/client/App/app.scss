@@ -43,7 +43,19 @@ body {
     @include font-size;
     scroll-behavior: smooth;
     cursor: url("../Assets/Images/pointer.cur"), default;
+    scrollbar-color: $borderColor;
+    scrollbar-width: 2px;
 
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $borderColor
 }
 
 .app {
@@ -79,14 +91,4 @@ h1,h2,h3,h4,h5,h6,p {
 }
 h1,h2,h3{
     @include font-header;
-}
-
-
-::-webkit-scrollbar {
-    width: 2px;
-    height: 2px;
-    background: transparent;
-}
-::-webkit-scrollbar-thumb{
-    background: $borderColor
 }

@@ -127,3 +127,7 @@ app.get("/health", (req, res) => {
 app.use((req, res, next) => {
     res.status(404).redirect("/");
 });
+process.on('unhandledRejection', (error, promise) => {
+    console.log(' Promise rejection : ', promise);
+    console.error(error);
+});

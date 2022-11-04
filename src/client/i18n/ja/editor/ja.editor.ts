@@ -40,6 +40,10 @@ const JAEditorTranslation = {
             "default":"デフォルト楽曲",
             "all":"すべての楽曲",
             "add":"追加"
+        },
+        "chart":{
+            "title":"チャート",
+            
         }
     },
     "converter":{
