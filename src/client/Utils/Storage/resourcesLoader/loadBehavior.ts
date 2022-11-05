@@ -9,8 +9,6 @@ function loadBehavior(behaviorName: string) {
             const getRequest = behaviorStore.get(behaviorName);
             getRequest.onsuccess = (e) => {
                 const behaviorAssetContents = getRequest.result;
-                console.log(behaviorAssetContents, behaviorName);
-
                 resolve(behaviorAssetContents);
             }
             getRequest.onerror = (e) => {
