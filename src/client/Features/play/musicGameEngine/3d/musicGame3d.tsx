@@ -38,19 +38,19 @@ import easings from "Utils/easing/easing";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 import { cloneDeep } from "lodash";
 import loadFont from "Utils/Storage/resourcesLoader/loadFont";
+import { gameProps } from "Types/play/game/gameProps";
 
 
-const MusicGame3D: React.FC = () => {
+const MusicGame3D: React.FC<gameProps> = (props) => {
     const scenechange = useSeneChangeNavigation();
     const selectedMusic = useRecoilValue(musicSelectorState);
     const gameConfig = useRecoilValue(gameConfigState);
-    const [ready, setReady] = React.useState(false);
 
     const setMusicGameValue = useSetRecoilState(musicGame.musicGameValueState);
     const setMusicGameNotesJudge = useSetRecoilState(musicGame.musicGameNotesJudgeState)
     const setMusicGamePrediction = useSetRecoilState(musicGame.musicGamePredictionState);
     const setMusicGameUIState = useSetRecoilState(musicGame.musicGameUIState);
-    const [musicGameMode, setMusicGameMode] = useRecoilState(musicGame.musicGameModeState);
+    const musicGameMode = useRecoilValue(musicGame.musicGameModeState);
     const setMusicGamePause = useSetRecoilState(musicGame.musicGamePauseState);
     const setMusicGameTime = useSetRecoilState(musicGame.musicGameTimeState)
 
@@ -61,7 +61,6 @@ const MusicGame3D: React.FC = () => {
     const rawChart = musicData.chart.find((c) => c.name === musicGameMode.difficulty);
     const rawMusic = musicData.music.find((m) => m.name === musicData.metadata.selectedMusic);
     //if rawChart or rawMusic is undefined, play error music
-    let chart: chartType;
     //let behavior: { model: behaviorAssetContents; sound: soundEffectAssetContents; font: behaviorAssetContents; };
     //const activeRange = musicGame_.mode == "auto"? 0: 1000;
     //const activeRange = 0;
@@ -80,7 +79,6 @@ const MusicGame3D: React.FC = () => {
         activeRange: 250,
         activeNotes: [],
         delay: 0,
-        ready: false,
         inputs: {
             position: "left",
             lanes: [false, false, false, false]
@@ -102,7 +100,7 @@ const MusicGame3D: React.FC = () => {
         volume: (gameConfig.audio.masterVolume * gameConfig.audio.musicVolume) || 1,
     });
 
-    let ResultNavigationInterval: NodeJS.Timeout;
+    let ResultNavigationTimeout: NodeJS.Timeout;
 
     const getBehavior = React.useMemo(async () => {
 
@@ -133,11 +131,10 @@ const MusicGame3D: React.FC = () => {
     }, []);
 
     React.useEffect(() => {
-        preparingGame();
         window.addEventListener("keydown", keyInput);
         window.addEventListener("resize", resizeCanvas);
         return () => {
-            clearTimeout(ResultNavigationInterval);
+            clearTimeout(ResultNavigationTimeout);
             clearInterval(gameRenderInterval);
             gameRenderer.dispose();
             window.removeEventListener("keydown", keyInput);
@@ -146,6 +143,12 @@ const MusicGame3D: React.FC = () => {
             musicAudio.unload();
         }
     }, []);
+
+    React.useEffect(()=>{
+        preparingGame();
+        console.log(props);
+        
+    },[props])
 
     function keyInput(key: KeyboardEvent) {
         if (!gameConfig.gameplay.key.includes(key.code)) return;
@@ -171,71 +174,43 @@ const MusicGame3D: React.FC = () => {
     }
 
     //accept behavior , load chart and play assist sound
-    function preparingGame() {
-        getBehavior.then((behavior) => {
-            parseChart(rawChart!.data, gameConfig.gameplay.scrollSpeed).then(async (chartData) => {
+    async function preparingGame() {
+        if (!props.ready) return;
 
-                await initRenderer();
+        await initRenderer();
 
-                const volume = (gameConfig.audio.masterVolume * gameConfig.audio.effectVolume) || 1;
-                chart = await acceptBehavior(chartData, behavior.model, behavior.font, behavior.sound, volume);
-                setMusicGameValue(value => {
-                    return {
-                        ...value,
-                        bpm: chartData.metadata.initialBpm,
-
-                    }
-                })
-                setMusicGamePause(pause => {
-                    return {
-                        ...pause,
-                        ready: true,
-                        paused: false
-                    }
-                })
-                setMusicGameNotesJudge(judge => {
-                    return {
-                        ...judge,
-                        notesCount: {
-                            current: 0,
-                            all: chart.metadata.chain,
-                        }
-                    }
-                })
-                const totalTime = musicData.metadata.time + (((60 / chartData.metadata.initialBpm) * 1000) * 4) + 1000;
-                musicGameVariables.time.totalTime = totalTime;
-                setMusicGameTime(time => {
-                    return {
-                        ...time,
-                        totalTime: totalTime,
-                        startedTime: performance.now()
-                    }
-                })
-
-                musicGameVariables.time.initialVoidTime = (((60 / chartData.metadata.initialBpm) * 1000) * 4)
-                musicGameVariables.time.startTime = performance.now() + (((60 / chartData.metadata.initialBpm) * 1000) * 4) + 3500 + chartData.metadata.offset;
-                musicGameVariables.ready = true;
-                ResultNavigationInterval = setInterval(() => {
-                    scenechange("../result");
-                }, totalTime + musicGameVariables.time.initialVoidTime + 2000);
-
-                await sleep(3500);
-                const sound = (await getBehavior).sound.sound.assist;
-                const soundUri = `data:${sound.mime};base64,${arrayBufferToBase64(sound.data)}`;
-                const audio = new Howl({
-                    src: [soundUri],
-                    volume: gameConfig.audio.effectVolume || 1,
-                });
-                for (let i = 0; i < 4; i++) {
-                    audio.play();
-                    await sleep((60 / chartData.metadata.initialBpm) * 1000);
-                }
-                audio.stop();
-                audio.unload();
-                musicAudio.play();
-                musicGameVariables.delay = performance.now() - musicGameVariables.time.startTime
-            })
+        const totalTime = musicData.metadata.time + (((60 / props.data.chart!.metadata.initialBpm) * 1000) * 4) + 1000;
+        musicGameVariables.time.totalTime = totalTime;
+        setMusicGameTime(time => {
+            return {
+                ...time,
+                totalTime: totalTime,
+                startedTime: performance.now()
+            }
         })
+
+        musicGameVariables.time.initialVoidTime = (((60 / props.data.chart!.metadata.initialBpm) * 1000) * 4)
+        musicGameVariables.time.startTime = performance.now() + (((60 / props.data.chart!.metadata.initialBpm) * 1000) * 4) + 3500 + props.data.chart!.metadata.offset;
+        //                musicGameVariables.ready = true;
+        ResultNavigationTimeout = setTimeout(() => {
+            scenechange("../result");
+        }, totalTime + musicGameVariables.time.initialVoidTime + 2000);
+
+        await sleep(3500);
+        const sound = (await getBehavior).sound.sound.assist;
+        const soundUri = `data:${sound.mime};base64,${arrayBufferToBase64(sound.data)}`;
+        const audio = new Howl({
+            src: [soundUri],
+            volume: gameConfig.audio.effectVolume || 1,
+        });
+        for (let i = 0; i < 4; i++) {
+            audio.play();
+            await sleep((60 / props.data.chart!.metadata.initialBpm) * 1000);
+        }
+        audio.stop();
+        audio.unload();
+        musicAudio.play();
+        musicGameVariables.delay = performance.now() - musicGameVariables.time.startTime
     }
 
 
@@ -327,7 +302,7 @@ const MusicGame3D: React.FC = () => {
 
     //update notes position
     function updateGame() {
-        if (!musicGameVariables.ready) return;
+        if (!props.ready) return;
         const activeRange = musicGameVariables.activeRange
         const elapsedTime = performance.now() - musicGameVariables.time.startTime;
         const gameTime = elapsedTime - /* musicGameVariables.delay - */ gameConfig.gameplay.timing.offset;
@@ -347,7 +322,7 @@ const MusicGame3D: React.FC = () => {
             else if (note.time + activeRange < judgeTime) managementJudge(note.judge(judgeTime))
             note.updatePosition(gameTime)
         }
-        for (const note of chart.notes) {
+        for (const note of props.data.chart!.notes) {
             if (note.active) continue;
             if (note.time - Math.abs(gameTime) < note.scrollTime) {
                 note.active = true;
@@ -366,7 +341,6 @@ const MusicGame3D: React.FC = () => {
         if (pos < 4) {
             //find tap note and judge
             const note = musicGameVariables.activeNotes.find(note => note instanceof tapNote && note.lane == pos + 1 && Math.abs(note.time - judgeTime) < activeRange);
-            console.log(note);
 
             if (note) managementJudge(note.judge(judgeTime));
         } else if (pos == 4) {
@@ -383,7 +357,7 @@ const MusicGame3D: React.FC = () => {
     //set score and some info
     function managementJudge(judge: { judge: judgeText, accuracy: number } | undefined) {
         if (!judge) return;
-        let score = chart.metadata.scorePerNote;
+        let score = props.data.chart!.metadata.scorePerNote;
         if (judge.judge == "glossy") score *= 0.75;
         else if (judge.judge == "moderate") score *= 0.5;
         else if (judge.judge == "lost") score = 0;
@@ -420,10 +394,7 @@ const MusicGame3D: React.FC = () => {
     }
 
     return (
-        <div>
-            <div className={style.musicgameCanvas} ref={musicgameCanvasRef}></div>
-            {/* <MusicGameRenderer render={false} /> */}
-        </div>
+        <div className={style.musicgameCanvas} ref={musicgameCanvasRef}></div>
     )
 }
 
