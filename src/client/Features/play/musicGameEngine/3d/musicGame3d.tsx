@@ -109,7 +109,7 @@ const MusicGame3D: React.FC = () => {
         const behaviorName = {
             model: gameConfig.gameplay.behavior.model == "default" ? version.defaultBehavior : gameConfig.gameplay.behavior.model,
             sound: gameConfig.gameplay.behavior.sound == "default" ? version.defaultBehavior : gameConfig.gameplay.behavior.sound,
-            font: gameConfig.gameplay.behavior.font == "default" ? version.defaultBehavior : gameConfig.gameplay.behavior.font,
+            font: gameConfig.gameplay.behavior.font == "default" ? version.defaultFont : gameConfig.gameplay.behavior.font,
         }
 
         const behaviordata = await loadBehavior(behaviorName.model);
