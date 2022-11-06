@@ -107,7 +107,17 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
     }));
 
     let ResultNavigationTimeout: NodeJS.Timeout;
-
+    
+    const judgeTable: fontTable = [
+        { name: "stunning", label: "Stunning", color: "#e5e537" },
+        { name: "glossy", label: "Glossy", color: "#1feaf4" },
+        { name: "moderate", label: "Moderate", color: "#3dbf2a" },
+        { name: "lost", label: "Lost", color: "#aaaaaa" }
+    ]
+    const timeTable: FPTable = {
+        future: "#1f5ff4",
+        past: "#f4751f"
+    }
 
     React.useEffect(() => {
         window.addEventListener("keydown", keyInput);
