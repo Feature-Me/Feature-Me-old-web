@@ -38,11 +38,11 @@ import easings from "Utils/easing/easing";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 import { cloneDeep } from "lodash";
 import loadFont from "Utils/Storage/resourcesLoader/loadFont";
-import { gameProps } from "Types/play/game/gameProps";
+import { gameData, gameProps } from "Types/play/game/gameProps";
 
 
 const MusicGame3D: React.FC<gameProps> = (props) => {
-    
+
     const scenechange = useSeneChangeNavigation();
     const selectedMusic = useRecoilValue(musicSelectorState);
     const gameConfig = useRecoilValue(gameConfigState);
@@ -58,9 +58,6 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
     const musicgameCanvasRef = React.useRef<HTMLDivElement>(null);
 
     const musicData = selectedMusic.selectedData as MusicAssetContents;
-    const chartMetaData = musicData.metadata.difficulties.find(diff => diff.name == musicGameMode.difficulty);
-    const rawChart = musicData.chart.find((c) => c.name === musicGameMode.difficulty);
-    const rawMusic = musicData.music.find((m) => m.name === musicData.metadata.selectedMusic);
     //if rawChart or rawMusic is undefined, play error music
     //let behavior: { model: behaviorAssetContents; sound: soundEffectAssetContents; font: behaviorAssetContents; };
     //const activeRange = musicGame_.mode == "auto"? 0: 1000;
@@ -94,42 +91,15 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         }
     })
 
-    let musicUri = `data:${rawMusic?.mime || "audio/mp3"};base64,${arrayBufferToBase64(rawMusic?.data || new ArrayBuffer(0))}`;
+    let musicUri = `data:${props.data.music?.mime || "audio/mp3"};base64,${arrayBufferToBase64(props.data.music?.data || new ArrayBuffer(0))}`;
     let musicDuration: number = 0;
-    let musicAudio = new Howl({
-        src: [musicUri],
+    let musicAudio = React.useRef(new Howl({
+        src: musicUri,
         volume: (gameConfig.audio.masterVolume * gameConfig.audio.musicVolume) || 1,
-    });
+    }));
 
     let ResultNavigationTimeout: NodeJS.Timeout;
 
-    const getBehavior = React.useMemo(async () => {
-
-        const behaviorName = {
-            model: gameConfig.gameplay.behavior.model == "default" ? version.defaultBehavior : gameConfig.gameplay.behavior.model,
-            sound: gameConfig.gameplay.behavior.sound == "default" ? version.defaultBehavior : gameConfig.gameplay.behavior.sound,
-            font: gameConfig.gameplay.behavior.font == "default" ? version.defaultBehavior : gameConfig.gameplay.behavior.font,
-        }
-
-        const behaviordata = await loadBehavior(behaviorName.model);
-
-        if (behaviorName.sound == "default" || behaviorName.sound == "auto") {
-            behaviorName.sound = behaviordata.soundEffect || version.defaultBehavior;
-        }
-        if (behaviorName.font == "default" || behaviorName.font == "auto") {
-            behaviorName.font = behaviordata.fontName || version.defaultFont;
-        }
-
-        const soundEffectdata = await loadSoundEffect(behaviorName.sound);
-        const fontdata = await loadFont(behaviorName.font);
-
-        return {
-            model: behaviordata,
-            sound: soundEffectdata,
-            font: fontdata,
-        }
-
-    }, []);
 
     React.useEffect(() => {
         window.addEventListener("keydown", keyInput);
@@ -140,14 +110,14 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
             gameRenderer.dispose();
             window.removeEventListener("keydown", keyInput);
             window.removeEventListener("resize", resizeCanvas);
-            musicAudio.stop();
-            musicAudio.unload();
+            musicAudio.current.stop();
+            musicAudio.current.unload();
         }
     }, []);
 
     React.useEffect(() => {
+        if(!props.ready)return;
         preparingGame();
-        console.log(props);
 
     }, [props])
 
@@ -174,9 +144,10 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         gameRenderer.setSize(window.innerWidth, window.innerHeight)
     }
 
-    //accept behavior , load chart and play assist sound
+    // play sound
     async function preparingGame() {
         if (!props.ready) return;
+        
 
         await initRenderer();
 
@@ -192,16 +163,16 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
 
         musicGameVariables.current.time.initialVoidTime = (((60 / props.data.chart!.metadata.initialBpm) * 1000) * 4)
         musicGameVariables.current.time.startTime = performance.now() + (((60 / props.data.chart!.metadata.initialBpm) * 1000) * 4) + 3500 + props.data.chart!.metadata.offset;
-        //                musicGameVariables.ready = true;
+        //musicGameVariables.ready = true;
         ResultNavigationTimeout = setTimeout(() => {
             scenechange("../result");
         }, totalTime + musicGameVariables.current.time.initialVoidTime + 2000);
 
         await sleep(3500);
-        const sound = (await getBehavior).sound.sound.assist;
-        const soundUri = `data:${sound.mime};base64,${arrayBufferToBase64(sound.data)}`;
+        const sound = props.data.behavior.sound?.sound.assist;
+        const soundUri = `data:${sound?.mime||"audio/mp3"};base64,${arrayBufferToBase64(sound?.data||new ArrayBuffer(0))}`;
         const audio = new Howl({
-            src: [soundUri],
+            src: soundUri,
             volume: gameConfig.audio.effectVolume || 1,
         });
         for (let i = 0; i < 4; i++) {
@@ -210,7 +181,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         }
         audio.stop();
         audio.unload();
-        musicAudio.play();
+        musicAudio.current.play();
         musicGameVariables.current.delay = performance.now() - musicGameVariables.current.time.startTime
     }
 
@@ -264,8 +235,8 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
 
     //ground
     async function setGround() {
-        const groundGltf = (await getBehavior).model.models.ground;
-        const gltf = await new GLTFLoader().loadFromArrayBufferAsync(groundGltf)
+        const groundGltf = props.data.behavior.model?.models.ground;
+        const gltf = await new GLTFLoader().loadFromArrayBufferAsync(groundGltf||new ArrayBuffer(0))
         const model = gltf.scene;
         model.position.set(0, 0, 0);
         model.receiveShadow = true;
@@ -274,8 +245,8 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
 
     //character
     async function setCharacter() {
-        const characterGltf = (await getBehavior).model.models.character;
-        const gltf = await new GLTFLoader().loadFromArrayBufferAsync(characterGltf);
+        const characterGltf = props.data.behavior.model?.models.character;
+        const gltf = await new GLTFLoader().loadFromArrayBufferAsync(characterGltf||new ArrayBuffer(0));
         character.current = gltf.scene;
         character.current.position.set(-9, 0, 0);
         character.current.rotation.set(0, 0, 0)
