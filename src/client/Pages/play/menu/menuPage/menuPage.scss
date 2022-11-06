@@ -41,9 +41,13 @@
             align-items: center;
 
             &:hover {
-                left: 0;
+                left: -16px;
                 background: linear-gradient(to right, rgb(11, 32, 63), #0e68a3);
                 filter: brightness(1.5);
+            }
+            &:active {
+                left: 0;
+                filter: brightness(1.75);
             }
 
         }
@@ -58,9 +62,13 @@
             justify-items: right;
 
             &:hover {
-                right: 0;
+                right: 16px;
                 background: linear-gradient(to left, rgb(7, 39, 18), #05680d);
                 filter: brightness(1.5);
+            }
+            &:active {
+                right: 0;
+                filter: brightness(1.75);
             }
         }
     }
