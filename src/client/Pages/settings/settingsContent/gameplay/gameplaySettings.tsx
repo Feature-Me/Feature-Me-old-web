@@ -12,12 +12,17 @@ import KeybindSettings from "./keybindSettings/keybindSettings";
 import keybindImage from "Assets/Images/keybindmap.png";
 import RangeInput from "Components/RangeInput/RangeInput";
 import NumberInput from "Components/numberInput/numberInput";
+import HorizonalSelectFromArray from "Components/horizonalSelectFromArray/horizonalSelectFromArray";
+import { values } from "lodash";
 
 const GameplaySettings: React.FC = () => {
     const [translate, i18n] = useTranslation();
     const [gameConfig, setGameConfig] = useRecoilState(gameConfigState);
     const [settingDetailsData, setiSettingDetailsData] = React.useState<settingDetailsData>({ title: "", processingLoad: "none", description: "" });
     const settingListRef = React.useRef<HTMLDivElement>(null);
+
+    const judgeTextShow = [{ label: "ON", value: true }, { label: "OFF", value: false }]
+    const judgeTextDirection = [{ label: "Vertical", value: 0 }, { label: "Facing", value: -38 }, { label: "Horizonal", value: -90 }]
 
     const settings: settingsData = [
         {
@@ -51,7 +56,31 @@ const GameplaySettings: React.FC = () => {
                 description: <TranslateText content="settingsPage.gameplay.judgeTiming.description" />
             },
             input: <NumberInput min={-250} max={250} step={1} value={gameConfig.gameplay.timing.judge} onChange={(value: number) => setGameConfig(config => { return { ...config, gameplay: { ...config.gameplay, timing: { ...config.gameplay.timing, judge: value } } } })} />
-        }
+        },
+        {
+            details: {
+                title: <TranslateText content="settingsPage.gameplay.judgeTextShow.name" />,
+                processingLoad: "low",
+                description: <TranslateText content="settingsPage.gameplay.judgeTextShow.description" />
+            },
+            input: <HorizonalSelectFromArray contents={judgeTextShow} value={judgeTextShow.find(c => c.value == gameConfig.gameplay.judgeText.show) || judgeTextShow[0]} onChange={(value) => setGameConfig(config => { return { ...config, gameplay: { ...config.gameplay, judgeText: { ...config.gameplay.judgeText, show: value.value } } }; })} />
+        },
+        {
+            details: {
+                title: <TranslateText content="settingsPage.gameplay.judgeTextPosition.name" />,
+                processingLoad: "none",
+                description: <TranslateText content="settingsPage.gameplay.judgeTextPosition.description" />
+            },
+            input: <NumberInput min={-100} max={0} step={0.01} value={gameConfig.gameplay.judgeText.position} onChange={(value) => setGameConfig(config => { return { ...config, gameplay: { ...config.gameplay, judgeText: { ...config.gameplay.judgeText, position: value } } } })} />
+        },
+        {
+            details: {
+                title: <TranslateText content="settingsPage.gameplay.judgeTextDirection.name" />,
+                processingLoad: "low",
+                description: <TranslateText content="settingsPage.gameplay.judgeTextDirection.description" />
+            },
+            input: <HorizonalSelectFromArray contents={judgeTextDirection} value={judgeTextDirection.find(c => c.value == gameConfig.gameplay.judgeText.direction) || judgeTextDirection[0]} onChange={(value) => setGameConfig(config => { return { ...config, gameplay: { ...config.gameplay, judgeText: { ...config.gameplay.judgeText, direction: value.value } } }; })} />
+        },
 
     ]
 
