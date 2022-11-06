@@ -226,6 +226,7 @@
         text-shadow: #5e5e5e 4px 4px 4px;
         font-weight: bold;
         text-align: center;
+        @include font-body;
     }
 
     p::first-letter {
