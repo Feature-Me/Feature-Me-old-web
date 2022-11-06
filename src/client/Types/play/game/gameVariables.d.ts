@@ -1,4 +1,4 @@
-import { note } from "Features/play/chartClass/notes"
+import { note } from "Features/play/class/noteClass/notes"
 
 interface musicGameVariablesType {
     activeRange: number
