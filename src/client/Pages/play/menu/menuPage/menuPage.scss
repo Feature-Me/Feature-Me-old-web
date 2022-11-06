@@ -62,7 +62,7 @@
             justify-items: right;
 
             &:hover {
-                right: 16px;
+                right: -16px;
                 background: linear-gradient(to left, rgb(7, 39, 18), #05680d);
                 filter: brightness(1.5);
             }
