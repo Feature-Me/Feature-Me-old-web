@@ -21,8 +21,6 @@ class note {
     scrollSpeed: number = 10;
     scrollTime: number = scrollSpeedToScrollTime(this.scrollSpeed);
 
-    font: { font: fontAssetContents, table: fontTable, FPTable: FPTable } | undefined;
-
     constructor(note: chartNote) {
         this.type = note.type;
         this.time = note.time;
@@ -55,9 +53,6 @@ class note {
         const behavior = model.scene.clone();
         this.note = behavior;
         this.note.position.set(0, 0.1, 100);
-    }
-    setFont(font: fontAssetContents, table: fontTable, FPTable: FPTable): void {
-        this.font = { font, table, FPTable }
     }
     setAudio(audioUrl: string, volume: number) {
         this.audio = new Howl({
