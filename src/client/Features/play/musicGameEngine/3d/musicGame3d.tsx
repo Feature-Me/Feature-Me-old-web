@@ -68,12 +68,12 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
     const gameOptions = {
         alpha: true,
     }
-    const gameRenderer = React.useRef(new THREE.WebGLRenderer(gameOptions));
-    const gameScene = React.useRef(new THREE.Scene());
-    const notesContainer = React.useRef(new THREE.Group());
-    const camera = React.useRef(new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 87.5))
-    const composer = React.useRef(new EffectComposer(gameRenderer.current));
-    let character: THREE.Object3D = new THREE.Object3D();
+    const gameRenderer = new THREE.WebGLRenderer(gameOptions);
+    const gameScene = new THREE.Scene();
+    const notesContainer = new THREE.Group();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 87.5)
+    const composer = new EffectComposer(gameRenderer);
+    let character = React.useRef(new THREE.Object3D());
     let gameRenderInterval: NodeJS.Timer;
 
     let musicGameVariables = React.useRef<musicGameVariablesType>({
@@ -137,7 +137,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         return () => {
             clearTimeout(ResultNavigationTimeout);
             clearInterval(gameRenderInterval);
-            gameRenderer.current.dispose();
+            gameRenderer.dispose();
             window.removeEventListener("keydown", keyInput);
             window.removeEventListener("resize", resizeCanvas);
             musicAudio.stop();
@@ -152,8 +152,6 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
     }, [props])
 
     function keyInput(key: KeyboardEvent) {
-        console.log(key);
-        
         if (!gameConfig.gameplay.key.includes(key.code)) return;
 
         const keyPos = gameConfig.gameplay.key.findIndex(str => str == key.code) as 0 | 1 | 2 | 3 | 4 | 5 | 6;
@@ -173,7 +171,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
 
     //when resized window, resize canvas to fit window size
     function resizeCanvas() {
-        gameRenderer.current.setSize(window.innerWidth, window.innerHeight)
+        gameRenderer.setSize(window.innerWidth, window.innerHeight)
     }
 
     //accept behavior , load chart and play assist sound
@@ -224,39 +222,39 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         const directionalLight = new THREE.DirectionalLight(0xffffff, 7);
 
         //renderer settings 
-        gameRenderer.current.outputEncoding = THREE.sRGBEncoding;
-        gameRenderer.current.physicallyCorrectLights = true;
-        gameRenderer.current.toneMapping = THREE.ACESFilmicToneMapping;
-        gameRenderer.current.toneMappingExposure = 0.25;
-        gameRenderer.current.setSize(window.innerWidth, window.innerHeight);
-        gameRenderer.current.setPixelRatio(gameConfig.graphics.musicgame.resolution || 1);
-        musicgameCanvasRef.current?.appendChild(gameRenderer.current.domElement);
-        gameScene.current.name = "musicGameScene";
-        notesContainer.current.name = "notesContainer";
+        gameRenderer.outputEncoding = THREE.sRGBEncoding;
+        gameRenderer.physicallyCorrectLights = true;
+        gameRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+        gameRenderer.toneMappingExposure = 0.25;
+        gameRenderer.setSize(window.innerWidth, window.innerHeight);
+        gameRenderer.setPixelRatio(gameConfig.graphics.musicgame.resolution || 1);
+        musicgameCanvasRef.current?.appendChild(gameRenderer.domElement);
+        gameScene.name = "musicGameScene";
+        notesContainer.name = "notesContainer";
 
         directionalLight.position.set(0, 10, 10);
         directionalLight.lookAt(0, 0, -10);
 
-        camera.current.position.set(0, 8, 5);
-        camera.current.rotation.set(THREE.MathUtils.degToRad(-38), 0, 0);
+        camera.position.set(0, 8, 5);
+        camera.rotation.set(THREE.MathUtils.degToRad(-38), 0, 0);
 
-        gameScene.current.add(ambientLight, directionalLight, notesContainer.current);
+        gameScene.add(ambientLight, directionalLight, notesContainer);
 
         //post process
-        const renderPass = new RenderPass(gameScene.current, camera.current);
-        composer.current.addPass(renderPass);
+        const renderPass = new RenderPass(gameScene, camera);
+        composer.addPass(renderPass);
         let AAPass: SSAARenderPass | SMAAPass | undefined = undefined;
         if (gameConfig.graphics.musicgame.postProcessing.enabled) {
             if (gameConfig.graphics.musicgame.postProcessing.antialias == "SSAA") {
-                AAPass = new SSAARenderPass(gameScene.current, camera.current);
+                AAPass = new SSAARenderPass(gameScene, camera);
                 AAPass.sampleLevel = gameConfig.graphics.musicgame.postProcessing.AALevel;
             }
             if (gameConfig.graphics.musicgame.postProcessing.antialias == "SMAA") AAPass = new SMAAPass(window.innerWidth, window.innerHeight);
             if (gameConfig.graphics.musicgame.postProcessing.antialias == "TAA") {
-                AAPass = new TAARenderPass(gameScene.current, camera.current, "black", 1)
+                AAPass = new TAARenderPass(gameScene, camera, "black", 1)
                 AAPass.sampleLevel = gameConfig.graphics.musicgame.postProcessing.AALevel;
             }
-            if (AAPass) composer.current.addPass(AAPass)
+            if (AAPass) composer.addPass(AAPass)
         }
 
         await setGround();
@@ -271,35 +269,35 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         const model = gltf.scene;
         model.position.set(0, 0, 0);
         model.receiveShadow = true;
-        gameScene.current.add(model)
+        gameScene.add(model)
     }
 
     //character
     async function setCharacter() {
         const characterGltf = (await getBehavior).model.models.character;
         const gltf = await new GLTFLoader().loadFromArrayBufferAsync(characterGltf);
-        character = gltf.scene;
-        character.position.set(-9, 0, 0);
-        character.rotation.set(0, 0, 0)
-        character.castShadow = true;
-        gameScene.current.add(character)
+        character.current = gltf.scene;
+        character.current.position.set(-9, 0, 0);
+        character.current.rotation.set(0, 0, 0)
+        character.current.castShadow = true;
+        gameScene.add(character.current)
     }
 
     async function moveCharacter(position: ("left" | "right")) {
-        const currentPos = character.position.x;
+        const currentPos = character.current.position.x;
         const newPos = position == "left" ? -9 : 9;
         if (currentPos == newPos) return;
         const moveDistance = currentPos + newPos * 2;
         for (let i = 0; i < 100; i++) {
             const pos = easings.bounce(i / 100) * moveDistance / 100 + newPos;
-            character.position.x = pos;
+            character.current.position.x = pos;
             await sleep(10);
         }
 
     }
 
     function render() {
-        composer.current.render();
+        composer.render();
         updateGame();
     }
 
@@ -317,7 +315,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         for (const note of musicGameVariables.current.activeNotes) {
             if (note.judged) {
                 note.active = false;
-                notesContainer.current.remove(note.note);
+                notesContainer.remove(note.note);
                 const index = musicGameVariables.current.activeNotes.findIndex(n => n == note);
                 musicGameVariables.current.activeNotes.splice(index, 1);
             }
@@ -329,7 +327,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
             if (note.active) continue;
             if (note.time - Math.abs(gameTime) < note.scrollTime) {
                 note.active = true;
-                notesContainer.current.add(note.note);
+                notesContainer.add(note.note);
                 musicGameVariables.current.activeNotes.push(note);
             }
 
