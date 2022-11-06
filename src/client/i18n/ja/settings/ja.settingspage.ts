@@ -41,6 +41,18 @@ const JASettingsPage = {
         "judgeTiming":{
             "name":"判定タイミング調整",
             "description":"ノートの判定のずれを調整します。\nFuture(Fast)が多い場合は-に,Past(Late)が多い場合は+に調整してください。"
+        },
+        "judgeTextShow":{
+            "name":"判定テキスト表示",
+            "description":"判定テキストの表示を設定します。"
+        },
+        "judgeTextPosition":{
+            "name":"判定テキスト位置調整",
+            "description":"判定テキストの位置を設定します。"
+        },
+        "judgeTextDirection":{
+            "name":"判定テキスト表示方向",
+            "description":"判定テキストの表示方向を設定します。"
         }
     },
     "graphics": {
