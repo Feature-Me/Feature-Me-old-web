@@ -33,7 +33,7 @@ const ResultPage: React.FC = () => {
                 <div className={style.summary}>
                     <div className={style.bigvalue}>
                         <span>Score</span>
-                        <h1>{musicGameValue.score}</h1>
+                        <h1>{Math.round(musicGameValue.score)}</h1>
                     </div>
                     <div className={style.bigvalue}>
                         <span>Rank</span>
