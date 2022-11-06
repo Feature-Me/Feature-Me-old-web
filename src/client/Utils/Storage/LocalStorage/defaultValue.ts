@@ -91,6 +91,11 @@ const gameConfig: gameConfig = {
             predictionScore: false,
             maxCombo: false,
             predictionRating: false,
+        },
+        judgeText: {
+            show: true,
+            direction:0,
+            position:-4
         }
     },
     audio: {
