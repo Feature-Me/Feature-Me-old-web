@@ -374,7 +374,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
     }
 
     function updateJudgeText(judgeText: string, posX: number) {
-        if (!props.data.behavior.font) return;
+        if (!props.data.behavior.font || gameConfig.gameplay.judgeText.show) return;
         const judgeTable: fontTable = [
             { name: "stunning", label: "Stunning", color: "#e5e537" },
             { name: "glossy", label: "Glossy", color: "#1feaf4" },
@@ -387,27 +387,34 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         }
 
         const tableData = judgeTable.find(t => t.name == judgeText)
-        
+
         if (!tableData) return;
-        
-        new Promise(async(resolve)=>{
+
+        //create judge text with shape geometry
+        new Promise<void>(async (resolve) => {
             const geometry = new THREE.ShapeGeometry(new Font(props.data.behavior.font.data).generateShapes(tableData.label, 0.3))
-            const material = new THREE.MeshStandardMaterial({ color: tableData.color,transparent:true,opacity:1 });
+            const material = new THREE.MeshStandardMaterial({ color: tableData.color, transparent: true, opacity: 1 });
             const mesh = new THREE.Mesh(geometry, material);
+
+            mesh.position.set(posX, 0.25, gameConfig.gameplay.judgeText.position);
+            mesh.rotation.set(THREE.MathUtils.degToRad(gameConfig.gameplay.judgeText.direction), 0, 0)
+
+            // translate -50% of itself
             geometry.computeBoundingBox();
             if (geometry.boundingBox) {
                 const xMid = - 0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
                 geometry.translate(xMid, 0, 0);
             }
-            mesh.position.set(posX, 0.25, -4);
-            mesh.rotation.set(THREE.MathUtils.degToRad(0), 0, 0)
+            //add and animation
             judgeTextContainer.current.add(mesh);
             for (let i = 0; i < 25; i++) {
-                mesh.position.setY(mesh.position.y+0.05);
-                material.opacity-=0.04
-                await sleep(500/25);
+                mesh.position.setY(mesh.position.y + 0.05);
+                material.opacity -= 0.04
+                await sleep(500 / 25);
             }
+            //after animation, text will remove
             judgeTextContainer.current.remove(mesh);
+            resolve();
         })
     }
 
