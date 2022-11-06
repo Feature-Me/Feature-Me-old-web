@@ -374,6 +374,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
     }
 
     function updateJudgeText(judgeText: string, posX: number) {
+        if (!props.data.behavior.font) return;
         const judgeTable: fontTable = [
             { name: "stunning", label: "Stunning", color: "#e5e537" },
             { name: "glossy", label: "Glossy", color: "#1feaf4" },
@@ -386,7 +387,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         }
 
         const tableData = judgeTable.find(t => t.name == judgeText)
-        if (!props.data.behavior.font) return;
+        
         if (!tableData) return;
         const geometry = new THREE.ShapeGeometry(new Font(props.data.behavior.font.data).generateShapes(tableData.label, 0.25))
         const material = new THREE.MeshStandardMaterial({ color: tableData.color });
