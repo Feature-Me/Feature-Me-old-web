@@ -24,16 +24,7 @@ async function acceptBehavior(chart: chartType, models: behaviorAssetContents, f
         flick: `data:${sound.sound.flick.mime};base64,${arrayBufferToBase64(sound.sound.flick.data)}`,
     }
 
-    let table: fontTable = [
-        { name: "stunning", label: "Stunning", color: "#e5e537" },
-        { name: "glossy", label: "Glossy", color: "#1feaf4" },
-        { name: "moderate", label: "Moderate", color: "#3dbf2a" },
-        { name: "lost", label: "Lost", color: "#aaaaaa" }
-    ]
-    let timeTable:FPTable = {
-        future:"#1f5ff4",
-        past:"#f4751f"
-    }
+    
 
     /*     const getBehavior = (type:keyof typeof behaviors) => {
             return match(type)
@@ -65,7 +56,6 @@ async function acceptBehavior(chart: chartType, models: behaviorAssetContents, f
 
         note.setBehavior(model);
         note.setAudio(sounds[note.type], volume);
-        note.setFont(font, table,timeTable)
         /* getBehavior(note.type).then((behavior)=>{
             note.setBehavior(behavior.scene.clone());
         }); */
