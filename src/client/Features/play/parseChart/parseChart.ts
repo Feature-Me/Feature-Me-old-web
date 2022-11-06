@@ -2,11 +2,11 @@ import { match } from "ts-pattern";
 import json5 from "json5";
 
 import { chartJsonType, chartNoteType, chartType, chartEffectType } from "./chartSample";
-import { brightNote, damageTapNote, flickNote, holdNote, seedNote, tapNote } from "../chartClass/notes";
+import { brightNote, damageTapNote, flickNote, holdNote, seedNote, tapNote } from "../class/noteClass/notes";
 
 import databaseInfo from "../../../Config/databaseinfo.json";
 import version from "../../../Config/versions.json";
-import { cameraEffect, speedEffect } from "../chartClass/effects";
+import { cameraEffect, speedEffect } from "../class/noteClass/effects";
 
 
 async function parseChart(chart: string, scrollSpeed: number) {

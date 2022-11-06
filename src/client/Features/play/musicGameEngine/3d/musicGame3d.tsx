@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
 import { motion, useAnimation } from "framer-motion";
 import { Howl, Howler } from "howler";
 
@@ -31,7 +32,7 @@ import * as musicGame from "State/play/game/musicGame/musicGameState"
 import version from "Config/versions.json";
 import { chartType } from "Features/play/parseChart/chartSample";
 import acceptBehavior from "Features/play/acceptBehavior/acceptBehavior";
-import { brightNote, holdNote, note, seedNote, tapNote } from "Features/play/chartClass/notes";
+import { brightNote, holdNote, note, seedNote, tapNote } from "Features/play/class/noteClass/notes";
 import { musicGameVariablesType } from "Types/play/game/gameVariables";
 import { match } from "ts-pattern";
 import easings from "Utils/easing/easing";
@@ -39,6 +40,9 @@ import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation"
 import { cloneDeep } from "lodash";
 import loadFont from "Utils/Storage/resourcesLoader/loadFont";
 import { gameData, gameProps } from "Types/play/game/gameProps";
+import { fontTable, FPTable } from "Types/resources/fontResources";
+import { Font } from "three/examples/jsm/loaders/FontLoader";
+import { Vector3 } from "three";
 
 
 const MusicGame3D: React.FC<gameProps> = (props) => {
@@ -68,12 +72,12 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
     const gameRenderer = new THREE.WebGLRenderer(gameOptions);
     const gameScene = new THREE.Scene();
     const notesContainer = new THREE.Group();
-    const judgeTextContainer = new THREE.Group();
+    const judgeTextContainer = React.useRef(new THREE.Group());
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 87.5)
     const composer = new EffectComposer(gameRenderer);
     gameScene.name = "musicGameScene";
     notesContainer.name = "notesContainer";
-    judgeTextContainer.name = "judgeTextContainer";
+    judgeTextContainer.current.name = "judgeTextContainer";
     let character = React.useRef(new THREE.Object3D());
     let gameRenderInterval: NodeJS.Timer;
 
@@ -127,7 +131,8 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
 
     //when resized window, resize canvas to fit window size
     function resizeCanvas() {
-        gameRenderer.setSize(window.innerWidth, window.innerHeight)
+        gameRenderer.setSize(window.innerWidth, window.innerHeight);
+        composer.setSize(window.innerWidth, window.innerHeight)
     }
 
     // play sound
@@ -194,7 +199,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         camera.position.set(0, 8, 5);
         camera.rotation.set(THREE.MathUtils.degToRad(-38), 0, 0);
 
-        gameScene.add(ambientLight, directionalLight, notesContainer, judgeTextContainer);
+        gameScene.add(ambientLight, directionalLight, notesContainer, judgeTextContainer.current);
 
         //post process
         const renderPass = new RenderPass(gameScene, camera);
@@ -286,7 +291,6 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
                 notesContainer.add(note.note);
                 musicGameVariables.current.activeNotes.push(note);
             }
-
         }
     }
 
@@ -331,13 +335,12 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
     }
 
     //set score and some info
-    function managementJudge(judge: { judge: judgeText, accuracy: number } | undefined) {
+    function managementJudge(judge: { judge: judgeText, accuracy: number, note: THREE.Object3D } | undefined) {
         if (!judge) return;
         let score = props.data.chart!.metadata.scorePerNote;
         if (judge.judge == "glossy") score *= 0.75;
         else if (judge.judge == "moderate") score *= 0.5;
         else if (judge.judge == "lost") score = 0;
-
 
         //update score and some values
         setMusicGameNotesJudge(noteJudge => {
@@ -367,6 +370,35 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
                 maxChain: Math.max((judge.judge == "lost" ? 0 : value.chain + 1), value.maxChain)
             }
         })
+        updateJudgeText(judge.judge, judge.note.position.x)
+    }
+
+    function updateJudgeText(judgeText: string, posX: number) {
+        const judgeTable: fontTable = [
+            { name: "stunning", label: "Stunning", color: "#e5e537" },
+            { name: "glossy", label: "Glossy", color: "#1feaf4" },
+            { name: "moderate", label: "Moderate", color: "#3dbf2a" },
+            { name: "lost", label: "Lost", color: "#aaaaaa" }
+        ]
+        const timeTable: FPTable = {
+            future: "#1f5ff4",
+            past: "#f4751f"
+        }
+
+        const tableData = judgeTable.find(t => t.name == judgeText)
+        if (!props.data.behavior.font) return;
+        if (!tableData) return;
+        const geometry = new THREE.ShapeGeometry(new Font(props.data.behavior.font.data).generateShapes(tableData.label, 0.25))
+        const material = new THREE.MeshStandardMaterial({ color: tableData.color });
+        const mesh = new THREE.Mesh(geometry, material);
+        geometry.computeBoundingBox();
+        if (geometry.boundingBox) {
+            const xMid = - 0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
+            geometry.translate(xMid, 0, 0);
+        }
+        mesh.position.set(posX, 0.2, -4);
+        mesh.rotation.set(THREE.MathUtils.degToRad(-38), 0, 0)
+        judgeTextContainer.current.add(mesh);
     }
 
     return (

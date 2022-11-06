@@ -3,9 +3,9 @@ import * as THREE from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { fontAssetContents, fontTable, FPTable } from "Types/resources/fontResources";
 import scrollSpeedToScrollTime from "Utils/scrollSpeedToScrollTime/scrollSpeedToScrollTime";
-import easing from "../../../Utils/easing/easing";
+import easing from "../../../../Utils/easing/easing";
 
-import { chartBrightNote, chartDamageTapNote, chartFlickNote, chartHoldNote, chartNote, chartSeedNote, chartTapNote } from "../parseChart/chartSample";
+import { chartBrightNote, chartDamageTapNote, chartFlickNote, chartHoldNote, chartNote, chartSeedNote, chartTapNote } from "../../parseChart/chartSample";
 
 class note {
     type: chartNote["type"];
@@ -33,7 +33,7 @@ class note {
             loop: false
         });
     }
-    judge(judgeTime: number): { judge: judgeText, accuracy: number,note:THREE.Object3D } | undefined {
+    judge(judgeTime: number): { judge: judgeText, accuracy: number, note: THREE.Object3D } | undefined {
         if (this.judged) return;
         this.judged = true;
         let judgeText: judgeText;
@@ -47,7 +47,7 @@ class note {
         return {
             judge: judgeText,
             accuracy: judgeTime - this.time,
-            note:this.note
+            note: this.note
         }
     }
     setBehavior(model: GLTF) {
@@ -152,7 +152,7 @@ class brightNote extends note {
         return {
             judge: judgeText,
             accuracy: judgeTime - this.time,
-            note:this.note
+            note: this.note
         }
     }
 }
@@ -177,13 +177,13 @@ class seedNote extends note {
             return {
                 judge: "lost" as judgeText,
                 accuracy: 0,
-                note:this.note
+                note: this.note
             }
         this.audio.play();
         return {
             judge: "stunning" as judgeText,
             accuracy: 0,
-            note:this.note
+            note: this.note
         }
     }
     updatePosition(gameTime: number): void {
