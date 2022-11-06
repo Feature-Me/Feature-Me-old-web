@@ -28,15 +28,10 @@ function useGameLoader() {
     const gameConfig = useRecoilValue(gameConfigState);
     const event = new EventHandler();
 
-    let propsData: gameProps = {
-        ready: false,
-        data: {
+    let data: gameProps["data"] = {
             chart: undefined,
             music: rawMusic
-        }
     }
-
-    const [data,setData] = React.useState(propsData);
 
     
 
@@ -97,12 +92,9 @@ function useGameLoader() {
         getBehavior().then((behavior) => {
             parseChart(rawChart!.data, gameConfig.gameplay.scrollSpeed).then(async (chartData) => {
                 const volume = (gameConfig.audio.masterVolume * gameConfig.audio.effectVolume) || 1;
-                const newData = cloneDeep(data);
-                newData.data.chart = await acceptBehavior(chartData, behavior.model, behavior.font, behavior.sound, volume);
-                newData.ready = true;
+                data.chart = await acceptBehavior(chartData, behavior.model, behavior.font, behavior.sound, volume);
                 setStates(chartData);
-                setData(newData)
-                //event.dispatch("loadData",data);
+                event.dispatch("loadData",data);
             })
         })
     }
