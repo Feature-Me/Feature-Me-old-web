@@ -374,7 +374,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
     }
 
     function updateJudgeText(judgeText: string, posX: number) {
-        if (!props.data.behavior.font || gameConfig.gameplay.judgeText.show) return;
+        if (!props.data.behavior.font || !gameConfig.gameplay.judgeText.show) return;
         const judgeTable: fontTable = [
             { name: "stunning", label: "Stunning", color: "#e5e537" },
             { name: "glossy", label: "Glossy", color: "#1feaf4" },
