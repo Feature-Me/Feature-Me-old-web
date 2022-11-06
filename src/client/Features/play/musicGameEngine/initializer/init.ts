@@ -29,11 +29,17 @@ function useGameLoader() {
     const event = new EventHandler();
 
     let data: gameProps["data"] = {
-            chart: undefined,
-            music: rawMusic
+        chart: undefined,
+        music: rawMusic,
+        behavior: {
+            model: undefined,
+            sound: undefined,
+            font: undefined
+        }
+
     }
 
-    
+
 
     function getBehavior() {
         return new Promise<getBehaviorReturns>(async (resolve) => {
@@ -94,7 +100,7 @@ function useGameLoader() {
                 const volume = (gameConfig.audio.masterVolume * gameConfig.audio.effectVolume) || 1;
                 data.chart = await acceptBehavior(chartData, behavior.model, behavior.font, behavior.sound, volume);
                 setStates(chartData);
-                event.dispatch("loadData",data);
+                event.dispatch("loadData", data);
             })
         })
     }
