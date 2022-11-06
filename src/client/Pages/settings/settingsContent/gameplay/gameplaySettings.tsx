@@ -9,11 +9,13 @@ import SettingDetails, { settingDetailsData, settingsData } from "../detailsPane
 import style from "../settingsContent.scss"
 import KeybindSettings from "./keybindSettings/keybindSettings";
 
-import keybindImage from "Assets/Images/keybindmap.png";
 import RangeInput from "Components/RangeInput/RangeInput";
 import NumberInput from "Components/numberInput/numberInput";
 import HorizonalSelectFromArray from "Components/horizonalSelectFromArray/horizonalSelectFromArray";
-import { values } from "lodash";
+
+import keybindImage from "Assets/Images/keybindmap.png";
+import judgeTextDirectionImage from "Assets/Images/judgeTextDirection.png";
+import judgeTextPositionImage from "Assets/Images/judgeTextPosition.png";
 
 const GameplaySettings: React.FC = () => {
     const [translate, i18n] = useTranslation();
@@ -69,15 +71,15 @@ const GameplaySettings: React.FC = () => {
             details: {
                 title: <TranslateText content="settingsPage.gameplay.judgeTextPosition.name" />,
                 processingLoad: "none",
-                description: <TranslateText content="settingsPage.gameplay.judgeTextPosition.description" />
+                description: <><TranslateText content="settingsPage.gameplay.judgeTextPosition.description" /><img src={judgeTextPositionImage} /></>
             },
             input: <NumberInput min={-100} max={0} step={0.01} value={gameConfig.gameplay.judgeText.position} onChange={(value) => setGameConfig(config => { return { ...config, gameplay: { ...config.gameplay, judgeText: { ...config.gameplay.judgeText, position: value } } } })} />
         },
         {
             details: {
                 title: <TranslateText content="settingsPage.gameplay.judgeTextDirection.name" />,
-                processingLoad: "low",
-                description: <TranslateText content="settingsPage.gameplay.judgeTextDirection.description" />
+                processingLoad: "none",
+                description: <><TranslateText content="settingsPage.gameplay.judgeTextDirection.description" /><img src={judgeTextDirectionImage} /></>
             },
             input: <HorizonalSelectFromArray contents={judgeTextDirection} value={judgeTextDirection.find(c => c.value == gameConfig.gameplay.judgeText.direction) || judgeTextDirection[0]} onChange={(value) => setGameConfig(config => { return { ...config, gameplay: { ...config.gameplay, judgeText: { ...config.gameplay.judgeText, direction: value.value } } }; })} />
         },
