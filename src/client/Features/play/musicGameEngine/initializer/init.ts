@@ -96,6 +96,7 @@ function useGameLoader() {
 
     function load() {
         getBehavior().then((behavior) => {
+            data.behavior = behavior
             parseChart(rawChart!.data, gameConfig.gameplay.scrollSpeed).then(async (chartData) => {
                 const volume = (gameConfig.audio.masterVolume * gameConfig.audio.effectVolume) || 1;
                 data.chart = await acceptBehavior(chartData, behavior.model, behavior.font, behavior.sound, volume);
