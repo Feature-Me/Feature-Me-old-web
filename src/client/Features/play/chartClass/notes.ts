@@ -175,7 +175,6 @@ class seedNote extends note {
     judge(judgeTime: number) {
         if (this.judged) return;
         this.judged = true;
-        console.log(judgeTime, this.time);
 
         if (judgeTime - this.time > 100)
             return {
