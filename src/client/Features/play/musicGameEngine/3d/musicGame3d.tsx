@@ -68,8 +68,12 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
     const gameRenderer = new THREE.WebGLRenderer(gameOptions);
     const gameScene = new THREE.Scene();
     const notesContainer = new THREE.Group();
+    const judgeTextContainer = new THREE.Group();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 87.5)
     const composer = new EffectComposer(gameRenderer);
+    gameScene.name = "musicGameScene";
+    notesContainer.name = "notesContainer";
+    judgeTextContainer.name = "judgeTextContainer";
     let character = React.useRef(new THREE.Object3D());
     let gameRenderInterval: NodeJS.Timer;
 
@@ -116,28 +120,10 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
     }, []);
 
     React.useEffect(() => {
-        if(!props.ready)return;
+        if (!props.ready) return;
         preparingGame();
 
     }, [props])
-
-    function keyInput(key: KeyboardEvent) {
-        if (!gameConfig.gameplay.key.includes(key.code)) return;
-
-        const keyPos = gameConfig.gameplay.key.findIndex(str => str == key.code) as 0 | 1 | 2 | 3 | 4 | 5 | 6;
-        keyAction(keyPos);
-    }
-    function keyAction(keyPos: 0 | 1 | 2 | 3 | 4 | 5 | 6) {
-        return match(keyPos)
-            .with(0, () => { judgeKeyPush(0) })
-            .with(1, () => { judgeKeyPush(1) })
-            .with(2, () => { judgeKeyPush(2) })
-            .with(3, () => { judgeKeyPush(3) })
-            .with(4, () => { judgeKeyPush(4) })
-            .with(5, () => { musicGameVariables.current.inputs.position = "left"; moveCharacter("left") })
-            .with(6, () => { musicGameVariables.current.inputs.position = "right"; moveCharacter("right") })
-            .exhaustive();
-    }
 
     //when resized window, resize canvas to fit window size
     function resizeCanvas() {
@@ -147,7 +133,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
     // play sound
     async function preparingGame() {
         if (!props.ready) return;
-        
+
 
         await initRenderer();
 
@@ -170,7 +156,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
 
         await sleep(3500);
         const sound = props.data.behavior.sound?.sound.assist;
-        const soundUri = `data:${sound?.mime||"audio/mp3"};base64,${arrayBufferToBase64(sound?.data||new ArrayBuffer(0))}`;
+        const soundUri = `data:${sound?.mime || "audio/mp3"};base64,${arrayBufferToBase64(sound?.data || new ArrayBuffer(0))}`;
         const audio = new Howl({
             src: soundUri,
             volume: gameConfig.audio.effectVolume || 1,
@@ -200,8 +186,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         gameRenderer.setSize(window.innerWidth, window.innerHeight);
         gameRenderer.setPixelRatio(gameConfig.graphics.musicgame.resolution || 1);
         musicgameCanvasRef.current?.appendChild(gameRenderer.domElement);
-        gameScene.name = "musicGameScene";
-        notesContainer.name = "notesContainer";
+
 
         directionalLight.position.set(0, 10, 10);
         directionalLight.lookAt(0, 0, -10);
@@ -209,7 +194,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         camera.position.set(0, 8, 5);
         camera.rotation.set(THREE.MathUtils.degToRad(-38), 0, 0);
 
-        gameScene.add(ambientLight, directionalLight, notesContainer);
+        gameScene.add(ambientLight, directionalLight, notesContainer, judgeTextContainer);
 
         //post process
         const renderPass = new RenderPass(gameScene, camera);
@@ -236,7 +221,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
     //ground
     async function setGround() {
         const groundGltf = props.data.behavior.model?.models.ground;
-        const gltf = await new GLTFLoader().loadFromArrayBufferAsync(groundGltf||new ArrayBuffer(0))
+        const gltf = await new GLTFLoader().loadFromArrayBufferAsync(groundGltf || new ArrayBuffer(0))
         const model = gltf.scene;
         model.position.set(0, 0, 0);
         model.receiveShadow = true;
@@ -246,7 +231,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
     //character
     async function setCharacter() {
         const characterGltf = props.data.behavior.model?.models.character;
-        const gltf = await new GLTFLoader().loadFromArrayBufferAsync(characterGltf||new ArrayBuffer(0));
+        const gltf = await new GLTFLoader().loadFromArrayBufferAsync(characterGltf || new ArrayBuffer(0));
         character.current = gltf.scene;
         character.current.position.set(-9, 0, 0);
         character.current.rotation.set(0, 0, 0)
@@ -303,6 +288,25 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
             }
 
         }
+    }
+
+
+    function keyInput(key: KeyboardEvent) {
+        if (!gameConfig.gameplay.key.includes(key.code)) return;
+
+        const keyPos = gameConfig.gameplay.key.findIndex(str => str == key.code) as 0 | 1 | 2 | 3 | 4 | 5 | 6;
+        keyAction(keyPos);
+    }
+    function keyAction(keyPos: 0 | 1 | 2 | 3 | 4 | 5 | 6) {
+        return match(keyPos)
+            .with(0, () => { judgeKeyPush(0) })
+            .with(1, () => { judgeKeyPush(1) })
+            .with(2, () => { judgeKeyPush(2) })
+            .with(3, () => { judgeKeyPush(3) })
+            .with(4, () => { judgeKeyPush(4) })
+            .with(5, () => { musicGameVariables.current.inputs.position = "left"; moveCharacter("left") })
+            .with(6, () => { musicGameVariables.current.inputs.position = "right"; moveCharacter("right") })
+            .exhaustive();
     }
 
     //find note and judge.
