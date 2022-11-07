@@ -404,6 +404,21 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
             judgeTextMesh.position.set(posX, 0.25, gameConfig.gameplay.judgeText.position);
             judgeTextMesh.rotation.set(THREE.MathUtils.degToRad(gameConfig.gameplay.judgeText.direction), 0, 0)
 
+            if (Math.abs(accuracy)>24){
+                const label = accuracy<0? "future":"past";
+                const FPData = timeTable.find(t=>t.name==label);
+                if(!FPData)return;
+                const FPTextGeometry = new THREE.ShapeGeometry(font.generateShapes(FPData.label, 0.25));
+                const FPTextMaterial = new THREE.MeshStandardMaterial({ color: FPData.color, transparent: true, opacity: 1 });
+                const FPTextMesh = new THREE.Mesh(FPTextGeometry,FPTextMaterial);
+                FPTextMesh.position.set(0, 0.3, -0.2);
+                FPTextGeometry.computeBoundingBox();
+                if(FPTextGeometry.boundingBox){
+                    const xMid = - 0.5 * (FPTextGeometry.boundingBox.max.x - FPTextGeometry.boundingBox.min.x);
+                    FPTextGeometry.translate(xMid, 0, 0);
+                }
+                judgeTextMesh.add(FPTextMesh);
+            }
 
             // translate -50% of itself
             judgeTextGeometry.computeBoundingBox();

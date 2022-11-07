@@ -1,3 +1,6 @@
+## 00181(0.6.2)
+Future/Past(Fast/Late)表示追加
+
 ## 00180(0.6.2)
 型 FPTableを削除し,関連するデータはすべてFontTableへ準拠するように変更
 
