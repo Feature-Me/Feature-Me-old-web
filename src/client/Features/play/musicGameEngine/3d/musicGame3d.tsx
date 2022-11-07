@@ -107,7 +107,8 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
     }));
 
     let ResultNavigationTimeout: NodeJS.Timeout;
-    
+
+    //judge text table
     const judgeTable: fontTable = [
         { name: "stunning", label: "Stunning", color: "#e5e537" },
         { name: "glossy", label: "Glossy", color: "#1feaf4" },
@@ -119,6 +120,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         past: "#f4751f"
     }
 
+    //listen events
     React.useEffect(() => {
         window.addEventListener("keydown", keyInput);
         window.addEventListener("resize", resizeCanvas);
@@ -233,7 +235,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         gameRenderInterval = setInterval(render, (gameConfig.graphics.musicgame.fps || 120) / 1000)
     }
 
-    //ground
+    //render ground
     async function setGround() {
         const groundGltf = props.data.behavior.model?.models.ground;
         const gltf = await new GLTFLoader().loadFromArrayBufferAsync(groundGltf || new ArrayBuffer(0))
@@ -243,7 +245,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         gameScene.add(model)
     }
 
-    //character
+    //redner character
     async function setCharacter() {
         const characterGltf = props.data.behavior.model?.models.character;
         const gltf = await new GLTFLoader().loadFromArrayBufferAsync(characterGltf || new ArrayBuffer(0));
@@ -254,6 +256,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         gameScene.add(character.current)
     }
 
+    //character move to left or right
     async function moveCharacter(position: ("left" | "right")) {
         const currentPos = character.current.position.x;
         const newPos = position == "left" ? -9 : 9;
@@ -266,7 +269,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         }
 
     }
-
+    //render to canvas
     function render() {
         composer.render();
         updateGame();
@@ -304,7 +307,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         }
     }
 
-
+    //get key event and dispatch action
     function keyInput(key: KeyboardEvent) {
         if (!gameConfig.gameplay.key.includes(key.code)) return;
 
@@ -380,21 +383,11 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
                 maxChain: Math.max((judge.judge == "lost" ? 0 : value.chain + 1), value.maxChain)
             }
         })
-        updateJudgeText(judge.judge, judge.note.position.x)
+        updateJudgeText(judge.judge, judge.accuracy, judge.note.position.x)
     }
 
-    function updateJudgeText(judgeText: string, posX: number) {
+    function updateJudgeText(judgeText: string, accuracy: number, posX: number) {
         if (!props.data.behavior.font || !gameConfig.gameplay.judgeText.show) return;
-        const judgeTable: fontTable = [
-            { name: "stunning", label: "Stunning", color: "#e5e537" },
-            { name: "glossy", label: "Glossy", color: "#1feaf4" },
-            { name: "moderate", label: "Moderate", color: "#3dbf2a" },
-            { name: "lost", label: "Lost", color: "#aaaaaa" }
-        ]
-        const timeTable: FPTable = {
-            future: "#1f5ff4",
-            past: "#f4751f"
-        }
 
         const tableData = judgeTable.find(t => t.name == judgeText)
 
@@ -402,28 +395,29 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
 
         //create judge text with shape geometry
         new Promise<void>(async (resolve) => {
-            const geometry = new THREE.ShapeGeometry(new Font(props.data.behavior.font.data).generateShapes(tableData.label, 0.3))
-            const material = new THREE.MeshStandardMaterial({ color: tableData.color, transparent: true, opacity: 1 });
-            const mesh = new THREE.Mesh(geometry, material);
+            const font = new Font(props.data.behavior.font.data)
+            const judgeTextGeometry = new THREE.ShapeGeometry(font.generateShapes(tableData.label, 0.3));
+            const judgeTextMaterial = new THREE.MeshStandardMaterial({ color: tableData.color, transparent: true, opacity: 1 });
+            const judgeTextMesh = new THREE.Mesh(judgeTextGeometry, judgeTextMaterial);
 
-            mesh.position.set(posX, 0.25, gameConfig.gameplay.judgeText.position);
-            mesh.rotation.set(THREE.MathUtils.degToRad(gameConfig.gameplay.judgeText.direction), 0, 0)
+            judgeTextMesh.position.set(posX, 0.25, gameConfig.gameplay.judgeText.position);
+            judgeTextMesh.rotation.set(THREE.MathUtils.degToRad(gameConfig.gameplay.judgeText.direction), 0, 0)
 
             // translate -50% of itself
-            geometry.computeBoundingBox();
-            if (geometry.boundingBox) {
-                const xMid = - 0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
-                geometry.translate(xMid, 0, 0);
+            judgeTextGeometry.computeBoundingBox();
+            if (judgeTextGeometry.boundingBox) {
+                const xMid = - 0.5 * (judgeTextGeometry.boundingBox.max.x - judgeTextGeometry.boundingBox.min.x);
+                judgeTextGeometry.translate(xMid, 0, 0);
             }
             //add and animation
-            judgeTextContainer.current.add(mesh);
+            judgeTextContainer.current.add(judgeTextMesh);
             for (let i = 0; i < 25; i++) {
-                mesh.position.setY(mesh.position.y + 0.05);
-                material.opacity -= 0.04
+                judgeTextMesh.position.setY(judgeTextMesh.position.y + 0.05);
+                judgeTextMaterial.opacity -= 0.04
                 await sleep(500 / 25);
             }
             //after animation, text will remove
-            judgeTextContainer.current.remove(mesh);
+            judgeTextContainer.current.remove(judgeTextMesh);
             resolve();
         })
     }
