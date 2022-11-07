@@ -6,7 +6,3 @@ interface fontAssetContents {
 }
 
 type fontTable = Array<{name:string,label:string,color:string}>
-interface FPTable {
-    future:string
-    past:string
-}

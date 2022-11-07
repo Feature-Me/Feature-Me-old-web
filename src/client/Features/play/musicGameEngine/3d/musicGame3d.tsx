@@ -40,7 +40,7 @@ import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation"
 import { cloneDeep } from "lodash";
 import loadFont from "Utils/Storage/resourcesLoader/loadFont";
 import { gameData, gameProps } from "Types/play/game/gameProps";
-import { fontTable, FPTable } from "Types/resources/fontResources";
+import { fontTable } from "Types/resources/fontResources";
 import { Font } from "three/examples/jsm/loaders/FontLoader";
 import { Vector3 } from "three";
 
@@ -115,10 +115,11 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         { name: "moderate", label: "Moderate", color: "#3dbf2a" },
         { name: "lost", label: "Lost", color: "#aaaaaa" }
     ]
-    const timeTable: FPTable = {
-        future: "#1f5ff4",
-        past: "#f4751f"
-    }
+    const timeTable: fontTable = [
+        {name:"future",label:"Future",color:"#1f5ff4"},
+        {name:"past",label:"Past",color:"#f4751f"}
+    ]
+    
 
     //listen events
     React.useEffect(() => {
@@ -402,6 +403,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
 
             judgeTextMesh.position.set(posX, 0.25, gameConfig.gameplay.judgeText.position);
             judgeTextMesh.rotation.set(THREE.MathUtils.degToRad(gameConfig.gameplay.judgeText.direction), 0, 0)
+
 
             // translate -50% of itself
             judgeTextGeometry.computeBoundingBox();
