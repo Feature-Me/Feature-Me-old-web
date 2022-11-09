@@ -1,7 +1,8 @@
 import { Howl } from "howler";
 import * as THREE from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import { fontAssetContents, fontTable} from "Types/resources/fontResources";
+import { match } from "ts-pattern";
+import { fontAssetContents, fontTable } from "Types/resources/fontResources";
 import scrollSpeedToScrollTime from "Utils/scrollSpeedToScrollTime/scrollSpeedToScrollTime";
 import easing from "../../../../Utils/easing/easing";
 
@@ -27,6 +28,10 @@ class note {
         this.script = note.script || [];
         this.note = new THREE.Object3D();
         this.transitionEase = note.transitionEase || easing.linear;
+        if (note.speed) {
+            if (!note.speed.type) note.speed.type = "absolute";
+            this.changeScrollSpeed(note.speed.type, note.speed.value)
+        }
 
         this.audio = new Howl({
             src: ["data:audio/mp3;base64,"],
@@ -63,6 +68,13 @@ class note {
     setScrollSpeed(speed: number) {
         this.scrollSpeed = speed;
         this.scrollTime = scrollSpeedToScrollTime(this.scrollSpeed);
+    }
+    changeScrollSpeed(type: "absolute"|"relative"|"fixedTime",value: number) {
+        return match(type)
+        .with("absolute",()=>this.setScrollSpeed(value))
+        .with("relative",()=>{this.scrollSpeed+=value;this.setScrollSpeed(this.scrollSpeed)})
+        .with("fixedTime",()=>{this.scrollTime = value})
+        .exhaustive()
     }
     setActive(active: boolean) {
         this.active = active;
