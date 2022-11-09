@@ -16,13 +16,8 @@ import { useRecoilState } from "recoil";
 import chartConverterState from "State/editor/chartConverterState";
 
 const ChartConverter: React.FC = () => {
-    const [translate, i18n] = useTranslation()
     let inputEditor: Ace.Editor;
     const [chartText, setChartText] = React.useState<string>("");
-    const [inputFileName, setInputFileName] = React.useState<string>(translate("editor.converter.input.selectedFile"))
-    const [convertType, setConvertType] = React.useState<string>("");
-    const [convertDirection, setConvertDirection] = React.useState<boolean>(true);
-    const [resultText, setResultText] = React.useState<string>("");
     const [chartConvert, setChartConvert] = useRecoilState(chartConverterState)
 
     const directionSelect: selectContentsArray<boolean> = [
@@ -72,7 +67,7 @@ const ChartConverter: React.FC = () => {
         if (!chartText) return;
         let resultString: string = "";
         try {
-            const chart = convertFunctions.find(f => f.name == chartConvert.convertType)?.exec(convertDirection, chartText)
+            const chart = convertFunctions.find(f => f.name == chartConvert.convertType)?.exec(chartConvert.convertDirection, chartText)
             if (!chart) throw new Error("cant exec convert: unsolved function.")
             resultString = chart
         } catch (error) {
@@ -89,7 +84,7 @@ const ChartConverter: React.FC = () => {
 
     function copyChart() {
         if (navigator.clipboard) {
-            navigator.clipboard.writeText(resultText)
+            navigator.clipboard.writeText(chartConvert.resultText)
         }
     }
 
@@ -108,7 +103,7 @@ const ChartConverter: React.FC = () => {
                         <div>
                             {/* input file button */}
                             <ChamferedButton ><label htmlFor="convertChartFileInput" >Upload</label></ChamferedButton>
-                            <span><TranslateText content="editor.converter.input.fileName" /> {inputFileName} </span>
+                            <span><TranslateText content="editor.converter.input.fileName" /> {chartConvert.inputFileName} </span>
                             <input type="file" id="convertChartFileInput" className={style.fileInput} onChange={inputFile} />
                         </div>
                     </div>
@@ -118,12 +113,12 @@ const ChartConverter: React.FC = () => {
                     <div>
                         {/* convert type */}
                         <h4><TranslateText content="editor.converter.input.direction" /></h4>
-                        <SelectBox contents={directionSelect} value={directionSelect[0]} onChange={e => setConvertDirection(e.value)} />
+                        <SelectBox contents={directionSelect} value={directionSelect[0]} onChange={e => setChartConvert(convert => { return { ...convert, convertDirection: e.value } })} />
                     </div>
                     <div>
                         {/* convert file type */}
                         <h4><TranslateText content="editor.converter.input.type" /></h4>
-                        <SelectBox contents={convertTypeSelect} value={convertTypeSelect[0]} onChange={e => setConvertType(e.value)} />
+                        <SelectBox contents={convertTypeSelect} value={convertTypeSelect[0]} onChange={e => setChartConvert(convert => { return { ...convert, convertType: e.value } })} />
                     </div>
                     <div>
                         {/* convert button */}
@@ -140,7 +135,7 @@ const ChartConverter: React.FC = () => {
                 <div className={style.output}>
                     <div className={style.content}>
                         <h2><TranslateText content="editor.converter.input.output" /></h2>
-                        <AceEditor mode="json5" fontSize={14} theme="monokai" readOnly value={resultText} height="100%" width="100%" />
+                        <AceEditor mode="json5" fontSize={14} theme="monokai" readOnly value={chartConvert.resultText} height="100%" width="100%" />
                     </div>
                     <div>
                         <ChamferedButton className={style.convetBtn} onClick={copyChart}>Copy</ChamferedButton>
