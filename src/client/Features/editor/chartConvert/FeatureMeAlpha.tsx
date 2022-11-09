@@ -49,7 +49,6 @@ function FMAlphaToFM(chart: string): string {
             }
             newChart.notes.push(newNote)
         }
-        console.log(newChart);
 
         chartString = json5.stringify(newChart, null, 4)
 
