@@ -116,14 +116,15 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         { name: "lost", label: "Lost", color: "#aaaaaa" }
     ]
     const timeTable: fontTable = [
-        {name:"future",label:"Future",color:"#1f5ff4"},
-        {name:"past",label:"Past",color:"#f4751f"}
+        { name: "future", label: "Future", color: "#1f5ff4" },
+        { name: "past", label: "Past", color: "#f4751f" }
     ]
-    
+
 
     //listen events
     React.useEffect(() => {
         window.addEventListener("keydown", keyInput);
+        window.addEventListener("keyup", keyUp);
         window.addEventListener("resize", resizeCanvas);
         return () => {
             clearTimeout(ResultNavigationTimeout);
@@ -313,6 +314,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         if (!gameConfig.gameplay.key.includes(key.code)) return;
 
         const keyPos = gameConfig.gameplay.key.findIndex(str => str == key.code) as 0 | 1 | 2 | 3 | 4 | 5 | 6;
+        if (keyPos < 4) musicGameVariables.current.inputs.lanes[keyPos as 0 | 1 | 2 | 3] = true;
         keyAction(keyPos);
     }
     function keyAction(keyPos: 0 | 1 | 2 | 3 | 4 | 5 | 6) {
@@ -325,6 +327,12 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
             .with(5, () => { musicGameVariables.current.inputs.position = "left"; moveCharacter("left") })
             .with(6, () => { musicGameVariables.current.inputs.position = "right"; moveCharacter("right") })
             .exhaustive();
+    }
+
+    function keyUp(key: KeyboardEvent) {
+        if (!gameConfig.gameplay.key.includes(key.code)) return;
+        const keyPos = gameConfig.gameplay.key.findIndex(str => str == key.code) as 0 | 1 | 2 | 3 | 4 | 5 | 6;
+        if (keyPos < 4) musicGameVariables.current.inputs.lanes[keyPos as 0 | 1 | 2 | 3] = false;
     }
 
     //find note and judge.
@@ -404,16 +412,16 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
             judgeTextMesh.position.set(posX, 0.25, gameConfig.gameplay.judgeText.position);
             judgeTextMesh.rotation.set(THREE.MathUtils.degToRad(gameConfig.gameplay.judgeText.direction), 0, 0)
 
-            if (Math.abs(accuracy)>24){
-                const label = accuracy<0? "future":"past";
-                const FPData = timeTable.find(t=>t.name==label);
-                if(!FPData)return;
+            if (Math.abs(accuracy) > 24) {
+                const label = accuracy < 0 ? "future" : "past";
+                const FPData = timeTable.find(t => t.name == label);
+                if (!FPData) return;
                 const FPTextGeometry = new THREE.ShapeGeometry(font.generateShapes(FPData.label, 0.25));
                 const FPTextMaterial = new THREE.MeshStandardMaterial({ color: FPData.color, transparent: true, opacity: 1 });
-                const FPTextMesh = new THREE.Mesh(FPTextGeometry,FPTextMaterial);
+                const FPTextMesh = new THREE.Mesh(FPTextGeometry, FPTextMaterial);
                 FPTextMesh.position.set(0, 0.3, -0.2);
                 FPTextGeometry.computeBoundingBox();
-                if(FPTextGeometry.boundingBox){
+                if (FPTextGeometry.boundingBox) {
                     const xMid = - 0.5 * (FPTextGeometry.boundingBox.max.x - FPTextGeometry.boundingBox.min.x);
                     FPTextGeometry.translate(xMid, 0, 0);
                 }
