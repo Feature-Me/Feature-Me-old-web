@@ -1,7 +1,7 @@
 import { Howl } from "howler";
 import * as THREE from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import { fontAssetContents, fontTable, FPTable } from "Types/resources/fontResources";
+import { fontAssetContents, fontTable} from "Types/resources/fontResources";
 import scrollSpeedToScrollTime from "Utils/scrollSpeedToScrollTime/scrollSpeedToScrollTime";
 import easing from "../../../../Utils/easing/easing";
 
