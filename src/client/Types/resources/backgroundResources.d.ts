@@ -11,7 +11,6 @@ interface backgroundContentMap {
         mieDirectionalG: number
         sunPhi: number
         sunTheta: number
-
     }
 }
 
@@ -19,10 +18,12 @@ interface backgroundContentMap {
 interface backgroundAssetContents {
     name: string
     data: ArrayBuffer
+    made: "official" | "community"
     alt?: {
         data: ArrayBuffer
         mime: string
     }
+    scenes:[]
     skydata: {
         turbidity: number
         rayleigh: number
@@ -30,6 +31,6 @@ interface backgroundAssetContents {
         mieDirectionalG: number
         sunPhi: number
         sunTheta: number
-
     }
+    installedAt:number
 }

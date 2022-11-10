@@ -36,6 +36,7 @@ interface musicMap {
 type directingsMap = DirectingTextMap;
 
 interface MusicAssetMap {
+    version:string
     title: string
     made: "official" | "community" |"publicOffering"
     composer: string
@@ -84,7 +85,8 @@ interface DirectingText {
 type directings = DirectingText
 
 interface MusicAssetContents {
-    
+    version:string
+    made:"official"|"community"|"publicOffering"
     metadata: {
         title: string
         composer: string
@@ -113,4 +115,5 @@ interface MusicAssetContents {
     behavior: ArrayBuffer
     music: Array<musicData>
     chart: Array<chartData>
+    installedAt:number
 }

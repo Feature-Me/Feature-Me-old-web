@@ -20,8 +20,10 @@ interface behaviorContentMap {
 
 
 interface behaviorAssetContents {
+    version:string
     name: string
     type: "2d" | "3d"
+    made: "official" | "community"
     models: {
         tap: ArrayBuffer
         damageTap: ArrayBuffer
@@ -34,9 +36,11 @@ interface behaviorAssetContents {
     }
     soundEffect: string
     fontName?: string
+    installedAt:number
 }
 
 interface soundEffectContentMap {
+    version:string
     name: string
     made: "official" | "community"
     sound: {
@@ -49,6 +53,7 @@ interface soundEffectContentMap {
         assist: string
     }
     license: string
+    installedAt:number
 }
 
 interface soundEffectAssetContents {
