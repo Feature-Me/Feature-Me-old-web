@@ -2,6 +2,7 @@ interface behaviorContentMap {
     version: string
     type: "2d" | "3d"
     name: string
+    made:"official"|"community"
     models: {
         tap: string
         damageTap: string
@@ -37,6 +38,7 @@ interface behaviorAssetContents {
 
 interface soundEffectContentMap {
     name: string
+    made: "official" | "community"
     sound: {
         tap: string
         damage: string

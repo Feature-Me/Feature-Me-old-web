@@ -37,6 +37,7 @@ type directingsMap = DirectingTextMap;
 
 interface MusicAssetMap {
     title: string
+    made: "official" | "community" |"publicOffering"
     composer: string
     bpm: string
     time: number
