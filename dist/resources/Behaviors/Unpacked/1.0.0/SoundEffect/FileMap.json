@@ -1,5 +1,6 @@
 {
     "name": "Feature Me",
+    "mode":"official",
     "sound":{
         "tap": "tap.mp3",
         "damage": "damage.mp3",

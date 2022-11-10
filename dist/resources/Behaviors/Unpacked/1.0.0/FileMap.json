@@ -2,6 +2,7 @@
     "version": "1.0.0",
     "name": "Feature Me",
     "type":"3d",
+    "made":"official",
     "models":{
         "tap": "Model/Tapnote.glb",
         "damageTap": "Model/DamageTapnote.glb",
