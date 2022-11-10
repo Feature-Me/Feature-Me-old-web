@@ -1,7 +1,9 @@
 interface backgroundContentMap {
     name: string
     src: string
+    made:"official"|"community"
     alt?: string
+    scenes:[]
     skydata: {
         turbidity: number
         rayleigh: number
