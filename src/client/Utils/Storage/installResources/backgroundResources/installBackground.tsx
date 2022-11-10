@@ -34,7 +34,10 @@ function installBackground(zip: JSZip) {
                 mieDirectionalG: fileMapJsonData.skydata.mieDirectionalG,
                 sunPhi: fileMapJsonData.skydata.sunPhi,
                 sunTheta: fileMapJsonData.skydata.sunTheta
-            }
+            },
+            made: fileMapJsonData.made,
+            scenes: [],
+            installedAt: Date.now()
         }
 
         const dbOpenRequest = indexedDB.open(databaseInfo.DBName);
