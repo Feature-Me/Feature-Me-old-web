@@ -21,6 +21,7 @@ class note {
 
     scrollSpeed: number = 10;
     scrollTime: number = scrollSpeedToScrollTime(this.scrollSpeed);
+    speedChanged:boolean = false;
 
     constructor(note: chartNote) {
         this.type = note.type;
@@ -65,11 +66,13 @@ class note {
             src: [audioUrl]
         });
     }
-    setScrollSpeed(speed: number) {
+    setScrollSpeed(speed: number,important?:boolean) {
+        if(this.speedChanged&&!important) return;
         this.scrollSpeed = speed;
         this.scrollTime = scrollSpeedToScrollTime(this.scrollSpeed);
     }
     changeScrollSpeed(type: "absolute"|"relative"|"fixedTime",value: number) {
+        this.speedChanged = true;
         return match(type)
         .with("absolute",()=>this.setScrollSpeed(value))
         .with("relative",()=>{this.scrollSpeed+=value;this.setScrollSpeed(this.scrollSpeed)})
