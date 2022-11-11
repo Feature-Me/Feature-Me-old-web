@@ -105,6 +105,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         src: musicUri,
         volume: (gameConfig.audio.masterVolume * gameConfig.audio.musicVolume) || 1,
     }));
+    musicAudio.current.stereo(gameConfig.audio.audioStereo)
 
     let ResultNavigationTimeout: NodeJS.Timeout;
 
