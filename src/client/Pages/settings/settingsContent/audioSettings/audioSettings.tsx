@@ -9,6 +9,7 @@ import SettingDetails, { settingDetailsData, settingsData } from "../detailsPane
 import style from "../settingsContent.scss"
 
 import RangeInput from "Components/RangeInput/RangeInput";
+import ToggleSwitch from "Components/toggleSwitch/toggleSwitch";
 
 const AudioSettings: React.FC = () => {
     const [translate, i18n] = useTranslation();
@@ -49,7 +50,14 @@ const AudioSettings: React.FC = () => {
             },
             input: <RangeInput min={0} max={2} step={0.01} value={gameConfig.audio.audioStereo+1} onChange={(value: number) => setGameConfig(config => { return { ...config, audio: { ...config.audio, audioStereo: value-1 } } })} />
         },
-        
+        {
+            details: {
+                title: <TranslateText content="settingsPage.audio.positional.name" />,
+                processingLoad: "none",
+                description: <TranslateText content="settingsPage.audio.positional.description" />
+            },
+            input: <ToggleSwitch checked={gameConfig.audio.positional} onChange={(value: boolean) => setGameConfig(config => { return { ...config, audio: { ...config.audio, positional:value } } })} />
+        },
         {
             details: {
                 title: <TranslateText content="settingsPage.audio.positionalIntensity.name" />,
