@@ -66,6 +66,13 @@ class note {
             src: [audioUrl]
         });
     }
+    setAudioPosition(intensity:number){
+        let balance = (this.note.position.x*0.1)*intensity;
+        if(balance>1) balance=1;
+        else if(balance<-1) balance = -1;
+        this.audio.stereo(balance);
+
+    }
     setScrollSpeed(speed: number,important?:boolean) {
         if(this.speedChanged&&!important) return;
         this.scrollSpeed = speed;
