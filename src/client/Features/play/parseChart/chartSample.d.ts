@@ -1,4 +1,4 @@
-import { tapNote, damageTapNote, holdNote, brightNote, seedNote, flickNote } from "../chartClass/notes";
+import { tapNote, damageTapNote, holdNote, brightNote, seedNote, flickNote } from "../class/noteClass/notes";
 import easing from "../../../Utils/easing/easing";
 
 interface chartNote {

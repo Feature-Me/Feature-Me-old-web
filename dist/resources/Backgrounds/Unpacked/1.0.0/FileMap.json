@@ -3,6 +3,8 @@
     "name": "Tidal Wreck",
     "src": "tidal wreck.glb",
     "alt": "tidal wreck.png",
+    "made":"official",
+    "scenes":[],
     "skydata":{
         "turbidity":1,
         "rayleigh":0.0075,

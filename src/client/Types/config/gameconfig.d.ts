@@ -60,11 +60,19 @@ interface gameConfig {
             maxCombo: boolean
             predictionRating: boolean
         }
+        judgeText:{
+            show:boolean
+            direction:number
+            position:number
+        }
     }
     audio: {
         masterVolume: number
         musicVolume: number
         effectVolume: number
+        audioStereo: number
+        positional: boolean
+        positionalIntensity:number
     }
 }
 

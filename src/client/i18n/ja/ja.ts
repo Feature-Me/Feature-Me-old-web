@@ -9,6 +9,7 @@ import JAMusicSelectTranslation from "./play/ja.musicselect";
 import JASettingsPage from "./settings/ja.settingspage";
 import JAEditorTranslation from "./editor/ja.editor";
 import JASplashScreenTranslate from "./others/ja.splashScreen";
+import JAMultiPlayerTranslation from "./play/multiPlayer/multiplayer.ja";
 
 const JAtranslation = {
     title: JATitleTranslation,
@@ -21,7 +22,8 @@ const JAtranslation = {
     musicSelect: JAMusicSelectTranslation,
     settingsPage: JASettingsPage,
     editor: JAEditorTranslation,
-    splashScreen:JASplashScreenTranslate
+    splashScreen:JASplashScreenTranslate,
+    multiPlay:JAMultiPlayerTranslation
 }
 
 export default JAtranslation;

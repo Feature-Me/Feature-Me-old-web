@@ -67,9 +67,12 @@ function installSoundEffect(zip:JSZip) {
             const db = dbOpenRequest.result;
             const soundEffectStore = db.transaction(databaseInfo.soundEffectStore, "readwrite").objectStore(databaseInfo.soundEffectStore);
             const put = soundEffectStore.put({
+                version:fileMapJsonData.version,
                 name: fileMapJsonData.name,
+                made:fileMapJsonData.made,
                 sound: data,
-                license: fileMapJsonData.license
+                license: fileMapJsonData.license,
+                installedAt: Date.now()
             });
             put.onsuccess = (event) => {
                 console.log("SoundEffect installed");

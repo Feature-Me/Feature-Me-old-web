@@ -1,6 +1,6 @@
 {
   "name": "feature-me-webgl-ts",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Music Game Feature Me",
   "main": "./dist/server/server.js",
   "scripts": {
@@ -30,7 +30,12 @@
     "react-ace": "^10.1.0",
     "socket.io": "^4.5.0",
     "socket.io-client": "^4.5.2",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "typescript": "^4.6.4",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "tsconfig-paths-webpack-plugin": "^3.5.2"
   },
   "devDependencies": {
     "@babel/core": "7.19.0",
@@ -79,11 +84,8 @@
     "three": "^0.143.0",
     "ts-loader": "^9.3.0",
     "ts-pattern": "^4.0.5",
-    "tsconfig-paths-webpack-plugin": "^3.5.2",
     "typescript": "^4.6.4",
     "url-loader": "^4.1.1",
-    "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0",
     "webpack-dev-middleware": "^5.3.3",
     "webpack-hot-middleware": "^2.25.2"
   }

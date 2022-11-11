@@ -1,8 +1,9 @@
 import { FontObject } from "three/examples/jsm/loaders/TTFLoader"
 import databaseInfo from "Config/databaseinfo.json"
+import { fontAssetContents } from "Types/resources/fontResources";
 
 function loadFont(fontName:string){
-    return new Promise<FontObject>((resolve, reject) => {
+    return new Promise<fontAssetContents>((resolve, reject) => {
         const dbOpenRequest = indexedDB.open(databaseInfo.DBName);
         dbOpenRequest.onsuccess = (e) => {
             const db = dbOpenRequest.result;
@@ -10,7 +11,7 @@ function loadFont(fontName:string){
             const getRequest = fontStore.get(fontName);
             getRequest.onsuccess = (e) => {
                 const fontObject = getRequest.result as {name:string, data:FontObject};
-                resolve(fontObject.data);
+                resolve(fontObject);
             }
             getRequest.onerror = (e) => {
                 console.error(e);

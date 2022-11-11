@@ -41,6 +41,18 @@ const JASettingsPage = {
         "judgeTiming":{
             "name":"判定タイミング調整",
             "description":"ノートの判定のずれを調整します。\nFuture(Fast)が多い場合は-に,Past(Late)が多い場合は+に調整してください。"
+        },
+        "judgeTextShow":{
+            "name":"判定テキスト表示",
+            "description":"判定テキストの表示を設定します。"
+        },
+        "judgeTextPosition":{
+            "name":"判定テキスト位置調整",
+            "description":"判定テキストの位置を設定します。"
+        },
+        "judgeTextDirection":{
+            "name":"判定テキスト表示方向",
+            "description":"判定テキストの表示方向を設定します。"
         }
     },
     "graphics": {
@@ -95,6 +107,18 @@ const JASettingsPage = {
         "effectVolume": {
             "name": "エフェクト音量",
             "description": "判定音とアシストサウンドの音量を設定します。"
+        },
+        "stereo":{
+            "name":"ステレオバランス",
+            "description":"ゲームの左右の音量バランスを調整します。\n0で左,2で右側に調整します。1で中央に調整します。"
+        },
+        "positional":{
+            "name":"位置音響",
+            "description":"ゲームの効果音の音響効果を設定します。\n位置に応じてステレオバランスを変更します。"
+        },
+        "positionalIntensity":{
+            "name":"位置音響レベル",
+            "description":"位置音響の強さの倍率を設定します。"
         }
     },
     "storage": {
