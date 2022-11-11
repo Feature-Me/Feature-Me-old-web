@@ -1,0 +1,43 @@
+@import "../../Assets/mixin.scss";
+
+.wrapper{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.toggle{
+    border: 1px solid $borderColor;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: $inputBackgroundColor;
+    position: relative;
+
+    height: 32px;
+    width: 80px;
+    margin: 0;
+    transition: 0.2s ease-in-out;
+
+    &:hover{
+        background-color: $inputForegroundColor;
+    }
+    &:active{
+        filter: brightness(0.8);
+    }
+    &:checked{
+        background-color: $accentColor;
+        &::before{
+            right: 4px!important;
+            left: auto;
+        }
+    }
+
+    &::before{
+        position: absolute;
+        content: "";
+        background-color: $textColor;
+        height: calc(100% - 8px);
+        width: calc(50% - 8px);
+        left: 4px;
+        top: 4px;
+    }
+}
