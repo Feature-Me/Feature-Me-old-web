@@ -107,6 +107,18 @@ const JASettingsPage = {
         "effectVolume": {
             "name": "エフェクト音量",
             "description": "判定音とアシストサウンドの音量を設定します。"
+        },
+        "stereo":{
+            "name":"ステレオバランス",
+            "description":"ゲームの左右の音量バランスを調整します。\n-1で左,1で右側に調整します。"
+        },
+        "positional":{
+            "name":"位置音響",
+            "description":"ゲームの効果音の音響効果を設定します。\n位置に応じてステレオバランスを変更します。"
+        },
+        "positionalIntensity":{
+            "name":"位置音響レベル",
+            "description":"位置音響の強さの倍率を設定します。"
         }
     },
     "storage": {
