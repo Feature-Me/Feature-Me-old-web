@@ -1,9 +1,10 @@
 import { chartType } from "Features/play/parseChart/chartSample";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { match } from "ts-pattern";
+import { fontAssetContents, fontTable, FPTable } from "Types/resources/fontResources";
 import arrayBufferToBase64 from "Utils/ArrayBufferToBase64/ArrayBufferToBase64";
 
-async function acceptBehavior(chart: chartType, models: behaviorAssetContents, sound: soundEffectAssetContents, volume: number) {
+async function acceptBehavior(chart: chartType, models: behaviorAssetContents, font: fontAssetContents, sound: soundEffectAssetContents, volume: number) {
 
     let behaviors = {
         tap: new GLTFLoader().loadFromArrayBufferAsync(models.models.tap),
@@ -22,6 +23,8 @@ async function acceptBehavior(chart: chartType, models: behaviorAssetContents, s
         seed: `data:${sound.sound.seed.mime};base64,${arrayBufferToBase64(sound.sound.seed.data)}`,
         flick: `data:${sound.sound.flick.mime};base64,${arrayBufferToBase64(sound.sound.flick.data)}`,
     }
+
+    
 
     /*     const getBehavior = (type:keyof typeof behaviors) => {
             return match(type)

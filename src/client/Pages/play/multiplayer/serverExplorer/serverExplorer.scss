@@ -1,0 +1,38 @@
+@import "../../../../Assets/mixin.scss";
+
+.serverExplorer {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 48px 1fr;
+    @include blur-background;
+
+    .contents {
+        padding: 4px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 48px 32px 1fr;
+        row-gap: 8px;
+
+        .newServerBtn {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: auto;
+            grid-template-rows: 1fr;
+            column-gap: 8px;
+            .button{
+                display: grid;
+                grid-template-rows: 1fr;
+                grid-template-columns: 32px 1fr;
+            }
+        }
+    }
+}
+
+.iconWrapper {
+    margin: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
 import { motion, useAnimation } from "framer-motion";
 import { Howl, Howler } from "howler";
 
@@ -31,36 +32,37 @@ import * as musicGame from "State/play/game/musicGame/musicGameState"
 import version from "Config/versions.json";
 import { chartType } from "Features/play/parseChart/chartSample";
 import acceptBehavior from "Features/play/acceptBehavior/acceptBehavior";
-import { brightNote, holdNote, note, seedNote, tapNote } from "Features/play/chartClass/notes";
+import { brightNote, holdNote, note, seedNote, tapNote } from "Features/play/class/noteClass/notes";
 import { musicGameVariablesType } from "Types/play/game/gameVariables";
 import { match } from "ts-pattern";
 import easings from "Utils/easing/easing";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 import { cloneDeep } from "lodash";
+import loadFont from "Utils/Storage/resourcesLoader/loadFont";
+import { gameData, gameProps } from "Types/play/game/gameProps";
+import { fontTable } from "Types/resources/fontResources";
+import { Font } from "three/examples/jsm/loaders/FontLoader";
+import { Vector3 } from "three";
 
 
-const MusicGame3D: React.FC = () => {
+const MusicGame3D: React.FC<gameProps> = (props) => {
+
     const scenechange = useSeneChangeNavigation();
     const selectedMusic = useRecoilValue(musicSelectorState);
     const gameConfig = useRecoilValue(gameConfigState);
-    const [ready, setReady] = React.useState(false);
 
     const setMusicGameValue = useSetRecoilState(musicGame.musicGameValueState);
     const setMusicGameNotesJudge = useSetRecoilState(musicGame.musicGameNotesJudgeState)
     const setMusicGamePrediction = useSetRecoilState(musicGame.musicGamePredictionState);
     const setMusicGameUIState = useSetRecoilState(musicGame.musicGameUIState);
-    const [musicGameMode, setMusicGameMode] = useRecoilState(musicGame.musicGameModeState);
+    const musicGameMode = useRecoilValue(musicGame.musicGameModeState);
     const setMusicGamePause = useSetRecoilState(musicGame.musicGamePauseState);
     const setMusicGameTime = useSetRecoilState(musicGame.musicGameTimeState)
 
     const musicgameCanvasRef = React.useRef<HTMLDivElement>(null);
 
     const musicData = selectedMusic.selectedData as MusicAssetContents;
-    const chartMetaData = musicData.metadata.difficulties.find(diff => diff.name == musicGameMode.difficulty);
-    const rawChart = musicData.chart.find((c) => c.name === musicGameMode.difficulty);
-    const rawMusic = musicData.music.find((m) => m.name === musicData.metadata.selectedMusic);
     //if rawChart or rawMusic is undefined, play error music
-    let chart: chartType;
     //let behavior: { model: behaviorAssetContents; sound: soundEffectAssetContents; font: behaviorAssetContents; };
     //const activeRange = musicGame_.mode == "auto"? 0: 1000;
     //const activeRange = 0;
@@ -70,16 +72,19 @@ const MusicGame3D: React.FC = () => {
     const gameRenderer = new THREE.WebGLRenderer(gameOptions);
     const gameScene = new THREE.Scene();
     const notesContainer = new THREE.Group();
+    const judgeTextContainer = React.useRef(new THREE.Group());
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 87.5)
     const composer = new EffectComposer(gameRenderer);
-    let character: THREE.Object3D = new THREE.Object3D();
+    gameScene.name = "musicGameScene";
+    notesContainer.name = "notesContainer";
+    judgeTextContainer.current.name = "judgeTextContainer";
+    let character = React.useRef(new THREE.Object3D());
     let gameRenderInterval: NodeJS.Timer;
 
-    let musicGameVariables: musicGameVariablesType = {
+    let musicGameVariables = React.useRef<musicGameVariablesType>({
         activeRange: 250,
         activeNotes: [],
         delay: 0,
-        ready: false,
         inputs: {
             position: "left",
             lanes: [false, false, false, false]
@@ -92,149 +97,98 @@ const MusicGame3D: React.FC = () => {
             judgeTime: 0,
             totalTime: 0
         }
-    }
+    })
 
-    let musicUri = `data:${rawMusic?.mime || "audio/mp3"};base64,${arrayBufferToBase64(rawMusic?.data || new ArrayBuffer(0))}`;
+    let musicUri = `data:${props.data.music?.mime || "audio/mp3"};base64,${arrayBufferToBase64(props.data.music?.data || new ArrayBuffer(0))}`;
     let musicDuration: number = 0;
-    let musicAudio = new Howl({
-        src: [musicUri],
+    let musicAudio = React.useRef(new Howl({
+        src: musicUri,
         volume: (gameConfig.audio.masterVolume * gameConfig.audio.musicVolume) || 1,
-    });
+    }));
+    musicAudio.current.stereo(gameConfig.audio.audioStereo)
 
-    let ResultNavigationInterval: NodeJS.Timeout;
+    let ResultNavigationTimeout: NodeJS.Timeout;
 
-    const getBehavior = React.useMemo(async () => {
+    //judge text table
+    const judgeTable: fontTable = [
+        { name: "stunning", label: "Stunning", color: "#e5e537" },
+        { name: "glossy", label: "Glossy", color: "#1feaf4" },
+        { name: "moderate", label: "Moderate", color: "#3dbf2a" },
+        { name: "lost", label: "Lost", color: "#aaaaaa" }
+    ]
+    const timeTable: fontTable = [
+        { name: "future", label: "Future", color: "#1f5ff4" },
+        { name: "past", label: "Past", color: "#f4751f" }
+    ]
 
-        const behaviorName = {
-            model: gameConfig.gameplay.behavior.model == "default" ? version.defaultBehavior : gameConfig.gameplay.behavior.model,
-            sound: gameConfig.gameplay.behavior.sound == "default" ? version.defaultBehavior : gameConfig.gameplay.behavior.sound,
-            font: gameConfig.gameplay.behavior.font == "default" ? version.defaultBehavior : gameConfig.gameplay.behavior.font,
-        }
 
-        const behaviordata = await loadBehavior(behaviorName.model);
-
-        if (behaviorName.sound == "default" || behaviorName.sound == "auto") {
-            behaviorName.sound = behaviordata.soundEffect || version.defaultBehavior;
-        }
-        if (behaviorName.font == "default" || behaviorName.font == "auto") {
-            behaviorName.font = behaviordata.font || version.defaultFont;
-        }
-
-        const soundEffectdata = await loadSoundEffect(behaviorName.sound);
-        const fontdata = await loadBehavior(behaviorName.font);
-
-        return {
-            model: behaviordata,
-            sound: soundEffectdata,
-            font: fontdata,
-        }
-
-    }, []);
-
+    //listen events
     React.useEffect(() => {
-        preparingGame();
         window.addEventListener("keydown", keyInput);
+        window.addEventListener("keyup", keyUp);
         window.addEventListener("resize", resizeCanvas);
         return () => {
-            clearTimeout(ResultNavigationInterval);
+            clearTimeout(ResultNavigationTimeout);
             clearInterval(gameRenderInterval);
             gameRenderer.dispose();
             window.removeEventListener("keydown", keyInput);
             window.removeEventListener("resize", resizeCanvas);
-            musicAudio.stop();
-            musicAudio.unload();
+            musicAudio.current.stop();
+            musicAudio.current.unload();
         }
     }, []);
 
-    function keyInput(key: KeyboardEvent) {
-        if (!gameConfig.gameplay.key.includes(key.code)) return;
+    React.useEffect(() => {
+        if (!props.ready) return;
+        preparingGame();
 
-        const keyPos = gameConfig.gameplay.key.findIndex(str => str == key.code) as 0 | 1 | 2 | 3 | 4 | 5 | 6;
-        keyAction(keyPos);
-    }
-    function keyAction(keyPos: 0 | 1 | 2 | 3 | 4 | 5 | 6) {
-        return match(keyPos)
-            .with(0, () => { judgeKeyPush(0) })
-            .with(1, () => { judgeKeyPush(1) })
-            .with(2, () => { judgeKeyPush(2) })
-            .with(3, () => { judgeKeyPush(3) })
-            .with(4, () => { judgeKeyPush(4) })
-            .with(5, () => { musicGameVariables.inputs.position = "left"; moveCharacter("left") })
-            .with(6, () => { musicGameVariables.inputs.position = "right"; moveCharacter("right") })
-            .exhaustive();
-    }
+    }, [props])
 
     //when resized window, resize canvas to fit window size
     function resizeCanvas() {
-        gameRenderer.setSize(window.innerWidth, window.innerHeight)
+        gameRenderer.setSize(window.innerWidth, window.innerHeight);
+        composer.setSize(window.innerWidth, window.innerHeight)
     }
 
-    //accept behavior , load chart and play assist sound
-    function preparingGame() {
-        getBehavior.then((behavior) => {
-            parseChart(rawChart!.data, gameConfig.gameplay.scrollSpeed).then(async (chartData) => {
+    // play sound
+    async function preparingGame() {
+        if (!props.ready) return;
 
-                await initRenderer();
 
-                const volume = (gameConfig.audio.masterVolume * gameConfig.audio.effectVolume) || 1;
-                chart = await acceptBehavior(chartData, behavior.model, behavior.sound, volume);
-                setMusicGameValue(value => {
-                    return {
-                        ...value,
-                        bpm: chartData.metadata.initialBpm,
+        await initRenderer();
 
-                    }
-                })
-                setMusicGamePause(pause => {
-                    return {
-                        ...pause,
-                        ready: true,
-                        paused: false
-                    }
-                })
-                setMusicGameNotesJudge(judge => {
-                    return {
-                        ...judge,
-                        notesCount: {
-                            current: 0,
-                            all: chart.metadata.chain,
-                        }
-                    }
-                })
-                const totalTime = musicData.metadata.time + (((60 / chartData.metadata.initialBpm) * 1000) * 4) + 1000;
-                musicGameVariables.time.totalTime = totalTime;
-                setMusicGameTime(time => {
-                    return {
-                        ...time,
-                        totalTime: totalTime,
-                        startedTime: performance.now()
-                    }
-                })
-
-                musicGameVariables.time.initialVoidTime = (((60 / chartData.metadata.initialBpm) * 1000) * 4)
-                musicGameVariables.time.startTime = performance.now() + (((60 / chartData.metadata.initialBpm) * 1000) * 4) + 3500 + chartData.metadata.offset;
-                musicGameVariables.ready = true;
-                ResultNavigationInterval = setInterval(() => {
-                    scenechange("../result");
-                }, totalTime + musicGameVariables.time.initialVoidTime + 2000);
-
-                await sleep(3500);
-                const sound = (await getBehavior).sound.sound.assist;
-                const soundUri = `data:${sound.mime};base64,${arrayBufferToBase64(sound.data)}`;
-                const audio = new Howl({
-                    src: [soundUri],
-                    volume: gameConfig.audio.effectVolume || 1,
-                });
-                for (let i = 0; i < 4; i++) {
-                    audio.play();
-                    await sleep((60 / chartData.metadata.initialBpm) * 1000);
-                }
-                audio.stop();
-                audio.unload();
-                musicAudio.play();
-                musicGameVariables.delay = performance.now() - musicGameVariables.time.startTime
-            })
+        const totalTime = musicData.metadata.time + (((60 / props.data.chart!.metadata.initialBpm) * 1000) * 4) + 1000;
+        musicGameVariables.current.time.totalTime = totalTime;
+        setMusicGameTime(time => {
+            return {
+                ...time,
+                totalTime: totalTime,
+                startedTime: performance.now()
+            }
         })
+
+        musicGameVariables.current.time.initialVoidTime = (((60 / props.data.chart!.metadata.initialBpm) * 1000) * 4)
+        musicGameVariables.current.time.startTime = performance.now() + (((60 / props.data.chart!.metadata.initialBpm) * 1000) * 4) + 3500 + props.data.chart!.metadata.offset;
+        //musicGameVariables.ready = true;
+        ResultNavigationTimeout = setTimeout(() => {
+            scenechange("../result");
+        }, totalTime + musicGameVariables.current.time.initialVoidTime + 2000);
+
+        await sleep(3500);
+        const sound = props.data.behavior.sound?.sound.assist;
+        const soundUri = `data:${sound?.mime || "audio/mp3"};base64,${arrayBufferToBase64(sound?.data || new ArrayBuffer(0))}`;
+        const audio = new Howl({
+            src: soundUri,
+            volume: gameConfig.audio.effectVolume || 1,
+        });
+        for (let i = 0; i < 4; i++) {
+            audio.play();
+            await sleep((60 / props.data.chart!.metadata.initialBpm) * 1000);
+        }
+        audio.stop();
+        audio.unload();
+        musicAudio.current.play();
+        musicGameVariables.current.delay = performance.now() - musicGameVariables.current.time.startTime
     }
 
 
@@ -252,8 +206,7 @@ const MusicGame3D: React.FC = () => {
         gameRenderer.setSize(window.innerWidth, window.innerHeight);
         gameRenderer.setPixelRatio(gameConfig.graphics.musicgame.resolution || 1);
         musicgameCanvasRef.current?.appendChild(gameRenderer.domElement);
-        gameScene.name = "musicGameScene";
-        notesContainer.name = "notesContainer";
+
 
         directionalLight.position.set(0, 10, 10);
         directionalLight.lookAt(0, 0, -10);
@@ -261,7 +214,7 @@ const MusicGame3D: React.FC = () => {
         camera.position.set(0, 8, 5);
         camera.rotation.set(THREE.MathUtils.degToRad(-38), 0, 0);
 
-        gameScene.add(ambientLight, directionalLight, notesContainer);
+        gameScene.add(ambientLight, directionalLight, notesContainer, judgeTextContainer.current);
 
         //post process
         const renderPass = new RenderPass(gameScene, camera);
@@ -285,92 +238,138 @@ const MusicGame3D: React.FC = () => {
         gameRenderInterval = setInterval(render, (gameConfig.graphics.musicgame.fps || 120) / 1000)
     }
 
-    //ground
+    //render ground
     async function setGround() {
-        const groundGltf = (await getBehavior).model.models.ground;
-        const gltf = await new GLTFLoader().loadFromArrayBufferAsync(groundGltf)
+        const groundGltf = props.data.behavior.model?.models.ground;
+        const gltf = await new GLTFLoader().loadFromArrayBufferAsync(groundGltf || new ArrayBuffer(0))
         const model = gltf.scene;
         model.position.set(0, 0, 0);
         model.receiveShadow = true;
         gameScene.add(model)
     }
 
-    //character
+    //redner character
     async function setCharacter() {
-        const characterGltf = (await getBehavior).model.models.character;
-        const gltf = await new GLTFLoader().loadFromArrayBufferAsync(characterGltf);
-        character = gltf.scene;
-        character.position.set(-9, 0, 0);
-        character.rotation.set(0, 0, 0)
-        character.castShadow = true;
-        gameScene.add(character)
+        const characterGltf = props.data.behavior.model?.models.character;
+        const gltf = await new GLTFLoader().loadFromArrayBufferAsync(characterGltf || new ArrayBuffer(0));
+        character.current = gltf.scene;
+        character.current.position.set(-9, 0, 0);
+        character.current.rotation.set(0, 0, 0)
+        character.current.castShadow = true;
+        gameScene.add(character.current)
     }
 
+    //character move to left or right
     async function moveCharacter(position: ("left" | "right")) {
-        const currentPos = character.position.x;
+        const currentPos = character.current.position.x;
         const newPos = position == "left" ? -9 : 9;
         if (currentPos == newPos) return;
         const moveDistance = currentPos + newPos * 2;
         for (let i = 0; i < 100; i++) {
             const pos = easings.bounce(i / 100) * moveDistance / 100 + newPos;
-            character.position.x = pos;
+            character.current.position.x = pos;
             await sleep(10);
         }
 
     }
-
+    //render to canvas
     function render() {
         composer.render();
         updateGame();
     }
 
+    function updateChainText(chain:number){
+        const oldObj = gameScene.children.find(c => c.name == "chainText")
+        if(oldObj) gameScene.remove(oldObj);
+
+        const font = new Font(props.data.behavior.font.data)
+        const chainTextGeometry = new THREE.ShapeGeometry(font.generateShapes(chain.toString(), 1));
+        const chainTextMaterial = new THREE.MeshStandardMaterial({ color: "#a0a0a0"});
+        const chainTextMesh = new THREE.Mesh(chainTextGeometry, chainTextMaterial);
+
+        chainTextGeometry.computeBoundingBox();
+        if (chainTextGeometry.boundingBox) {
+            const xMid = - 0.5 * (chainTextGeometry.boundingBox.max.x - chainTextGeometry.boundingBox.min.x);
+            chainTextGeometry.translate(xMid, 0, 0);
+        }
+
+        chainTextMesh.position.set(0, 0.25, 12.5);
+        chainTextMesh.rotation.set(0, 0, 0);
+        gameScene.add(chainTextMesh)
+
+    }
+
     //update notes position
     function updateGame() {
-        if (!musicGameVariables.ready) return;
-        const activeRange = musicGameVariables.activeRange
-        const elapsedTime = performance.now() - musicGameVariables.time.startTime;
+        if (!props.ready) return;
+        const activeRange = musicGameVariables.current.activeRange
+        const elapsedTime = performance.now() - musicGameVariables.current.time.startTime;
         const gameTime = elapsedTime - /* musicGameVariables.delay - */ gameConfig.gameplay.timing.offset;
         const judgeTime = gameTime - gameConfig.gameplay.timing.judge;
-        musicGameVariables.time.elapsedTime = elapsedTime;
-        musicGameVariables.time.gameTime = gameTime;
-        musicGameVariables.time.judgeTime = judgeTime;
+        musicGameVariables.current.time.elapsedTime = elapsedTime;
+        musicGameVariables.current.time.gameTime = gameTime;
+        musicGameVariables.current.time.judgeTime = judgeTime;
 
-        for (const note of musicGameVariables.activeNotes) {
+        for (const note of musicGameVariables.current.activeNotes) {
             if (note.judged) {
                 note.active = false;
                 notesContainer.remove(note.note);
-                const index = musicGameVariables.activeNotes.findIndex(n => n == note);
-                musicGameVariables.activeNotes.splice(index, 1);
+                const index = musicGameVariables.current.activeNotes.findIndex(n => n == note);
+                musicGameVariables.current.activeNotes.splice(index, 1);
             }
-            else if (note instanceof seedNote && Math.abs(note.time - gameTime) < 25 && note.lane == musicGameVariables.inputs.position) managementJudge(note.judge(gameTime));
+            else if (note instanceof seedNote && Math.abs(note.time - gameTime) < 25 && note.lane == musicGameVariables.current.inputs.position) managementJudge(note.judge(gameTime));
             else if (note.time + activeRange < judgeTime) managementJudge(note.judge(judgeTime))
             note.updatePosition(gameTime)
         }
-        for (const note of chart.notes) {
+        for (const note of props.data.chart!.notes) {
             if (note.active) continue;
             if (note.time - Math.abs(gameTime) < note.scrollTime) {
                 note.active = true;
                 notesContainer.add(note.note);
-                musicGameVariables.activeNotes.push(note);
+                musicGameVariables.current.activeNotes.push(note);
             }
-
         }
+    }
+
+    //get key event and dispatch action
+    function keyInput(key: KeyboardEvent) {
+        if (!gameConfig.gameplay.key.includes(key.code)) return;
+
+        const keyPos = gameConfig.gameplay.key.findIndex(str => str == key.code) as 0 | 1 | 2 | 3 | 4 | 5 | 6;
+        if (keyPos < 4) musicGameVariables.current.inputs.lanes[keyPos as 0 | 1 | 2 | 3] = true;
+        keyAction(keyPos);
+    }
+    function keyAction(keyPos: 0 | 1 | 2 | 3 | 4 | 5 | 6) {
+        return match(keyPos)
+            .with(0, () => { judgeKeyPush(0) })
+            .with(1, () => { judgeKeyPush(1) })
+            .with(2, () => { judgeKeyPush(2) })
+            .with(3, () => { judgeKeyPush(3) })
+            .with(4, () => { judgeKeyPush(4) })
+            .with(5, () => { musicGameVariables.current.inputs.position = "left"; moveCharacter("left") })
+            .with(6, () => { musicGameVariables.current.inputs.position = "right"; moveCharacter("right") })
+            .exhaustive();
+    }
+
+    function keyUp(key: KeyboardEvent) {
+        if (!gameConfig.gameplay.key.includes(key.code)) return;
+        const keyPos = gameConfig.gameplay.key.findIndex(str => str == key.code) as 0 | 1 | 2 | 3 | 4 | 5 | 6;
+        if (keyPos < 4) musicGameVariables.current.inputs.lanes[keyPos as 0 | 1 | 2 | 3] = false;
     }
 
     //find note and judge.
     function judgeKeyPush(pos: 0 | 1 | 2 | 3 | 4) {
-        const judgeTime = musicGameVariables.time.judgeTime;
-        const activeRange = musicGameVariables.activeRange;
+        const judgeTime = musicGameVariables.current.time.judgeTime;
+        const activeRange = musicGameVariables.current.activeRange;
 
         if (pos < 4) {
             //find tap note and judge
-            const note = musicGameVariables.activeNotes.find(note => note instanceof tapNote && note.lane == pos + 1 && Math.abs(note.time - judgeTime) < activeRange);
-            console.log(note);
+            const note = musicGameVariables.current.activeNotes.find(note => note instanceof tapNote && note.lane == pos + 1 && Math.abs(note.time - judgeTime) < activeRange);
 
             if (note) managementJudge(note.judge(judgeTime));
         } else if (pos == 4) {
             //bright note
-            const note = musicGameVariables.activeNotes.find(note => note instanceof brightNote && Math.abs(note.time - judgeTime) < activeRange);
+            const note = musicGameVariables.current.activeNotes.find(note => note instanceof brightNote && Math.abs(note.time - judgeTime) < activeRange);
             if (note) managementJudge(note.judge(judgeTime));
         }
     }
@@ -380,13 +379,12 @@ const MusicGame3D: React.FC = () => {
     }
 
     //set score and some info
-    function managementJudge(judge: { judge: judgeText, accuracy: number } | undefined) {
+    function managementJudge(judge: { judge: judgeText, accuracy: number, note: THREE.Object3D } | undefined) {
         if (!judge) return;
-        let score = chart.metadata.scorePerNote;
+        let score = props.data.chart!.metadata.scorePerNote;
         if (judge.judge == "glossy") score *= 0.75;
         else if (judge.judge == "moderate") score *= 0.5;
         else if (judge.judge == "lost") score = 0;
-
 
         //update score and some values
         setMusicGameNotesJudge(noteJudge => {
@@ -409,6 +407,7 @@ const MusicGame3D: React.FC = () => {
             }
         })
         setMusicGameValue(value => {
+            updateChainText(judge.judge == "lost" ? 0 : value.chain + 1,);
             return {
                 ...value,
                 score: value.score + score,
@@ -416,13 +415,63 @@ const MusicGame3D: React.FC = () => {
                 maxChain: Math.max((judge.judge == "lost" ? 0 : value.chain + 1), value.maxChain)
             }
         })
+        updateJudgeText(judge.judge, judge.accuracy, judge.note.position.x)
+    }
+
+    function updateJudgeText(judgeText: string, accuracy: number, posX: number) {
+        if (!props.data.behavior.font || !gameConfig.gameplay.judgeText.show) return;
+
+        const tableData = judgeTable.find(t => t.name == judgeText)
+
+        if (!tableData) return;
+
+        //create judge text with shape geometry
+        new Promise<void>(async (resolve) => {
+            const font = new Font(props.data.behavior.font.data)
+            const judgeTextGeometry = new THREE.ShapeGeometry(font.generateShapes(tableData.label, 0.3));
+            const judgeTextMaterial = new THREE.MeshStandardMaterial({ color: tableData.color, transparent: true, opacity: 1 });
+            const judgeTextMesh = new THREE.Mesh(judgeTextGeometry, judgeTextMaterial);
+
+            judgeTextMesh.position.set(posX, 0.25, gameConfig.gameplay.judgeText.position);
+            judgeTextMesh.rotation.set(THREE.MathUtils.degToRad(gameConfig.gameplay.judgeText.direction), 0, 0)
+
+            if (Math.abs(accuracy) > 24) {
+                const label = accuracy < 0 ? "future" : "past";
+                const FPData = timeTable.find(t => t.name == label);
+                if (!FPData) return;
+                const FPTextGeometry = new THREE.ShapeGeometry(font.generateShapes(FPData.label, 0.25));
+                const FPTextMaterial = new THREE.MeshStandardMaterial({ color: FPData.color, transparent: true, opacity: 1 });
+                const FPTextMesh = new THREE.Mesh(FPTextGeometry, FPTextMaterial);
+                FPTextMesh.position.set(0, 0.3, -0.2);
+                FPTextGeometry.computeBoundingBox();
+                if (FPTextGeometry.boundingBox) {
+                    const xMid = - 0.5 * (FPTextGeometry.boundingBox.max.x - FPTextGeometry.boundingBox.min.x);
+                    FPTextGeometry.translate(xMid, 0, 0);
+                }
+                judgeTextMesh.add(FPTextMesh);
+            }
+
+            // translate -50% of itself
+            judgeTextGeometry.computeBoundingBox();
+            if (judgeTextGeometry.boundingBox) {
+                const xMid = - 0.5 * (judgeTextGeometry.boundingBox.max.x - judgeTextGeometry.boundingBox.min.x);
+                judgeTextGeometry.translate(xMid, 0, 0);
+            }
+            //add and animation
+            judgeTextContainer.current.add(judgeTextMesh);
+            for (let i = 0; i < 25; i++) {
+                judgeTextMesh.position.setY(judgeTextMesh.position.y + 0.05);
+                judgeTextMaterial.opacity -= 0.04
+                await sleep(500 / 25);
+            }
+            //after animation, text will remove
+            judgeTextContainer.current.remove(judgeTextMesh);
+            resolve();
+        })
     }
 
     return (
-        <div>
-            <div className={style.musicgameCanvas} ref={musicgameCanvasRef}></div>
-            {/* <MusicGameRenderer render={false} /> */}
-        </div>
+        <div className={style.musicgameCanvas} ref={musicgameCanvasRef}></div>
     )
 }
 

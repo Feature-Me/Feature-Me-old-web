@@ -28,6 +28,10 @@ interface chartNoteFromAlpha {
     type: "tap" | "bright" | "seed"
     time: number
     lane?: 1 | 2 | 3 | 4 | 5 | 6 | "left" | "right"
+    speed?: {
+        type: "absolute" | "relative" | "fixed"
+        value: number
+    }
 }
 
 interface chartJsonFromAlpha extends chartJsonType {

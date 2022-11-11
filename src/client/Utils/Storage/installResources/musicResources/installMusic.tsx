@@ -40,7 +40,10 @@ function installMusic(zip: JSZip) {
             behavior: fileMapJsonData.behavior ? await zip.file(fileMapJsonData.behavior)?.async("arraybuffer") || new ArrayBuffer(0) : new ArrayBuffer(0),
             music: [],
             chart: [],
-            directing: []
+            directing: [],
+            version: fileMapJsonData.version,
+            made: fileMapJsonData.made,
+            installedAt: Date.now()
         }
 
         for (const music of fileMapJsonData.music) {

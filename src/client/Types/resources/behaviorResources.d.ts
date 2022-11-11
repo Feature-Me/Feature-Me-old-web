@@ -2,6 +2,7 @@ interface behaviorContentMap {
     version: string
     type: "2d" | "3d"
     name: string
+    made:"official"|"community"
     models: {
         tap: string
         damageTap: string
@@ -19,8 +20,10 @@ interface behaviorContentMap {
 
 
 interface behaviorAssetContents {
+    version:string
     name: string
     type: "2d" | "3d"
+    made: "official" | "community"
     models: {
         tap: ArrayBuffer
         damageTap: ArrayBuffer
@@ -32,11 +35,14 @@ interface behaviorAssetContents {
         ground: ArrayBuffer
     }
     soundEffect: string
-    font?: any
+    fontName?: string
+    installedAt:number
 }
 
 interface soundEffectContentMap {
+    version:string
     name: string
+    made: "official" | "community"
     sound: {
         tap: string
         damage: string
@@ -47,36 +53,37 @@ interface soundEffectContentMap {
         assist: string
     }
     license: string
+    installedAt:number
 }
 
 interface soundEffectAssetContents {
     name: string
     sound: {
-        tap:{
+        tap: {
             data: ArrayBuffer
             mime: string
         }
-        damage:{
+        damage: {
             data: ArrayBuffer
             mime: string
         }
-        hold:{
+        hold: {
             data: ArrayBuffer
             mime: string
         }
-        bright:{
+        bright: {
             data: ArrayBuffer
             mime: string
         }
-        seed:{
+        seed: {
             data: ArrayBuffer
             mime: string
         }
-        flick:{
+        flick: {
             data: ArrayBuffer
             mime: string
         }
-        assist:{
+        assist: {
             data: ArrayBuffer
             mime: string
         }

@@ -43,20 +43,9 @@ const MusicGameUI: React.FC = () => {
     const rightBoardAnimationController = useAnimation();
     const pauseMenuAnimationController = useAnimation();
 
-    const initialLeftBoard = {
-        x: "-20%",
-        opacity: 0,
-    }
+    const initialLeftBoard = { x: "-20%", opacity: 0, }
 
-    const slideFadeInFromLeft = {
-        x: 0,
-        opacity: 1,
-        transition: {
-            duration: 1,
-            ease: "circOut",
-        }
-
-    }
+    const slideFadeInFromLeft = { x: 0, opacity: 1, transition: { duration: 1, ease: "circOut", } }
 
     const initialRightBoard = { x: "20%", opacity: 0, }
     const slideFadeInFromRight = { x: 0, opacity: 1, transition: { duration: 1, ease: "circOut", } }
@@ -162,26 +151,26 @@ const MusicGameUI: React.FC = () => {
         }
     }, [musicGameTime.totalTime])
 
-/*     React.useEffect(() => {
-        if (!musicGamePause.ready) return;
-        console.log("paused", musicGamePause.paused);
-        let timeout: NodeJS.Timeout;
-        if (!pauseOverlayRef.current) return;
-        if (performance.now() - musicGameTime.totalTime) return;
-        if (musicGamePause.paused) {
-            pauseOverlayRef.current.style.visibility = "visible";
-            pauseMenuAnimationController.start(pauseMenuAnimation);
-        } else {
-            pauseMenuAnimationController.start(pauseMenuAnimationOut);
-            timeout = setTimeout(() => {
-                if (pauseOverlayRef.current) pauseOverlayRef.current.style.visibility = "hidden";
-            }, 300);
-        }
-        return () => {
-            clearTimeout(timeout);
-        }
-    }, [musicGamePause.paused])
- */
+    /*     React.useEffect(() => {
+            if (!musicGamePause.ready) return;
+            console.log("paused", musicGamePause.paused);
+            let timeout: NodeJS.Timeout;
+            if (!pauseOverlayRef.current) return;
+            if (performance.now() - musicGameTime.totalTime) return;
+            if (musicGamePause.paused) {
+                pauseOverlayRef.current.style.visibility = "visible";
+                pauseMenuAnimationController.start(pauseMenuAnimation);
+            } else {
+                pauseMenuAnimationController.start(pauseMenuAnimationOut);
+                timeout = setTimeout(() => {
+                    if (pauseOverlayRef.current) pauseOverlayRef.current.style.visibility = "hidden";
+                }, 300);
+            }
+            return () => {
+                clearTimeout(timeout);
+            }
+        }, [musicGamePause.paused])
+     */
 
 
     return (
@@ -230,7 +219,7 @@ const MusicGameUI: React.FC = () => {
                 <p><span>Notes :</span> <span>{musicGameNotesJudge.notesCount.current}/{musicGameNotesJudge.notesCount.all}</span></p>
             </motion.div>
 
-{/*             <motion.div className={style.pause_overlay} ref={pauseOverlayRef} animate={pauseMenuAnimationController} initial={initPauseMenu}>
+            {/*             <motion.div className={style.pause_overlay} ref={pauseOverlayRef} animate={pauseMenuAnimationController} initial={initPauseMenu}>
                 <Header title={`Paused - ${musicData.metadata.title}`} backFunc={() => setMusicGameMode(game => { return { ...game, paused: false } })} />
                 <div className={style.pause_content}>
                     <p>Resume</p>

@@ -91,12 +91,20 @@ const gameConfig: gameConfig = {
             predictionScore: false,
             maxCombo: false,
             predictionRating: false,
+        },
+        judgeText: {
+            show: true,
+            direction:0,
+            position:-4
         }
     },
     audio: {
         masterVolume: 1,
         musicVolume: 1,
         effectVolume: 1,
+        audioStereo:0,
+        positional:false,
+        positionalIntensity:1
     }
 }
 

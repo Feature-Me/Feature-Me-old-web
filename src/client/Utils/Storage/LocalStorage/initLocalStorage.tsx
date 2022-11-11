@@ -3,40 +3,25 @@ import { toast } from "react-toastify";
 import TranslateText from "Components/TranslateText/TranslateText";
 import { enviroment, resourcesDownloaded, DBVersion, gameConfig, musicSelect } from "./defaultValue";
 
+const valueMap = {
+    enviroment,
+    resourcesDownloaded,
+    DBVersion,
+    gameConfig,
+    musicSelect,
 
+}
 
 function initLocalStorage(): void {
     let fixedCount = 0;
     try {
-        if (!localStorage.getItem("environment")) {
-            
-            localStorage.setItem("environment", JSON.stringify(enviroment));
-            fixedCount++;
-        }
-
-        if (!localStorage.getItem("resourcesDownloaded")) {
-            
-            localStorage.setItem("resourcesDownloaded", JSON.stringify(resourcesDownloaded));
-            fixedCount++;
-        }
-
-        if (!localStorage.getItem("DBVersion")) {
-            
-            localStorage.setItem("DBVersion", JSON.stringify(DBVersion));
-            fixedCount++;
-        }
-
-        if (!localStorage.getItem("gameConfig")) {
-            
-            localStorage.setItem("gameConfig", JSON.stringify(gameConfig));
-            fixedCount++;
-        }
-        if (!localStorage.getItem("musicSelect")) {
-            
-            localStorage.setItem("musicSelect", JSON.stringify(musicSelect));
-        }
-        if(fixedCount > 0) toast.success(<TranslateText content = { "resourcesManager.cache.notifications.fixed"} start = { fixedCount.toString() } />);
-    //toast.success(<TranslateText contentData={"resourcesManager.cache.notifications.fixed"} />);
+        
+        localStorage.setItem("environment", JSON.stringify({ ...enviroment, ...(JSON.parse(localStorage.getItem("environment")||"{}")) }));
+        localStorage.setItem("resourcesDownloaded", JSON.stringify({ ...resourcesDownloaded, ...(JSON.parse(localStorage.getItem("resourcesDownloaded") || "{}")) }));
+        localStorage.setItem("DBVersion", JSON.stringify({ ...DBVersion, ...(JSON.parse(localStorage.getItem("DBVersion") || "{}")) }));
+        localStorage.setItem("gameConfig", JSON.stringify({ ...gameConfig, ...(JSON.parse(localStorage.getItem("gameConfig") || "{}")) }));
+        localStorage.setItem("musicSelect", JSON.stringify({ ...musicSelect, ...(JSON.parse(localStorage.getItem("musicSelect") || "{}")) }));
+    
 } catch (error) {
     console.error(error);
     toast.error(`${error}`);

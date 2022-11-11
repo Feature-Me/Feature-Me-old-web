@@ -19,13 +19,7 @@ const MusicGameTitle: React.FC<{}> = (props) => {
     const chartMetaData = musicData.metadata.difficulties.find(diff => diff.name == musicGameMode.difficulty)
 
     const titleAnimationController = useAnimation();
-    const titleAnimation = {
-        opacity: 0,
-        transition: {
-            duration: 0.5,
-            ease: "easeOut",
-        }
-    }
+    const titleAnimation = { opacity: 0, transition: { duration: 0.5, ease: "easeOut", } }
 
     async function fadeOut() {
         if (musicGameTitleRef.current) {
