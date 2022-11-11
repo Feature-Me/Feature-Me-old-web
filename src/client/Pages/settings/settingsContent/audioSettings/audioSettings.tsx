@@ -41,6 +41,23 @@ const AudioSettings: React.FC = () => {
             },
             input: <RangeInput min={0} max={1} step={0.01} value={gameConfig.audio.effectVolume} onChange={(value: number) => setGameConfig(config => { return { ...config, audio: { ...config.audio, effectVolume: value } } })} />
         },
+        {
+            details: {
+                title: <TranslateText content="settingsPage.audio.stereo.name" />,
+                processingLoad: "none",
+                description: <TranslateText content="settingsPage.audio.stereo.description" />
+            },
+            input: <RangeInput min={-1} max={1} step={0.01} value={gameConfig.audio.audioStereo} onChange={(value: number) => setGameConfig(config => { return { ...config, audio: { ...config.audio, audioStereo: value } } })} />
+        },
+        
+        {
+            details: {
+                title: <TranslateText content="settingsPage.audio.positionalIntensity.name" />,
+                processingLoad: "none",
+                description: <TranslateText content="settingsPage.audio.positionalIntensity.description" />
+            },
+            input: <RangeInput min={0} max={1} step={0.01} value={gameConfig.audio.positionalIntensity} onChange={(value: number) => setGameConfig(config => { return { ...config, audio: { ...config.audio, positionalIntensity: value } } })} />
+        },
     ]
 
 
