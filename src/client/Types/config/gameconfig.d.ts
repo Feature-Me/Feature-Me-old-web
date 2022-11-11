@@ -70,6 +70,9 @@ interface gameConfig {
         masterVolume: number
         musicVolume: number
         effectVolume: number
+        audioStereo: number
+        positional: boolean
+        positionalIntensity:number
     }
 }
 

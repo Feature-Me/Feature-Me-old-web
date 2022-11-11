@@ -102,6 +102,9 @@ const gameConfig: gameConfig = {
         masterVolume: 1,
         musicVolume: 1,
         effectVolume: 1,
+        audioStereo:0,
+        positional:false,
+        positionalIntensity:1
     }
 }
 
