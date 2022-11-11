@@ -6,8 +6,7 @@ import ServerExplorer from "Pages/play/multiplayer/serverExplorer/serverExplorer
 const MultiPlayRouter: React.FC = () => {
     return (
         <Routes>
-            <Route path="/" element={<Navigate to={"./menu"} />} />
-            <Route path="/menu" element={<ServerExplorer />} />
+            <Route path="/" element={<ServerExplorer />} />
         </Routes>
     )
 }
