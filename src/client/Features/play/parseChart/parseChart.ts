@@ -11,7 +11,7 @@ import { cameraEffect, speedEffect } from "../class/noteClass/effects";
 
 async function parseChart(chart: string, scrollSpeed: number) {
 
-    const gameConfig = json5.parse(localStorage.getItem("gameConfig") || "{}");
+    const gameConfig:gameConfig = json5.parse(localStorage.getItem("gameConfig") || "{}");
 
     const chartJson = json5.parse(chart) as chartJsonType;
     const chartData: chartType = {
@@ -69,6 +69,7 @@ async function parseChart(chart: string, scrollSpeed: number) {
     for (const note of chartJson.notes) {
         const noteInstance = checkNoteType(note);
         noteInstance.setScrollSpeed(scrollSpeed);
+        if(gameConfig.audio.positional) noteInstance.setAudioPosition(gameConfig.audio.positionalIntensity)
         chartData.notes.push(noteInstance);
         if (noteInstance.type === "hold") chartData.metadata.chain += (noteInstance as holdNote).getChain(chartData.metadata.initialBpm);
         else chartData.metadata.chain++;
