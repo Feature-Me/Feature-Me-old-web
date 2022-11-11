@@ -277,6 +277,27 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         updateGame();
     }
 
+    function updateChainText(chain:number){
+        const oldObj = gameScene.children.find(c => c.name == "chainText")
+        if(oldObj) gameScene.remove(oldObj);
+
+        const font = new Font(props.data.behavior.font.data)
+        const chainTextGeometry = new THREE.ShapeGeometry(font.generateShapes(chain.toString(), 1));
+        const chainTextMaterial = new THREE.MeshStandardMaterial({ color: "#a0a0a0"});
+        const chainTextMesh = new THREE.Mesh(chainTextGeometry, chainTextMaterial);
+
+        chainTextGeometry.computeBoundingBox();
+        if (chainTextGeometry.boundingBox) {
+            const xMid = - 0.5 * (chainTextGeometry.boundingBox.max.x - chainTextGeometry.boundingBox.min.x);
+            chainTextGeometry.translate(xMid, 0, 0);
+        }
+
+        chainTextMesh.position.set(0, 0.25, 12.5);
+        chainTextMesh.rotation.set(0, 0, 0);
+        gameScene.add(chainTextMesh)
+
+    }
+
     //update notes position
     function updateGame() {
         if (!props.ready) return;
@@ -385,6 +406,7 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
             }
         })
         setMusicGameValue(value => {
+            updateChainText(judge.judge == "lost" ? 0 : value.chain + 1,);
             return {
                 ...value,
                 score: value.score + score,
