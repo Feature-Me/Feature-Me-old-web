@@ -23,6 +23,9 @@ class note {
     scrollTime: number = scrollSpeedToScrollTime(this.scrollSpeed);
     speedChanged:boolean = false;
 
+    positionalAudio:boolean = false;
+    positionalIntensity :number = 1;
+
     constructor(note: chartNote) {
         this.type = note.type;
         this.time = note.time;
@@ -67,11 +70,17 @@ class note {
         });
     }
     setAudioPosition(intensity:number){
-        let balance = (this.note.position.x*0.1)*intensity;
-        if(balance>1) balance=1;
-        else if(balance<-1) balance = -1;
-        this.audio.stereo(balance);
+        this.positionalAudio =true;
+        this.positionalIntensity = intensity;
+    }
+    acceptAudioPosition(){
+        if(!this.positionalAudio)return;
+        let balance = (this.note.position.x * 0.1) * this.positionalIntensity;
+        if (balance > 1) balance = 1;
+        else if (balance < -1) balance = -1;
+        console.log(balance, this.note.position.x);
 
+        this.audio.stereo(balance);
     }
     setScrollSpeed(speed: number,important?:boolean) {
         if(this.speedChanged&&!important) return;
@@ -113,6 +122,7 @@ class tapNote extends note {
         const x = 4 * this.lane - 10;
         this.note.position.x = x;
         this.note.name = "tap";
+        this.acceptAudioPosition()
     }
 
 }
@@ -128,6 +138,7 @@ class damageTapNote extends note {
         const x = 4 * this.lane - 6;
         this.note.position.x = x;
         this.note.name = "damageTap";
+        this.acceptAudioPosition()
     }
 }
 
@@ -149,6 +160,7 @@ class holdNote extends note {
         const toZ = -(this.duration / this.scrollTime) * 87.5;
         this.note.position.z = (fromZ - toZ) / 8;
         this.note.name = "hold";
+        this.acceptAudioPosition()
     }
     getChain(bpm: number): number {
         this.chainCount = Math.floor(this.duration / (60 / bpm) * 2);
@@ -163,6 +175,7 @@ class brightNote extends note {
     setBehavior(model: GLTF): void {
         super.setBehavior(model);
         this.note.name = "bright";
+        this.acceptAudioPosition()
     }
     judge(judgeTime: number) {
         if (this.judged) return;
@@ -190,6 +203,7 @@ class seedNote extends note {
         const x = this.lane === "left" ? -9 : 9;
         this.note.position.x = x;
         this.note.name = "seed";
+        this.acceptAudioPosition()
     }
     judge(judgeTime: number) {
         if (this.judged) return;
@@ -230,6 +244,7 @@ class flickNote extends note {
             this.note.rotation.y = Math.PI;
         }
         this.note.name = "flick";
+        this.acceptAudioPosition()
     }
 }
 
