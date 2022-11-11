@@ -1,6 +1,6 @@
 {
     metadata: {
-        offset: 40,
+        "offset":500,
         initialBpm: 120,
     },
     notes: [
