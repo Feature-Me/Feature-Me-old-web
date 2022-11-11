@@ -16,6 +16,7 @@ import HorizonalSelectFromArray from "Components/horizonalSelectFromArray/horizo
 import keybindImage from "Assets/Images/keybindmap.png";
 import judgeTextDirectionImage from "Assets/Images/judgeTextDirection.png";
 import judgeTextPositionImage from "Assets/Images/judgeTextPosition.png";
+import ToggleSwitch from "Components/toggleSwitch/toggleSwitch";
 
 const GameplaySettings: React.FC = () => {
     const [translate, i18n] = useTranslation();
@@ -23,7 +24,6 @@ const GameplaySettings: React.FC = () => {
     const [settingDetailsData, setiSettingDetailsData] = React.useState<settingDetailsData>({ title: "", processingLoad: "none", description: "" });
     const settingListRef = React.useRef<HTMLDivElement>(null);
 
-    const judgeTextShow = [{ label: "ON", value: true }, { label: "OFF", value: false }]
     const judgeTextDirection = [{ label: "Vertical", value: 0 }, { label: "Facing", value: -38 }, { label: "Horizonal", value: -90 }]
 
     const settings: settingsData = [
@@ -65,7 +65,7 @@ const GameplaySettings: React.FC = () => {
                 processingLoad: "low",
                 description: <TranslateText content="settingsPage.gameplay.judgeTextShow.description" />
             },
-            input: <HorizonalSelectFromArray contents={judgeTextShow} value={judgeTextShow.find(c => c.value == gameConfig.gameplay.judgeText.show) || judgeTextShow[0]} onChange={(value) => setGameConfig(config => { return { ...config, gameplay: { ...config.gameplay, judgeText: { ...config.gameplay.judgeText, show: value.value } } }; })} />
+            input: <ToggleSwitch checked={gameConfig.gameplay.judgeText.show} onChange={(value) => setGameConfig(config => { return { ...config, gameplay: { ...config.gameplay, judgeText: { ...config.gameplay.judgeText, show: value } } }; })} />
         },
         {
             details: {
