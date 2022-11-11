@@ -110,7 +110,7 @@ const JASettingsPage = {
         },
         "stereo":{
             "name":"ステレオバランス",
-            "description":"ゲームの左右の音量バランスを調整します。\n-1で左,1で右側に調整します。"
+            "description":"ゲームの左右の音量バランスを調整します。\n0で左,2で右側に調整します。1で中央に調整します。"
         },
         "positional":{
             "name":"位置音響",
