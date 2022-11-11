@@ -87,11 +87,14 @@ function installBehavior(zip: JSZip) {
             const ModelStore = db.transaction(databaseInfo.behaviorStore, "readwrite").objectStore(databaseInfo.behaviorStore);
 
             const behavior = {
+                version:fileMapJsonData.version,
                 name: fileMapJsonData.name,
+                made:fileMapJsonData.made,
                 models: data,
                 soundEffect: soundEffectName || "",
                 font: fontName || "",
-                type: "3d"
+                type: "3d",
+                installedAt:  Date.now()
             }
 
             const put = ModelStore.put(behavior);

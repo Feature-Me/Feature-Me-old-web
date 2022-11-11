@@ -1,10 +1,12 @@
 import { Howl } from "howler";
 import * as THREE from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
+import { match } from "ts-pattern";
+import { fontAssetContents, fontTable } from "Types/resources/fontResources";
 import scrollSpeedToScrollTime from "Utils/scrollSpeedToScrollTime/scrollSpeedToScrollTime";
-import easing from "../../../Utils/easing/easing";
+import easing from "../../../../Utils/easing/easing";
 
-import { chartBrightNote, chartDamageTapNote, chartFlickNote, chartHoldNote, chartNote, chartSeedNote, chartTapNote } from "../parseChart/chartSample";
+import { chartBrightNote, chartDamageTapNote, chartFlickNote, chartHoldNote, chartNote, chartSeedNote, chartTapNote } from "../../parseChart/chartSample";
 
 class note {
     type: chartNote["type"];
@@ -19,6 +21,10 @@ class note {
 
     scrollSpeed: number = 10;
     scrollTime: number = scrollSpeedToScrollTime(this.scrollSpeed);
+    speedChanged:boolean = false;
+
+    positionalAudio:boolean = false;
+    positionalIntensity :number = 1;
 
     constructor(note: chartNote) {
         this.type = note.type;
@@ -26,12 +32,17 @@ class note {
         this.script = note.script || [];
         this.note = new THREE.Object3D();
         this.transitionEase = note.transitionEase || easing.linear;
+        if (note.speed) {
+            if (!note.speed.type) note.speed.type = "absolute";
+            this.changeScrollSpeed(note.speed.type, note.speed.value)
+        }
+
         this.audio = new Howl({
             src: ["data:audio/mp3;base64,"],
             loop: false
         });
     }
-    judge(judgeTime: number): { judge: judgeText, accuracy: number } | undefined {
+    judge(judgeTime: number): { judge: judgeText, accuracy: number, note: THREE.Object3D } | undefined {
         if (this.judged) return;
         this.judged = true;
         let judgeText: judgeText;
@@ -44,7 +55,8 @@ class note {
 
         return {
             judge: judgeText,
-            accuracy: judgeTime - this.time
+            accuracy: judgeTime - this.time,
+            note: this.note
         }
     }
     setBehavior(model: GLTF) {
@@ -57,9 +69,31 @@ class note {
             src: [audioUrl]
         });
     }
-    setScrollSpeed(speed: number) {
+    setAudioPosition(intensity:number){
+        this.positionalAudio =true;
+        this.positionalIntensity = intensity;
+    }
+    acceptAudioPosition(){
+        if(!this.positionalAudio)return;
+        let balance = (this.note.position.x * 0.1) * this.positionalIntensity;
+        if (balance > 1) balance = 1;
+        else if (balance < -1) balance = -1;
+        console.log(balance, this.note.position.x);
+
+        this.audio.stereo(balance);
+    }
+    setScrollSpeed(speed: number,important?:boolean) {
+        if(this.speedChanged&&!important) return;
         this.scrollSpeed = speed;
         this.scrollTime = scrollSpeedToScrollTime(this.scrollSpeed);
+    }
+    changeScrollSpeed(type: "absolute"|"relative"|"fixedTime",value: number) {
+        this.speedChanged = true;
+        return match(type)
+        .with("absolute",()=>this.setScrollSpeed(value))
+        .with("relative",()=>{this.scrollSpeed+=value;this.setScrollSpeed(this.scrollSpeed)})
+        .with("fixedTime",()=>{this.scrollTime = value})
+        .exhaustive()
     }
     setActive(active: boolean) {
         this.active = active;
@@ -88,7 +122,9 @@ class tapNote extends note {
         const x = 4 * this.lane - 10;
         this.note.position.x = x;
         this.note.name = "tap";
+        this.acceptAudioPosition()
     }
+
 }
 
 class damageTapNote extends note {
@@ -102,6 +138,7 @@ class damageTapNote extends note {
         const x = 4 * this.lane - 6;
         this.note.position.x = x;
         this.note.name = "damageTap";
+        this.acceptAudioPosition()
     }
 }
 
@@ -123,6 +160,7 @@ class holdNote extends note {
         const toZ = -(this.duration / this.scrollTime) * 87.5;
         this.note.position.z = (fromZ - toZ) / 8;
         this.note.name = "hold";
+        this.acceptAudioPosition()
     }
     getChain(bpm: number): number {
         this.chainCount = Math.floor(this.duration / (60 / bpm) * 2);
@@ -137,6 +175,7 @@ class brightNote extends note {
     setBehavior(model: GLTF): void {
         super.setBehavior(model);
         this.note.name = "bright";
+        this.acceptAudioPosition()
     }
     judge(judgeTime: number) {
         if (this.judged) return;
@@ -147,7 +186,8 @@ class brightNote extends note {
         if (judgeText != "lost") this.audio.play();
         return {
             judge: judgeText,
-            accuracy: judgeTime - this.time
+            accuracy: judgeTime - this.time,
+            note: this.note
         }
     }
 }
@@ -163,21 +203,23 @@ class seedNote extends note {
         const x = this.lane === "left" ? -9 : 9;
         this.note.position.x = x;
         this.note.name = "seed";
+        this.acceptAudioPosition()
     }
     judge(judgeTime: number) {
         if (this.judged) return;
         this.judged = true;
-        console.log(judgeTime, this.time);
 
         if (judgeTime - this.time > 100)
             return {
                 judge: "lost" as judgeText,
-                accuracy: 0
+                accuracy: 0,
+                note: this.note
             }
         this.audio.play();
         return {
             judge: "stunning" as judgeText,
-            accuracy: 0
+            accuracy: 0,
+            note: this.note
         }
     }
     updatePosition(gameTime: number): void {
@@ -202,6 +244,7 @@ class flickNote extends note {
             this.note.rotation.y = Math.PI;
         }
         this.note.name = "flick";
+        this.acceptAudioPosition()
     }
 }
 

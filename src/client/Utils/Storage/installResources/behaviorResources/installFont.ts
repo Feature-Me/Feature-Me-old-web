@@ -10,7 +10,8 @@ async function installFont(font:FontObject){
             const fontStore = db.transaction(databaseInfo.fontStore, "readwrite").objectStore(databaseInfo.fontStore);
             const put = fontStore.put({
                 name: font.familyName,
-                data: font
+                data: font,
+                installedAt: Date.now()
             });
             put.onsuccess = (event) => {
                 console.log("Font installed");

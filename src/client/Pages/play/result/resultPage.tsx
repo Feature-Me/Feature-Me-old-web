@@ -4,6 +4,7 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import { musicGameModeState, musicGameValueState } from "State/play/game/musicGame/musicGameState";
 import musicSelectorState from "State/play/musicSelector/musicSelectorState";
+import getScoreRankFromScore from "Utils/getScoreRankFromScore/getScoreRank";
 
 import style from "./resultPage.scss";
 
@@ -33,11 +34,11 @@ const ResultPage: React.FC = () => {
                 <div className={style.summary}>
                     <div className={style.bigvalue}>
                         <span>Score</span>
-                        <h1>{musicGameValue.score}</h1>
+                        <h1>{Math.round(musicGameValue.score)}</h1>
                     </div>
                     <div className={style.bigvalue}>
                         <span>Rank</span>
-                        <h1> - </h1>
+                        <h1> {getScoreRankFromScore(musicGameValue.score)} </h1>
                     </div>
                     <div className={style.bigvalue}>
                         <span>Max Chain</span>

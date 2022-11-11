@@ -44,4 +44,12 @@
 
     }
 
+    .editor {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: 2fr 1fr;
+        height: 100%;
+        min-height: 0;
+    }
+
 }
