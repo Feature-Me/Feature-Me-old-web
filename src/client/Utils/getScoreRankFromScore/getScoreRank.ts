@@ -1,7 +1,7 @@
 const scoreRanks: scoreRanks = [
     { label: "SSS+", min: 990000, max: 1000000 },
     { label: "SSS", min: 980000, max: 990000 },
-    { label: "SS+", min: 97000, max: 980000 },
+    { label: "SS+", min: 970000, max: 980000 },
     { label: "SS", min: 950000, max: 97000 },
     { label: "S+", min: 940000, max: 950000 },
     { label: "S", min: 900000, max: 940000 },
