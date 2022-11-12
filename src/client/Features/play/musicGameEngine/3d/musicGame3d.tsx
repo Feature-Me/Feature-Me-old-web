@@ -264,11 +264,11 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         const currentPos = character.current.position.x;
         const newPos = position == "left" ? -9 : 9;
         if (currentPos == newPos) return;
-        const moveDistance = currentPos + newPos * 2;
+        const moveDistance = -(currentPos - newPos);
         for (let i = 0; i < 100; i++) {
-            const pos = easings.bounce(i / 100) * moveDistance / 100 + newPos;
+            const pos = easings.easeOutExpo(i / 100) * (moveDistance) + currentPos;
             character.current.position.x = pos;
-            await sleep(10);
+            await sleep(5);
         }
 
     }
