@@ -41,20 +41,26 @@ const SceneChangeCover: React.FC = () => {
             return;
         }
         new Promise<void>(async (resolve) => {
-            if (sceneChangerRef.current) sceneChangerRef.current.style.display = "block";
+            if (sceneChangerRef.current) {
+                sceneChangerRef.current.style.display = "block";
+                sceneChangerRef.current.style.pointerEvents = "all";
+            }
             BlueAnimationController.start(BlueAnimationClose);
             GreenAnimationController.start(GreenAnimationClose);
             await sleep(1000);
             BlueAnimationController.start(BlueAnimationOpen);
             GreenAnimationController.start(GreenAnimationOpen);
             await sleep(500);
-            if (sceneChangerRef.current) sceneChangerRef.current.style.display = "none";
+            if (sceneChangerRef.current) {
+                sceneChangerRef.current.style.display = "none";
+                sceneChangerRef.current.style.pointerEvents = "none";
+            }
             resolve();
         })
     }, [sceneChanger]);
 
     return (
-        <div className={style.scene_changer_wrapper} ref={sceneChangerRef}>
+        <div className={style.sceneChangerWrapper} ref={sceneChangerRef}>
             <motion.div className={style.blue} animate={BlueAnimationController} initial={BlueAnimationInitial} ></motion.div>
             <motion.div className={style.green} animate={GreenAnimationController} initial={GreenAnimationInitial} ></motion.div>
         </div>
