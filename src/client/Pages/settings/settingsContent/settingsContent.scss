@@ -75,3 +75,15 @@
 
     }
 }
+
+
+.textInput {
+    border: 1px solid $borderColor;
+    background-color: $inputForegroundColor;
+    color: $textColor;
+
+    &:active,
+    &:focus {
+        border: 1px solid $accentColor;
+    }
+}
