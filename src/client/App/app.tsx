@@ -59,7 +59,7 @@ function App(): JSX.Element {
                 return {
                     ...ws,
                     user: {
-                        name: data.name,
+                        name: `${data.name}#${ws.user.id.slice(0, 4)}`,
                         id: data.id
                     }
                 }
