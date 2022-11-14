@@ -1,8 +1,12 @@
-const enviroment = {
+const enviroment:enviroment = {
     language: navigator.language.toLowerCase().replace(/-/g, "_"),
     termsVersion: "0.0.0",
     termsAccepted: false,
     initializedSettings: false,
+    userData: {
+        name: "",
+        id:""
+    }
 }
 
 const resourcesDownloaded = {
@@ -27,8 +31,9 @@ const musicSelect = {
 const DBVersion = {
     version: 0,
     initialized: false,
-    updated: new Date().getDate()
+    updated: new Date().getDate(),
 }
+
 
 const gameConfig: gameConfig = {
     graphics: {
