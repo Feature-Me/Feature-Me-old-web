@@ -58,7 +58,7 @@ const UserSettings: React.FC = () => {
 
     return (
         <div className={style.settings_content_wrapper}>
-            <h1>{translate("settingsPage.audio.title")}</h1>
+            <h1>{translate("settingsPage.user.title")}</h1>
             <div className={style.content}>
                 <div className={style.list} ref={settingListRef}>
                     {settings.map((setting, index) => {
