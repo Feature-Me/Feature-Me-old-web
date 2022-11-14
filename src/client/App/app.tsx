@@ -25,6 +25,7 @@ import clicksound from 'Assets/Sounds/click.mp3';
 import useWebSocket from 'Hooks/webSocket/useWebSocket';
 import webSocketState from 'State/webSocket/webSocketState';
 import QuickMenu from 'Block/quickmenu/quickmenu';
+import { cloneDeep } from 'lodash';
 
 function App(): JSX.Element {
     const [translation, i18n] = useTranslation();
@@ -34,9 +35,12 @@ function App(): JSX.Element {
         const socket = useWebSocket("/user");
         socket.on("connect", () => {
             setWebSocket(ws => {
-                socket.emit("login", ws.user);
+                const environment = JSON.parse(localStorage.getItem("environment")!) as enviroment
+                const userData = { ...cloneDeep(ws.user), ...environment.userData }
+                socket.emit("login", userData);
                 return {
                     ...ws,
+                    user:userData,
                     state: "online",
                     connectedTime: Date.now()
                 }
