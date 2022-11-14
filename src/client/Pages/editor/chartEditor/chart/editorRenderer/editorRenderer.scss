@@ -4,4 +4,8 @@
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 48px 1fr;
+
+    .canvasContainer{
+        overflow: auto;
+    }
 }
