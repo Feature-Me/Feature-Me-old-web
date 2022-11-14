@@ -124,6 +124,21 @@ const JASettingsPage = {
     "storage": {
         "title": "ストレージ",
     },
+    "user": {
+        "title": "ユーザー",
+        "userName":{
+            "name":"ディスプレイネーム",
+            "description":"ゲーム上で表示される名前を変更します。\nこの設定は再ログイン後に反映されます。"
+        },
+        "id":{
+            "name": "ユーザーID",
+            "description": "登録されているユーザーIDを表示します。"
+        },
+        "sessionId":{
+            "name": "セッションID",
+            "description": "このセッションに割り当てられたIDを表示します。"
+        }
+    },
     "details":{
         "processingLoad": {
             "name": "負荷",
