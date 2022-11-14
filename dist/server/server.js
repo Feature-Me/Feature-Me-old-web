@@ -38,7 +38,7 @@ user.on("connection", (socket) => {
             const ns = (0, uuid_1.v4)();
             const id = (0, uuid_1.v5)(String(Date.now()), ns);
             data = {
-                name: data.name || `Guest#${id.slice(0, 4)}`,
+                name: data.name || "Guest",
                 id: data.id || id,
             };
         }
