@@ -21,7 +21,6 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
     const deferredQuantize = React.useDeferredValue(quantize);
     const [verticalAnchor, setVerticalAnchor] = React.useState<Array<number>>([]);
     const canvasContainerRef = React.useRef<HTMLDivElement>(null);
-    const minimapRef = React.useRef<HTMLDivElement>(null)
 
     let beatCount = Math.ceil((chartProject.project.metadata.time || 60000) / (chartProject.project.metadata.bpm || 120) / 4)
 
@@ -36,26 +35,12 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
         canvasContainerRef.current.scrollBy(e.deltaY, 0)
     }
 
-    function updateMinimap() {
-        captureEditor()
-    }
-    function captureEditor() {
-        return new Promise((resolve,reject)=>{
-            if (!canvasContainerRef.current) return;
-            html2canvas(canvasContainerRef.current).then(canvas => {
-                if (!minimapRef.current) return;
-                minimapRef.current.style.backgroundImage = `url(${canvas.toDataURL()})`
-            }).catch(error => console.error(error))
-        })
-    }
 
     React.useEffect(() => {
         if (!canvasContainerRef.current) return;
         window.addEventListener("wheel", scrollCanvas)
-        window.addEventListener("wheel", async()=>updateMinimap())
-        return()=>{
+        return () => {
             window.removeEventListener("wheel", scrollCanvas)
-            window.removeEventListener("wheel", updateMinimap)
         }
     }, [])
 
@@ -125,7 +110,6 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
                             }
                         </div>
                     </div>
-                    <div className={style.minimap} ref={minimapRef}></div>
                 </div>
             </div>
         </div>
