@@ -44,7 +44,10 @@ const JAEditorTranslation = {
         "chart":{
             "title":"チャート",
             "scale":"拡大率",
-            "quantize":"クオンタイズ"
+            "quantize":"クオンタイズ",
+            "positionBase":"配置フォーマット",
+            "beatBase":"拍",
+            "timeBase":"時間"
         }
     },
     "converter":{

@@ -1,3 +1,4 @@
+import HorizonalSelectFromArray from "Components/horizonalSelectFromArray/horizonalSelectFromArray";
 import RangeInput from "Components/RangeInput/RangeInput";
 import TranslateText from "Components/TranslateText/TranslateText";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
@@ -14,11 +15,19 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
     const [chartProject, setChartProject] = useRecoilState(chartProjectState);
     const [scale, setScale] = React.useState(1);
     const [quantize, setQuantize] = React.useState(4);
+    const [isBeatBased, setIsBeatBased] = React.useState(true);
     const deferredScale = React.useDeferredValue(scale);
     const deferredQuantize = React.useDeferredValue(quantize);
     let beatCount = Math.ceil(chartProject.project.metadata.time / chartProject.project.metadata.bpm / 4)
     const verticalAnchor = React.useRef<Array<number>>([]);
     const canvasContainerRef = React.useRef<HTMLDivElement>(null);
+
+    const setIsBasedSelect:selectContentsArray<boolean> = [
+        { label: <TranslateText content="editor.chartEditor.chart.beatBase" />, value: true },
+        { label: <TranslateText content="editor.chartEditor.chart.timeBase" />,value:false }
+    ]
+
+
     React.useEffect(() => {
         if (!canvasContainerRef.current) return;
         window.addEventListener("wheel", scrollCanvas)
@@ -28,6 +37,7 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
         if (e.deltaY == 0) return;
         canvasContainerRef.current.scrollBy(e.deltaY, 0)
     }
+
 
     return (
         <div className={style.editorRenderer}>
@@ -41,6 +51,10 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
                 <div className={style.toolBarContent}>
                     <TranslateText content="editor.chartEditor.chart.quantize" />
                     <RangeInput min={1} max={64} step={1} size="tiny" value={quantize} onChange={value => setQuantize(value)} />
+                </div>
+                <div className={style.toolBarContent}>
+                    <TranslateText content="editor.chartEditor.chart.positionBase" />
+                    <HorizonalSelectFromArray contents={setIsBasedSelect} value={setIsBasedSelect[0]} onChange={(value)=>setIsBeatBased(value.value)} />
                 </div>
             </div>
             <div className={style.canvasContainer} ref={canvasContainerRef}>
