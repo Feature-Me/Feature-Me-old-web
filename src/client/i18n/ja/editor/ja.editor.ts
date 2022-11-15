@@ -43,7 +43,8 @@ const JAEditorTranslation = {
         },
         "chart":{
             "title":"チャート",
-            "scale":"拡大率"
+            "scale":"拡大率",
+            "quantize":"クオンタイズ"
         }
     },
     "converter":{
