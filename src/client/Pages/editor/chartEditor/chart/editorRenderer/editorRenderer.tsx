@@ -18,13 +18,13 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
     const [isBeatBased, setIsBeatBased] = React.useState(true);
     const deferredScale = React.useDeferredValue(scale);
     const deferredQuantize = React.useDeferredValue(quantize);
-    let beatCount = Math.ceil(chartProject.project.metadata.time / chartProject.project.metadata.bpm / 4)
-    const verticalAnchor = React.useRef<Array<number>>([]);
+    let beatCount = Math.ceil((chartProject.project.metadata.time || 60000) / (chartProject.project.metadata.bpm || 120) / 4)
+    const [verticalAnchor,setVerticalAnchor] = React.useState<Array<number>>([]);
     const canvasContainerRef = React.useRef<HTMLDivElement>(null);
 
-    const setIsBasedSelect:selectContentsArray<boolean> = [
+    const setIsBasedSelect: selectContentsArray<boolean> = [
         { label: <TranslateText content="editor.chartEditor.chart.beatBase" />, value: true },
-        { label: <TranslateText content="editor.chartEditor.chart.timeBase" />,value:false }
+        { label: <TranslateText content="editor.chartEditor.chart.timeBase" />, value: false }
     ]
 
 
@@ -37,6 +37,23 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
         if (e.deltaY == 0) return;
         canvasContainerRef.current.scrollBy(e.deltaY, 0)
     }
+
+    React.useEffect(() => {
+        const array = []
+        for (let i = 0; i < beatCount; i++) {
+            const x = (96 * i) * scale + 16
+            array.push(x)
+            if (quantize != 1) {
+
+                for (let i = 0; i < quantize - 1; i++) {
+                    const deltaX = x + ((i + 1) * (96 / quantize * scale))
+                    array.push(deltaX)
+                }
+            }
+
+        }
+        setVerticalAnchor(array)
+    },[scale,quantize])
 
 
     return (
@@ -54,40 +71,23 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
                 </div>
                 <div className={style.toolBarContent}>
                     <TranslateText content="editor.chartEditor.chart.positionBase" />
-                    <HorizonalSelectFromArray contents={setIsBasedSelect} value={setIsBasedSelect[0]} onChange={(value)=>setIsBeatBased(value.value)} />
+                    <HorizonalSelectFromArray contents={setIsBasedSelect} value={setIsBasedSelect[0]} onChange={(value) => setIsBeatBased(value.value)} />
                 </div>
             </div>
             <div className={style.canvasContainer} ref={canvasContainerRef}>
                 <div className={style.editorCanvas}>
                     <div className={style.vLineContainer}>
                         {
-                            (() => {
-                                const array = []
-                                for (let i = 0; i < beatCount; i++) {
-                                    const x = (96 * i) * scale + 16
-                                    array.push(x)
-                                    if (quantize != 1) {
-
-                                        for (let i = 0; i < quantize - 1; i++) {
-                                            const deltaX = x + ((i + 1) * (96 / quantize * scale))
-                                            array.push(deltaX)
-                                        }
-                                    }
-
-                                }
-                                verticalAnchor.current = array;
+                            verticalAnchor.map((value, index) => {
+                                let flag = index % quantize == 0 ? true : false
+                                if (quantize == 1) flag = true;
                                 return (
-                                    array.map((value, index) => {
-                                        let flag = index % quantize == 0 ? true : false
-                                        if (quantize == 1) flag = true;
-                                        return (
-                                            <div className={`${style.verticalLine} ${flag ? style.base : style.nonBase}`} style={{ left: `${value}px` }} key={index}>
-                                                {flag ? <span className={style.indexText}>{index / quantize + 1}</span> : <></>}
-                                            </div>
-                                        )
-                                    })
+                                    <div className={`${style.verticalLine} ${flag ? style.base : style.nonBase}`} style={{ left: `${value}px` }} key={index}>
+                                        {flag ? <span className={style.indexText}>{index / quantize + 1}</span> : <></>}
+                                    </div>
                                 )
-                            })()
+                            })
+
                         }
                     </div>
                 </div>
