@@ -16,8 +16,11 @@
     .toolBar {
         grid-row: 1;
         grid-column: 2;
-        display: flex;
-        gap: 16px;
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-rows: 1fr;
+        grid-auto-columns: 1fr;
+        column-gap: 16px;
 
         .toolBarContent{
             height: 48px;
