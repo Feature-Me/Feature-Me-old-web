@@ -22,7 +22,7 @@
         grid-auto-columns: 1fr;
         column-gap: 16px;
 
-        .toolBarContent{
+        .toolBarContent {
             height: 48px;
             display: grid;
             grid-template-rows: 1fr;
@@ -41,36 +41,59 @@
 }
 
 .editorCanvas {
-    position: relative;
     height: 100%;
+    display: grid;
+    grid-template-rows: 24px 1fr;
+    grid-template-columns: 64px 1fr;
+    min-height: 0;
 
-    .vLineContainer {
+    .vLineTextContainer {
         position: relative;
-        height: calc(100% - 16px);
-        top: 8px;
-        left: 0;
+        grid-row: 1;
+        grid-column: 2;
 
-        .verticalLine {
+        .vLineText {
             position: absolute;
-            height: 100%;
-            margin: 0;
-            top: 0;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            font-size: 12px;
+            color: #aaaaaa;
+        }
+    }
 
-            &.base {
-                width: 2px;
-                background-color: #aaaaaa;
-            }
+    .hLineTextContainer {
+        position: sticky;
+    }
 
-            &.nonBase {
-                width: 1px;
-                background-color: #909090;
-            }
+    .lineContainer {
+        position: relative;
+        grid-row: 2;
+        grid-column: 2;
 
-            .indexText {
-                font-size: 12px;
-                margin-left: 6px;
-                color: #aaaaaa;
+        .baseLine {
+            width: 2px;
+            background-color: #aaaaaa;
+        }
+
+        .nonBaseLine {
+            width: 1px;
+            background-color: #909090;
+        }
+
+        .vLineContainer {
+            position: relative;
+            height: calc(100% - 16px);
+            top: 8px;
+            left: 0;
+
+            .verticalLine {
+                position: absolute;
+                height: 100%;
+                margin: 0;
+                top: 0;
             }
         }
     }
+
+
 }

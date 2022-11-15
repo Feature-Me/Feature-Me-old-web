@@ -19,7 +19,7 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
     const deferredScale = React.useDeferredValue(scale);
     const deferredQuantize = React.useDeferredValue(quantize);
     let beatCount = Math.ceil((chartProject.project.metadata.time || 60000) / (chartProject.project.metadata.bpm || 120) / 4)
-    const [verticalAnchor,setVerticalAnchor] = React.useState<Array<number>>([]);
+    const [verticalAnchor, setVerticalAnchor] = React.useState<Array<number>>([]);
     const canvasContainerRef = React.useRef<HTMLDivElement>(null);
 
     const setIsBasedSelect: selectContentsArray<boolean> = [
@@ -53,7 +53,7 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
 
         }
         setVerticalAnchor(array)
-    },[scale,quantize])
+    }, [scale, quantize])
 
 
     return (
@@ -76,19 +76,32 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
             </div>
             <div className={style.canvasContainer} ref={canvasContainerRef}>
                 <div className={style.editorCanvas}>
-                    <div className={style.vLineContainer}>
+                    <div className={style.vLineTextContainer}>
                         {
                             verticalAnchor.map((value, index) => {
-                                let flag = index % quantize == 0 ? true : false
+                                let flag = index % quantize == 0 ? true : false;
                                 if (quantize == 1) flag = true;
                                 return (
-                                    <div className={`${style.verticalLine} ${flag ? style.base : style.nonBase}`} style={{ left: `${value}px` }} key={index}>
-                                        {flag ? <span className={style.indexText}>{index / quantize + 1}</span> : <></>}
-                                    </div>
+                                    <>
+                                        {flag ? <span className={style.vLineText} style={{ left: `${value}px` }}> {index / 4 + 1}</span> : <></>}
+                                    </>
                                 )
                             })
-
                         }
+                    </div>
+                    <div className={style.lineContainer}>
+                        <div className={style.vLineContainer}>
+                            {
+                                verticalAnchor.map((value, index) => {
+                                    let flag = index % quantize == 0 ? true : false;
+                                    if (quantize == 1) flag = true;
+                                    return (
+                                        <div className={`${style.verticalLine} ${flag ? style.baseLine : style.nonBaseLine}`} style={{ left: `${value}px` }} key={index} />
+                                    )
+                                })
+
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
