@@ -2,6 +2,7 @@ import HorizonalSelectFromArray from "Components/horizonalSelectFromArray/horizo
 import RangeInput from "Components/RangeInput/RangeInput";
 import TranslateText from "Components/TranslateText/TranslateText";
 import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
+import html2canvas from "html2canvas";
 import * as PIXI from "pixi.js";
 import React from "react";
 import { useNavigate } from "react-router";
@@ -18,25 +19,45 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
     const [isBeatBased, setIsBeatBased] = React.useState(true);
     const deferredScale = React.useDeferredValue(scale);
     const deferredQuantize = React.useDeferredValue(quantize);
-    let beatCount = Math.ceil((chartProject.project.metadata.time || 60000) / (chartProject.project.metadata.bpm || 120) / 4)
     const [verticalAnchor, setVerticalAnchor] = React.useState<Array<number>>([]);
     const canvasContainerRef = React.useRef<HTMLDivElement>(null);
+    const minimapRef = React.useRef<HTMLDivElement>(null)
+
+    let beatCount = Math.ceil((chartProject.project.metadata.time || 60000) / (chartProject.project.metadata.bpm || 120) / 4)
 
     const setIsBasedSelect: selectContentsArray<boolean> = [
         { label: <TranslateText content="editor.chartEditor.chart.beatBase" />, value: true },
         { label: <TranslateText content="editor.chartEditor.chart.timeBase" />, value: false }
     ]
 
-
-    React.useEffect(() => {
-        if (!canvasContainerRef.current) return;
-        window.addEventListener("wheel", scrollCanvas)
-    }, [])
     function scrollCanvas(e: WheelEvent) {
         if (!canvasContainerRef.current) return;
         if (e.deltaY == 0) return;
         canvasContainerRef.current.scrollBy(e.deltaY, 0)
     }
+
+    function updateMinimap() {
+        captureEditor()
+    }
+    function captureEditor() {
+        return new Promise((resolve,reject)=>{
+            if (!canvasContainerRef.current) return;
+            html2canvas(canvasContainerRef.current).then(canvas => {
+                if (!minimapRef.current) return;
+                minimapRef.current.style.backgroundImage = `url(${canvas.toDataURL()})`
+            }).catch(error => console.error(error))
+        })
+    }
+
+    React.useEffect(() => {
+        if (!canvasContainerRef.current) return;
+        window.addEventListener("wheel", scrollCanvas)
+        window.addEventListener("wheel", async()=>updateMinimap())
+        return()=>{
+            window.removeEventListener("wheel", scrollCanvas)
+            window.removeEventListener("wheel", updateMinimap)
+        }
+    }, [])
 
     React.useEffect(() => {
         const array = []
@@ -54,6 +75,8 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
         }
         setVerticalAnchor(array)
     }, [scale, quantize])
+
+
 
 
     return (
@@ -83,7 +106,7 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
                                 if (quantize == 1) flag = true;
                                 return (
                                     <>
-                                        {flag ? <span className={style.vLineText} style={{ left: `${value}px` }}> {index / 4 + 1}</span> : <></>}
+                                        {flag ? <span className={style.vLineText} style={{ left: `${value}px` }} key={index}> {index / 4 + 1}</span> : <></>}
                                     </>
                                 )
                             })
@@ -99,10 +122,10 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
                                         <div className={`${style.verticalLine} ${flag ? style.baseLine : style.nonBaseLine}`} style={{ left: `${value}px` }} key={index} />
                                     )
                                 })
-
                             }
                         </div>
                     </div>
+                    <div className={style.minimap} ref={minimapRef}></div>
                 </div>
             </div>
         </div>
