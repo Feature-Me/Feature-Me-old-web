@@ -4,8 +4,10 @@
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 48px 1fr;
+    min-height: 0;
 
     .canvasContainer{
-        overflow: auto;
+        overflow-x: scroll;
+        overflow-y: hidden;
     }
 }
