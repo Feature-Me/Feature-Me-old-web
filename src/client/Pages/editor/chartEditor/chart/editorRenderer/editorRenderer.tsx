@@ -13,6 +13,7 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
     const sceneChange = useSeneChangeNavigation();
     const [chartProject, setChartProject] = useRecoilState(chartProjectState);
     const [scale, setScale] = React.useState(1);
+    const [quantize,setQuantize] = React.useState(4);
     let beatCount = Math.ceil(chartProject.project.metadata.time / chartProject.project.metadata.bpm / 4)
     const verticalAnchor = React.useRef<Array<number>>([]);
     const canvasContainerRef = React.useRef<HTMLDivElement>(null);
@@ -34,7 +35,11 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
             <div className={style.toolBar}>
                 <div className={style.toolBarContent}>
                     <TranslateText content="editor.chartEditor.chart.scale" />
-                    <RangeInput min={0.2} max={5} step={0.1} size="tiny" value={scale} onChange={value => setScale(value)} />
+                    <RangeInput min={0.2} max={20} step={0.1} size="tiny" value={scale} onChange={value => setScale(value)} />
+                </div>
+                <div className={style.toolBarContent}>
+                    <TranslateText content="editor.chartEditor.chart.quantize" />
+                    <RangeInput min={1} max={64} step={1} size="tiny" value={quantize} onChange={value => setQuantize(value)} />
                 </div>
             </div>
             <div className={style.canvasContainer} ref={canvasContainerRef}>
@@ -46,19 +51,20 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
                                 for (let i = 0; i < beatCount; i++) {
                                     const x = (96 * i) * scale + 16
                                     array.push(x)
-                                    for (let i = 0; i < 3; i++) {
-                                        const deltaX = x + ((i + 1) * (24 * scale))
+                                    if(quantize==1)return;
+                                    for (let i = 0; i < quantize-1; i++) {
+                                        const deltaX = x + ((i + 1) * (96/quantize * scale))
                                         array.push(deltaX)
                                     }
                                 }
                                 verticalAnchor.current = array;
                                 return (
                                     array.map((value, index) => {
-                                        let flag = index % 4 == 0 ? true : false
+                                        let flag = index % quantize == 0 ? true : false
 
                                         return (
                                             <div className={`${style.verticalLine} ${flag ? style.base : style.nonBase}`} style={{ left: `${value}px` }} key={index}>
-                                                {flag ? <span className={style.indexText}>{index / 4 + 1}</span> : <></>}
+                                                {flag ? <span className={style.indexText}>{index / quantize + 1}</span> : <></>}
                                             </div>
                                         )
                                     })
