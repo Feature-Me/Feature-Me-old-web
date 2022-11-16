@@ -91,7 +91,7 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
                                 if (quantize == 1) flag = true;
                                 return (
                                     <>
-                                        {flag ? <span className={style.vLineText} style={{ left: `${value}px` }} key={index}> {index / 4 + 1}</span> : <></>}
+                                        {flag ? <span className={style.vLineText} style={{ left: `${value}px` }} key={index}> {index / quantize + 1}</span> : <></>}
                                     </>
                                 )
                             })
