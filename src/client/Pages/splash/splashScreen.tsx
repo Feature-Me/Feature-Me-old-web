@@ -11,6 +11,7 @@ import style from "./splashScreen.scss";
 import splashImage1 from "Assets/Images/splash-logo-1.png";
 import slpashImage2 from "Assets/Images/splash-logo-2.png";
 import startup from "Assets/Sounds/startup.mp3";
+import { reject } from "lodash";
 
 const SplashScreen: React.FC = () => {
     const navigate = useNavigate();
@@ -81,8 +82,9 @@ const SplashScreen: React.FC = () => {
     proton.addEmitter(emitter);
 
     React.useEffect(() => {
-
+        let rejectFunc:Function
         new Promise<void>(async (resolve, reject) => {
+            rejectFunc = reject
             if (!logoRef.current || !cautionTextRef.current) return;
             logoRef.current.style.visibility = "visible";
             for (const image of logoImages) {
@@ -99,6 +101,9 @@ const SplashScreen: React.FC = () => {
             navigate("../title");
             resolve();
         });
+        return ()=> {
+            reject("")
+        }
     }, [])
 
     React.useEffect(() => {
