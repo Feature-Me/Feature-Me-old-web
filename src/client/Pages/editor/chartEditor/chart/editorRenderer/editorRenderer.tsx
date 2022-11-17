@@ -10,6 +10,16 @@ import { useRecoilState } from "recoil";
 import { chartProjectState } from "State/editor/chartProjectState";
 import getNearest from "Utils/getNearest/getNearest";
 
+import tapNoteSvg from "Assets/Images/editor/tapnoteIcon.svg";
+import damageTapNoteSvg from "Assets/Images/editor/damageTapnoteIcon.svg";
+import holdNoteSvg from "Assets/Images/editor/holdnoteIcon.svg";
+import brightNoteSvg from "Assets/Images/editor/brightnoteIcon.svg";
+import flickNoteSvg from "Assets/Images/editor/flicknoteIcon.svg";
+import seednoteSvg from "Assets/Images/editor/seednoteIcon.svg";
+import cameraeffectSvg from "Assets/Images/editor/cameraIcon.svg";
+import speedeffectSvg from "Assets/Images/editor/speedIcon.svg";
+import texteffectSvg from "Assets/Images/editor/textIcon.svg";
+
 import style from "./editorRenderer.scss"
 
 const ChartEditorRenderer: React.FC<{}> = (props) => {
@@ -24,6 +34,7 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
     const deferredQuantize = React.useDeferredValue(quantize);
     const [verticalAnchor, setVerticalAnchor] = React.useState<Array<number>>([]);
     const [horizonalAnchor, setHorizonalAnchor] = React.useState<Array<{ name: string, position: number, type: string, lane: number | string }>>([]);
+    const [selectedMode, setSelectedMode] = React.useState<{ name: string, type: string }>({ name: "cursor", type: "cursor" });
     const canvasContainerRef = React.useRef<HTMLDivElement>(null);
     const editorCanvasRef = React.useRef<HTMLDivElement>(null);
     let beatCount = Math.ceil((chartProject.project.metadata.time || 60000) / (chartProject.project.metadata.bpm || 120) / 4)
@@ -31,6 +42,21 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
     const setIsBasedSelect: selectContentsArray<boolean> = [
         { label: <TranslateText content="editor.chartEditor.chart.beatBase" />, value: true },
         { label: <TranslateText content="editor.chartEditor.chart.timeBase" />, value: false }
+    ]
+
+    const sideBarContents: Array<{ name: string, type: string, src: string }> = [
+        // todo: replace cursor icon 
+        { name: "cursor", type: "cursor", src: texteffectSvg },
+        { name: "tap", type: "normal", src: tapNoteSvg },
+        { name: "damageTap", type: "normal", src: damageTapNoteSvg },
+        { name: "hold", type: "normal", src: holdNoteSvg },
+        { name: "bright", type: "bright", src: brightNoteSvg },
+        { name: "flick", type: "flick", src: flickNoteSvg },
+        { name: "seed", type: "seed", src: seednoteSvg },
+        { name: "camera", type: "effect", src: cameraeffectSvg },
+        { name: "speed", type: "effect", src: speedeffectSvg },
+        { name: "text", type: "effect", src: texteffectSvg },
+        
     ]
 
     function scrollCanvas(e: WheelEvent) {
@@ -85,12 +111,15 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
 
     React.useEffect(() => {
         const map = [
-            { name: "Seed Left", type: "seed", lane: "left" },
             { name: "Lane 1", type: "normal", lane: 1 },
             { name: "Lane 2", type: "normal", lane: 2 },
-            { name: "Bright", type: "bright", lane: 0 },
             { name: "Lane 3", type: "normal", lane: 3 },
             { name: "Lane 4", type: "normal", lane: 4 },
+            { name: "Bright", type: "bright", lane: 0 },
+            { name: "Flick Left", type: "flick", lane: "left" },
+            { name: "Flick Centre", type: "flick", lane: "center" },
+            { name: "Flick Right", type: "flick", lane: "right" },
+            { name: "Seed Left", type: "seed", lane: "left" },
             { name: "Seed Right", type: "seed", lane: "right" },
             { name: "Effects", type: "effect", lane: 0 }
         ]
@@ -106,6 +135,15 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
     return (
         <div className={style.editorRenderer}>
             <div className={style.sideBar}>
+                {
+                    sideBarContents.map((content, index) => {
+                        return (
+                            <div key={index} title={`${content.name} (${content.type})`}>
+                                <img src={content.src} alt={`${content.name} (${content.type})`} />
+                            </div>
+                        )
+                    })
+                }
             </div>
             <div className={style.toolBar}>
                 <div className={style.toolBarContent}>
@@ -136,7 +174,7 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
                     <div className={style.hLineTextContainer}>
                         {
                             horizonalAnchor.map((value, index) => {
-                                return <span className={style.hLineText} key={index} style={{top:`${value.position}%`}}>{value.name}</span>
+                                return <span className={style.hLineText} key={index} style={{ top: `${value.position}%` }}>{value.name}</span>
                             })
                         }
                     </div>
