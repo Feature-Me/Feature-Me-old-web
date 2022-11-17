@@ -78,11 +78,9 @@
         flex-wrap: nowrap;
         justify-content: space-evenly;
 
-        .vLineText {
-            position: absolute;
-            transform: translate(-50%, -50%);
-            left: 0;
+        .hLineText {
             font-size: 12px;
+            height: 32px;
             color: #aaaaaa;
         }
 
