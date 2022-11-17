@@ -56,13 +56,21 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
         { name: "camera", type: "effect", src: cameraeffectSvg },
         { name: "speed", type: "effect", src: speedeffectSvg },
         { name: "text", type: "effect", src: texteffectSvg },
-        
+
     ]
 
-    function scrollCanvas(e: WheelEvent) {
-        if (!canvasContainerRef.current) return;
-        if (e.deltaY == 0) return;
-        canvasContainerRef.current.scrollBy(e.deltaY, 0)
+    function wheelAction(e: WheelEvent) {
+        if (e.altKey) {
+            console.log(e.deltaX);
+
+            if (e.deltaY > 0) setScale(x => Math.min(x + 0.1, 20))
+            else setScale(x => Math.max(x - 0.1, 0.2))
+
+        } else {
+            if (!canvasContainerRef.current) return;
+            if (e.deltaY == 0) return;
+            canvasContainerRef.current.scrollBy(e.deltaY, 0)
+        }
     }
 
     function updateCursor(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -77,20 +85,21 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
 
     function setSize() {
         if (!editorCanvasRef.current) return;
-        editorCanvasRef.current.style.width = `${(beatCount + 1) * 96 + 32}px`
+        editorCanvasRef.current.style.width = `${(beatCount + 1) * 96*scale + 32}px`
         //beatCount * 96 + 32
     }
 
     React.useEffect(() => {
         if (!canvasContainerRef.current) return;
         setSize();
-        window.addEventListener("wheel", scrollCanvas)
+        window.addEventListener("wheel", wheelAction)
+        
         return () => {
-            window.removeEventListener("wheel", scrollCanvas)
+            window.removeEventListener("wheel", wheelAction)
         }
     }, [])
 
-
+    React.useEffect(setSize, [scale])
 
     React.useEffect(() => {
         const array = []
@@ -138,7 +147,7 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
                 {
                     sideBarContents.map((content, index) => {
                         return (
-                            <div key={index} title={`${content.name} (${content.type})`}>
+                            <div className={style.icon} key={index} title={`${content.name} (${content.type})`}>
                                 <img src={content.src} alt={`${content.name} (${content.type})`} />
                             </div>
                         )

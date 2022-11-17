@@ -11,6 +11,11 @@
     .sideBar {
         grid-row: 2;
         grid-column: 1;
+        background-color: $backgroundSubColor;
+        .icon{
+            height: 48px;
+            display: flex;
+        }
     }
 
     .toolBar {
