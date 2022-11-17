@@ -79,8 +79,10 @@
         justify-content: space-evenly;
 
         .hLineText {
+            position: absolute;
+            left: 0;
+            transform: translate(0, -50%);
             font-size: 12px;
-            height: 32px;
             color: #aaaaaa;
         }
 

@@ -92,6 +92,7 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
             { name: "Lane 3", type: "normal", lane: 3 },
             { name: "Lane 4", type: "normal", lane: 4 },
             { name: "Seed Right", type: "seed", lane: "right" },
+            { name: "Effects", type: "effect", lane: 0 }
         ]
         const array = []
         for (let i = 0; i < map.length; i++) {
@@ -99,7 +100,6 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
         }
         setHorizonalAnchor(array);
     }, [])
-
 
 
 
@@ -136,7 +136,7 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
                     <div className={style.hLineTextContainer}>
                         {
                             horizonalAnchor.map((value, index) => {
-                                return <span className={style.hLineText} key={index}>{value.name}({value.lane})</span>
+                                return <span className={style.hLineText} key={index} style={{top:`${value.position}%`}}>{value.name}</span>
                             })
                         }
                     </div>
