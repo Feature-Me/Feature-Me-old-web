@@ -17,7 +17,7 @@ const JASettingsPage = {
         },
         "credit": {
             "name": "クレジット",
-            "description": "クレジット\n プログラム : Mksk , ぐらん \n 書き下ろし楽曲 : Rae/Goners \n イラストレーション : てぬ",
+            "description": "クレジット\n プログラム : Mksk , ぐらん \n 楽曲提供 : Rae , 榛原静 / Shizuka Haibara \n イラストレーション : てぬ",
         }
     },
     "gameplay": {
