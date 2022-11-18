@@ -10,6 +10,7 @@ import { useRecoilState } from "recoil";
 import { chartProjectState } from "State/editor/chartProjectState";
 import getNearest from "Utils/getNearest/getNearest";
 
+import cursorSvg from "Assets/Images/editor/cursorIcon.svg";
 import tapNoteSvg from "Assets/Images/editor/tapnoteIcon.svg";
 import damageTapNoteSvg from "Assets/Images/editor/damageTapnoteIcon.svg";
 import holdNoteSvg from "Assets/Images/editor/holdnoteIcon.svg";
@@ -46,7 +47,7 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
 
     const sideBarContents: Array<{ name: string, type: string, src: string }> = [
         // todo: replace cursor icon 
-        { name: "cursor", type: "cursor", src: texteffectSvg },
+        { name: "cursor", type: "cursor", src: cursorSvg },
         { name: "tap", type: "normal", src: tapNoteSvg },
         { name: "damageTap", type: "normal", src: damageTapNoteSvg },
         { name: "hold", type: "normal", src: holdNoteSvg },
@@ -85,15 +86,19 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
 
     function setSize() {
         if (!editorCanvasRef.current) return;
-        editorCanvasRef.current.style.width = `${(beatCount + 1) * 96*scale + 32}px`
+        editorCanvasRef.current.style.width = `${(beatCount + 1) * 96 * scale + 32}px`
         //beatCount * 96 + 32
+    }
+
+    function setMode(mode: { name: string, type: string, src: string }) {
+        setSelectedMode({ name: mode.name, type: mode.type })
     }
 
     React.useEffect(() => {
         if (!canvasContainerRef.current) return;
         setSize();
         window.addEventListener("wheel", wheelAction)
-        
+
         return () => {
             window.removeEventListener("wheel", wheelAction)
         }
@@ -147,7 +152,7 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
                 {
                     sideBarContents.map((content, index) => {
                         return (
-                            <div className={style.icon} key={index} title={`${content.name} (${content.type})`}>
+                            <div className={`${style.icon} ${content.name==selectedMode.name?style.selected:""}`} key={index} title={`${content.name} (${content.type})`} onClick={() => setMode(content)}>
                                 <img src={content.src} alt={`${content.name} (${content.type})`} />
                             </div>
                         )
