@@ -75,11 +75,14 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
     }
 
     function updateCursor(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+        //get boundingBox size and position
         const boundingBox = e.currentTarget.getBoundingClientRect();
+        // get absolute position x (px)
         const x = e.pageX + e.currentTarget.scrollLeft - boundingBox.left - 96;
         const nearestX = getNearest(x, verticalAnchor)
         if (nearestX != 0) setCurosrPosX(nearestX);
-        const y = (e.pageY - boundingBox.top) / boundingBox.height * 100
+        //get relative position y (%)
+        const y = (e.pageY - boundingBox.top - 32) / boundingBox.height * 100
         const nearestY = getNearest(y, horizonalAnchor.map(a => a.position));
         if (nearestY != 0) setCurosrPosY(nearestY);
     }
@@ -173,7 +176,7 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
                     <HorizonalSelectFromArray contents={setIsBasedSelect} value={setIsBasedSelect[0]} onChange={(value) => setIsBeatBased(value.value)} />
                 </div>
             </div>
-            <div className={style.canvasContainer} ref={canvasContainerRef} onClick={updateCursor}>
+            <div className={style.canvasContainer} ref={canvasContainerRef} onMouseMove={updateCursor}>
                 <div className={style.editorCanvas} ref={editorCanvasRef}>
                     <div className={style.vLineTextContainer}>
                         {
