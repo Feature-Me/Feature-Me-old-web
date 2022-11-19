@@ -17,7 +17,7 @@ const JASettingsPage = {
         },
         "credit": {
             "name": "クレジット",
-            "description": "クレジット\n プログラム : Mksk , ぐらん \n 書き下ろし楽曲 : Rae/Goners \n イラストレーション : てぬ",
+            "description": "クレジット\n プログラム : Mksk , ぐらん \n 楽曲提供 : Rae , 榛原静 / Shizuka Haibara \n イラストレーション : てぬ",
         }
     },
     "gameplay": {
@@ -123,6 +123,21 @@ const JASettingsPage = {
     },
     "storage": {
         "title": "ストレージ",
+    },
+    "user": {
+        "title": "ユーザー",
+        "userName":{
+            "name":"ディスプレイネーム",
+            "description":"ゲーム上で表示される名前を変更します。\nこの設定は再ログイン後に反映されます。"
+        },
+        "id":{
+            "name": "ユーザーID",
+            "description": "登録されているユーザーIDを表示します。"
+        },
+        "sessionId":{
+            "name": "セッションID",
+            "description": "このセッションに割り当てられたIDを表示します。"
+        }
     },
     "details":{
         "processingLoad": {

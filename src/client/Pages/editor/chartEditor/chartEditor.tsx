@@ -43,7 +43,7 @@ const ChartEditor: React.FC = () => {
 
     return (
         <div className={style.chartEditor}>
-            <Header title="Chart Editor" backFunc={() => sceneChange(-2)} />
+            <Header title="Chart Editor" backFunc={() => sceneChange("../../../editor")} />
             <div className={style.head}>
                 <h2>{chartProject.project.name}</h2>
                 {/*space*/}

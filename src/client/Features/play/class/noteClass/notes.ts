@@ -78,7 +78,6 @@ class note {
         let balance = (this.note.position.x * 0.1) * this.positionalIntensity;
         if (balance > 1) balance = 1;
         else if (balance < -1) balance = -1;
-        console.log(balance, this.note.position.x);
 
         this.audio.stereo(balance);
     }
