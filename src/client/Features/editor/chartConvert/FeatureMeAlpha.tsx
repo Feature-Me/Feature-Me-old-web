@@ -90,7 +90,6 @@ function FMToFMAlpha(chart: string): string {
         chartString = json5.stringify(AlphaChart, null, 4);
 
     } catch (error) {
-        console.log(error);
         if (error instanceof Error) throw error
     }
     return chartString
