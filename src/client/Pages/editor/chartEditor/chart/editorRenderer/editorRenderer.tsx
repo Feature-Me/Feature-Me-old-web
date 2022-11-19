@@ -97,10 +97,10 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
     React.useEffect(() => {
         if (!canvasContainerRef.current) return;
         setSize();
-        window.addEventListener("wheel", wheelAction)
-
+        canvasContainerRef.current.addEventListener("wheel", wheelAction)
         return () => {
-            window.removeEventListener("wheel", wheelAction)
+            if (!canvasContainerRef.current) return;
+            canvasContainerRef.current.removeEventListener("wheel", wheelAction)
         }
     }, [])
 
@@ -152,7 +152,7 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
                 {
                     sideBarContents.map((content, index) => {
                         return (
-                            <div className={`${style.icon} ${content.name==selectedMode.name?style.selected:""}`} key={index} title={`${content.name} (${content.type})`} onClick={() => setMode(content)}>
+                            <div className={`${style.icon} ${content.name == selectedMode.name ? style.selected : ""}`} key={index} title={`${content.name} (${content.type})`} onClick={() => setMode(content)}>
                                 <img src={content.src} alt={`${content.name} (${content.type})`} />
                             </div>
                         )
