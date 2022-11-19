@@ -1,0 +1,38 @@
+.errorPage {
+    * {
+        min-height: 0;
+    }
+
+    .errorDetails {
+        padding: 8px;
+        display: grid;
+        grid-template-rows: 48px 32px 40px 1fr;
+        grid-template-columns: 1fr;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+
+        .errorMessage {
+            display: grid;
+            grid-template-rows: 32px 36px 2px 1fr;
+            grid-template-columns: 1fr;
+            height: 100%;
+            width: 100%;
+            hr{
+                margin: 0;
+            }
+
+            .stackTraces {
+                display: grid;
+                grid-template-rows: 1fr;
+                grid-template-columns: repeat(2,1fr);
+                height: 100%;
+                width: 100%;
+                div{
+                    white-space: pre;
+                    overflow: auto;
+                }
+            }
+        }
+    }
+}
