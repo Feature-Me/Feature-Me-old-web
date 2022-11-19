@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="32.0px"
+   height="32.0px"
+   viewBox="0 0 32.0 32.0"
+   version="1.1"
+   id="SVGRoot"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <title
+     id="title3383">Tapnote icon</title>
+  <defs
+     id="defs9" />
+  <g
+     id="layer1">
+    <rect
+       style="fill:#dbdbdb;fill-opacity:1;stroke-width:0.945874"
+       id="rect228"
+       width="18"
+       height="4"
+       x="7"
+       y="14"
+       ry="0" />
+    <path
+       style="fill:#dbdbdb;fill-opacity:1;stroke-width:1.73205"
+       d="m 7,14 -3,2 3,2 v -4"
+       id="path394" />
+    <path
+       style="fill:#dbdbdb;fill-opacity:1;stroke-width:1.73204"
+       d="m 25,14 3,2 -3,2 z"
+       id="path465" />
+    <rect
+       style="fill:#c0c2e7;fill-opacity:1;stroke-width:0.999997"
+       id="rect1200"
+       width="10"
+       height="1"
+       x="11"
+       y="15.5" />
+  </g>
+  <metadata
+     id="metadata3381">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Tapnote icon</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>

@@ -43,7 +43,11 @@ const JAEditorTranslation = {
         },
         "chart":{
             "title":"チャート",
-            
+            "scale":"拡大率",
+            "quantize":"クオンタイズ",
+            "positionBase":"配置フォーマット",
+            "beatBase":"拍",
+            "timeBase":"時間"
         }
     },
     "converter":{

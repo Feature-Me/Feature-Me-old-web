@@ -33,7 +33,9 @@ const SettingsPage: React.FC = (props) => {
                     <Link className={style.sidebar_content} to={"./gameplay"}><TranslateText content="settingsPage.gameplay.title" /></Link>
                     <Link className={style.sidebar_content} to={"./graphics"}><TranslateText content="settingsPage.graphics.title" /></Link>
                     <Link className={style.sidebar_content} to={"./audio"}><TranslateText content="settingsPage.audio.title" /></Link>
+                    <Link className={style.sidebar_content} to={"./user"}><TranslateText content="settingsPage.user.title" /></Link>
                     <Link className={style.sidebar_content} to={"./storage"}><TranslateText content="settingsPage.storage.title" /></Link>
+
                 </div>
                 <div className={style.content}>
                     <SettingsRouter />
