@@ -1,6 +1,6 @@
 const ENUKCrashHandler = {
     "title": "Crash Handler",
-    "header": "Game Crashed",
+    "header": "Game Crashed.",
     "description": "An critical error has occured.",
     "details": "Error details",
     "interaction": {
