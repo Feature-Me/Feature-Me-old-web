@@ -58,11 +58,32 @@
     .inner {
         background-color: $floatBackground;
         border: 1px solid $backgroundSubColor;
-        border-radius: 4px;
+        border-radius: 8px;
         min-width: 40%;
-        padding: 4px;
+        overflow: hidden;
+
+        .titleBar {
+            height: 24px;
+            line-height: 24px;
+            background-color: $black;
+            display: grid;
+            grid-template-rows: 1fr;
+            grid-template-columns: 1fr 24px;
+
+            .closebtn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 4px;
+                transition: 0.2s;
+                &:hover{
+                    background-color: $redSecondary;
+                }
+            }
+        }
     }
-    .interaction{
+
+    .interaction {
         display: flex;
         justify-content: flex-end;
     }
@@ -76,6 +97,6 @@ code {
     overflow: auto;
 }
 
-button{
+button {
     min-width: 128px;
 }

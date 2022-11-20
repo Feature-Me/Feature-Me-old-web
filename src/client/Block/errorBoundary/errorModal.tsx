@@ -1,18 +1,25 @@
 import ChamferedButton from "Components/Button/chamferedButton/chamferedButton";
 import TranslateText from "Components/TranslateText/TranslateText";
 import React from "react";
+import { VscClose } from "react-icons/vsc";
 
 import style from "./errorBoundary.scss";
 
-const ErrorModal:React.FC<{message:string}> = (props) =>{
-    const [show,setShow] = React.useReducer(()=>false,true);
-    
+const ErrorModal: React.FC<{ message: string }> = (props) => {
+    const [show, setShow] = React.useReducer(() => false, true);
 
-    if(!show) return null
-    return(
+
+    if (!show) return null
+    return (
         <div className={style.modal}>
             <div className={style.inner}>
-                <h2><TranslateText defaultValue="Game Crashed!" content="crashHandler.header" end="!" /></h2>
+                <div className={style.titleBar}>
+                    <p><TranslateText defaultValue="Game Crashed!" content="crashHandler.title" /></p>
+                    <div className={style.closebtn}>
+                        <VscClose onClick={setShow} />
+                    </div>
+                </div>
+                <h2><TranslateText defaultValue="Game Crashed!" content="crashHandler.header" /></h2>
                 <p>
                     <TranslateText content="crashHandler.modal.description" /> <br />
                     <code>{props.message}</code>
