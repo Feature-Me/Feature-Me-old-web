@@ -26,7 +26,7 @@ import useWebSocket from 'Hooks/webSocket/useWebSocket';
 import webSocketState from 'State/webSocket/webSocketState';
 import QuickMenu from 'Block/quickmenu/quickmenu';
 import { cloneDeep } from 'lodash';
-import ErrorBoundary from 'Components/errorBoundary/errorBoundary';
+import ErrorBoundary from 'Block/errorBoundary/errorBoundary';
 
 function App(): JSX.Element {
     const [translation, i18n] = useTranslation();
