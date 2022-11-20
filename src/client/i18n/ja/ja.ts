@@ -8,8 +8,9 @@ import JAHeadTranslation from "./components/ja.head";
 import JAMusicSelectTranslation from "./play/ja.musicselect";
 import JASettingsPage from "./settings/ja.settingspage";
 import JAEditorTranslation from "./editor/ja.editor";
-import JASplashScreenTranslate from "./others/ja.splashScreen";
-import JAMultiPlayerTranslation from "./play/multiPlayer/multiplayer.ja";
+import JASplashScreenTranslation from "./others/ja.splashScreen";
+import JAMultiPlayerTranslation from "./play/multiPlayer/ja.multiplayer";
+import JACrashHandlerTranslation from "./others/ja.crashHandler";
 
 const JAtranslation = {
     title: JATitleTranslation,
@@ -22,8 +23,9 @@ const JAtranslation = {
     musicSelect: JAMusicSelectTranslation,
     settingsPage: JASettingsPage,
     editor: JAEditorTranslation,
-    splashScreen:JASplashScreenTranslate,
-    multiPlay:JAMultiPlayerTranslation
+    splashScreen: JASplashScreenTranslation,
+    multiPlay: JAMultiPlayerTranslation,
+    crashHandler: JACrashHandlerTranslation
 }
 
 export default JAtranslation;
