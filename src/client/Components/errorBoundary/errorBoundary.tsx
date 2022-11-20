@@ -1,7 +1,9 @@
 import ChamferedButton from "Components/Button/chamferedButton/chamferedButton";
+import TranslateText from "Components/TranslateText/TranslateText";
 import React from "react";
 
 import style from "./errorBoundary.scss"
+import ErrorModal from "./errorModal";
 import StackTrace from "./stackTrace";
 
 class ErrorBoundary extends React.Component {
@@ -33,44 +35,43 @@ class ErrorBoundary extends React.Component {
             return (
                 <div className={style.errorPage}>
                     <div className={style.errorDetails}>
-                        <h1>Game Crashed.</h1>
-                        <p>An Critical Error has occured.</p>
+                        <h1><TranslateText defaultValue="Game Crashed." content="crashHandler.header" /></h1>
+                        <p><TranslateText defaultValue="An Critical Error has occured." content="crashHandler.description" /></p>
                         <div className={style.interaction}>
-                            <ChamferedButton onClick={() => location.reload()}>Relaunch Page</ChamferedButton>
-                            <ChamferedButton onClick={() => window.open("https://github.com/Feature-Me/Feature-Me/issues")}>Report</ChamferedButton>
-
+                            <ChamferedButton onClick={() => location.reload()} > <TranslateText content="crashHandler.interaction.relaunch" /></ChamferedButton>
+                            <ChamferedButton onClick={() => window.open("https://github.com/Feature-Me/Feature-Me/issues")}><TranslateText content="crashHandler.interaction.report" /></ChamferedButton>
                         </div>
                         <div className={style.errorMessage}>
-                            <p>Error Details:</p>
+                            <p><TranslateText defaultValue="Error details" content="crashHandler.details" /></p>
                             <h2>{this.state.error?.toString()}</h2>
                             <hr />
                             <div className={style.stackTraces}>
-                                <div className={style.errorTrace}>
-                                    <h2>Stack Trace:</h2>
+                                <div className={style.trace}>
+                                    <h2><TranslateText defaultValue="Stack Trace" content="crashHandler.stackTrace" end=":" /></h2>
                                     <StackTrace stack={this.state.error?.stack || ""} isComponent={false} />
-                                    <hr />
-                                    <details>
-                                        <summary>View Raw Code</summary>
-                                        <code>
-                                            {this.state.error?.stack}
-                                        </code>
-                                    </details>
                                 </div>
-                                <div className={style.componentTrace}>
-                                    <h2>Component Stack:</h2>
+                                <div className={style.trace}>
+                                    <h2><TranslateText defaultValue="Component Trace" content="crashHandler.componentTrace" end=":" /></h2>
                                     <StackTrace stack={this.state.errorInfo?.componentStack || ""} isComponent={true} />
-                                    <hr />
-                                    <details>
-                                        <summary>View Raw Code</summary>
-                                        <code>
-                                            {this.state.errorInfo?.componentStack}
-                                        </code>
-                                    </details>
                                 </div>
+                                <hr />
+                                <hr />
+                                <details className={style.rawTrace}>
+                                    <summary><TranslateText defaultValue="View raw Error" content="crashHandler.viewRawError" /></summary>
+                                    <code>
+                                        {this.state.error?.stack}
+                                    </code>
+                                </details>
+                                <details className={style.rawTrace}>
+                                    <summary><TranslateText defaultValue="View raw Component Stack" content="crashHandler.viewRawComponent" end=":" /></summary>
+                                    <code>
+                                        {this.state.errorInfo?.componentStack}
+                                    </code>
+                                </details>
                             </div>
-
                         </div>
                     </div>
+                    <ErrorModal message={this.state.error?.message||""} />
                 </div>
             )
         }

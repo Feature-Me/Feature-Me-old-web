@@ -13,7 +13,7 @@ const StackTrace: React.FC<{ stack: string, isComponent: boolean }> = (props) =>
                             {/* if component stack trace, this will render component with tag like <xxx/> */}
                             {props.isComponent && <>&lt;</>}
                                 {stackName}
-                            {props.isComponent && <>/&gt;</>}
+                            {props.isComponent && <>&gt;</>}
                         </p>
                     )
                 })

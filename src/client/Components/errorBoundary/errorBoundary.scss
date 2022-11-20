@@ -1,3 +1,5 @@
+@import "../../Assets/mixin.scss";
+
 .errorPage {
     * {
         min-height: 0;
@@ -11,6 +13,7 @@
         align-items: center;
         height: 100%;
         width: 100%;
+        overflow-x: hidden;
 
         .errorMessage {
             display: grid;
@@ -18,21 +21,61 @@
             grid-template-columns: 1fr;
             height: 100%;
             width: 100%;
-            hr{
+
+            hr {
                 margin: 0;
             }
 
             .stackTraces {
                 display: grid;
-                grid-template-rows: 1fr;
-                grid-template-columns: repeat(2,1fr);
+                grid-template-rows: 1fr 2px auto;
+                grid-template-columns: repeat(2, 1fr);
                 height: 100%;
                 width: 100%;
-                div{
+
+                .trace,
+                .rawTrace {
                     white-space: pre;
                     overflow: auto;
                 }
             }
         }
     }
+
+}
+
+.modal {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $transparent-bg;
+
+    .inner {
+        background-color: $floatBackground;
+        border: 1px solid $backgroundSubColor;
+        border-radius: 4px;
+        min-width: 40%;
+        padding: 4px;
+    }
+    .interaction{
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+code {
+    display: block;
+    background-color: $inputBackgroundColor;
+    font-family: "consolas", monospace, sans-serif;
+    line-height: 24px;
+    overflow: auto;
+}
+
+button{
+    min-width: 128px;
 }
