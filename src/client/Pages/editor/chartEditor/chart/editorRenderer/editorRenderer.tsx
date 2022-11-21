@@ -6,7 +6,7 @@ import html2canvas from "html2canvas";
 import * as PIXI from "pixi.js";
 import React from "react";
 import { useNavigate } from "react-router";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { chartProjectState } from "State/editor/chartProjectState";
 import getNearest from "Utils/getNearest/getNearest";
 
@@ -22,10 +22,13 @@ import speedeffectSvg from "Assets/Images/editor/speedIcon.svg";
 import texteffectSvg from "Assets/Images/editor/textIcon.svg";
 
 import style from "./editorRenderer.scss"
+import json5 from "json5";
+import chartEditorEditingNotesState from "State/editor/editorState";
 
-const ChartEditorRenderer: React.FC<{}> = (props) => {
+const ChartEditorRenderer = React.memo((props:{current: chartEditorChart, setCurrent: React.Dispatch<React.SetStateAction<chartEditorChart>>}) => {
     const sceneChange = useSeneChangeNavigation();
     const [chartProject, setChartProject] = useRecoilState(chartProjectState);
+    const setChartEditorEditingNotes = useSetRecoilState(chartEditorEditingNotesState);
     const [scale, setScale] = React.useState(1);
     const [quantize, setQuantize] = React.useState(4);
     const [isBeatBased, setIsBeatBased] = React.useState(true);
@@ -97,10 +100,15 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
         setSelectedMode({ name: mode.name, type: mode.type })
     }
 
+    function parseChart() {
+        json5.parse(props.current.data)
+    }
+
     React.useEffect(() => {
         if (!canvasContainerRef.current) return;
         setSize();
         canvasContainerRef.current.addEventListener("wheel", wheelAction)
+        parseChart
         return () => {
             if (!canvasContainerRef.current) return;
             canvasContainerRef.current.removeEventListener("wheel", wheelAction)
@@ -156,7 +164,7 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
                     sideBarContents.map((content, index) => {
                         return (
                             <div className={`${style.icon} ${content.name == selectedMode.name ? style.selected : ""}`} key={index} title={`${content.name} (${content.type})`} onClick={() => setMode(content)}>
-                                <img src={content.src} alt={`${content.name} (${content.type})`} />
+                                <img src={content.src} alt={`${content.name} (${content.type})`} draggable={false} />
                             </div>
                         )
                     })
@@ -227,6 +235,6 @@ const ChartEditorRenderer: React.FC<{}> = (props) => {
             </div>
         </div>
     )
-}
+})
 
 export default ChartEditorRenderer;
