@@ -12,6 +12,7 @@ import ChamferedButton from "Components/Button/chamferedButton/chamferedButton";
 
 import style from './termsWindow.scss';
 import TranslateText from "Components/TranslateText/TranslateText";
+import TermsRejectedError from "Utils/Errors/TermsRejectedError";
 //import { deleteEnvironmentData } from "../cacheController/deleteData";
 
 
@@ -43,7 +44,7 @@ const TermsWindow: React.FC = (): JSX.Element => {
 
     React.useEffect(()=>{
         if(decline)
-            throw new Error(translation("terms.termsMessage.decline"))
+            throw new TermsRejectedError(translation("terms.termsMessage.decline"))
     },[decline])
 
     return (
