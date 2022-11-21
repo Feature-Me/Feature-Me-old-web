@@ -47,7 +47,11 @@ const JAEditorTranslation = {
             "quantize":"クオンタイズ",
             "positionBase":"配置フォーマット",
             "beatBase":"拍",
-            "timeBase":"時間"
+            "timeBase":"時間",
+            "properties":{
+                "overView":"概要",
+                "note":"ノート詳細"
+            }
         }
     },
     "converter":{
