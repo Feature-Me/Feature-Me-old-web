@@ -1,5 +1,7 @@
 import React from "react";
 
+import style from "./docs.scss";
+
 const ChartEditorDocs:React.FC = () =>{
 
     React.useEffect(() => {
@@ -7,8 +9,8 @@ const ChartEditorDocs:React.FC = () =>{
     }, [])
 
     return(
-        <div>
-            Docs for Feature Me editor
+        <div className={style.docs}>
+            <iframe src="https://feature-me-wiki.vercel.app" />
         </div>
     )
 }
