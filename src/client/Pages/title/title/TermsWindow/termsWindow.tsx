@@ -12,6 +12,7 @@ import ChamferedButton from "Components/Button/chamferedButton/chamferedButton";
 
 import style from './termsWindow.scss';
 import TranslateText from "Components/TranslateText/TranslateText";
+import TermsRejectedError from "Utils/Errors/TermsRejectedError";
 //import { deleteEnvironmentData } from "../cacheController/deleteData";
 
 
@@ -21,14 +22,13 @@ const TermsWindow: React.FC = (): JSX.Element => {
     const [translation, i18n] = useTranslation();
     const animationController = useAnimation();
     const [showTermsWindow, setShowTermsWindow] = useRecoilState(termsWindowAtomState);
-
+    const [decline,setDecline] = React.useReducer(()=>true,false)
 
     function closeTermsWindow(): void {
         setShowTermsWindow(false);
     }
     function acceptTerms(): void {
         console.log("acceptTerms");
-
         const environment = JSON.parse(localStorage.getItem("environment")!);
         environment.termsVersion = version.TermsVersion
         environment.termsAccepted = true;
@@ -38,10 +38,14 @@ const TermsWindow: React.FC = (): JSX.Element => {
     }
     function declineTerms(): void {
         closeTermsWindow();
-        document.body.innerHTML = translation("terms.termsMessage.decline");
+        setDecline()
         //deleteEnvironmentData();
     }
 
+    React.useEffect(()=>{
+        if(decline)
+            throw new TermsRejectedError(translation("terms.termsMessage.decline"))
+    },[decline])
 
     return (
         <Window title={translation("terms.title")} className={style.terms_window} showed={showTermsWindow} setShowed={setShowTermsWindow}>

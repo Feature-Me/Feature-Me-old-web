@@ -71,7 +71,6 @@ const ChartConverter: React.FC = () => {
             if (!chart) throw new Error("cant exec convert: unsolved function.")
             resultString = chart
         } catch (error) {
-            console.log(error);
             resultString = String(error);
         }
         setChartConvert(convert => {

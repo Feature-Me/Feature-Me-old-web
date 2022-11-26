@@ -11,6 +11,7 @@ import arrayBufferToBase64 from "Utils/ArrayBufferToBase64/ArrayBufferToBase64";
 
 import style from "./chart.scss";
 import ChartEditorRenderer from "./editorRenderer/editorRenderer";
+import PropertyEditor from "./propertyEditor/propertyEditor";
 
 const ChartEditorChartEditPage: React.FC = () => {
     const [chartProject, setChartEditorProject] = useRecoilState(chartProjectState);
@@ -21,6 +22,24 @@ const ChartEditorChartEditPage: React.FC = () => {
     React.useEffect(() => {
         document.title = `Editor - Chart(${current.name}) - Feature Me`
     }, [])
+
+    React.useEffect(()=>{
+        return()=>{
+            // brfore change chart, save to chartProject state
+            setChartEditorProject(proj=>{
+                let newCharts = cloneDeep(proj.project.chart);
+                const index = newCharts.findIndex(c=>c.id==current.id);
+                newCharts[index] = current;
+                return{
+                    ...proj,
+                    project:{
+                        ...proj.project,
+                        chart:newCharts
+                    }
+                }
+            })
+        }
+    },[current.id])
 
     return (
         <div className={style.editorPageView}>
@@ -39,7 +58,8 @@ const ChartEditorChartEditPage: React.FC = () => {
                     }
                 </div>
                     <div className={style.editor}>
-                        <ChartEditorRenderer />
+                        <ChartEditorRenderer {...{current,setCurrent}} />
+                    <PropertyEditor {...{current,setCurrent}} />
                     </div>
             </div>
         </div>

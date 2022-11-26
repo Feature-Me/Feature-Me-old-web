@@ -20,7 +20,7 @@ const Title: React.FC = () => {
     return (
         <div className={style.titlepage} /* ref={backgroundRef} */>
             <motion.div className={style.background} animate={backgroundAniamtion} initial={backgroundInitialAnimation}>
-                <GlitchImage background={background} />
+                <GlitchImage src={background} />
             </motion.div>
             <TitleText />
             <SettingsWindow />

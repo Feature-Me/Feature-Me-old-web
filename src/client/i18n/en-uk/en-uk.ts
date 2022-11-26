@@ -7,6 +7,9 @@ import ENUKMenuTranslation from "./play/en-uk.menu";
 import ENUKHeadTranslation from "./components/en-uk.head";
 import ENUKMusicSelectTranslation from "./play/en-uk.musicselect";
 import ENUKSettingsPage from "./settings/en-uk.settingspage";
+import ENUKCrashHandler from "./others/en-uk.crashHandler";
+import ENUKMultiPlayerTranslation from "./play/multiPlayer/en-uk.multiplayer";
+import ENUKSplashScreenTranslation from "./others/en-uk.splashscreen";
 
 const ENUKtranslation = {
     title: ENUKTitleTranslation,
@@ -18,6 +21,9 @@ const ENUKtranslation = {
     head: ENUKHeadTranslation,
     musicSelect: ENUKMusicSelectTranslation,
     settingsPage: ENUKSettingsPage,
+    splashScreen:ENUKSplashScreenTranslation,
+    multiPlay:ENUKMultiPlayerTranslation,
+    crashHandler:ENUKCrashHandler
 }
 
 export default ENUKtranslation;

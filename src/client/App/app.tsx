@@ -26,6 +26,7 @@ import useWebSocket from 'Hooks/webSocket/useWebSocket';
 import webSocketState from 'State/webSocket/webSocketState';
 import QuickMenu from 'Block/quickmenu/quickmenu';
 import { cloneDeep } from 'lodash';
+import ErrorBoundary from 'Block/errorBoundary/errorBoundary';
 
 function App(): JSX.Element {
     const [translation, i18n] = useTranslation();
@@ -40,7 +41,7 @@ function App(): JSX.Element {
                 socket.emit("login", userData);
                 return {
                     ...ws,
-                    user:userData,
+                    user: userData,
                     state: "online",
                     connectedTime: Date.now()
                 }
@@ -95,9 +96,11 @@ function App(): JSX.Element {
 function render(): void {
     const container: HTMLDivElement = document.querySelector("#root")!;
     createRoot(container).render(
-        <RecoilRoot>
-            <App />
-        </RecoilRoot>
+        <ErrorBoundary>
+            <RecoilRoot>
+                <App />
+            </RecoilRoot>
+        </ErrorBoundary>
     );
 }
 
