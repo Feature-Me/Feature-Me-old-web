@@ -7,6 +7,7 @@ import React from "react";
 import { MdPlayArrow, MdSave } from "react-icons/md";
 import { TbPackgeExport } from "react-icons/tb";
 import { Route, useNavigate, useParams } from "react-router";
+import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import ChartEditorViewRouter from "Routs/editorRouter/chartEditor/chartEditorViewRouter";
 import { chartProjectState } from "State/editor/chartProjectState";
@@ -53,7 +54,9 @@ const ChartEditor: React.FC = () => {
                     {
                         menuTabs.map((menu, index) => {
                             return (
-                                <div className={style.tabContent} key={index} onClick={() => navigate(menu.to)}><TranslateText content={menu.content} /></div>
+                                <Link to={menu.to}>
+                                    <div className={style.tabContent} key={index} /* onClick={() => navigate(menu.to)} */><TranslateText content={menu.content} /></div>
+                                </Link>
                             )
                         })
                     }

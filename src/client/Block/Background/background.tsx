@@ -48,7 +48,10 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
                 mieDirectionalG: 0,
                 sunPhi: 0,
                 sunTheta: 0
-            }
+            },
+            made: "official",
+            scenes: [],
+            installedAt: 0
         }
         if (!backgroundState.showed) return background;
 

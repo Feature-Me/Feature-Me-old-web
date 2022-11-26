@@ -7,9 +7,6 @@
     grid-template-columns: 1fr;
     grid-template-rows: 48px 48px 1fr 20px;
 
-    @include blur-background;
-    @include no-support-background-blur($transparent-bg);
-
     .head {
         display: grid;
         grid-template-columns: auto 1fr auto repeat(3, 148px);
@@ -120,6 +117,8 @@
         max-height: 100%;
         width: 100%;
         min-height: 0;
+        @include blur-background;
+        @include no-support-background-blur($transparent-bg);
     }
 }
 

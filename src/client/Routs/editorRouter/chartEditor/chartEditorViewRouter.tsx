@@ -13,7 +13,7 @@ const ChartEditorViewRouter: React.FC = () => {
             <Route path="/overview" element={<ChartEditorOverView />} />
             <Route path="/metadata" element={<ChartEditorMetadata />} />
             <Route path="/music" element={<ChartEditorMusic />} />
-            <Route path="/chart" element={<ChartEditorChartEditPage />} />
+            <Route path="/chart/*" element={<ChartEditorChartEditPage />} />
             <Route path="/docs" element={<ChartEditorDocs />} />
         </Routes>
     )

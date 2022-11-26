@@ -1,7 +1,7 @@
 const ENUKHeadTranslation = {
     'hr': 'hr',
     'min': 'min',
-    'sessiontime': 'in this session',
+    'sessionTime': 'in this session',
 }
 
 export default ENUKHeadTranslation

@@ -7,6 +7,9 @@ import ENUSMenuTranslation from "./play/en-us.menu";
 import ENUSHeadTranslation from "./components/en-us.head";
 import ENUSMusicSelectTranslation from "./play/en-us.musicselect";
 import ENUSSettingsPage from "./settings/en-us.settingspage";
+import ENUSCrashHandlerTranslation from "./others/en-us.crashHandler";
+import ENUSMultiPlayerTranslation from "./play/multiPlayer/en-us.multiplayer";
+import ENUSSplashScreenTranslation from "./others/en-us.splashscreen";
 
 const ENUStranslation = {
     title: ENUSTitleTranslation,
@@ -18,6 +21,9 @@ const ENUStranslation = {
     head: ENUSHeadTranslation,
     musicSelect: ENUSMusicSelectTranslation,
     settingsPage: ENUSSettingsPage,
+    splashScreen:ENUSSplashScreenTranslation,
+    multiPlay:ENUSMultiPlayerTranslation,
+    crashHandler: ENUSCrashHandlerTranslation
 }
 
 export default ENUStranslation;

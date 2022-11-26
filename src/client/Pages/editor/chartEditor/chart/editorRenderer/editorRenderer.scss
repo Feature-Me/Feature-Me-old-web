@@ -8,6 +8,7 @@
     grid-template-columns: 48px 1fr;
     min-height: 0;
     column-gap: 8px;
+    overflow: auto;
 
     .sideBar {
         grid-row: 2;
@@ -17,6 +18,15 @@
         .icon {
             height: 48px;
             display: flex;
+            transition: 0.2s;
+
+            &:hover{
+                background-color: $inputForegroundColor;
+            }
+
+            &:active{
+                transform: scale(0.8);
+            }
 
             &.selected {
                 background-color: $accentColor;

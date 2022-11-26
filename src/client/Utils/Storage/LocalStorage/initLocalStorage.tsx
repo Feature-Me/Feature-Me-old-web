@@ -3,17 +3,7 @@ import { toast } from "react-toastify";
 import TranslateText from "Components/TranslateText/TranslateText";
 import { enviroment, resourcesDownloaded, DBVersion, gameConfig, musicSelect } from "./defaultValue";
 
-const valueMap = {
-    enviroment,
-    resourcesDownloaded,
-    DBVersion,
-    gameConfig,
-    musicSelect,
-
-}
-
 function initLocalStorage(): void {
-    let fixedCount = 0;
     try {
         
         localStorage.setItem("environment", JSON.stringify({ ...enviroment, ...(JSON.parse(localStorage.getItem("environment")||"{}")) }));

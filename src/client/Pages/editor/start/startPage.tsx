@@ -71,7 +71,7 @@ const EditorStartPage: React.FC = () => {
 
     return (
         <div className={style.editorStart}>
-            <Header title="Editor" />
+            <Header title="Editor" backFunc={()=>navigate("/title")}/>
             <div className={style.startPage}>
                 <h1><TranslateText content="editor.start" /></h1>
                 <div className={style.projectSelect}>
