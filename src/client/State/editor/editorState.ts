@@ -1,8 +1,12 @@
 import { atom } from "recoil";
 
-const defaultChartEditingNotesState: Array<chartEditorNote> = []
+const defaultChartEditingNotesState:chartEditorEditingNotesState = {
+    notes:[],
+    effects:[],
+    selected:[]
+}
 const chartEditorEditingNotesState = atom({
-    key: "chartConverterState",
+    key: "chartEditorEditingState",
     default: defaultChartEditingNotesState
 })
 
