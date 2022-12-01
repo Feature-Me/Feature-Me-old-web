@@ -52,10 +52,10 @@ const ChartEditor: React.FC = () => {
                 {/*page select tab*/}
                 <div className={style.modeSelect}>
                     {
-                        menuTabs.map((menu, index) => {
+                        menuTabs.map(menu => {
                             return (
-                                <Link to={menu.to}>
-                                    <div className={style.tabContent} key={index} /* onClick={() => navigate(menu.to)} */><TranslateText content={menu.content} /></div>
+                                <Link to={menu.to} key={menu.to}>
+                                    <div className={style.tabContent}  /* onClick={() => navigate(menu.to)} */><TranslateText content={menu.content} /></div>
                                 </Link>
                             )
                         })

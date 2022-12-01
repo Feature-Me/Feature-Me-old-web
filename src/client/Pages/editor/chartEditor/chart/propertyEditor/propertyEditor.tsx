@@ -24,8 +24,8 @@ const PropertyEditor: React.FC<{ current: chartEditorChart, setCurrent: React.Di
                 {
                     menuTabs.map(menu => {
                         return (
-                            <Link to={menu.to}>
-                                <div className={style.tabContent} key={menu.to}>
+                            <Link to={menu.to} key={menu.to}>
+                                <div className={style.tabContent}>
                                     <TranslateText content={menu.content} />
                                 </div>
                             </Link>
