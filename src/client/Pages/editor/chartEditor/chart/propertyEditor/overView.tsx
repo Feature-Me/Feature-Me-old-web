@@ -13,6 +13,7 @@ const PropertyOverView: React.FC<{ current: chartEditorChart, setCurrent: React.
     return (
         <div className={style.propertyEditor}>
             <h4>Chart Overview</h4>
+            <p>Notes: {}</p>
         </div>
     )
 }

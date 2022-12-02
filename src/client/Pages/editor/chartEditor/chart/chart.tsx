@@ -12,18 +12,29 @@ import arrayBufferToBase64 from "Utils/ArrayBufferToBase64/ArrayBufferToBase64";
 import style from "./chart.scss";
 import ChartEditorRenderer from "./editorRenderer/editorRenderer";
 import PropertyEditor from "./propertyEditor/propertyEditor";
+import chartEditorEditingNotesState from "State/editor/editorState";
+import json5 from "json5";
 
 const ChartEditorChartEditPage: React.FC = () => {
     const [chartProject, setChartEditorProject] = useRecoilState(chartProjectState);
+    const [chartEditorEditingNotes,setChartEditorEditingNotes] = useRecoilState(chartEditorEditingNotesState);
     const charts = chartProject.project.chart;
     const [current, setCurrent] = React.useState(charts[0]);
 
 
     React.useEffect(() => {
         document.title = `Editor - Chart(${current.name}) - Feature Me`
+        
     }, [])
 
     React.useEffect(()=>{
+        setChartEditorEditingNotes(chart => {
+            const notes = json5.parse(chartProject.project.chart.find(c => c.id == current.id)?.data || "{}")
+            return {
+                ...chart,
+                ...notes
+            }
+        })
         return()=>{
             // brfore change chart, save to chartProject state
             setChartEditorProject(proj=>{

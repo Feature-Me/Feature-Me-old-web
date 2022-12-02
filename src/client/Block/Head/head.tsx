@@ -11,10 +11,11 @@ import timeState from "State/timeState/timeState";
 import style from "./head.scss";
 import webSocketState from "State/webSocket/webSocketState";
 import quickmenuState from "State/quickmenu/quickmenuState";
+import useSeneChangeNavigation from "Hooks/scenechange/useSceneChangeNavigation";
 
 const Header: React.FC<{ title: string, backFunc?: Function }> = (props) => {
     const [translation, i18n] = useTranslation();
-    const navigate = useNavigate();
+    const navigate = useSeneChangeNavigation();
     const setSceneChanger = useSetRecoilState(sceneChangerState);
     const setQuickmenu = useSetRecoilState(quickmenuState);
     const webSocket = useRecoilValue(webSocketState);
@@ -42,12 +43,7 @@ const Header: React.FC<{ title: string, backFunc?: Function }> = (props) => {
 
     function backFunc() {
         if (props.backFunc) props.backFunc();
-        else {
-            setSceneChanger(scene=>scene+1);
-            setTimeout(() => {
-                navigate(-1);
-            }, 500);
-        }
+        else navigate(-1);
     }
 
     function setQuickMenuState(){
