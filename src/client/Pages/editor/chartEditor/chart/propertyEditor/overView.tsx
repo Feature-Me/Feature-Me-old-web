@@ -6,12 +6,10 @@ import chartEditorEditingNotesState from "State/editor/editorState";
 import style from "./propertyEditor.scss";
 
 const PropertyOverView: React.FC<{ current: chartEditorChart, setCurrent: React.Dispatch<React.SetStateAction<chartEditorChart>> }> = (props) => {
-
-    const [mode, setMode] = React.useState("overview");
     const chartEditorEditingNotes = useRecoilValue(chartEditorEditingNotesState);
 
     return (
-        <div className={style.propertyEditor}>
+        <div className={style.overView}>
             <h4>Chart Overview</h4>
             <p>Notes: {}</p>
         </div>
