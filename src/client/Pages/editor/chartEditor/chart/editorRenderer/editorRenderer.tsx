@@ -24,9 +24,11 @@ import texteffectSvg from "Assets/Images/editor/textIcon.svg";
 import style from "./editorRenderer.scss"
 import json5 from "json5";
 import chartEditorEditingNotesState from "State/editor/editorState";
+import { cloneDeep } from "lodash";
+import { beatToTime } from "Features/editor/chartEditor/beatAndTimeConvert/beatAndConvert";
+import countToBeat from "Features/editor/chartEditor/countToBeatConvert/countToBeatConvert";
 
 const ChartEditorRenderer = React.memo((props:{current: chartEditorChart, setCurrent: React.Dispatch<React.SetStateAction<chartEditorChart>>}) => {
-    const sceneChange = useSeneChangeNavigation();
     const [chartProject, setChartProject] = useRecoilState(chartProjectState);
     const [chartEditorEditingNotes,setChartEditorEditingNotes] = useRecoilState(chartEditorEditingNotesState);
     const [scale, setScale] = React.useState(1);
@@ -43,6 +45,8 @@ const ChartEditorRenderer = React.memo((props:{current: chartEditorChart, setCur
     const canvasContainerRef = React.useRef<HTMLDivElement>(null);
     const editorCanvasRef = React.useRef<HTMLDivElement>(null);
     let beatCount = Math.ceil((chartProject.project.metadata.time || 60000) / (chartProject.project.metadata.bpm || 120) / 4)
+
+    const metadata = chartProject.project.metadata;
 
     const setIsBasedSelect: selectContentsArray<boolean> = [
         { label: <TranslateText content="editor.chartEditor.chart.beatBase" />, value: true },
@@ -112,7 +116,20 @@ const ChartEditorRenderer = React.memo((props:{current: chartEditorChart, setCur
 
     function addNote(e:React.MouseEvent<HTMLDivElement,MouseEvent>){
         if(!noteTypeIntegrity) return;
+        const lane = horizonalAnchor.find(a=>a.position==cursorPosY);
+        if(!lane)return;
+        const position = horizonalAnchor.findIndex(a=>a==lane);
 
+        if(selectedMode.type=="effect"){
+            setChartEditorEditingNotes(note=>{
+                let newEffect = cloneDeep(note.effects);
+                newEffect.push({type:"tap",time:beatToTime(countToBeat(position,quantize),metadata.bpm),lane:lane.lane})
+                return {
+                    ...note,
+                    effects:newEffect
+                }
+            })
+        }
 
     }
 
@@ -203,7 +220,7 @@ const ChartEditorRenderer = React.memo((props:{current: chartEditorChart, setCur
                             verticalAnchor.map((value, index) => {
                                 let flag = index % quantize == 0 ? true : false;
                                 if (quantize == 1) flag = true;
-                                if (flag) return <span className={style.vLineText} style={{ left: `${value}px` }} key={index}>{index / quantize + 1}</span>
+                                if (flag) return <span className={style.vLineText} style={{ left: `${value}px` }} key={index}>{index / quantize}</span>
                                 return null
                             })
                         }
