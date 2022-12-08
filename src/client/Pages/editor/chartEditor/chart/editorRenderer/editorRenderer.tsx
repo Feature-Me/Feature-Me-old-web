@@ -25,7 +25,7 @@ import style from "./editorRenderer.scss"
 import json5 from "json5";
 import chartEditorEditingNotesState from "State/editor/editorState";
 import { cloneDeep } from "lodash";
-import { beatToTime } from "Features/editor/chartEditor/beatAndTimeConvert/beatAndConvert";
+import { beatToTime } from "Features/editor/chartEditor/beatAndTimeConvert/beatAndTimeConvert";
 import countToBeat from "Features/editor/chartEditor/countToBeatConvert/countToBeatConvert";
 
 const ChartEditorRenderer = React.memo((props:{current: chartEditorChart, setCurrent: React.Dispatch<React.SetStateAction<chartEditorChart>>}) => {
