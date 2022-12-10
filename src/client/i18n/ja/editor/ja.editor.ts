@@ -50,7 +50,8 @@ const JAEditorTranslation = {
             "timeBase":"時間",
             "properties":{
                 "overView":"概要",
-                "note":"ノート詳細"
+                "note":"ノート詳細",
+                "code":"コード"
             }
         }
     },

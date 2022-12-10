@@ -46,7 +46,7 @@ function FMAlphaToFM(chart: string): string {
                 type: newNotetype,
                 time: (60 / alphaChart.BPM * note.count) * 1000,
                 lane: getLane(note.track),
-                speed: note.speed? note.speed : undefined
+                speed: note.speed ? note.speed : undefined
             }
             newChart.notes.push(newNote)
         }
@@ -82,7 +82,7 @@ function FMToFMAlpha(chart: string): string {
                 const pos = convertNoteType(note)
                 const alphaNote: alphaNote = {
                     track: pos,
-                    count: note.time / 500
+                    count: note.time / (1000 / FMChart.metadata.initialBpm) / 60
                 }
                 AlphaChart.notes.push(alphaNote)
             }
