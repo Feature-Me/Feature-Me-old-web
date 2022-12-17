@@ -257,7 +257,13 @@ const ChartEditorRenderer = React.memo((props:{current: chartEditorChart, setCur
 
                         </div>
                         <div className={style.noteIconContainer} onClick={addNote}>
-
+                                {
+                                    chartEditorEditingNotes.effects.map(e=>{
+                                        return(
+                                            <span className={`${style.noteIcon} ${style[e.type]}`}></span>
+                                        )
+                                    })
+                                }
                         </div>
                         <div className={style.cursorObjectContainer}>
                             <div className={`${style.cursorVLine} ${style.cursorLine}`} style={{ left: `${cursorPosX}px` }}></div>
