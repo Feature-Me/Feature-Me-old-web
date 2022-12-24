@@ -1,97 +1,99 @@
+import { reverse } from "lodash";
+
 const easings = {
-    easeInQuad: function (pos: number) {
+    easeInQuad: (pos: number) => {
         return Math.pow(pos, 2);
     },
 
-    easeOutQuad: function (pos: number) {
+    easeOutQuad: (pos: number) => {
         return -(Math.pow((pos - 1), 2) - 1);
     },
 
-    easeInOutQuad: function (pos: number) {
+    easeInOutQuad: (pos: number) => {
         if ((pos /= 0.5) < 1) return 0.5 * Math.pow(pos, 2);
         return -0.5 * ((pos -= 2) * pos - 2);
     },
 
-    easeInCubic: function (pos: number) {
+    easeInCubic: (pos: number) => {
         return Math.pow(pos, 3);
     },
 
-    easeOutCubic: function (pos: number) {
+    easeOutCubic: (pos: number) => {
         return (Math.pow((pos - 1), 3) + 1);
     },
 
-    easeInOutCubic: function (pos: number) {
+    easeInOutCubic: (pos: number) => {
         if ((pos /= 0.5) < 1) return 0.5 * Math.pow(pos, 3);
         return 0.5 * (Math.pow((pos - 2), 3) + 2);
     },
 
-    easeInQuart: function (pos: number) {
+    easeInQuart: (pos: number) => {
         return Math.pow(pos, 4);
     },
 
-    easeOutQuart: function (pos: number) {
+    easeOutQuart: (pos: number) => {
         return -(Math.pow((pos - 1), 4) - 1);
     },
 
-    easeInOutQuart: function (pos: number) {
+    easeInOutQuart: (pos: number) => {
         if ((pos /= 0.5) < 1) return 0.5 * Math.pow(pos, 4);
         return -0.5 * ((pos -= 2) * Math.pow(pos, 3) - 2);
     },
 
-    easeInQuint: function (pos: number) {
+    easeInQuint: (pos: number) => {
         return Math.pow(pos, 5);
     },
 
-    easeOutQuint: function (pos: number) {
+    easeOutQuint: (pos: number) => {
         return (Math.pow((pos - 1), 5) + 1);
     },
 
-    easeInOutQuint: function (pos: number) {
+    easeInOutQuint: (pos: number) => {
         if ((pos /= 0.5) < 1) return 0.5 * Math.pow(pos, 5);
         return 0.5 * (Math.pow((pos - 2), 5) + 2);
     },
 
-    easeInSine: function (pos: number) {
+    easeInSine: (pos: number) => {
         return -Math.cos(pos * (Math.PI / 2)) + 1;
     },
 
-    easeOutSine: function (pos: number) {
+    easeOutSine: (pos: number) => {
         return Math.sin(pos * (Math.PI / 2));
     },
 
-    easeInOutSine: function (pos: number) {
+    easeInOutSine: (pos: number) => {
         return (-0.5 * (Math.cos(Math.PI * pos) - 1));
     },
 
-    easeInExpo: function (pos: number) {
+    easeInExpo: (pos: number) => {
         return (pos === 0) ? 0 : Math.pow(2, 10 * (pos - 1));
     },
 
-    easeOutExpo: function (pos: number) {
+    easeOutExpo: (pos: number) => {
         return (pos === 1) ? 1 : -Math.pow(2, -10 * pos) + 1;
     },
 
-    easeInOutExpo: function (pos: number) {
+    easeInOutExpo: (pos: number) => {
         if (pos === 0) return 0;
         if (pos === 1) return 1;
         if ((pos /= 0.5) < 1) return 0.5 * Math.pow(2, 10 * (pos - 1));
         return 0.5 * (-Math.pow(2, -10 * --pos) + 2);
     },
 
-    easeInCirc: function (pos: number) {
+    easeInCirc: (pos: number) => {
         return -(Math.sqrt(1 - (pos * pos)) - 1);
     },
 
-    easeOutCirc: function (pos: number) {
+    easeOutCirc: (pos: number) => {
         return Math.sqrt(1 - Math.pow((pos - 1), 2));
     },
 
-    easeInOutCirc: function (pos: number) {
+    easeInOutCirc: (pos: number) => {
         if ((pos /= 0.5) < 1) return -0.5 * (Math.sqrt(1 - pos * pos) - 1);
         return 0.5 * (Math.sqrt(1 - (pos -= 2) * pos) + 1);
     },
 
-    easeOutBounce: function (pos: number) {
+    easeOutBounce: (pos: number) => {
         if ((pos) < (1 / 2.75)) {
             return (7.5625 * pos * pos);
         } else if (pos < (2 / 2.75)) {
@@ -103,43 +105,43 @@ const easings = {
         }
     },
 
-    easeInBack: function (pos: number) {
+    easeInBack: (pos: number) => {
         var s = 1.70158;
         return (pos) * pos * ((s + 1) * pos - s);
     },
 
-    easeOutBack: function (pos: number) {
+    easeOutBack: (pos: number) => {
         var s = 1.70158;
         return (pos = pos - 1) * pos * ((s + 1) * pos + s) + 1;
     },
 
-    easeInOutBack: function (pos: number) {
+    easeInOutBack: (pos: number) => {
         var s = 1.70158;
         if ((pos /= 0.5) < 1) return 0.5 * (pos * pos * (((s *= (1.525)) + 1) * pos - s));
         return 0.5 * ((pos -= 2) * pos * (((s *= (1.525)) + 1) * pos + s) + 2);
     },
 
-    elastic: function (pos: number) {
+    elastic: (pos: number) => {
         return -1 * Math.pow(4, -8 * pos) * Math.sin((pos * 6 - 1) * (2 * Math.PI) / 2) + 1;
     },
 
-    swingFromTo: function (pos: number) {
+    swingFromTo: (pos: number) => {
         var s = 1.70158;
         return ((pos /= 0.5) < 1) ? 0.5 * (pos * pos * (((s *= (1.525)) + 1) * pos - s)) :
             0.5 * ((pos -= 2) * pos * (((s *= (1.525)) + 1) * pos + s) + 2);
     },
 
-    swingFrom: function (pos: number) {
+    swingFrom: (pos: number) => {
         var s = 1.70158;
         return pos * pos * ((s + 1) * pos - s);
     },
 
-    swingTo: function (pos: number) {
+    swingTo: (pos: number) => {
         var s = 1.70158;
         return (pos -= 1) * pos * ((s + 1) * pos + s) + 1;
     },
 
-    bounce: function (pos: number) {
+    bounce: (pos: number) => {
         if (pos < (1 / 2.75)) {
             return (7.5625 * pos * pos);
         } else if (pos < (2 / 2.75)) {
@@ -151,7 +153,7 @@ const easings = {
         }
     },
 
-    bouncePast: function (pos: number) {
+    bouncePast: (pos: number) => {
         if (pos < (1 / 2.75)) {
             return (7.5625 * pos * pos);
         } else if (pos < (2 / 2.75)) {
@@ -163,20 +165,29 @@ const easings = {
         }
     },
 
-    easeFromTo: function (pos: number) {
+    easeFromTo: (pos: number) => {
         if ((pos /= 0.5) < 1) return 0.5 * Math.pow(pos, 4);
         return -0.5 * ((pos -= 2) * Math.pow(pos, 3) - 2);
     },
 
-    easeFrom: function (pos: number) {
+    easeFrom: (pos: number) => {
         return Math.pow(pos, 4);
     },
 
-    easeTo: function (pos: number) {
+    easeTo: (pos: number) => {
         return Math.pow(pos, 0.25);
     },
-    linear: function (pos: number) {
+    linear: (pos: number) => {
         return pos;
+    },
+    reverseLinear: (pos:number) => {
+        return 1 - pos
+    },
+    reverseLinearToMiddle: (pos:number) => {
+        return -(pos*2)+1
+    },
+    reverseLinearToEnd: (pos:number) => {
+        return 2 - pos
     }
 }
 
