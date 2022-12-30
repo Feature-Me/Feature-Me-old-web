@@ -1,5 +1,3 @@
-import { reverse } from "lodash";
-
 const easings = {
     easeInQuad: (pos: number) => {
         return Math.pow(pos, 2);

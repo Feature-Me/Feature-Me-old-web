@@ -1,19 +1,7 @@
 @import "../Assets/mixin.scss";
 @font-face {
-    font-family: "Julius Sans One";
-    src: url("../Assets/Fonts/JuliusSansOne-Regular.ttf");
-}
-@font-face {
     font-family: "IBM Plex Sans JP";
     src: url("../Assets/Fonts/IBMPLEXSANSJP-TEXT.OTF");
-}
-@font-face {
-    font-family: "Noto Sans JP";
-    src: url("../Assets/Fonts/NotoSansJP-Regular.OTF");
-}
-@font-face {
-    font-family: "Noto Sans JP Bold";
-    src: url("../Assets/Fonts/NotoSansJP-Black.otf");
 }
 @font-face {
     font-family: "AppliMincho";
@@ -30,6 +18,16 @@
 @font-face {
     font-family: "Noto Sans Chinese Bold";
     src: url("../Assets/Fonts/NotoSansSC-Black.otf");
+}
+
+@font-face {
+    font-family: "Uranea";
+    src: url("../Assets/Fonts/uranea.otf");
+}
+
+@font-face {
+    font-family: "Feature Me";
+    src: url("../Assets/Fonts/FeatureMe.ttf");
 }
 
 body {
@@ -74,6 +72,7 @@ a{
     text-decoration: none;
     color: whitesmoke;
     cursor: url("../Assets/Images/pointer.cur"), default;
+    user-select: none;
 }
  form,
  select,
