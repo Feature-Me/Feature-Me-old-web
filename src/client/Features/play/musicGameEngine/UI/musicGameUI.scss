@@ -7,6 +7,10 @@
     left: 0;
     height: 100%;
     width: 100%;
+    
+    * {
+        @include font-gameText;
+    }
 
     .primary_board {
         @include blur(16px);
@@ -28,14 +32,12 @@
             line-height: 64px;
             font-size: 48px;
             text-shadow: 2px 2px 2px #5e5e5e;
-            @include font-gameText;
         }
 
         h3 {
             line-height: 32px;
             font-size: 28px;
             text-shadow: 2px 2px #3d6264;
-            @include font-gameText;
             font-weight: bold;
         }
 
@@ -82,9 +84,6 @@
                 grid-template-rows: 24px 40px;
                 grid-template-columns: 1fr;
                 align-items: center;
-                h3{
-                    @include font-body;
-                }
             }
         }
 
@@ -229,6 +228,9 @@
         @include font-body;
     }
 
+    p{
+        @include font-body;
+    }
     p::first-letter {
         text-transform: uppercase;
     }
