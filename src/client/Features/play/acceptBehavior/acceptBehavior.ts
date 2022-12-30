@@ -1,7 +1,7 @@
 import { chartType } from "Features/play/parseChart/chartSample";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { match } from "ts-pattern";
-import { fontAssetContents, fontTable, FPTable } from "Types/resources/fontResources";
+import { fontAssetContents, fontTable } from "Types/resources/fontResources";
 import arrayBufferToBase64 from "Utils/ArrayBufferToBase64/ArrayBufferToBase64";
 
 async function acceptBehavior(chart: chartType, models: behaviorAssetContents, font: fontAssetContents, sound: soundEffectAssetContents, volume: number) {
