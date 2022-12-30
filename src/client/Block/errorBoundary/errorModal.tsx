@@ -14,12 +14,14 @@ const ErrorModal: React.FC<{ message: string }> = (props) => {
         <div className={style.modal}>
             <div className={style.inner}>
                 <div className={style.titleBar}>
-                    <p><TranslateText defaultValue="Game Crashed!" content="crashHandler.title" /></p>
+                    {/* <p><TranslateText defaultValue="Game Crashed!" content="crashHandler.title" /></p> */}
+                    <p>繧ｨ繝ｩ繝ｼ</p>
                     <div className={style.closebtn}>
                         <VscClose onClick={setShow} />
                     </div>
                 </div>
-                <h2><TranslateText defaultValue="Game Crashed!" content="crashHandler.header" /></h2>
+                {/* <h2><TranslateText defaultValue="Game Crashed!" content="crashHandler.header" /></h2> */}
+                <h2>繧ｯ繝ｩ繝?す繝･縺励∪縺励◆</h2>
                 <p>
                     <TranslateText content="crashHandler.modal.description" /> <br />
                     <code>{props.message}</code>
