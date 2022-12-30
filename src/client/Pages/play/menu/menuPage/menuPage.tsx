@@ -25,8 +25,6 @@ const MenuPage: React.FC = () => {
         { content: "menu.settings", to: "../settings" },
         { content: "menu.about", to: "../about" },
         { content: "menu.viewbg", to: "../background" }
-
-
     ]
 
     React.useEffect(() => {
