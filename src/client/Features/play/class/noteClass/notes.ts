@@ -99,8 +99,8 @@ class note {
     }
     updatePosition(gameTime: number) {
         //const z = -((this.time - gameTime)/this.scrollTime) * 87.5;
-        const progress = (gameTime - this.time) / this.scrollTime;
-        const z = this.getPositionFromEasing(progress) * 87.5;
+        const progress = /* Math.abs */(this.time - gameTime) / this.scrollTime;
+        const z = this.getPositionFromEasing(progress) * -87.5;
         this.note.position.z = z;
     }
     getPositionFromEasing(progress: number) {
