@@ -1,4 +1,3 @@
-import { reverse } from "lodash";
 
 const easings = {
     easeInQuad: (pos: number) => {
