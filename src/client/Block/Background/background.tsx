@@ -20,9 +20,10 @@ import versions from "Config/versions.json";
 import backgroundNameState from "State/background/backgroundState";
 import gameConfigState from "State/gameConfig/gameConfig";
 
-
-
 import style from "./background.scss"
+
+//new years update
+import Proton from "Proton-engine";
 
 const Background: React.FC<{ onload?: Function }> = (props) => {
     const backgroundCanvas = React.useRef<HTMLDivElement>(null);
@@ -205,11 +206,59 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
         }
     }, [backgroundState]);
 
+    //new years update
+    const particleCanvasRef = React.useRef<HTMLCanvasElement>(null);
+    const proton = new Proton();
+    const emitter = new Proton.Emitter();
+
+    emitter.rate = new Proton.Rate(
+        new Proton.Span(1, 4),
+        new Proton.Span(0.1, 0.5)
+    );
+    emitter.addInitialize(new Proton.Mass(0.1, 0.25));
+    emitter.addInitialize(new Proton.Radius(1, 4));
+    emitter.addInitialize(new Proton.Life(2, 100));
+    emitter.addInitialize(
+        new Proton.Velocity(
+            new Proton.Span(0.5, 0.5),
+            new Proton.Span(-180, 180),
+            "polar"
+        )
+    );
+    emitter.addBehaviour(new Proton.Alpha(1, 1, Infinity, "easeInSine"))
+    emitter.addBehaviour(new Proton.Color("f5f5f5"));
+    emitter.addBehaviour(new Proton.Scale(1, 1))
+    emitter.addBehaviour(new Proton.Force(0, -0.75));
+    emitter.p.x = window.innerWidth / 2;
+    emitter.p.y = window.innerHeight;
+    emitter.emit();
+    proton.addEmitter(emitter);
+
+    React.useEffect(() => {
+        if(!backgroundState) return;
+        let renderInterval: NodeJS.Timer;
+        if (particleCanvasRef.current) {
+            const renderer = new Proton.CanvasRenderer(particleCanvasRef.current);
+            proton.addRenderer(renderer);
+            renderInterval = setInterval(() => {
+                proton.update();
+            }, 30)
+
+        }
+        return () => {
+            clearInterval(renderInterval)
+        }
+    }, [backgroundState])
+
 
     return (
         <div className={style.backgroundvanvas}>
             <img src={""} alt="" ref={backgroundImage} className={style.backgroundimg} />
             <div ref={backgroundCanvas} className={style.renderer} />
+            {
+                /* new years update */
+                <canvas className={style.canvas} ref={particleCanvasRef} height={window.innerHeight} width={window.innerWidth} />
+            }
         </div>
     )
 }
