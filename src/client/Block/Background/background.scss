@@ -21,3 +21,11 @@
     height: 100%;
     z-index: -1;
 }
+
+//new years update
+.canvas {
+    position: absolute;
+    z-index: -1;
+    transform: rotateZ(180deg);
+    background-image: linear-gradient(to bottom, silver, whitesmoke 10%, transparent 20%, transparent 60%, #99cbf0);
+}

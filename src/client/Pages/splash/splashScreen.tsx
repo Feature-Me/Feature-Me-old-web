@@ -78,11 +78,15 @@ const SplashScreen: React.FC = () => {
     emitter.p.y = window.innerHeight;
     emitter.emit();
 
+    //new years update
+    emitter.addBehaviour(new Proton.Alpha(1, 1, Infinity, "easeInSine"))
+    emitter.addBehaviour(new Proton.Color("f5f5f5"));
+
     //add emitter to the proton
     proton.addEmitter(emitter);
 
     React.useEffect(() => {
-        let rejectFunc:Function
+        let rejectFunc: Function
         new Promise<void>(async (resolve, reject) => {
             rejectFunc = reject
             if (!logoRef.current || !cautionTextRef.current) return;
@@ -101,7 +105,7 @@ const SplashScreen: React.FC = () => {
             navigate("../title");
             resolve();
         });
-        return ()=> {
+        return () => {
             reject("")
         }
     }, [])
@@ -128,7 +132,7 @@ const SplashScreen: React.FC = () => {
 
     return (
         <div className={style.splashScreen} >
-            <canvas className={style.background} ref={particleCanvasRef} height={window.innerHeight} width={window.innerWidth} />
+            <canvas className={style.background} ref={particleCanvasRef} height={window.innerHeight} width={window.innerWidth}  /*new years update→*/ style={{ transform: "rotateZ(180deg)" }} />
             <div className={style.content}>
                 <motion.div className={style.logo} ref={logoRef} animate={logoAnimationController} initial={initial} />
                 <motion.div className={style.cautionText} ref={cautionTextRef} animate={cautionTextAnimationController} initial={initial} >
