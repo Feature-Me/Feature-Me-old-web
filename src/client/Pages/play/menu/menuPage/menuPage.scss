@@ -10,7 +10,7 @@
 
     .menu {
         overflow-x: hidden;
-        overflow-y: scroll;
+        overflow-y: auto;
         max-height: 100%;
         padding: 16px 0;
 
@@ -31,6 +31,9 @@
             @media screen and (max-height:540px) {
                 height: 48px;
             }
+
+            //new years update
+            border-top: 6px solid $borderColor;
         }
 
         .left {
@@ -72,4 +75,14 @@
             }
         }
     }
+}
+
+//new years update
+.canvas {
+    position: absolute;
+    top:0;
+    z-index: -1;
+    pointer-events: none;
+    transform: rotateZ(180deg);
+    background-image: linear-gradient(to bottom, silver, whitesmoke 10%, transparent 20%, transparent 60%, #99cbf0);
 }
