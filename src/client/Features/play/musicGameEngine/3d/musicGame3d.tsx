@@ -146,8 +146,11 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
 
     //when resized window, resize canvas to fit window size
     function resizeCanvas() {
+        console.log("resize", window.innerWidth, window.innerHeight);
         gameRenderer.setSize(window.innerWidth, window.innerHeight);
-        composer.setSize(window.innerWidth, window.innerHeight)
+        composer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
     }
 
     // play sound
@@ -278,13 +281,13 @@ const MusicGame3D: React.FC<gameProps> = (props) => {
         updateGame();
     }
 
-    function updateChainText(chain:number){
+    function updateChainText(chain: number) {
         const oldObj = gameScene.children.find(c => c.name == "chainText")
-        if(oldObj) gameScene.remove(oldObj);
+        if (oldObj) gameScene.remove(oldObj);
 
         const font = new Font(props.data.behavior.font.data)
         const chainTextGeometry = new THREE.ShapeGeometry(font.generateShapes(chain.toString(), 1));
-        const chainTextMaterial = new THREE.MeshStandardMaterial({ color: "#a0a0a0"});
+        const chainTextMaterial = new THREE.MeshStandardMaterial({ color: "#a0a0a0" });
         const chainTextMesh = new THREE.Mesh(chainTextGeometry, chainTextMaterial);
 
         chainTextGeometry.computeBoundingBox();
