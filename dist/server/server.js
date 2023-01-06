@@ -8,7 +8,6 @@ const admin_ui_1 = require("@socket.io/admin-ui");
 const fs = require("fs");
 const crypto = require("crypto");
 const uuid_1 = require("uuid");
-const os = require("os");
 //express server
 const app = express();
 const server = http.createServer(app);
@@ -32,6 +31,7 @@ const io = new socketIo.Server(server, {
 const user = io.of("/user");
 const chat = io.of("/chat");
 const multiPlayer = io.of("/multiplayer");
+const rooms = [];
 user.on("connection", (socket) => {
     socket.on("login", (data) => {
         if (!data.id || !data.name) {
@@ -68,6 +68,9 @@ app.get("/favicon", (req, res) => {
         res.sendFile(path.join(imagedir, "favicon.ico"));
     else
         res.sendFile(path.join(imagedir, "favicon.png"));
+});
+app.get("/worker", (req, res) => {
+    res.sendFile(path.join(scriptsdir, "serviceWorker", "serviceWorker.js"));
 });
 app.get("/", (req, res) => {
     res.sendFile(path.join(viewsdir, "index.html"));
@@ -114,15 +117,6 @@ app.get("/update/map", (req, res) => {
 });
 app.get("/health", (req, res) => {
     res.status(200).end("Server online.");
-    console.log({
-        memory: {
-            used: process.memoryUsage().heapUsed,
-            all: os.totalmem(),
-            free: os.freemem()
-        },
-        upTime: process.uptime(),
-        usedCpu: process.cpuUsage()
-    });
 });
 app.use((req, res, next) => {
     res.status(404).redirect("/");

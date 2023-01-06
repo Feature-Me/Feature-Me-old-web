@@ -7,7 +7,8 @@
     "start_url": "/",
     "id": "/",
     "orientation":"landscape",
-    "theme-color":"#14141e",
+    "theme_color":"#1189da",
+    "background_color":"#14141e",
     "icons": [
         {
             "src": "/favicon",

@@ -131,3 +131,7 @@ window.addEventListener("popstate", (e) => { });
 window.addEventListener("click", () => {
     /* clickSound.play(); */
 })
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/worker', { scope: "./" });
+}

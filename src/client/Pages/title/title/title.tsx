@@ -46,6 +46,12 @@ const Title: React.FC = () => {
     emitter.emit();
     proton.addEmitter(emitter);
 
+    function resizeRenderer(){
+        if(!particleCanvasRef.current) return;
+        particleCanvasRef.current.width = window.innerWidth;
+        particleCanvasRef.current.height = window.innerHeight;
+    }
+
     React.useEffect(() => {
         let renderInterval: NodeJS.Timer;
         if (particleCanvasRef.current) {
@@ -54,10 +60,11 @@ const Title: React.FC = () => {
             renderInterval = setInterval(() => {
                 proton.update();
             }, 30)
-
         }
+        window.addEventListener("resize",resizeRenderer)
         return () => {
-            clearInterval(renderInterval)
+            clearInterval(renderInterval);
+            window.removeEventListener("resize", resizeRenderer);
         }
     }, [])
 
