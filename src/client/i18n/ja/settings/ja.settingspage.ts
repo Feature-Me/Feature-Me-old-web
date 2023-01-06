@@ -36,11 +36,11 @@ const JASettingsPage = {
         },
         "offset":{
             "name":"オフセット調整",
-            "description":"音楽に対するノートの位置を調整します。\nFuture(Fast)が多い場合は-に,Past(Late)が多い場合は+に調整してください。"
+            "description":"音楽に対するノートの位置を調整します。\nFuture(Fast)が多い場合は-に,Past(Late)が多い場合は+に調整してください。無線機器を使用している場合は75~200を推奨。"
         },
         "judgeTiming":{
             "name":"判定タイミング調整",
-            "description":"ノートの判定のずれを調整します。\nFuture(Fast)が多い場合は-に,Past(Late)が多い場合は+に調整してください。"
+            "description":"ノートの判定のずれを調整します。\nFuture(Fast)が多い場合は-に,Past(Late)が多い場合は+に調整してください。\n無線機器を使用している場合は50~100を推奨。"
         },
         "judgeTextShow":{
             "name":"判定テキスト表示",

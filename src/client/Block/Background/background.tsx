@@ -234,6 +234,12 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
     emitter.emit();
     proton.addEmitter(emitter);
 
+    function resizeParticleRenderer() {
+        if (!particleCanvasRef.current) return;
+        particleCanvasRef.current.width = window.innerWidth;
+        particleCanvasRef.current.height = window.innerHeight;
+    }
+
     React.useEffect(() => {
         if(!backgroundState) return;
         let renderInterval: NodeJS.Timer;
@@ -243,10 +249,11 @@ const Background: React.FC<{ onload?: Function }> = (props) => {
             renderInterval = setInterval(() => {
                 proton.update();
             }, 30)
-
         }
+        window.addEventListener("resize", resizeParticleRenderer)
         return () => {
             clearInterval(renderInterval)
+            window.removeEventListener("resize",resizeParticleRenderer)
         }
     }, [backgroundState])
 

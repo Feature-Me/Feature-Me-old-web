@@ -1,11 +1,17 @@
 const CACHE_NAME = `feature-me-cache-v1`;
 
+const cacheFiles = [
+    "./scripts/bundle.js",
+    "./favicon"
+]
+
 // Use the install event to pre-cache all initial resources.
 self.addEventListener('install', event => {
     event.waitUntil((async () => {
         const cache = await caches.open(CACHE_NAME);
-        cache.addAll(['/']);
+        cache.addAll(cacheFiles);
     })());
+    console.log("[Service Worker] installed Service Worker.");
 });
 
 self.addEventListener('fetch', event => {
