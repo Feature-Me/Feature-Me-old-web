@@ -37,7 +37,7 @@ instrument(io, {
 const user = io.of("/user");
 const chat = io.of("/chat")
 const multiPlayer = io.of("/multiplayer");
-
+const rooms = [];
 
 user.on("connection",(socket)=>{
     socket.on("login",(data:user)=>{
@@ -78,6 +78,10 @@ app.use("/images", express.static(imagedir));
 app.get("/favicon",(req,res)=>{
     if(req.headers["content-type"] == "image/x-icon") res.sendFile(path.join(imagedir,"favicon.ico"));
     else res.sendFile(path.join(imagedir,"favicon.png"));
+});
+
+app.get("/worker",(req,res)=>{
+    res.sendFile(path.join(scriptsdir,"serviceWorker","serviceWorker.js"))
 })
 
 app.get("/", (req, res) => {
@@ -130,16 +134,6 @@ app.get("/update/map", (req, res) => {
 
 app.get("/health",(req,res)=>{
     res.status(200).end("Server online.");
-    console.log({
-        memory:{
-            used: process.memoryUsage().heapUsed,
-            all:os.totalmem(),
-            free:os.freemem()
-        },
-        upTime:process.uptime(),
-        usedCpu:process.cpuUsage()
-    });
-    
 })
 
 app.use((req, res, next) => {
