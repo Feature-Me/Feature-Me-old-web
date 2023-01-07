@@ -1,6 +1,6 @@
 {
   "name": "feature-me-webgl-ts",
-  "version": "0.6.9",
+  "version": "0.6.11",
   "description": "Music Game Feature Me",
   "main": "./dist/server/server.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "react"
   ],
   "author": "Mksk",
-  "license": "MIT",
+  "license": "SEE LICENSE IN ./LICENSE",
   "types": "./server\\server.d.ts",
   "dependencies": {
     "@socket.io/admin-ui": "^0.5.0",
