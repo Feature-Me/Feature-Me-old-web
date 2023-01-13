@@ -1,4 +1,5 @@
 import ChamferdTextInput from "Components/textInput/chamferedTextInput/chamferedTextInput";
+import { cloneDeep } from "lodash";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useRecoilState } from "recoil";
@@ -12,14 +13,13 @@ const KeybindSettings: React.FC = () => {
 
     function setKeybind(index: number, key: string) {
         setGameConfig(config => {
+            let newKeys = cloneDeep(config.gameplay.key);
+            newKeys[Number(index)] = key;
             return {
                 ...config,
                 gameplay: {
                     ...config.gameplay,
-                    key: {
-                        ...config.gameplay.key,
-                        [index]: key
-                    }
+                    key: newKeys
                 }
             }
         });
