@@ -14,7 +14,7 @@ const KeybindSettings: React.FC = () => {
     function setKeybind(index: number, key: string) {
         setGameConfig(config => {
             let newKeys = cloneDeep(config.gameplay.key);
-            newKeys[index] = key;
+            newKeys[Number(index)] = key;
             return {
                 ...config,
                 gameplay: {
