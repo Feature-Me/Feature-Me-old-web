@@ -41,7 +41,7 @@ const MusicListContent: React.FC<{ data: MusicAssetContents }> = (props) => {
 
     React.useEffect(() => {
         if (!contentRef.current) return;
-        contentRef.current.style.left = -contentRef.current.offsetTop * 0.1 + "px";
+        contentRef.current.style.left = -contentRef.current.offsetTop * 0.125 + "px";
     }, [musicSelector]);
 
 
