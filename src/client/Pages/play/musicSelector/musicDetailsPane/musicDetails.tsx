@@ -54,6 +54,7 @@ const MusicDetails: React.FC = () => {
         let fadeOutTimeout: NodeJS.Timeout;
         let musicTimeout: NodeJS.Timeout;
 
+        animationController.start({ "--rotateZ": "-10deg" } as any);
         animationController.start(imageAnimation);
         imageRef.current.style.backgroundImage = `url(data:${data.metadata.thumbnail.mime || "image/png"};base64,${arrayBufferToBase64(data.metadata.thumbnail.data)})`;
         console.log(data.metadata.selectedMusic);
@@ -136,6 +137,7 @@ const MusicDetails: React.FC = () => {
                         <ChamferedButton onClick={() => { scenechange("../relay/advance") }} className={`${style.diffbtn} ${style.advance} ${!(difficulties?.advance) ? style.disabled : ""}`}>Advance {(difficulties?.advance) || "-"}</ChamferedButton>
                         <ChamferedButton onClick={() => { scenechange("../relay/prospects") }} className={`${style.diffbtn} ${style.prospects} ${!(difficulties?.prospects) ? style.disabled : ""}`}>Prospects {(difficulties?.prospects) || "-"}</ChamferedButton>
                         <ChamferedButton onClick={() => { scenechange("../relay/ozma") }} className={`${style.diffbtn} ${style.ozma} ${!(difficulties?.ozma) ? style.disabled : ""}`}>Ozma {(difficulties?.ozma) || "-"}</ChamferedButton>
+                        <ChamferedButton /* onClick={() => { scenechange("../relay/prostage") }} */ className={`${style.diffbtn} ${style.prostage} ${!(difficulties?.master) ? style.disabled : ""}`}>Prostage</ChamferedButton>
                     </div>
                     <div className={style.multi} >
                         <ChamferedButton>Select</ChamferedButton>

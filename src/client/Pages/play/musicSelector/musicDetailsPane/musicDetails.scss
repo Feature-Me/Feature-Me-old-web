@@ -13,11 +13,16 @@
     row-gap: 16px;
     grid-template-columns: 1fr;
     grid-template-rows: 56px 32px 24px 1fr 96px;
+    min-width: 0;
 
     @media screen and (max-height: 540px) {
         grid-template-rows: 32px 24px 16px 1fr 64px;
         row-gap: 8px;
-        padding: 12px 32px;
+        padding: 8px 24px;
+    }
+
+    @media screen and (max-width: 1200px) {
+        padding: 24px 0;
     }
 
 
@@ -79,10 +84,11 @@
             overflow-x: auto;
             overflow-y: hidden;
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(6, 1fr);
             grid-template-rows: 1fr;
             column-gap: 16px;
             align-items: center;
+            min-width: 0;
         }
 
         .multi {
@@ -156,6 +162,16 @@
             &:hover {
                 &::before {
                     @include ozma-background;
+                }
+            }
+        }
+
+        .prostage {
+            background-color: $prostage;
+
+            &:hover {
+                &::before {
+                    background-color: $prostage;
                 }
             }
         }
