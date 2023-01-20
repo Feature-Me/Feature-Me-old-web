@@ -1,3 +1,6 @@
+## 000381(0.6.12)
+To summerの楽曲長さを修正
+
 ## 00380(0.6.12)
 楽曲名の変更
 + conscoius_end to conscoius_end - what's done is already done -
