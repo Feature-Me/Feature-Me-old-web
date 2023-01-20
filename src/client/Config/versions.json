@@ -1,7 +1,7 @@
 {
-    "version": "0.6.12",
+    "version": "0.6.12.1",
     "TermsVersion": "1.0.0",
-    "build": "00372.202301131125-beta",
+    "build": "00383.202301210025-beta",
     "themeBackground": "Tidal Wreck",
     "defaultBehavior": "Feature Me",
     "defaultFont": "Rajdhani Regular"
