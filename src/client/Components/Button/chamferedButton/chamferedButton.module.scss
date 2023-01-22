@@ -1,0 +1,39 @@
+@import "../../../Assets/mixin.scss";
+
+.chamferedbutton {
+    position: relative;
+    transition: 0.2s;
+    color: $textColor;
+    /* background-color: #36393f; */
+    background-color: $borderColor;
+    margin: 4px;
+    box-sizing: border-box;
+    line-height: 24px;
+    padding: 4px;
+    @include chamfered;
+    border: none;
+
+    
+
+    &:before {
+        z-index: -1;
+        position: absolute;
+        height: calc(100% - 4px);
+        width: calc(100% - 4px);
+        top: 0;
+        left: 0;
+        @include chamfered;
+        /* background-color: whitesmoke; */
+        background-color: $inputForegroundColor;
+        margin: 2px;
+
+        content: "";
+    }
+
+    &:hover {
+        background-color: $accentColor;
+    }
+    /*&:hover[data-color="red"] {
+        background-color: #ca1c1c
+    } */
+}
