@@ -1,3 +1,6 @@
+## 00384(0.6.13)
+サーバーアップデート
+
 ## 00383(0.6.12.1)
 楽曲タイトルの修正
 
@@ -9,7 +12,7 @@ To summerの楽曲長さを修正
 
 ## 00380(0.6.12)
 楽曲名の変更
-+ conscoius_end to conscoius_end - what's done is already done -
++ conscious_end to conscious_end - what's done is already done -
 
 ## 00379(0.6.12)
 package lockの更新

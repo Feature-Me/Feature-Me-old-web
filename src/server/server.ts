@@ -2,13 +2,11 @@ import * as express from "express";
 import * as path from "path";
 import * as http from "http";
 import * as socketIo from "socket.io";
-import {instrument} from "@socket.io/admin-ui"
+import { instrument } from "@socket.io/admin-ui"
 import * as fs from "fs";
 import * as crypto from "crypto";
-import * as url from "url";
 import * as dotenv from "dotenv"
-import {v4 as uuidv4, v5 as uuidv5} from "uuid";
-import * as os from "os";
+import { v4 as uuidv4, v5 as uuidv5 } from "uuid";
 
 //express server
 const app = express();
@@ -23,7 +21,7 @@ const dbdir: string = path.join(basedir, "db");
 const port: number = Number(process.env.PORT) || 3000;
 
 //web socket
-const io = new socketIo.Server(server,{
+const io = new socketIo.Server(server, {
     cors: {
         origin: ["https://admin.socket.io"],
         credentials: true
@@ -39,23 +37,23 @@ const chat = io.of("/chat")
 const multiPlayer = io.of("/multiplayer");
 const rooms = [];
 
-user.on("connection",(socket)=>{
-    socket.on("login",(data:user)=>{
-        if(!data.id||!data.name) {
+user.on("connection", (socket) => {
+    socket.on("login", (data: user) => {
+        if (!data.id || !data.name) {
             const ns = uuidv4()
-            const id = uuidv5(String(Date.now()),ns)
+            const id = uuidv5(String(Date.now()), ns)
             data = {
-                name: data.name|| "Guest",
-                id:data.id || id,
+                name: data.name || "Guest",
+                id: data.id || id,
             }
         }
-        socket.emit("loggedIn",data)
+        socket.emit("loggedIn", data)
     })
 })
 
-chat.on("connection",(socket)=>{
-    socket.on("sendMessage",(message:chatMessage)=>{
-        chat.emit("receiveMessage",message);
+chat.on("connection", (socket) => {
+    socket.on("sendMessage", (message: chatMessage) => {
+        chat.emit("receiveMessage", message);
     })
 })
 
@@ -64,7 +62,7 @@ server.listen(port, () => {
     console.log(`Node version:${process.version}`);
     console.log(`PID:${process.pid}`)
     console.log(`${process.env.NODE_ENV} mode,bot:${process.env.USE_BOT}`);
-    
+
     //if(process.env.NODE_ENV=="production") login();
 });
 
@@ -75,13 +73,13 @@ app.use("/resources/behavior", express.static(path.join(resourcesdir, "Behaviors
 app.use("/resources/music", express.static(path.join(resourcesdir, "MusicResources")));
 app.use("/images", express.static(imagedir));
 
-app.get("/favicon",(req,res)=>{
-    if(req.headers["content-type"] == "image/x-icon") res.sendFile(path.join(imagedir,"favicon.ico"));
-    else res.sendFile(path.join(imagedir,"favicon.png"));
+app.get("/favicon", (req, res) => {
+    if (req.headers["content-type"] == "image/x-icon") res.sendFile(path.join(imagedir, "favicon.ico"));
+    else res.sendFile(path.join(imagedir, "favicon.png"));
 });
 
-app.get("/worker",(req,res)=>{
-    res.sendFile(path.join(scriptsdir,"serviceWorker","serviceWorker.js"))
+app.get("/worker", (req, res) => {
+    res.sendFile(path.join(scriptsdir, "serviceWorker", "serviceWorker.js"))
 })
 
 app.get("/", (req, res) => {
@@ -132,7 +130,7 @@ app.get("/update/map", (req, res) => {
 })
 
 
-app.get("/health",(req,res)=>{
+app.get("/health", (req, res) => {
     res.status(200).end("Server online.");
 })
 
@@ -140,7 +138,16 @@ app.use((req, res, next) => {
     res.status(404).redirect("/");
 });
 
+//process events
 process.on('unhandledRejection', (error, promise) => {
     console.log(' Promise rejection : ', promise);
     console.error(error);
 });
+
+process.on("uncaughtException", (error) => {
+    console.error(error);
+})
+
+process.on("beforeExit", () => {
+    user.emit("serverExit");
+})
