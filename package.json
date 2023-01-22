@@ -43,5 +43,24 @@
     "ts-pattern": "^4.0.5",
     "typescript": "^4.9.4",
     "url-loader": "^4.1.1"
-  }
+  },
+  "name": "feature-me",
+  "description": "A all new music game on web.",
+  "version": "0.7.0",
+  "main": "dist/server/setver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./dist/server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Feature-Me/Feature-Me.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "SEE LICENSE IN ./LICENSE",
+  "bugs": {
+    "url": "https://github.com/Feature-Me/Feature-Me/issues"
+  },
+  "homepage": "https://github.com/Feature-Me/Feature-Me#readme"
 }

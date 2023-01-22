@@ -3,6 +3,8 @@ import I18nProvider from "Components/i18nProvider/i18nProvider";
 import i18next from "i18next";
 import * as solid from 'solid-js';
 
+import version from "Assets/StaticInfo/version.json";
+
 import style from "./App.module.scss"
 
 const App: solid.Component = () => {
@@ -22,7 +24,7 @@ const App: solid.Component = () => {
         <solid.Show when={loaded()}>
             <I18nProvider i18n={i18next}>
                 <div class={style.app}>
-                    Feature Me With solid js
+                    Feature Me {version.version} <br /> With solid js
                 </div>
             </I18nProvider>
         </solid.Show>
