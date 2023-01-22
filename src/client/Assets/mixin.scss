@@ -4,17 +4,17 @@
 }
 
 @mixin font-title {
-    font-family: "Feature Me", "Noto Sans Chinese Bold", sans-serif;
+    font-family: "Feature Me", "IBM Plex Sans JP", sans-serif;
     font-weight: bold;
 }
 
 @mixin font-header {
-    font-family: "IBM Plex Sans JP" "Noto Sans Chinese Bold", sans-serif;
+    font-family: "IBM Plex Sans JP", sans-serif;
     font-weight: bold;
 }
 
 @mixin font-body {
-    font-family: "IBM Plex Sans JP", "Noto Sans Chinese", sans-serif;
+    font-family: "IBM Plex Sans JP", sans-serif;
 }
 
 @mixin font-gameText {
