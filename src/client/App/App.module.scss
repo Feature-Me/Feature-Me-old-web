@@ -1,0 +1,108 @@
+@import "../Assets/mixin.scss";
+
+@font-face {
+    font-family: "IBM Plex Sans JP";
+    src: url("../Assets/Fonts/IBMPLEXSANSJP-TEXT.OTF");
+}
+
+@font-face {
+    font-family: "AppliMincho";
+    src: url("../Assets/Fonts/appliMincho.otf");
+}
+
+@font-face {
+    font-family: "Rajdhani Regular";
+    src: url("../Assets/Fonts/Rajdhani-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Noto Sans Chinese";
+    src: url("../Assets/Fonts/NotoSansSC-Regular.otf");
+}
+
+@font-face {
+    font-family: "Noto Sans Chinese Bold";
+    src: url("../Assets/Fonts/NotoSansSC-Black.otf");
+}
+
+@font-face {
+    font-family: "Uranea";
+    src: url("../Assets/Fonts/uranea.otf");
+}
+
+@font-face {
+    font-family: "Feature Me";
+    src: url("../Assets/Fonts/FeatureMe.ttf");
+}
+
+body {
+    background-color: rgb(20, 20, 30);
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    color: whitesmoke;
+    @include font-body;
+    user-select: none;
+    @include font-size;
+    scroll-behavior: smooth;
+    cursor: url("../Assets/Images/pointer.cur"), default;
+    scrollbar-color: $borderColor;
+    scrollbar-width: 2px;
+
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $borderColor
+}
+
+.app {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: whitesmoke;
+    cursor: url("../Assets/Images/pointer.cur"), default;
+    user-select: none;
+}
+
+form,
+select,
+input,
+textarea,
+button,
+label {
+    cursor: inherit;
+    outline: none;
+    @include font-body;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+}
+
+h1,
+h2,
+h3 {
+    @include font-header;
+}

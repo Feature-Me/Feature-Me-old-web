@@ -1,16 +1,16 @@
 {
-  "compilerOptions": {
-    "declaration": false,
-  },
-  "references": [
-    {
-      "path": "./src/server/tsconfig.json"
-    }/*,
-    {
-      "path": "./development/client/tsconfig.json"
-    }*/
-  ],
-  "exclude": [
-    "."
-  ]
+    "compilerOptions": {
+        "declaration": false,
+    },
+    "references": [
+        {
+            "path": "./src/server/tsconfig.json"
+        },
+        {
+            "path": "./sec/client/tsconfig.json"
+        }
+    ],
+    "exclude": [
+        "."
+    ]
 }

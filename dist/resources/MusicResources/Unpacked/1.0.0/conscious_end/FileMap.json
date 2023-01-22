@@ -1,0 +1,55 @@
+{
+    "version": "1.0.0",
+    "title": "conscious_end - what's done is already done -",
+    "made": "official",
+    "composer": "second_cousin",
+    "bpm": "115",
+    "time": 192000,
+    "demo": {
+        "start": 165000,
+        "end": 189000
+    },
+    "backgroundData": null,
+    "backgroundType": "image",
+    "music": [
+        {
+            "name": "conscious_end - what's done is already done -",
+            "src": "Music/conscious_end.mp3"
+        }
+    ],
+    "defaultMusic": "conscious_end - what's done is already done -",
+    "license": "2023 second_cousin",
+    "thumbnail": "Image/music.png",
+    "behavior": null,
+    "difficulties": [
+        /*
+        {
+            "name": "memory",
+            "level": 3,
+            "constant": 2,
+            "chartDesigner": "Mksk vs Rae",
+            "chartFile": "Chart/memory.fmc"
+        },
+         {
+            "name": "advance",
+            "level": 9,
+            "constant": 5,
+            "chartDesigner": "Mksk vs Rae",
+            "chartFile": "Chart/advance.fmc"
+        },
+        {
+            "name": "prospects",
+            "level": 16,
+            "constant": 6,
+            "chartDesigner": "Mksk vs Rae",
+            "chartFile": "Chart/prospects.fmc"
+        },
+        {
+            "name": "ozma",
+            "level": 20,
+            "constant": 0,
+            "chartDesigner": "second_cousin",
+            "chartFile": "Chart/ozma.fmc"
+        }*/
+    ]
+}

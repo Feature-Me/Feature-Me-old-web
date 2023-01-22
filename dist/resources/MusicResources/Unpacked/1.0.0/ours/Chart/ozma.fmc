@@ -1,0 +1,1349 @@
+{
+    metadata: {
+        offset: -1300,
+        initialBpm: 80,
+    },
+    notes: [
+        {
+            type: 'bright',
+            time: 3000,
+            speed: {
+                type: 'absolute',
+                value: 8,
+            },
+        },
+        {
+            type: 'tap',
+            time: 4125,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 4312.5,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 5625,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 5812.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 7500,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 8250,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 9000,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 11250,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 13500,
+            lane: 3,
+        },
+        {
+            type: 'bright',
+            time: 15000,
+        },
+        {
+            type: 'seed',
+            time: 15750,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 16500,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 17250,
+            lane: 'left',
+        },
+        {
+            type: 'bright',
+            time: 18000,
+        },
+        {
+            type: 'seed',
+            time: 18750,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 19500,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 20250,
+            lane: 'left',
+        },
+        {
+            type: 'bright',
+            time: 21000,
+        },
+        {
+            type: 'seed',
+            time: 21750,
+            lane: 'right',
+        },
+        {
+            type: 'seed',
+            time: 22500,
+            lane: 'right',
+        },
+        {
+            type: 'seed',
+            time: 23250,
+            lane: 'right',
+        },
+        {
+            type: 'bright',
+            time: 24000,
+        },
+        {
+            type: 'seed',
+            time: 24750,
+            lane: 'right',
+        },
+        {
+            type: 'seed',
+            time: 25500,
+            lane: 'right',
+        },
+        {
+            type: 'seed',
+            time: 26250,
+            lane: 'right',
+        },
+        {
+            type: 'tap',
+            time: 27000,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 27375,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 27750,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 28125,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 28500,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 28875,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 29250,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 29625,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 30000,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 30750,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 31500,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 32250,
+            lane: 1,
+        },
+        {
+            type: 'bright',
+            time: 33000,
+        },
+        {
+            type: 'tap',
+            time: 30000,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 30375,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 30750,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 31125,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 31500,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 31875,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 33750,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 34500,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 35250,
+            lane: 2,
+        },
+        {
+            type: 'seed',
+            time: 36000,
+            lane: 'right',
+            speed: {
+                type: 'absolute',
+                value: 3,
+            },
+        },
+        {
+            type: 'seed',
+            time: 36750,
+            lane: 'right',
+        },
+        {
+            type: 'seed',
+            time: 37500,
+            lane: 'right',
+        },
+        {
+            type: 'tap',
+            time: 39000,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 39750,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 40500,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 41250,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 42000,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 42000,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 42750,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 42750,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 43500,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 43500,
+            lane: 4,
+        },
+        {
+            type: 'bright',
+            time: 45000,
+        },
+        {
+            type: 'bright',
+            time: 45750,
+        },
+        {
+            type: 'bright',
+            time: 46500,
+        },
+        {
+            type: 'bright',
+            time: 47250,
+        },
+        {
+            type: 'tap',
+            time: 48000,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 48375,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 48750,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 49125,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 49500,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 49875,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 50250,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 50625,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 51000,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 51750,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 52500,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 54000,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 54375,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 54750,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 55125,
+            lane: 1,
+        },
+        {
+            type: 'bright',
+            time: 55500,
+        },
+        {
+            type: 'tap',
+            time: 57000,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 57750,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 58500,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 60000,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 60750,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 61500,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 62250,
+            lane: 4,
+        },
+        {
+            type: 'bright',
+            time: 63000,
+        },
+        {
+            type: 'tap',
+            time: 63187.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 63375,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 63562.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 63750,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 63937.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 64125,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 64312.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 64500,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 64687.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 64875,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 65062.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 65250,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 65437.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 65625,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 65812.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 66000,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 66187.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 66375,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 66562.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 66750,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 66937.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 67125,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 67312.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 67500,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 67687.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 67875,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 68062.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 68250,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 68437.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 68625,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 68812.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 69000,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 69187.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 69375,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 69562.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 69750,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 69937.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 70125,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 70312.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 70500,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 70687.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 70875,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 71062.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 71250,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 71437.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 71625,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 71812.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 72000,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 72187.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 72375,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 72562.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 72750,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 72937.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 73125,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 73312.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 73500,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 73687.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 73875,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 74062.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 74250,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 74437.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 74625,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 74812.5,
+            lane: 1,
+        },
+        {
+            type: 'bright',
+            time: 75000,
+        },
+        {
+            type: 'tap',
+            time: 75187.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 75375,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 75562.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 75750,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 75937.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 76125,
+            lane: 3,
+        },
+        {
+            type: 'seed',
+            time: 76312.5,
+            lane: 'left',
+            speed: {
+                type: 'absolute',
+                value: 1,
+            },
+        },
+        {
+            type: 'seed',
+            time: 76500,
+            lane: 'left',
+        },
+        {
+            type: 'tap',
+            time: 76687.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 76875,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 77062.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 77250,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 77437.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 77625,
+            lane: 4,
+        },
+        {
+            type: 'seed',
+            time: 77812.5,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 78000,
+            lane: 'left',
+        },
+        {
+            type: 'tap',
+            time: 78187.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 78375,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 78562.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 78750,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 78937.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 79125,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 79312.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 79500,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 79687.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 79875,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 80062.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 80250,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 80437.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 80625,
+            lane: 3,
+        },
+        {
+            type: 'seed',
+            time: 80812.5,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 81000,
+            lane: 'left',
+        },
+        {
+            type: 'tap',
+            time: 81187.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 81375,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 81562.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 81750,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 81937.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 82125,
+            lane: 4,
+        },
+        {
+            type: 'bright',
+            time: 82312.5,
+        },
+        {
+            type: 'bright',
+            time: 82500,
+        },
+        {
+            type: 'tap',
+            time: 82687.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 82875,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 83062.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 83250,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 83437.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 83625,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 83812.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 84000,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 84187.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 84375,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 84562.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 84750,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 84937.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 85125,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 85312.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 85500,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 85687.5,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 85875,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 86062.5,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 86250,
+            lane: 3,
+        },
+        {
+            type: 'bright',
+            time: 86437.5,
+        },
+        {
+            type: 'bright',
+            time: 86625,
+        },
+        {
+            type: 'bright',
+            time: 86812.5,
+        },
+        {
+            type: 'bright',
+            time: 87000,
+        },
+        {
+            type: 'tap',
+            time: 87750,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 87750,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 88125,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 88500,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 88500,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 88875,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 89250,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 89250,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 89625,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 90000,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 90000,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 90750,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 90750,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 91125,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 91500,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 91500,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 91875,
+            lane: 3,
+        },
+        {
+            type: 'tap',
+            time: 92250,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 92250,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 92625,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 93000,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 93000,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 93750,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 93750,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 94125,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 94500,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 94500,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 94875,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 95250,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 95250,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 95625,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 96000,
+            lane: 1,
+        },
+        {
+            type: 'tap',
+            time: 96000,
+            lane: 4,
+        },
+        {
+            type: 'tap',
+            time: 96750,
+            lane: 2,
+        },
+        {
+            type: 'tap',
+            time: 97125,
+            lane: 3,
+        },
+        {
+            type: 'bright',
+            time: 97500,
+        },
+        {
+            type: 'bright',
+            time: 97687.5,
+        },
+        {
+            type: 'bright',
+            time: 97875,
+        },
+        {
+            type: 'seed',
+            time: 98250,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 98250,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 98250,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 98250,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 98437.5,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 98437.5,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 98437.5,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 98437.5,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 98625,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 98625,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 98625,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 98625,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 98812.5,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 98812.5,
+            lane: 'left',
+        },
+        {
+            type: 'seed',
+            time: 98812.5,
+            lane: 'left',
+        },
+    ],
+    effects: [],
+}
