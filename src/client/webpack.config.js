@@ -28,7 +28,7 @@ module.exports = {
                 },
             },
             {
-                test: /\.[s]?css$/,
+                test: /\.module.[s]?css$/,
                 use: [
                     'style-loader',
                     {
@@ -36,7 +36,18 @@ module.exports = {
                         options: { modules: true }
                     },
                     'postcss-loader', 'sass-loader'
-                ]
+                ],
+            },
+            {
+                test: /\.[s]?css$/,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                    },
+                    'postcss-loader', 'sass-loader'
+                ],
+                exclude: /\.module.[s]?css/
             },
             {
                 test: /\.cur?$/,
