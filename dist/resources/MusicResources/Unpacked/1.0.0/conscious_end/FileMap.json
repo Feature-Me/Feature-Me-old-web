@@ -1,23 +1,23 @@
 {
     "version": "1.0.0",
-    "title": "conscious_end - what's done is already done -",
+    "title": "conscious_end",
     "made": "official",
     "composer": "second_cousin",
-    "bpm": "115",
-    "time": 192000,
+    "bpm": "230",
+    "time": 129000,
     "demo": {
-        "start": 165000,
-        "end": 189000
+        "start": 13000,
+        "end": 34000
     },
     "backgroundData": null,
     "backgroundType": "image",
     "music": [
         {
-            "name": "conscious_end - what's done is already done -",
+            "name": "conscious_end",
             "src": "Music/conscious_end.mp3"
         }
     ],
-    "defaultMusic": "conscious_end - what's done is already done -",
+    "defaultMusic": "conscious_end",
     "license": "2023 second_cousin",
     "thumbnail": "Image/music.png",
     "behavior": null,
