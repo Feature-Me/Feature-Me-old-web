@@ -1,0 +1,20 @@
+.hiddenVisibility {
+    visibility: hidden;
+}
+
+.noDisplay {
+    display: none;
+}
+
+.hide {
+    display: none;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.iconWrapper {
+    margin: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
