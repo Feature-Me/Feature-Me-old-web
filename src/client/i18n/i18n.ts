@@ -10,7 +10,7 @@ import zh_cn from "./zh-cn/zh-cn";
 const language: string = (localStorage.getItem("environment") && JSON.parse(localStorage.getItem("environment")!).language) || navigator.language.toLowerCase().replace(/-/g, "_");
 
 const i18n = i18next.init({
-    lng: "language",
+    lng: language,
     fallbackLng: 'ja',
     resources: {
         en_us: { translation: en_us },
