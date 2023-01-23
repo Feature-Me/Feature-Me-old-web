@@ -1,5 +1,6 @@
-interface user {
+interface chatUser {
     name: string
+    tag: string
     id: string
 }
 
