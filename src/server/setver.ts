@@ -24,12 +24,12 @@ const io = new socketIo.Server(server, {});
 const user = io.of("/user");
 const chat = io.of("/chat")
 const multiPlayer = io.of("/multiplayer");
-const rooms = [];
+const rooms: Array<multiPlayerRoom> = [];
 const users: Array<wsUser> = [];
 
 user.on("connection", (socket) => {
     let user: wsUser;
-    socket.on("login", (data: wsUserLoginInfo) => {
+    socket.on("login", (data: wsUserLoginInfo, callback: Function) => {
         try {
             if (!data.id || !data.name) {
                 const ns = uuidv4();
@@ -38,14 +38,16 @@ user.on("connection", (socket) => {
                     name: data.name || "Guest",
                     tag: "",
                     id: data.id || id,
-                    connection: id
+                    connection: socket.id
                 }
             }
             users.push(user);
             socket.emit("loggedIn", data);
+            callback({ success: true, data });
         } catch (error) {
             console.log(error);
             socket.emit("loginError");
+            callback({ success: false, data: undefined });
         }
     });
     socket.on("disconnect", () => {
@@ -53,7 +55,7 @@ user.on("connection", (socket) => {
         if (index < 0) return;
         users.splice(index, 1);
     })
-})
+});
 
 chat.on("connection", (socket) => {
     socket.on("sendMessage", (message: chatMessage) => {
@@ -63,26 +65,52 @@ chat.on("connection", (socket) => {
 
 multiPlayer.on("connection", (socket) => {
     socket.on("getRooms", () => {
-        socket.emit(rooms);
+        socket.emit(JSON.stringify(rooms.map(r => { r.invite, r.name, r.users.length })));
     })
-    socket.on("createRoom", (name:string,user:wsUser) => {
+    socket.on("createRoom", (name: string, user: wsUser, callback: Function) => {
         try {
             const ns = uuidv4();
-        const id = uuidv5(String(Date.now()), ns);
-        String.prototype.slice()
-        const room: multiPlayerRoom = {
-            name,
-            id,
-            invite:id.slice(0,4),
-            users:[user]
-        }
-        rooms.push(newRoom);
+            const id = uuidv5(String(Date.now()), ns);
+            String.prototype.slice()
+            const newRoom: multiPlayerRoom = {
+                name,
+                id,
+                invite: id.slice(0, 4),
+                users: [user],
+                owner: user
+            }
+            rooms.push(newRoom);
+            socket.join(newRoom.id);
+
+            callback({ success: true });
         } catch (error) {
             console.error(error);
-            socket.emit("createRoomError");
+            callback({ success: false });
+        }
+    });
+    socket.on("leaveRoom", () => {
+        socket.rooms.forEach(r => {
+            socket.leave(r);
+            //add leave function and auto close room
+            /* const room = rooms.find(rs=>rs.id==r);
+            if(room)room.users.splice() */
+        });
+    });
+    socket.on("joinRoom", (id: string, user: wsUser, callback: Function) => {
+        try {
+            const room = rooms.find(r => r.id == id);
+            if (!room) throw new Error("The room was not found.");
+            room.users.push(user);
+            socket.join(id);
+            callback({ success: true });
+        } catch (error) {
+            console.error(error);
+            callback({ success: false });
         }
     })
 });
+
+
 
 server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
