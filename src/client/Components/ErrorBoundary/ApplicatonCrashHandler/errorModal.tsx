@@ -11,7 +11,7 @@ const ErrorModal: solid.Component<{ message: string }> = (props) => {
     const [show, setShow] = solid.createSignal(true);
 
     return (
-        <div class={`${style.modal} ${!show()&&style.hide}`}>
+        <div class={style.modal} classList={{ hide: !show() }}>
             <div class={style.inner}>
                 <div class={style.titleBar}>
                     {/* <p><TranslateText defaultValue="Game Crashed!" content="crashHandler.title" /></p> */}

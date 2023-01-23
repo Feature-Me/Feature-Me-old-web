@@ -59,11 +59,6 @@
     justify-content: center;
     background-color: $transparent-bg;
 
-    &.hide{
-        display: none;
-        visibility: hidden;
-    }
-
     .inner {
         background-color: $floatBackground;
         border: 1px solid $backgroundSubColor;
