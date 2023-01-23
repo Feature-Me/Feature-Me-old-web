@@ -21,31 +21,68 @@ const port: number = Number(process.env.PORT) || 3000;
 //web socket
 const io = new socketIo.Server(server, {});
 
-
 const user = io.of("/user");
 const chat = io.of("/chat")
 const multiPlayer = io.of("/multiplayer");
 const rooms = [];
+const users: Array<wsUser> = [];
 
 user.on("connection", (socket) => {
-    socket.on("login", (data: user) => {
-        if (!data.id || !data.name) {
-            const ns = uuidv4()
-            const id = uuidv5(String(Date.now()), ns)
-            data = {
-                name: data.name || "Guest",
-                id: data.id || id,
+    let user: wsUser;
+    socket.on("login", (data: wsUserLoginInfo) => {
+        try {
+            if (!data.id || !data.name) {
+                const ns = uuidv4();
+                const id = uuidv5(String(Date.now()), ns);
+                user = {
+                    name: data.name || "Guest",
+                    tag: "",
+                    id: data.id || id,
+                    connection: id
+                }
             }
+            users.push(user);
+            socket.emit("loggedIn", data);
+        } catch (error) {
+            console.log(error);
+            socket.emit("loginError");
         }
-        socket.emit("loggedIn", data)
+    });
+    socket.on("disconnect", () => {
+        const index = users.findIndex(u => u == user);
+        if (index < 0) return;
+        users.splice(index, 1);
     })
 })
 
 chat.on("connection", (socket) => {
     socket.on("sendMessage", (message: chatMessage) => {
         chat.emit("receiveMessage", message);
+    });
+});
+
+multiPlayer.on("connection", (socket) => {
+    socket.on("getRooms", () => {
+        socket.emit(rooms);
     })
-})
+    socket.on("createRoom", (name:string,user:wsUser) => {
+        try {
+            const ns = uuidv4();
+        const id = uuidv5(String(Date.now()), ns);
+        String.prototype.slice()
+        const room: multiPlayerRoom = {
+            name,
+            id,
+            invite:id.slice(0,4),
+            users:[user]
+        }
+        rooms.push(newRoom);
+        } catch (error) {
+            console.error(error);
+            socket.emit("createRoomError");
+        }
+    })
+});
 
 server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
