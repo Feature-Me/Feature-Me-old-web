@@ -38,6 +38,8 @@
     "react-icons": "^4.6.0",
     "sass": "^1.51.0",
     "sass-loader": "^12.6.0",
+    "solid-devtools": "^0.24.7",
+    "solid-icons": "^1.0.4",
     "solid-js": "^1.6.9",
     "style-loader": "^3.3.1",
     "three": "^0.148.0",
