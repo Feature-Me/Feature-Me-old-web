@@ -1,6 +1,7 @@
-const CACHE_NAME = `feature-me-cache-v1`;
+const CACHE_NAME = `feature-me-cache-ver-0.7.0-v1`;
 
 const cacheFiles = [
+    "/",
     "./scripts/bundle.js",
     "./favicon"
 ]
@@ -25,11 +26,16 @@ self.addEventListener('fetch', event => {
             // Save the resource in the cache.
             cache.put(event.request, fetchResponse.clone());
 
+            console.log("[Service Worker] updated chache resources.");
+
             // And return it.
             return fetchResponse;
         } catch (e) {
+            console.log("[Service Worker] failed to fetch resources");
             // Fetching didn't work get the resource from the cache.
             const cachedResponse = await cache.match(event.request);
+
+            console.log("[Service Worker] loading from cached resources.");
 
             // And return it.
             return cachedResponse;
