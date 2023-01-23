@@ -2,5 +2,6 @@ interface multiPlayerRoom {
     name: string
     id: string
     invite: string,
-    users: Array<user>
+    users: Array<wsUser>
+    owner: wsUser
 }
