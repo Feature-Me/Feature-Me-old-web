@@ -1,3 +1,39 @@
+@import "../Assets/mixin.scss";
+
+a {
+    text-decoration: none;
+    color: whitesmoke;
+    cursor: url("../Assets/Images/pointer.cur"), default;
+    user-select: none;
+}
+
+form,
+select,
+input,
+textarea,
+button,
+label {
+    cursor: inherit;
+    outline: none;
+    @include font-body;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+}
+
+h1,
+h2,
+h3 {
+    @include font-header;
+}
+
 .hiddenVisibility {
     visibility: hidden;
 }
