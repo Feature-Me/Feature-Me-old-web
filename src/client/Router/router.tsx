@@ -10,6 +10,7 @@ const PageRouter: solid.Component = () => {
         <Routes>
             <Route path={"/"} element={<Initializer />} />
             <Route path={"/splash"} element={<SplashScreen />} />
+            
         </Routes>
     )
 }
