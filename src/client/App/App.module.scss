@@ -21,8 +21,8 @@
 } */
 
 @font-face {
-    font-family: "Feature Me";
-    src: url("../Assets/Fonts/FeatureMe.ttf");
+    font-family: "Julius Sans One";
+    src: url("../Assets/Fonts/JuliusSansOne-Regular.ttf");
 }
 
 body {
@@ -56,43 +56,30 @@ body {
     width: 100vw;
     position: relative;
     overflow: hidden;
+
+    &>div {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        display: flex;
+    }
+
+    .background {
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .content {
+        z-index: 2;
+    }
+
+    .overlay {
+        z-index: 3;
+        pointer-events: none;
+    }
 }
 
 
 * {
     box-sizing: border-box;
-}
-
-a {
-    text-decoration: none;
-    color: whitesmoke;
-    cursor: url("../Assets/Images/pointer.cur"), default;
-    user-select: none;
-}
-
-form,
-select,
-input,
-textarea,
-button,
-label {
-    cursor: inherit;
-    outline: none;
-    @include font-body;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-    margin: 0;
-}
-
-h1,
-h2,
-h3 {
-    @include font-header;
 }
