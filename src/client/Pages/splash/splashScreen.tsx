@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "@solidjs/router";
+import { useBeforeLeave, useLocation, useNavigate } from "@solidjs/router";
 import { BsChevronDoubleRight } from "solid-icons/bs";
 import * as solid from "solid-js";
 import { Transition } from "solid-transition-group";
@@ -14,39 +14,48 @@ const SplashScreen: solid.Component = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [hideSkip, setHideSkip] = solid.createSignal(true);
-    let logoRef: HTMLDivElement | undefined = undefined;
+    let logoRef: HTMLDivElement | undefined;
+    let textRef: HTMLDivElement | undefined;
+    let containerRef: HTMLDivElement | undefined;
 
-    const logoImages = [splashImage1, slpashImage2];
+    const logoImages = [splashImage1];
 
     solid.onMount(async () => {
         const data = JSON.parse(sessionStorage.getItem("splashScreen") || "false");
         if (data) setHideSkip(false);
         for (const image of logoImages) {
             if (!logoRef) return;
+
             logoRef.style.backgroundImage = `url(${image})`;
+            logoRef.style.animation = `${style.logoAnimation} 3s ease`;
             await sleep(3000)
         }
+        if (textRef) textRef.style.animation = `${style.fadeInStopOut} 5s ease`
         await sleep(5000);
-        if (location.pathname.includes("/splash")) navigate("/title");
+        if (location.pathname == "/splash") navigate("/title");
 
     })
 
     solid.onCleanup(() => {
+        console.log("clean up");
         sessionStorage.setItem("splashScreen", "true");
     })
 
-    function exitAnimation(el: Element, done: () => void) {
-        const animate = el.animate([{ opacity: 0 }, { opacity: 1 }], {
-            duration: 200
-        });
-        animate.finished.then(done);
-    }
+    useBeforeLeave(async (e) => {
+        if (location.pathname != "/splash") return;
+        if (!e.defaultPrevented) e.preventDefault();
+        if (!containerRef) return;
+        containerRef.style.opacity = "0";
+        containerRef.style.animation = "fadeOut 0.3s linear";
+        await sleep(3000);
+        e.retry(true);
+    })
 
     return (
-        <div class={style.splashScreen}>
+        <div class={style.splashScreen} ref={containerRef}>
             <div class={style.content}>
                 <div class={style.logo} ref={logoRef} />
-                <div class={style.cautionText} >
+                <div class={style.cautionText} ref={textRef}>
                     <h1><TranslateText content="splashScreen.caution.title" /></h1>
                     <p><TranslateText content="splashScreen.caution.description" /></p>
                 </div>
