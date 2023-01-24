@@ -1,0 +1,8 @@
+@import "../../Assets/mixin.scss";
+
+.loader {
+    height: 100%;
+    width: 100%;
+    background-color: $transparent-bg;
+    @include blur(20px);
+}
