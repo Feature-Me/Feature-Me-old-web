@@ -16,12 +16,13 @@ const ChamferedButton: solid.Component<buttonPropsType> = (props) => {
         if(!chamferedButtonRef) return;
         chamferedButtonRef.addEventListener("mouseenter", () => setHoverAction(true));
         chamferedButtonRef.addEventListener("mouseleave", () => setHoverAction(false));
-        return () => {
-            if (!chamferedButtonRef) return;
+    });
+
+    solid.onCleanup(()=>{
+        if (!chamferedButtonRef) return;
             chamferedButtonRef.removeEventListener("mouseenter", () => setHoverAction(true));
             chamferedButtonRef.removeEventListener("mouseleave", () => setHoverAction(false));
-        }
-    }, [])
+    })
 
     function setHoverAction(active: boolean) {
         if (!chamferedButtonRef || !props.accentColor) return;
