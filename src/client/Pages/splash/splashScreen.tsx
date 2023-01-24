@@ -32,12 +32,11 @@ const SplashScreen: solid.Component = () => {
         }
         if (textRef) textRef.style.animation = `${style.fadeInStopOut} 5s ease`
         await sleep(5000);
-        if (location.pathname == "/splash") navigate("/title");
+        if (location.pathname == "/splash") navigate("/load");
 
     })
 
     solid.onCleanup(() => {
-        console.log("clean up");
         sessionStorage.setItem("splashScreen", "true");
     })
 
@@ -47,7 +46,7 @@ const SplashScreen: solid.Component = () => {
         if (!containerRef) return;
         containerRef.style.opacity = "0";
         containerRef.style.animation = "fadeOut 0.3s linear";
-        await sleep(3000);
+        await sleep(300);
         e.retry(true);
     })
 
@@ -59,7 +58,7 @@ const SplashScreen: solid.Component = () => {
                     <h1><TranslateText content="splashScreen.caution.title" /></h1>
                     <p><TranslateText content="splashScreen.caution.description" /></p>
                 </div>
-                <div class={style.skip} classList={{ hide: hideSkip() }} onClick={() => { navigate("/title") }}>
+                <div class={style.skip} classList={{ hide: hideSkip() }} onClick={() => { navigate("/load") }}>
                     <h2>skip</h2> <div class="iconWrapper"><BsChevronDoubleRight /></div>
                 </div>
             </div>
