@@ -1,10 +1,22 @@
 @import "../../Assets/mixin.scss";
 
-.gradientButton{
-    border-radius:4px;
+.gradientButton {
     text-align: center;
+    background-image: linear-gradient(to right, transparent, $inputBackgroundColor, transparent);
+    transition: 0.2s;
+    margin: 4px;
+    border-radius: 4px;
+    padding: 0 4px;
+    min-height: 32px;
 
-    &:hover{
-        border: 1px solid $bordercolor;
+    &:hover {
+        box-shadow: 0 0 4px 0 whitesmoke;
+        background-color: $inputForegroundColor;
+    }
+
+    &:active {
+        box-shadow: 0 0 4px 0 $accentColor;
+        background-color: $backgroundSubColor;
+        transform: scale(0.98);
     }
 }
