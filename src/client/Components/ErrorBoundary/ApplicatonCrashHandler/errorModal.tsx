@@ -14,13 +14,11 @@ const ErrorModal: solid.Component<{ message: string }> = (props) => {
         <div class={style.modal} classList={{ hide: !show() }}>
             <div class={style.inner}>
                 <div class={style.titleBar}>
-                    {/* <p><TranslateText defaultValue="Game Crashed!" content="crashHandler.title" /></p> */}
-                    <p>繧ｨ繝ｩ繝ｼ</p>
+                    <p><TranslateText defaultValue="Game Crashed!" content="crashHandler.title" /></p>
                     <div class={style.closebtn}>
                     </div>
                 </div>
-                {/* <h2><TranslateText defaultValue="Game Crashed!" content="crashHandler.header" /></h2> */}
-                <h2>繧ｯ繝ｩ繝?す繝･縺励∪縺励◆</h2>
+                <h2><TranslateText defaultValue="Game Crashed!" content="crashHandler.header" /></h2>
                 <p>
                     <TranslateText content="crashHandler.modal.description" /> <br />
                     <code>{props.message}</code>
