@@ -1,0 +1,13 @@
+{
+    "version":"1.0.0",
+    "DBName": "FeatureMeV0.7DataBase",
+    "databases": [
+        "BackgroundStore",
+        "BehaviorStore",
+        "FontStore",
+        "MusicStore",
+        "ReplayStore",
+        "SoundEffectStore",
+        "StoryStore"
+    ]
+}
