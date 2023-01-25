@@ -1,11 +1,11 @@
-const enviroment:enviroment = {
+const enviroment: enviroment = {
     language: navigator.language.toLowerCase().replace(/-/g, "_"),
     termsVersion: "0.0.0",
     termsAccepted: false,
     initializedSettings: false,
     userData: {
         name: "",
-        id:""
+        id: ""
     }
 }
 
@@ -29,7 +29,7 @@ const musicSelect = {
 }
 
 const DBVersion = {
-    version: 0,
+    version: "0.0.0",
     initialized: false,
     updated: new Date().getDate(),
 }
@@ -99,20 +99,20 @@ const gameConfig: gameConfig = {
         },
         judgeText: {
             show: true,
-            direction:0,
-            position:-4
+            direction: 0,
+            position: -4
         }
     },
     audio: {
         masterVolume: 1,
         musicVolume: 1,
         effectVolume: 1,
-        audioStereo:0,
-        positional:false,
-        positionalIntensity:1
+        audioStereo: 0,
+        positional: false,
+        positionalIntensity: 1
     }
 }
 
 
 
-export {enviroment,resourcesDownloaded,DBVersion,gameConfig,musicSelect};
+export { enviroment, resourcesDownloaded, DBVersion, gameConfig, musicSelect };
