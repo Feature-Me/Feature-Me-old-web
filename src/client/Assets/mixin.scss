@@ -68,6 +68,7 @@
     clip-path: $chamferedClip;
 }
 
+
 $chamferedClip: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
 $pageBackgroundColor: rgb(20, 20, 30);
 $inputBackgroundColor: rgb(65, 64, 64);
@@ -101,4 +102,4 @@ $ozma: linear-gradient(45deg,
         hsl(160, 100%, 50%), hsl(200, 100%, 50%),
         hsl(240, 100%, 50%), hsl(280, 100%, 50%),
         hsl(320, 100%, 50%));
-$prostage:rgb(160,40,40)
+$prostage:rgb(160,40,40);
