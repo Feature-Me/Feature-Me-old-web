@@ -5,4 +5,29 @@
     width: 100%;
     background-color: $transparent-bg;
     @include blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .modal {
+        height: 50%;
+        width: 50%;
+        min-height: 240px;
+        min-width: 360px;
+        background-color: $mainBackgroundColor;
+        box-shadow: 0 0 4px 1px $borderColor;
+        border-radius: 4px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 64px 2px 1fr;
+        row-gap: 8px;
+        padding: 8px;
+
+        hr {
+            margin: 0;
+            height: 2px;
+            width: 100%;
+            color: $borderColor;
+        }
+    }
 }
