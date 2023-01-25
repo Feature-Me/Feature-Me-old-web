@@ -1,7 +1,7 @@
 import * as solid from "solid-js";
 import { Routes, Route, Navigate } from "@solidjs/router";
 
-import Initializer from "Pages/initializer/initializer";
+import Initializer from "Pages/appInitializer/appInitializer";
 import SplashScreen from "Pages/splash/splashScreen";
 import Loader from "Pages/loader/loader";
 
