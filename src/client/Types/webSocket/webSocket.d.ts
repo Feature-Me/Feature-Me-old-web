@@ -1,0 +1,3 @@
+interface webSocketReturnValue {
+    success:boolean
+}
