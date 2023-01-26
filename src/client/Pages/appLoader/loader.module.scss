@@ -13,21 +13,32 @@
         height: 50%;
         width: 50%;
         min-height: 240px;
-        min-width: 360px;
+        min-width: 480px;
         background-color: $mainBackgroundColor;
         box-shadow: 0 0 4px 1px $borderColor;
         border-radius: 4px;
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 64px 2px 1fr;
+        grid-template-rows: 64px 2px 1fr 2px 40px;
         row-gap: 8px;
         padding: 8px;
+        overflow: auto;
+
+        h1 {
+            line-height: 64px;
+        }
 
         hr {
             margin: 0;
             height: 2px;
             width: 100%;
             color: $borderColor;
+        }
+
+        .interactions {
+            display: flex;
+            justify-content: flex-end;
+            column-gap: 8px;
         }
     }
 }
