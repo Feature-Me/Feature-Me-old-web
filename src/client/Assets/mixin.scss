@@ -4,17 +4,17 @@
 }
 
 @mixin font-title {
-    font-family: "Julius Sans One", "IBM Plex Sans JP", sans-serif;
+    font-family: "Julius Sans One", "IBM Plex Sans JP", "游ゴシック", "游ゴシック体", sans-serif;
     font-weight: bold;
 }
 
 @mixin font-header {
-    font-family: "IBM Plex Sans JP", sans-serif;
+    font-family: "IBM Plex Sans JP", "游ゴシック", "游ゴシック体" sans-serif;
     font-weight: bold;
 }
 
 @mixin font-body {
-    font-family: "IBM Plex Sans JP", sans-serif;
+    font-family: "IBM Plex Sans JP", "游ゴシック", "游ゴシック体", sans-serif;
 }
 
 @mixin font-gameText {
@@ -73,21 +73,21 @@ $chamferedClip: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 
 $pageBackgroundColor: rgb(20, 20, 30);
 $mainBackgroundColor: rgb(20, 20, 20);
 $inputBackgroundColor: rgb(65, 64, 64);
-$inputForegroundColor: rgb(51,54,63);
-$backgroundSubColor: rgb(37,40,44);
+$inputForegroundColor: rgb(51, 54, 63);
+$backgroundSubColor: rgb(37, 40, 44);
 $grayBackgrund: rgb(114, 116, 117);
 $transparent-bg: rgb(7, 8, 14, 0.75);
 $cardBackground: rgba(73, 73, 96, 0.5);
 $floatBackground: rgb(42, 42, 57);
 $black: rgb(7, 8, 14);
-$accentColor: rgb(17,137,218);
-$clickedAccentColor: rgb(17,95,218);
-$textColor: rgb(245,245,245);
-$secondaryText: rgb(160,160,160);
-$blackTextColor: rgb(8,14,20);
-$borderColor: rgb(245,245,245);
+$accentColor: rgb(17, 137, 218);
+$clickedAccentColor: rgb(17, 95, 218);
+$textColor: rgb(245, 245, 245);
+$secondaryText: rgb(160, 160, 160);
+$blackTextColor: rgb(8, 14, 20);
+$borderColor: rgb(245, 245, 245);
 $red: rgb(202, 28, 28);
-$redSecondary: rgb(202,28,28);
+$redSecondary: rgb(202, 28, 28);
 
 
 $fontSize: 16px;
@@ -103,4 +103,4 @@ $ozma: linear-gradient(45deg,
         hsl(160, 100%, 50%), hsl(200, 100%, 50%),
         hsl(240, 100%, 50%), hsl(280, 100%, 50%),
         hsl(320, 100%, 50%));
-$prostage:rgb(160,40,40);
+$prostage: rgb(160, 40, 40);
