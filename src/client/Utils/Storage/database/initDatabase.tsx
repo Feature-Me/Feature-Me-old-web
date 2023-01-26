@@ -5,30 +5,34 @@ import databaseInfo from "Assets/StaticInfo/databaseinfo.json";
 import DatabaseError from "Utils/Errors/DatabaseError";
 
 function initDatabase() {
-    try {
-        if (compareVersions(databaseInfo.version, JSON.parse(localStorage.getItem("DBVersion") || '{version:"0.0.0"}').version) != 1) return;
-        console.log("initializing database");
+    return new Promise<void>((resolve, reject) => {
+        try {
+            if (compareVersions(databaseInfo.version, JSON.parse(localStorage.getItem("DBVersion") || '{version:"0.0.0"}').version) != 1) {
+                resolve();
+                return;
+            }
+            const db = new Dexie(databaseInfo.DBName);
 
-        const db = new Dexie(databaseInfo.DBName);
+            let stores: { [key: string]: string } = {};
+            for (const key of databaseInfo.databases) {
+                stores[key] = "++index";
+            }
 
-        let stores: { [key: string]: string } = {};
-        for (const key of databaseInfo.databases) {
-            stores[key] = "++index";
+            db.version(db.verno + 1).stores({ ...stores });
+            db.open().then((database) => {
+                database.close();
+                localStorage.setItem("DBVersion", JSON.stringify({ version: databaseInfo.version, initialized: true, updated: Date.now() }));
+                resolve();
+            }).catch(error => {
+                reject();
+                throw new DatabaseError("cannot open database");
+            });
+
+
+        } catch (error) {
+            reject();
         }
-
-        db.version(db.verno + 1).stores({ ...stores });
-        db.open().then((database) => {
-            database.close();
-        }).catch(error => {
-            console.error(error);
-            throw new DatabaseError("cannot open database");
-        })
-
-        localStorage.setItem("DBVersion", JSON.stringify({ version: databaseInfo.version, initialized: true, updated: Date.now() }));
-    } catch (error) {
-        console.error(error);
-        throw error;
-    }
+    })
 }
 
 
