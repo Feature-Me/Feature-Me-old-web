@@ -4,13 +4,20 @@ import initLocalStorage from "Utils/Storage/LocalStorage/initLocalStorage";
 import initDatabase from "Utils/Storage/database/initDatabase";
 
 function initStorageFromLoader(setTitle: Setter<string>, setDescription: Setter<string>) {
-    setTitle(i18next.t("loader.storage.title"));
+    return new Promise<void>(async (resolve, reject) => {
+        try {
+            setTitle(i18next.t("appLoader.storage.title"));
 
-    setDescription(i18next.t("loader.storage.localStorage"));
-    initLocalStorage();
+            setDescription(i18next.t("appLoader.storage.localStorage"));
+            initLocalStorage();
 
-    setDescription(i18next.t("loader.storage.database"));
-    initDatabase();
+            setDescription(i18next.t("appLoader.storage.database"));
+            initDatabase().then(resolve).catch(reject);
+
+        } catch (error) {
+            reject();
+        }
+    })
 
 }
 
