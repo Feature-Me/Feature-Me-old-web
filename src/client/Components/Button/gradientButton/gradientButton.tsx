@@ -1,6 +1,6 @@
 import * as solid from "solid-js";
 
-import style from "./chamferedButton.module.scss";
+import style from "./gradientButton.module.scss";
 
 interface buttonPropsType extends solid.JSX.ButtonHTMLAttributes<HTMLButtonElement> {
     accentColor?: string
