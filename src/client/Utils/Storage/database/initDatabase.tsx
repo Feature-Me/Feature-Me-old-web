@@ -19,7 +19,10 @@ function initDatabase() {
         db.version(db.verno + 1).stores({ ...stores });
         db.open().then((database) => {
             database.close();
-        }).catch(error => { throw new DatabaseError("cannot open database") })
+        }).catch(error => {
+            console.error(error);
+            throw new DatabaseError("cannot open database");
+        })
 
         localStorage.setItem("DBVersion", JSON.stringify({ version: databaseInfo.version, initialized: true, updated: Date.now() }));
     } catch (error) {

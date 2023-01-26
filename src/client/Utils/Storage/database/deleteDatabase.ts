@@ -1,7 +1,5 @@
-import databaseInfo from "Config/databaseinfo.json"
-
-function deleteDatabase(){
-    const dbOpenRequest = indexedDB.deleteDatabase(databaseInfo.DBName)
+import databaseInfo from "Assets/StaticInfo/databaseinfo.json";
+function deleteDatabase() {
 }
 
 export default deleteDatabase;

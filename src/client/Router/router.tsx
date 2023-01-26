@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "@solidjs/router";
 
 import Initializer from "Pages/appInitializer/appInitializer";
 import SplashScreen from "Pages/splash/splashScreen";
-import Loader from "Pages/loader/loader";
+import Loader from "Pages/appLoader/loader";
 
 
 const PageRouter: solid.Component = () => {
