@@ -3,6 +3,7 @@ import I18nProvider from "Components/i18nProvider/i18nProvider";
 import i18next from "i18next";
 import * as solid from "solid-js";
 import { Router, staticIntegration } from "@solidjs/router";
+import toast,{ Toaster } from "solid-toast";
 
 import PageRouter from "Router/router";
 
@@ -42,6 +43,7 @@ const App: solid.Component = () => {
                             </div>
                             <div class={style.content}>
                                 <PageRouter />
+                                <Toaster />
                             </div>
                             <div class={style.overlay}>
 
