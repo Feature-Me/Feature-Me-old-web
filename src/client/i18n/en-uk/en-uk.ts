@@ -10,20 +10,22 @@ import ENUKSettingsPage from "./settings/en-uk.settingspage";
 import ENUKCrashHandler from "./others/en-uk.crashHandler";
 import ENUKMultiPlayerTranslation from "./play/multiPlayer/en-uk.multiplayer";
 import ENUKSplashScreenTranslation from "./others/en-uk.splashscreen";
+import ENUKAppLoaderTranslation from "./appLoader/en-uk.appLoader";
 
 const ENUKtranslation = {
     title: ENUKTitleTranslation,
     terms: ENUKTermsTranslation,
     resourcesManager: ENUKResourcesManagerTranslation,
-    cacheController : ENUKCacheController,
+    cacheController: ENUKCacheController,
     cautions: ENUKCautions,
     menu: ENUKMenuTranslation,
     head: ENUKHeadTranslation,
     musicSelect: ENUKMusicSelectTranslation,
     settingsPage: ENUKSettingsPage,
-    splashScreen:ENUKSplashScreenTranslation,
-    multiPlay:ENUKMultiPlayerTranslation,
-    crashHandler:ENUKCrashHandler
+    splashScreen: ENUKSplashScreenTranslation,
+    multiPlay: ENUKMultiPlayerTranslation,
+    crashHandler: ENUKCrashHandler,
+    appLoader: ENUKAppLoaderTranslation
 }
 
 export default ENUKtranslation;
