@@ -1,0 +1,8 @@
+{
+    "github": {
+        "repo": "https://github.com/Feature-Me/Feature-Me"
+    },
+    "resources": {
+        "updateMap": "/update/map"
+    }
+}
