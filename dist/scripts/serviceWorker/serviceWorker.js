@@ -2,8 +2,16 @@ const CACHE_NAME = `feature-me-cache-ver-0.7.0-v1`;
 
 const cacheFiles = [
     "/",
-    "./scripts/bundle.js",
-    "./favicon"
+    "/scripts/bundle.js",
+    "/favicon"
+]
+
+const excludeFilePaths = [
+    "extension",
+    "chrome-extension",
+    "/resources",
+    "/update/map",
+    "socket.io"
 ]
 
 // Use the install event to pre-cache all initial resources.
@@ -15,6 +23,13 @@ self.addEventListener('install', event => {
     console.log("[Service Worker] installed Service Worker.");
 });
 
+self.addEventListener("activate", event => {
+    event.waitUntil((async () => {
+        event.waitUntil(self.clients.claim());
+        event.waitUntil(self.skipWaiting());
+    })())
+})
+
 self.addEventListener('fetch', event => {
     event.respondWith((async () => {
         const cache = await caches.open(CACHE_NAME);
@@ -22,6 +37,11 @@ self.addEventListener('fetch', event => {
         try {
             // Try to fetch the resource from the network.
             const fetchResponse = await fetch(event.request);
+
+            // If it fetched excluded files, they will not save in the cache
+            for (const path of excludeFilePaths) {
+                if (event.request.url.includes(path)) return fetchResponse;
+            }
 
             // Save the resource in the cache.
             cache.put(event.request, fetchResponse.clone());
