@@ -42,11 +42,9 @@ user.on("connection", (socket) => {
                 }
             }
             users.push(user);
-            socket.emit("loggedIn", data);
             callback({ success: true, data });
         } catch (error) {
             console.log(error);
-            socket.emit("loginError");
             callback({ success: false, data: undefined });
         }
     });
