@@ -15,7 +15,13 @@ function connectToWebSocket(setTitle: Setter<string>, setDescription: Setter<str
         setUserWebSocket(socket);
         setDescription(i18next.t("appLoader.websocket.fetchingData"));
 
+        const connectionTimeout = setTimeout(() => {
+            console.log("timeout");
+            reject("connection timed out");
+        }, 30000);
+
         socket.on("connect", () => {
+            clearTimeout(connectionTimeout);
             const environment = JSON.parse(localStorage.getItem("environment") || "{}");
             const userData = { name: "", id: "", ...environment.userData }
             setUserOnline(true);
@@ -23,9 +29,16 @@ function connectToWebSocket(setTitle: Setter<string>, setDescription: Setter<str
             socket.emit("login", userData, (res: loginData) => {
                 if (!res.success) reject("Login failed");
                 setUserData(res.data);
+                socket.off("disconnect");
+                clearTimeout(loginTimeout);
                 resolve();
-            })
-        })
+            });
+            const loginTimeout = setTimeout(() => {
+                console.log("timeout");
+                reject("socket timed out");
+            }, 30000);
+        });
+        socket.on("disconnect", reject);
     })
 }
 

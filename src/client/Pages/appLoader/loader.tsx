@@ -28,7 +28,7 @@ const Loader: solid.Component = () => {
     const interactions = [
         { type: "cancel", label: i18next.t("appLoader.cancel"), func: () => rejectFunc() },
         { type: "ok", label: i18next.t("appLoader.ok"), func: () => { } },
-        { type: "retry", label: i18next.t("appLoader.retry"), func: runLoaders },
+        { type: "retry", label: i18next.t("appLoader.retry"), func: retry },
         { type: "report", label: i18next.t("appLoader.report"), func: () => window.open(path.join(defaultUrl.github.repo, "/issues")) }
     ]
 
@@ -37,6 +37,14 @@ const Loader: solid.Component = () => {
         setRenderBackground(true);
         runLoaders();
     });
+    
+    function retry(){
+        runLoaders();
+    }
+
+    solid.onCleanup(() => {
+        rejectFunc();
+    })
 
     function runLoaders() {
         new Promise<void>(async (resolve, reject) => {
@@ -47,14 +55,14 @@ const Loader: solid.Component = () => {
                     await func(setTitle, setDescription);
                 } catch (error) {
                     console.error(error);
-                    reject();
+                    reject(error);
                     break;
                 }
             }
             resolve();
-        }).catch(() => {
+        }).catch((error) => {
             setTitle(i18next.t("appLoader.failed.title"));
-            setDescription(i18next.t("appLoader.failed.description"));
+            setDescription(`${i18next.t("appLoader.failed.description")}\n${error || ""}`);
             setActiveInteraction(["retry", "report"]);
         })
     }
