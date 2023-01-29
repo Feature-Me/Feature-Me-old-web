@@ -7,7 +7,6 @@ function fetchResourcesUpdate() {
             method: "GET",
             headers: {
                 "Content-type": "application/json",
-
             }
         }).then(res => res.json()).then((res: updateMap) => {
             const resourcesInfo = JSON.parse(localStorage.getItem("resourcesDownloaded") || "{}");
@@ -30,6 +29,7 @@ function fetchResourcesUpdate() {
             resolve(updates);
         }).catch(error => {
             console.error(error);
+            resolve({ background: {}, behavior: {}, music: {} });
         })
     })
 }
