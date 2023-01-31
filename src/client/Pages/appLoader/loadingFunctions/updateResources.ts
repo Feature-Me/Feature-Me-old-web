@@ -5,7 +5,6 @@ import fetchResourcesUpdate from "Utils/Storage/resources/fetchUpdate/fetchUpdat
 import downloadResourceFile from "Utils/Storage/resources/downloadResources/downloadFile";
 import getVersionMapInfo from "Utils/getVersionMapInfo/getVersionMapInfo";
 import fileSize from "filesize";
-import sleep from "Utils/sleep/sleep";
 
 
 function uptdateResourcesFromLoader(setTitle: solid.Setter<string>, setDescription: solid.Setter<string>) {
