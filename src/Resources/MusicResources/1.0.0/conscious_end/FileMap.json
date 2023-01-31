@@ -1,0 +1,56 @@
+{
+    "version": "1.0.0",
+    "type": "music",
+    "title": "conscious_end",
+    "made": "official",
+    "composer": "second_cousin",
+    "showBpm": "230",
+    "time": 129000,
+    "demo": {
+        "start": 13000,
+        "end": 34000
+    },
+    "backgroundData": null,
+    "backgroundType": "image",
+    "music": [
+        {
+            "name": "conscious_end",
+            "src": "Music/conscious_end.mp3"
+        }
+    ],
+    "defaultMusic": "conscious_end",
+    "license": "2023 second_cousin",
+    "thumbnail": "Image/music.png",
+    "behavior": null,
+    "difficulties": [
+        /*
+        {
+            "name": "memory",
+            "level": 3,
+            "constant": 2,
+            "chartDesigner": "Mksk vs Rae",
+            "chartFile": "Chart/memory.fmc"
+        },
+         {
+            "name": "advance",
+            "level": 9,
+            "constant": 5,
+            "chartDesigner": "Mksk vs Rae",
+            "chartFile": "Chart/advance.fmc"
+        },
+        {
+            "name": "prospects",
+            "level": 16,
+            "constant": 6,
+            "chartDesigner": "Mksk vs Rae",
+            "chartFile": "Chart/prospects.fmc"
+        },
+        {
+            "name": "ozma",
+            "level": 20,
+            "constant": 0,
+            "chartDesigner": "second_cousin",
+            "chartFile": "Chart/ozma.fmc"
+        }*/
+    ]
+}

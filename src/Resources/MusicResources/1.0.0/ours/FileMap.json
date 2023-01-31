@@ -1,0 +1,54 @@
+{
+    "version": "1.0.0",
+    "type": "music",
+    "title": "Ours",
+    "composer": "Goners",
+    "showBpm": "80",
+    "time": 99000,
+    "demo": {
+        "start": 60000,
+        "end": 75000
+    },
+    "backgroundData": null,
+    "backgroundType": "image",
+    "music": [
+        {
+            "name": "Ours",
+            "src": "Music/ours.mp3"
+        }
+    ],
+    "defaultMusic": "Ours",
+    "license": "2021 Goners. All rights reserved.",
+    "thumbnail": "Image/music.png",
+    "behavior": null,
+    "difficulties": [
+        /*         {
+            "name": "memory",
+            "level":3,
+            "constant":0,
+            "chartDesigner":"Mksk",
+            "chartFile":"Chart/memory.fmc"
+        },
+        {
+            "name": "advance",
+            "level": 6,
+            "constant": 1,
+            "chartDesigner": "Mksk",
+            "chartFile": "Chart/advance.fmc"
+        },
+        {
+            "name": "prospects",
+            "level": 12,
+            "constant": 6,
+            "chartDesigner": "Mksk",
+            "chartFile": "Chart/prospects.fmc"
+        }, */
+        {
+            "name": "ozma",
+            "level": 11,
+            "constant": 5,
+            "chartDesigner": "Mksk",
+            "chartFile": "Chart/ozma.fmc"
+        }
+    ]
+}
