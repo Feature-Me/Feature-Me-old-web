@@ -3,7 +3,7 @@
     "title": "conscious_end",
     "made": "official",
     "composer": "second_cousin",
-    "bpm": "230",
+    "showBpm": "230",
     "time": 129000,
     "demo": {
         "start": 13000,

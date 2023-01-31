@@ -2,7 +2,7 @@
     "version": "1.0.0",
     "title": "To Summer",
     "composer": "Goners",
-    "bpm": "120",
+    "showBpm": "120",
     "time": 117000,
     "demo": {
         "start": 71000,
@@ -20,7 +20,7 @@
             "src":"Music/To_Summer_2022.mp3"
         } */
     ],
-    "defaultMusic": "To Summer-2022",
+    "defaultMusic": "To Summer",
     "license": "2021 Goners. All rights reserved.",
     "thumbnail": "Image/music.png",
     "behavior": null,

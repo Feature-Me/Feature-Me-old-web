@@ -2,7 +2,7 @@
     "version": "1.0.0",
     "title": "Ours",
     "composer": "Goners",
-    "bpm": "80",
+    "showBpm": "80",
     "time": 99000,
     "demo": {
         "start": 60000,

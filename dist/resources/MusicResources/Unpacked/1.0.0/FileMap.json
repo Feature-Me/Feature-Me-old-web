@@ -1,11 +1,14 @@
 {
-    "version": "1.0.0.2",
-    "folders": [
+    "version": "1.0.0",
+    "packageName":"Resources Ver.1.0.0",
+    "add": [
         "conscious_end",
         "conscious_end_whats_done_is_already_done",
         "Feat you",
         "ours",
         "To summer",
         "Tutorial"
-    ]
+    ],
+    "modify":[],
+    "delete":[]
 }
