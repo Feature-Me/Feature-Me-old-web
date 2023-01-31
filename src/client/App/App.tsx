@@ -3,7 +3,7 @@ import I18nProvider from "Components/i18nProvider/i18nProvider";
 import i18next from "i18next";
 import * as solid from "solid-js";
 import { Router, staticIntegration } from "@solidjs/router";
-import toast,{ Toaster } from "solid-toast";
+import toast, { Toaster } from "solid-toast";
 
 import PageRouter from "Router/router";
 
@@ -13,6 +13,7 @@ import CrashHandler from "Components/ErrorBoundary/ApplicatonCrashHandler/crashH
 import style from "./App.module.scss";
 import "./style.scss";
 import Background from "Components/Background/background";
+import { Howl } from "howler";
 
 const App: solid.Component = () => {
     const [loaded, setLoaded] = solid.createSignal(true);
