@@ -28,8 +28,6 @@ function uptdateResourcesFromLoader(setTitle: solid.Setter<string>, setDescripti
         console.log(versionMapInfo);
 
 
-
-
         for (const type in downloadFunctions) {
             if (Object.prototype.hasOwnProperty.call(downloadFunctions, type)) {
                 const element = downloadFunctions[type];
@@ -53,8 +51,9 @@ function uptdateResourcesFromLoader(setTitle: solid.Setter<string>, setDescripti
                 }
             }
         }
+        resolve();
+    });
 
-    })
 }
 
 export default uptdateResourcesFromLoader;
