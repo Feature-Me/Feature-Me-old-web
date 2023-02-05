@@ -22,9 +22,10 @@ const Loader: solid.Component = () => {
     const [title, setTitle] = solid.createSignal<string>("");
     const [description, setDescription] = solid.createSignal<string>("");
     const [activeInteraction, setActiveInteraction] = solid.createSignal<Array<string>>(["cancel"]);
+    const [fadeOut, setFadeOut] = solid.createSignal<boolean>(false);
     let rejectFunc = () => { };
 
-    const functions: Array<FunctionWithType<solid.Setter<string>>> = [initStorageFromLoader, connectToWebSocket, uptdateResourcesFromLoader];
+    const functions: Array<FunctionWithType<solid.Setter<string>>> = [initStorageFromLoader, connectToWebSocket, /* uptdateResourcesFromLoader */];
     const interactions = [
         { type: "cancel", label: i18next.t("appLoader.cancel"), func: () => rejectFunc() },
         { type: "ok", label: i18next.t("appLoader.ok"), func: () => { } },
@@ -35,40 +36,54 @@ const Loader: solid.Component = () => {
 
     solid.onMount(() => {
         setRenderBackground(true);
-        runLoaders();
+        runLoaders().then(async () => {
+            await sleep(1500);
+            setFadeOut(true)
+            await sleep(500);
+            navigation();
+        });
     });
-    
-    function retry(){
+
+    function retry() {
         runLoaders();
+    }
+
+    function navigation() {
+        const environment = JSON.parse(localStorage.getItem("environment") || "{}");
+        if (environment.initializedSettings) navigate("/title");
+        else navigate("/setup");
     }
 
     solid.onCleanup(() => {
         rejectFunc();
     })
 
-    function runLoaders() {
-        new Promise<void>(async (resolve, reject) => {
-            rejectFunc = reject;
-            setActiveInteraction(["cancel"]);
-            for (const func of functions) {
-                try {
-                    await func(setTitle, setDescription);
-                } catch (error) {
-                    console.error(error);
-                    reject(error);
-                    break;
+    async function runLoaders() {
+        try {
+            return await new Promise<void>(async (resolve, reject) => {
+                rejectFunc = reject;
+                setActiveInteraction(["cancel"]);
+                for (const func of functions) {
+                    try {
+                        await func(setTitle, setDescription);
+                    } catch (error) {
+                        console.error(error);
+                        reject(error);
+                        break;
+                    }
                 }
-            }
-            resolve();
-        }).catch((error) => {
+                resolve();
+            });
+        } catch (error_1) {
             setTitle(i18next.t("appLoader.failed.title"));
-            setDescription(`${i18next.t("appLoader.failed.description")}\n${error || ""}`);
+            setDescription(`${i18next.t("appLoader.failed.description")}\n${error_1 || ""}`);
             setActiveInteraction(["retry", "report"]);
-        })
+        }
     }
 
+
     return (
-        <div class={style.loader}>
+        <div class={`${style.loader} ${fadeOut() && style.fadeOut}`}>
             <div class={style.modal}>
                 <h1>{title() || "Loading"}</h1>
                 <hr />
