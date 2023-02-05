@@ -44,8 +44,7 @@ const SplashScreen: solid.Component = () => {
         if (location.pathname != "/splash") return;
         if (!e.defaultPrevented) e.preventDefault();
         if (!containerRef) return;
-        containerRef.style.opacity = "0";
-        containerRef.style.animation = "fadeOut 0.3s linear";
+        containerRef.style.animation = "fadeOut 0.3s linear forwards";
         await sleep(300);
         e.retry(true);
     })
