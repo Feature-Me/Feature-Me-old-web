@@ -1,22 +1,53 @@
 import { useBeforeLeave, useLocation, useNavigate } from "@solidjs/router";
-import { BsChevronDoubleRight } from "solid-icons/bs";
 import * as solid from "solid-js";
-import { Transition } from "solid-transition-group";
-import sleep from "Utils/sleep/sleep";
+import { BsArrowUp, BsArrowUpLeft, BsGear } from "solid-icons/bs";
 
-import style from "./splashScreen.module.scss";
+import GlitchImage from "Components/GlitchImage/glitchImage";
 
-import splashImage1 from "Assets/Images/splash-logo-1.png";
-import slpashImage2 from "Assets/Images/splash-logo-2.png";
-import TranslateText from "Components/TranslateText/TranslateText";
+import version from "Assets/StaticInfo/version.json";
+
+import style from "./title.module.scss";
+
+import background from "Assets/Images/tidal_wreck_far_camera.png";
 
 const Title: solid.Component = () => {
     const navigate = useNavigate();
-    const location = useLocation();
+
+    function closeWindow() {
+        window.close();
+        //location.href = "https://feature-me-.onrender.com/"
+        history.back()
+    }
+
+    function navigateHome() {
+        navigate("/home");
+    }
+
 
     return (
-        <div class={style.splashScreen}>
-            
+        <div class={style.title}>
+            <div class={style.background}>
+                <GlitchImage src={background} />
+            </div>
+            <div class={style.titleText}>
+                <h1>Feature Me</h1>
+                <div class={style.buttons}>
+                    <p data-color="#03a7eb" onClick={closeWindow}>
+                        <BsArrowUpLeft />
+                        Exit
+                    </p>
+                    <p data-color="#149610" onClick={navigateHome}>
+                        <BsArrowUp />
+                        Begin
+                    </p>
+                </div>
+            </div>
+            <div class={style.footer}>
+                <p>Feature Me {version.version} Mksk and Rae the Feature Me Project <br /> ©{new Date().getFullYear()} Feature Me All rights reserved.</p>
+                <div class={`iconWrapper ${style.settings}`} onClick={()=>{}}>
+                    <BsGear class={style.settingsIcon} />
+                </div>
+            </div>
         </div>
     )
 }

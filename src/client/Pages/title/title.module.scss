@@ -1,0 +1,143 @@
+@import "../../Assets/mixin.scss";
+
+.title {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    animation: blackFadeIn 1s linear forwards;
+    @include font-title;
+
+    .titleText {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+
+        font-size: calc((100% + 0.25vw) * 1.5);
+
+        .buttons {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: 1fr;
+            font-size: 0.8em;
+            column-gap: 16px;
+
+            p {
+                position: relative;
+                padding: 8px;
+                display: flex;
+                align-items: center;
+                transition: 0.2s;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    height: calc(100% - 12px);
+                    width: calc(100% - 12px);
+                    top: 4px;
+                    left: 4px;
+                    border: 2px solid $borderColor;
+                    transition: 0.2s;
+                    opacity: 0;
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    background-color: inherit;
+                    height: 80%;
+                    width: 100%;
+                    top: 100%;
+                    transform: perspective(1em) rotateX(25deg) scaleY(0.35);
+                    filter: blur(1em);
+                }
+
+                &:hover {
+                    background-color: rgb(20, 150, 16);
+                    box-shadow: 0 0 8px 4px rgb(20, 150, 16);
+
+                    //almost browsers does not support this
+                    &[data-background] {
+                        background-color: attr(data-color color, rgb(20, 150, 16)), ;
+                        box-shadow: 0 0 8px 4px attr(data-color color, rgb(20, 150, 16));
+                    }
+
+                    &::before {
+                        opacity: 1;
+                    }
+                }
+
+                &:active {
+                    transform: scale(0.98);
+                    filter: brightness(0.8);
+                }
+            }
+        }
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 0;
+        @include font-body;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 64px;
+
+        p {
+            color: $secondaryText;
+        }
+
+        .settings {
+            background-color: #424242;
+            box-shadow: 0 0 4px 2px rgb(255, 255, 255);
+            transition: 0.2s;
+
+            .settingsIcon {
+                transition: 0.2s;
+            }
+
+            &:hover {
+                box-shadow: 0 0 4px 2px #1189da;
+
+                .settingsIcon {
+                    transform: rotate(45deg) scale(0.9);
+                }
+            }
+        }
+    }
+
+
+}
+
+.background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transform: scale(1.5);
+    animation: scrollBackgroundImage 5s ease-out forwards;
+}
+
+@keyframes blackFadeIn {
+    from {
+        filter: brightness(0);
+    }
+
+    to {
+        filter: brightness(1);
+    }
+}
+
+@keyframes scrollBackgroundImage {
+    from {
+        top: 5%;
+    }
+
+    to {
+        top: 0;
+    }
+}
