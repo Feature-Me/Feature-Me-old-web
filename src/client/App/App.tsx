@@ -37,7 +37,7 @@ const App: solid.Component = () => {
             <solid.Show when={loaded()} fallback={<Loading />}>
                 <I18nProvider i18n={i18next}>
                     {/* memory router */}
-                    <Router source={staticIntegration({ value: "" })}>
+                    <Router /* source={staticIntegration({ value: "" })} */>
                         <div class={style.app}>
                             <div class={style.background}>
                                 <Background />
