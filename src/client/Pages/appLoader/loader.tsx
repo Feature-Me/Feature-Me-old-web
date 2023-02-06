@@ -44,6 +44,10 @@ const Loader: solid.Component = () => {
         });
     });
 
+    solid.onCleanup(() => {
+        rejectFunc();
+    })
+
     function retry() {
         runLoaders();
     }
@@ -53,10 +57,6 @@ const Loader: solid.Component = () => {
         if (environment.initializedSettings) navigate("/title");
         else navigate("/setup");
     }
-
-    solid.onCleanup(() => {
-        rejectFunc();
-    })
 
     async function runLoaders() {
         try {
@@ -83,7 +83,7 @@ const Loader: solid.Component = () => {
 
 
     return (
-        <div class={`${style.loader} ${fadeOut() && style.fadeOut}`}>
+        <div class={style.loader} classList={{ blackOut: fadeOut() }}>
             <div class={style.modal}>
                 <h1>{title() || "Loading"}</h1>
                 <hr />
