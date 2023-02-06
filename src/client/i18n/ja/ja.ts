@@ -12,6 +12,7 @@ import JASplashScreenTranslation from "./others/ja.splashScreen";
 import JAMultiPlayerTranslation from "./play/multiPlayer/ja.multiplayer";
 import JACrashHandlerTranslation from "./others/ja.crashHandler";
 import JAAppLoaderTranslation from "./appLoader/ja.appLoader";
+import JASetupTranslation from "./setup/ja.setup";
 
 const JAtranslation = {
     title: JATitleTranslation,
@@ -27,7 +28,8 @@ const JAtranslation = {
     splashScreen: JASplashScreenTranslation,
     multiPlay: JAMultiPlayerTranslation,
     crashHandler: JACrashHandlerTranslation,
-    appLoader: JAAppLoaderTranslation
+    appLoader: JAAppLoaderTranslation,
+    setup:JASetupTranslation
 }
 
 export default JAtranslation;
