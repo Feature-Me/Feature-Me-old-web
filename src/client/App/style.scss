@@ -1,4 +1,4 @@
-@import "../Assets/mixin.scss";
+@import "./mixin.scss";
 
 a {
     text-decoration: none;
@@ -53,6 +53,15 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.fadeOut {
+    animation: fadeOut 0.3s ease forwards;
+}
+
+.blackOut {
+    transition: 1s;
+    filter: brightness(0);
 }
 
 @keyframes fadeIn {
