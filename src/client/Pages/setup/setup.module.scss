@@ -1,0 +1,15 @@
+@import "../../App/mixin.scss";
+
+.setup {
+    height: 100%;
+    width: 100%;
+    background-color: $transparent-bg;
+    padding: 16px;
+    @include blur(20px);
+    display: grid;
+    grid-template-rows: 64px 1fr;
+    align-items: center;
+    justify-items: center;
+
+
+}
