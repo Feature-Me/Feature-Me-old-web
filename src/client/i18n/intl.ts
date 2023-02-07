@@ -16,7 +16,6 @@ const i18n = i18next.init({
         en_us: { translation: en_us },
         en_uk: { translation: en_uk },
         ja: { translation: ja },
-        zh_cn: { translation: zh_cn },
     },
     interpolation: {
         escapeValue: false,
