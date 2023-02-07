@@ -6,6 +6,7 @@ const JAAppLoaderTranslation = {
     "ok": "OK",
     "retry": "再試行",
     "report": "問題を報告",
+    "offline":"オフラインプレイ",
     "failed": {
         "title": "読み込みに失敗",
         "description": "ゲームの読み込みに失敗しました。"

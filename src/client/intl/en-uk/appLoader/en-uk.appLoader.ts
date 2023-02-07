@@ -6,6 +6,7 @@ const ENUKAppLoaderTranslation = {
     "ok": "OK",
     "retry": "Retry",
     "report": "Report issue",
+    "offline": "Play offline",
     "failed": {
         "title": "Failed to load data",
         "description": "Failed to load game data."
