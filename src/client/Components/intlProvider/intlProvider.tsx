@@ -1,4 +1,4 @@
-import { I18nContext } from 'i18n/intlContext';
+import { I18nContext } from 'intl/intlContext';
 import { i18n } from 'i18next';
 import { ChildrenReturn, Component, JSXElement } from 'solid-js';
 

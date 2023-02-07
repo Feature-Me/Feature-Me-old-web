@@ -1,5 +1,5 @@
 import i18n from "intl/intl";
-import I18nProvider from "Components/intlProvider/i18nProvider";
+import I18nProvider from "Components/intlProvider/intlProvider";
 import i18next from "i18next";
 import * as solid from "solid-js";
 import { Router, staticIntegration } from "@solidjs/router";
