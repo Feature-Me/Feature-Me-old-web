@@ -1,6 +1,7 @@
 import { useNavigate } from "@solidjs/router";
 import * as solid from "solid-js";
-import i18next from "i18next";
+
+import { useI18n } from "intl/intlContext";
 
 import { setRenderBackground } from "State/backgroundState";
 import GradientButton from "Components/Button/gradientButton/gradientButton";
@@ -19,6 +20,7 @@ import sleep from "Utils/sleep/sleep";
 
 const Loader: solid.Component = () => {
     const navigate = useNavigate();
+    const [t, intl] = useI18n();
     const [title, setTitle] = solid.createSignal<string>("");
     const [description, setDescription] = solid.createSignal<string>("");
     const [activeInteraction, setActiveInteraction] = solid.createSignal<Array<string>>(["cancel"]);
@@ -27,20 +29,24 @@ const Loader: solid.Component = () => {
 
     const functions: Array<FunctionWithType<solid.Setter<string>>> = [initStorageFromLoader, connectToWebSocket, /* uptdateResourcesFromLoader */];
     const interactions = [
-        { type: "cancel", label: i18next.t("appLoader.cancel"), func: () => rejectFunc() },
-        { type: "ok", label: i18next.t("appLoader.ok"), func: () => { } },
-        { type: "retry", label: i18next.t("appLoader.retry"), func: retry },
-        { type: "report", label: i18next.t("appLoader.report"), func: () => window.open(path.join(defaultUrl.github.repo, "/issues")) }
+        { type: "cancel", label: t("appLoader.cancel"), func: () => rejectFunc() },
+        { type: "ok", label: t("appLoader.ok"), func: () => { } },
+        { type: "retry", label: t("appLoader.retry"), func: retry },
+        { type: "report", label: t("appLoader.report"), func: () => window.open(path.join(defaultUrl.github.repo, "/issues")) },
+        { type: "offline", label: t("appLoader.offline"), func: () => { } }
     ]
 
 
     solid.onMount(() => {
         setRenderBackground(true);
         runLoaders().then(async () => {
+            console.log("then");
             await sleep(1500);
             setFadeOut(true)
             await sleep(500);
             navigation();
+        }).catch(err => {
+            console.error(err);
         });
     });
 
@@ -74,10 +80,13 @@ const Loader: solid.Component = () => {
                 }
                 resolve();
             });
-        } catch (error_1) {
-            setTitle(i18next.t("appLoader.failed.title"));
-            setDescription(`${i18next.t("appLoader.failed.description")}\n${error_1 || ""}`);
+        } catch (err) {
+            const timeout = String(err).includes("timed out");
+            setTitle(t("appLoader.failed.title"));
+            setDescription(`${t("appLoader.failed.description")}\n${err || ""}`);
             setActiveInteraction(["retry", "report"]);
+            if (timeout) setActiveInteraction(i => [...i, "offline"]);
+            throw new Error(String(err));
         }
     }
 
