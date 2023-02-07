@@ -1,8 +1,6 @@
 import * as solid from "solid-js";
+import i18next from "i18next";
 import JSZip from "jszip";
-
-import { useI18n } from "intl/intlContext";
-
 import fetchResourcesUpdate from "Utils/Storage/resources/fetchUpdate/fetchUpdate";
 import downloadResourceFile from "Utils/Storage/resources/downloadResources/downloadFile";
 import getVersionMapInfo from "Utils/getVersionMapInfo/getVersionMapInfo";
@@ -10,8 +8,6 @@ import fileSize from "filesize";
 
 
 function uptdateResourcesFromLoader(setTitle: solid.Setter<string>, setDescription: solid.Setter<string>) {
-    const [t, intl] = useI18n();
-
     const [download, setDownload] = solid.createSignal({
         type: "",
         count: 0,
@@ -25,8 +21,8 @@ function uptdateResourcesFromLoader(setTitle: solid.Setter<string>, setDescripti
             { key: "behavior", func: () => { } },
             { key: "music", func: () => { } }
         ]
-        setTitle(t("appLoader.resources.title"));
-        setDescription(t("appLoader.resources.fetchUpdate"));
+        setTitle(i18next.t("appLoader.resources.title"));
+        setDescription(i18next.t("appLoader.resources.fetchUpdate"));
         const versionMap = await fetchResourcesUpdate();
         versionMapInfo = getVersionMapInfo(versionMap);
         console.log(versionMapInfo);
@@ -50,7 +46,7 @@ function uptdateResourcesFromLoader(setTitle: solid.Setter<string>, setDescripti
                             versionMapInfo.size -= data.size;
                             console.error(error);
                         })
-                        setDescription(`${t("appLoader.resources.installUpdate")} - ${download().type} \n ${download().count} / ${versionMapInfo.count} , ${fileSize(download().size)} / ${fileSize(versionMapInfo.size)}`);
+                        setDescription(`${i18next.t("appLoader.resources.installUpdate")} - ${download().type} \n ${download().count} / ${versionMapInfo.count} , ${fileSize(download().size)} / ${fileSize(versionMapInfo.size)}`);
                     }
                 }
             }
