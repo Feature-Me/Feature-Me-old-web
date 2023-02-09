@@ -57,9 +57,9 @@ const SplashScreen: solid.Component = () => {
                     <h1><TranslateText content="splashScreen.caution.title" /></h1>
                     <p><TranslateText content="splashScreen.caution.description" /></p>
                 </div>
-                <div class={style.skip} classList={{ hide: hideSkip() }} onClick={() => { navigate("/load") }}>
+                <button class={style.skip} classList={{ hide: hideSkip() }} onClick={() => navigate("/load")} role="button" tabIndex={0}>
                     <h2>skip</h2> <div class="iconWrapper"><BsChevronDoubleRight /></div>
-                </div>
+                </button>
             </div>
         </div>
     )

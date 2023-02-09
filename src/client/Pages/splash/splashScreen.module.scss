@@ -70,10 +70,15 @@
         }
 
         .skip {
+            appearance: none;
+            background-color: transparent;
+            border: none;
+            color: $textColor;
             position: absolute;
             display: grid;
             grid-template-rows: 1fr;
             grid-template-columns: 1fr auto;
+            min-width: 0;
             top: 16px;
             right: 16px;
             opacity: 0.8;
@@ -86,6 +91,12 @@
             &:active {
                 transform: scale(0.95);
                 filter: brightness(0.8)
+            }
+
+            &:focus-visible {
+                outline: none;
+                box-shadow: 0 0 4px 2px $activeColor;
+                border-radius: 4px;
             }
 
             h2 {
