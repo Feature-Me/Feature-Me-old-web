@@ -19,8 +19,11 @@ const GradientButton: solid.Component<buttonPropsType> = (props) => {
 
     }
 
+    const buttonProps = props;
+    delete buttonProps.accentColor;
+
     return (
-        <button onClick={props.onClick} class={`${style.gradientButton} ${props.class || ""}`} ref={buttonRef} >
+        <button {...buttonProps} class={`${style.gradientButton} ${props.class || ""}`} ref={buttonRef} >
             {props.children}
         </button>
     )

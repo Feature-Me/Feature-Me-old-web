@@ -9,19 +9,19 @@ interface buttonPropsType extends solid.JSX.ButtonHTMLAttributes<HTMLButtonEleme
 
 const ChamferedButton: solid.Component<buttonPropsType> = (props) => {
 
-    let chamferedButtonRef: HTMLButtonElement|undefined;
+    let chamferedButtonRef: HTMLButtonElement | undefined;
 
     //if there is custom accent color,set lisner to override color
     solid.createEffect(() => {
-        if(!chamferedButtonRef) return;
+        if (!chamferedButtonRef) return;
         chamferedButtonRef.addEventListener("mouseenter", () => setHoverAction(true));
         chamferedButtonRef.addEventListener("mouseleave", () => setHoverAction(false));
     });
 
-    solid.onCleanup(()=>{
+    solid.onCleanup(() => {
         if (!chamferedButtonRef) return;
-            chamferedButtonRef.removeEventListener("mouseenter", () => setHoverAction(true));
-            chamferedButtonRef.removeEventListener("mouseleave", () => setHoverAction(false));
+        chamferedButtonRef.removeEventListener("mouseenter", () => setHoverAction(true));
+        chamferedButtonRef.removeEventListener("mouseleave", () => setHoverAction(false));
     })
 
     function setHoverAction(active: boolean) {
@@ -30,8 +30,11 @@ const ChamferedButton: solid.Component<buttonPropsType> = (props) => {
         else chamferedButtonRef.style.backgroundColor = "";
     }
 
+    const buttonProps = props;
+    delete buttonProps.accentColor;
+
     return (
-        <button onClick={props.onClick} class={`${style.chamferedbutton} ${props.class || ""}`} ref={chamferedButtonRef} >
+        <button {...buttonProps} class={`${style.chamferedbutton} ${props.class || ""}`} ref={chamferedButtonRef} >
             {props.children}
         </button>
     )
