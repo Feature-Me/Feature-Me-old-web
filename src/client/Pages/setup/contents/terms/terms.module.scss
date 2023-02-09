@@ -1,0 +1,71 @@
+@import "../../../../App/mixin.scss";
+
+.terms {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 64px 1fr auto;
+    align-items: center;
+    row-gap: 8px;
+
+    .contents {
+        height: 100%;
+        background-color: $inputForegroundColor;
+        min-height: 0;
+        overflow: auto;
+        white-space: pre-wrap;
+    }
+
+    .interactions {
+        display: flex;
+        justify-content: center;
+        column-gap: 8px;
+    }
+
+    .button:disabled {
+        filter: brightness(0.5);
+
+        &:hover {
+            box-shadow: none;
+            background-color: transparent;
+        }
+
+        &:active {
+            transform: scale(1.1);
+            box-shadow: none;
+            background-color: transparent;
+        }
+    }
+
+    .termsCheck {
+        width: 100%;
+        background-color: $backgroundSubColor;
+        display: flex;
+        align-items: center;
+        padding: 0 4px;
+        column-gap: 8px;
+
+        input[type="checkbox"] {
+            appearance: none;
+            height: 16px;
+            width: 16px;
+            box-shadow: 0 0 4px 1px $borderColor;
+            transition: 0.2s;
+
+            &:checked {
+                box-shadow: 0 0 4px 1px $accentColor;
+                background-color: $accentColor;
+                transform: rotate(45deg);
+                transform-origin: center;
+            }
+        }
+    }
+
+    button {
+        transform: scale(1.1);
+
+        &:active {
+            transform: scale(1.08);
+        }
+    }
+}
