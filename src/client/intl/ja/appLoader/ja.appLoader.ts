@@ -11,6 +11,8 @@ const JAAppLoaderTranslation = {
         "title": "読み込みに失敗",
         "description": "ゲームの読み込みに失敗しました。"
     },
+    "done":"準備完了",
+    "ready":"読み込みが完了しました。間もなく開始します...",
     "storage": JAAppLoaderStorageTranslation,
     "websocket": JAAppLoaderWebSocketTranslation
 }
