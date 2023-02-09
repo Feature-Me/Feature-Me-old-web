@@ -1,7 +1,8 @@
 import { Setter } from "solid-js";
 import { io } from "socket.io-client"
-import { setUserData, setUserOnline, setUserWebSocket } from "State/webSocket/userSocker";
+import { setUserData, setUserOnline, setUserWebSocket } from "State/network/webSocket/userSocker";
 import i18next from "i18next";
+import { offlineMode } from "State/network/offlineMode";
 
 interface loginData extends webSocketReturnValue {
     data: wsUser
@@ -9,6 +10,7 @@ interface loginData extends webSocketReturnValue {
 
 function connectToWebSocket(setTitle: Setter<string>, setDescription: Setter<string>) {
     return new Promise<void>((resolve, reject) => {
+        if (offlineMode()) resolve()
         setTitle(i18next.t("appLoader.websocket.title"));
         setDescription(i18next.t("appLoader.websocket.connecting"));
         const socket = io("/user");

@@ -8,15 +8,13 @@ import GradientButton from "Components/Button/gradientButton/gradientButton";
 
 import connectToWebSocket from "./loadingFunctions/connectToWebSocket";
 import initStorageFromLoader from "./loadingFunctions/localStorage";
+import path from "path-browserify";
+import sleep from "Utils/sleep/sleep";
+import { setOfflineMode } from "State/network/offlineMode";
+import uptdateResourcesFromLoader from "./loadingFunctions/updateResources";
 
 import defaultUrl from "Assets/StaticInfo/defaultUrl.json";
-
 import style from "./loader.module.scss"
-import path from "path-browserify";
-import uptdateResourcesFromLoader from "./loadingFunctions/updateResources";
-import sleep from "Utils/sleep/sleep";
-
-
 
 const Loader: solid.Component = () => {
     const navigate = useNavigate();
@@ -33,14 +31,17 @@ const Loader: solid.Component = () => {
         { type: "ok", label: t("appLoader.ok"), func: () => { } },
         { type: "retry", label: t("appLoader.retry"), func: retry },
         { type: "report", label: t("appLoader.report"), func: () => window.open(path.join(defaultUrl.github.repo, "/issues")) },
-        { type: "offline", label: t("appLoader.offline"), func: () => { } }
+        { type: "offline", label: t("appLoader.offline"), func: runOfflineMode }
     ]
 
 
     solid.onMount(() => {
         setRenderBackground(true);
+        if (!navigator.onLine) setOfflineMode(true);
         runLoaders().then(async () => {
-            console.log("then");
+            setTitle(t("appLoader.done"));
+            setDescription(t("appLoader.ready"));
+            setActiveInteraction([])
             await sleep(1500);
             setFadeOut(true)
             await sleep(500);
@@ -55,6 +56,11 @@ const Loader: solid.Component = () => {
     })
 
     function retry() {
+        runLoaders();
+    }
+
+    function runOfflineMode() {
+        setOfflineMode(true);
         runLoaders();
     }
 

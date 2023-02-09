@@ -5,6 +5,7 @@ import fetchResourcesUpdate from "Utils/Storage/resources/fetchUpdate/fetchUpdat
 import downloadResourceFile from "Utils/Storage/resources/downloadResources/downloadFile";
 import getVersionMapInfo from "Utils/getVersionMapInfo/getVersionMapInfo";
 import fileSize from "filesize";
+import { offlineMode } from "State/network/offlineMode";
 
 
 function uptdateResourcesFromLoader(setTitle: solid.Setter<string>, setDescription: solid.Setter<string>) {
@@ -16,6 +17,8 @@ function uptdateResourcesFromLoader(setTitle: solid.Setter<string>, setDescripti
     });
     let versionMapInfo: { count: any; size: any; };
     return new Promise<void>(async (resolve, reject) => {
+
+        if (offlineMode()) resolve();
         const downloadFunctions = [
             { key: "background", func: () => { } },
             { key: "behavior", func: () => { } },
