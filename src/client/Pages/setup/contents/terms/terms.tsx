@@ -6,8 +6,8 @@ import GradientButton from "Components/Button/gradientButton/gradientButton";
 import { useNavigate } from "@solidjs/router";
 
 
-
 const SetupTerms: solid.Component = () => {
+
     const navigate = useNavigate();
     const [timer, setTimer] = solid.createSignal(15);
     const [agreeTerms, setAgreeTerms] = solid.createSignal(false);
@@ -18,6 +18,7 @@ const SetupTerms: solid.Component = () => {
         if (timer() !== 0) return;
         navigate("../import")
     }
+
 
     solid.onMount(() => {
         interval = setInterval(() => {
@@ -36,11 +37,11 @@ const SetupTerms: solid.Component = () => {
     return (
         <div class={style.terms} >
             <h1><TranslateText content="terms.title" /></h1>
-            <div class={style.contents}>
+            <div class={style.contents} tabIndex={0}>
                 <p><TranslateText content="terms.content" /></p>
                 <hr />
                 <label class={style.termsCheck}>
-                    <input type="checkbox" onChange={(e) => setAgreeTerms(Boolean(e.currentTarget.checked))} />
+                    <input type="checkbox" onChange={(e) => setAgreeTerms(Boolean(e.currentTarget.checked))} tabIndex={0} />
                     <TranslateText content="terms.agree" />
                 </label>
             </div>

@@ -8,9 +8,9 @@ import GradientButton from "Components/Button/gradientButton/gradientButton";
 import { useNavigate } from "@solidjs/router";
 
 
-
 const SetupCautions: solid.Component = () => {
-    const navigate = useNavigate()
+
+    const navigate = useNavigate();
 
     const cautionsContent: Array<{ icon: solid.JSXElement, textKey: string }> = [
         { icon: <BsMusicNote />, textKey: "first" },
