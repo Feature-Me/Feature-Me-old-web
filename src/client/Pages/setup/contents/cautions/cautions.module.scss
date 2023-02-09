@@ -1,0 +1,66 @@
+@import "../../../../App/mixin.scss";
+
+.caution {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 64px auto 1fr;
+    align-items: center;
+    justify-items: center;
+    row-gap: 8px;
+
+    p {
+        max-width: 60em;
+        text-align: center;
+        @include small-device-font;
+        white-space: pre-wrap;
+    }
+
+    .contents {
+        min-height: 64px;
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+        column-gap: 16px;
+    }
+
+    button {
+        transform: scale(1.1);
+        &:active{
+            transform: scale(1.08);
+        }
+    }
+
+}
+
+.cautionCard {
+    border-radius: 8px;
+    box-shadow: 0 0 4px 2px $grayBackgrund;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    background-color: $inputForegroundColor;
+    padding: 4px;
+
+    .icon {
+        background-color: $mainBackgroundColor;
+        border-radius: 4px;
+        display: flex;
+        height: 48px;
+        align-items: center;
+        justify-content: center;
+        padding: 4px;
+
+        svg {
+            height: 100%;
+            width: auto;
+        }
+    }
+
+    p {
+        padding: 4px;
+        text-align: center;
+        max-width: 20em;
+        @include small-device-font;
+        white-space: pre-wrap;
+    }
+}

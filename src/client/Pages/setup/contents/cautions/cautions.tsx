@@ -1,19 +1,43 @@
-import { useNavigate } from "@solidjs/router";
 import * as solid from "solid-js";
-import i18next from "i18next";
-
-import sleep from "Utils/sleep/sleep";
+import { BsChatLeftHeartFill, BsEmojiSmileFill, BsMusicNote } from "solid-icons/bs";
 
 import style from "./cautions.module.scss"
 import TranslateText from "Components/TranslateText/TranslateText";
+import SetupCautionCard from "./cautionCard";
+import GradientButton from "Components/Button/gradientButton/gradientButton";
+import { useNavigate } from "@solidjs/router";
+
 
 
 const SetupCautions: solid.Component = () => {
+    const navigate = useNavigate()
 
-    console.log(i18next.t("setup.caution.title"));
+    const cautionsContent: Array<{ icon: solid.JSXElement, textKey: string }> = [
+        { icon: <BsMusicNote />, textKey: "first" },
+        { icon: <BsChatLeftHeartFill />, textKey: "second" },
+        { icon: <BsEmojiSmileFill />, textKey: "third" }
+    ]
+
+
+    function navigation() {
+        navigate("../terms")
+    }
+
     return (
-        <div class={style.setup} >
+        <div class={style.caution} >
             <h1><TranslateText content="setup.caution.title" /></h1>
+            <p><TranslateText content="setup.caution.description" /></p>
+            <div class={style.contents}>
+                <solid.For each={cautionsContent}>
+                    {item => <SetupCautionCard {...item} />}
+                </solid.For>
+            </div>
+            <div class={style.interactions}>
+                <GradientButton onClick={navigation}>
+                    <TranslateText content="setup.accept" />
+                </GradientButton>
+            </div>
+
         </div>
     )
 }
