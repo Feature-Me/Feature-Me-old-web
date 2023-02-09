@@ -3,14 +3,15 @@
     "name": "Tidal Wreck",
     "src": "tidal wreck.glb",
     "alt": "tidal wreck.png",
-    "made":"official",
-    "scenes":[],
-    "skydata":{
-        "turbidity":1,
-        "rayleigh":0.0075,
-        "mieCoefficient":0.003,
-        "mieDirectionalG":0.5,
-        "sunPhi":1.396263,
-        "sunTheta":3.141592
+    "made": "official",
+    "readonly": true,
+    "scenes": [],
+    "skydata": {
+        "turbidity": 1,
+        "rayleigh": 0.0075,
+        "mieCoefficient": 0.003,
+        "mieDirectionalG": 0.5,
+        "sunPhi": 1.396263,
+        "sunTheta": 3.141592
     }
 }

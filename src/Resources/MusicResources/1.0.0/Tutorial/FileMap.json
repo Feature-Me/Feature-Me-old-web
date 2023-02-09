@@ -3,6 +3,8 @@
     "type": "music",
     "title": "Tutorial",
     "composer": "Feature Me",
+    "made":"official",
+    "readonly": true,
     "showBpm": "120",
     "time": 95000,
     "demo": {

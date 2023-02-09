@@ -3,6 +3,7 @@
     "type": "music",
     "title": "Feat you.",
     "made": "official",
+    "readonly": true,
     "composer": "Rae",
     "showBpm": "120",
     "time": 95000,

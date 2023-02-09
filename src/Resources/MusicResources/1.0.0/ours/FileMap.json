@@ -3,6 +3,8 @@
     "type": "music",
     "title": "Ours",
     "composer": "Goners",
+    "made":"official",
+    "readonly": true,
     "showBpm": "80",
     "time": 99000,
     "demo": {

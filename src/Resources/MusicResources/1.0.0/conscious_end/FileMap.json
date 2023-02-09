@@ -3,6 +3,7 @@
     "type": "music",
     "title": "conscious_end",
     "made": "official",
+    "readonly":true,
     "composer": "second_cousin",
     "showBpm": "230",
     "time": 129000,

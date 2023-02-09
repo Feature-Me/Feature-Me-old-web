@@ -3,6 +3,8 @@
     "type": "music",
     "title": "To Summer",
     "composer": "Goners",
+    "made":"official",
+    "readonly": true,
     "showBpm": "120",
     "time": 117000,
     "demo": {
