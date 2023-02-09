@@ -38,7 +38,7 @@ const App: solid.Component = () => {
                 <I18nProvider i18n={i18next}>
                     {/* memory router */}
                     <Router /* source={staticIntegration({ value: "" })} */>
-                        <div class={style.app}>
+                        <div class={style.app} onContextMenu={(e)=>e.preventDefault()}>
                             <div class={style.background}>
                                 <Background />
                             </div>
