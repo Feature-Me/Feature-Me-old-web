@@ -6,10 +6,7 @@
     background-color: $transparent-bg;
     padding: 16px;
     @include blur(20px);
-    display: grid;
+    display: flex;
     grid-template-rows: 64px 1fr;
     align-items: center;
-    justify-items: center;
-
-
 }
