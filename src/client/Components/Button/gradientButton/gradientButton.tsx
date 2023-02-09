@@ -9,7 +9,7 @@ interface buttonPropsType extends solid.JSX.ButtonHTMLAttributes<HTMLButtonEleme
 
 const GradientButton: solid.Component<buttonPropsType> = (props) => {
 
-    let buttonRef: HTMLButtonElement|undefined;
+    let buttonRef: HTMLButtonElement | undefined;
 
     //if there is custom accent color,set lisner to override color
     solid.createEffect(() => {
@@ -23,7 +23,7 @@ const GradientButton: solid.Component<buttonPropsType> = (props) => {
     delete buttonProps.accentColor;
 
     return (
-        <button {...buttonProps} class={`${style.gradientButton} ${props.class || ""}`} ref={buttonRef} >
+        <button tabIndex={0} ref={buttonRef} {...buttonProps} class={`${style.gradientButton} ${props.class || ""}`} >
             {props.children}
         </button>
     )
