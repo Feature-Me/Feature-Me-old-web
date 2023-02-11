@@ -18,7 +18,10 @@ function uptdateResourcesFromLoader(setTitle: solid.Setter<string>, setDescripti
     let versionMapInfo: { count: any; size: any; };
     return new Promise<void>(async (resolve, reject) => {
 
-        if (offlineMode()) resolve();
+        if (offlineMode()) {
+            resolve();
+            return;
+        }
         const downloadFunctions = [
             { key: "background", func: () => { } },
             { key: "behavior", func: () => { } },

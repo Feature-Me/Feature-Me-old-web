@@ -10,7 +10,11 @@ interface loginData extends webSocketReturnValue {
 
 function connectToWebSocket(setTitle: Setter<string>, setDescription: Setter<string>) {
     return new Promise<void>((resolve, reject) => {
-        if (offlineMode()) resolve()
+
+        if (offlineMode()) {
+            resolve();
+            return;
+        }
         setTitle(i18next.t("appLoader.websocket.title"));
         setDescription(i18next.t("appLoader.websocket.connecting"));
         const socket = io("/user");
