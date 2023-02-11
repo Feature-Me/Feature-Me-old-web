@@ -3,10 +3,23 @@ import { offlineMode } from "State/network/offlineMode";
 
 import style from "./generalOverlay.module.scss";
 const GeneralOverlay: solid.Component = () => {
-    const [showOverlay, setShowOverlay] = solid.createSignal(true);
+    const [showOverlay, setShowOverlay] = solid.createSignal(false);
 
-    solid.createEffect(() => {
+    solid.onMount(() => {
+        window.addEventListener("keydown", handleKey)
+        if (process.env.NODE_ENV == "development") setShowOverlay(true);
     })
+    solid.onCleanup(() => {
+        window.removeEventListener("keydown", handleKey)
+    })
+
+    function handleKey(e: KeyboardEvent) {
+        if (e.key == "F1") {
+            e.preventDefault();
+            e.stopPropagation();
+            setShowOverlay(s => !s)
+        }
+    }
 
     return (
         <div class={style.generalOverlay}>
