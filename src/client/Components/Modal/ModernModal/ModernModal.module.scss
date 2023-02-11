@@ -1,0 +1,69 @@
+@import "../../../App/mixin.scss";
+
+.modalWrapper {
+    height: 100%;
+    width: 100%;
+    background-color: $transparent-bg;
+    //@include blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+
+    &.opaque {
+        opacity: 1;
+    }
+
+    .modal {
+        height: 50%;
+        width: 50%;
+        min-height: 240px;
+        min-width: 480px;
+        background-color: $mainBackgroundColor;
+        box-shadow: 0 0 4px 1px $borderColor;
+        border-radius: 4px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 64px 2px 1fr 2px 40px;
+        row-gap: 8px;
+        padding: 8px;
+        overflow: auto;
+
+        @media screen and (max-height:375px),
+        (max-width:640px) {
+            width: 100%;
+            height: 100%;
+            min-width: none;
+            min-height: none;
+            box-shadow: none;
+            background-color: transparent;
+        }
+
+        .content {
+            min-height: 0;
+            height: 100%;
+            width: 100%;
+            overflow: auto;
+        }
+
+        h1 {
+            line-height: 64px;
+        }
+
+        hr {
+            margin: 0;
+            height: 2px;
+            width: 100%;
+            color: $borderColor;
+        }
+
+        .interactions {
+            display: flex;
+            justify-content: flex-end;
+            column-gap: 8px;
+        }
+    }
+}
