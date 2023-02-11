@@ -15,6 +15,12 @@ import uptdateResourcesFromLoader from "./loadingFunctions/updateResources";
 
 import defaultUrl from "Assets/StaticInfo/defaultUrl.json";
 import style from "./loader.module.scss"
+import ModernModal from "Components/Modal/ModernModal/ModernModal";
+
+interface activeButtonType {
+    label: solid.JSXElement
+    onClick: solid.JSX.EventHandler<HTMLButtonElement, MouseEvent>
+}
 
 const Loader: solid.Component = () => {
     const navigate = useNavigate();
@@ -26,13 +32,14 @@ const Loader: solid.Component = () => {
     let rejectFunc = () => { };
 
     const functions: Array<FunctionWithType<solid.Setter<string>>> = [initStorageFromLoader, connectToWebSocket, /* uptdateResourcesFromLoader */];
-    const interactions = [
+    const interactionList = [
         { type: "cancel", label: t("appLoader.cancel"), func: () => rejectFunc() },
         { type: "ok", label: t("appLoader.ok"), func: () => { } },
         { type: "retry", label: t("appLoader.retry"), func: retry },
         { type: "report", label: t("appLoader.report"), func: () => window.open(path.join(defaultUrl.github.repo, "/issues")) },
         { type: "offline", label: t("appLoader.offline"), func: runOfflineMode }
     ]
+    const [activeButton, setActiveButton] = solid.createSignal<Array<activeButtonType>>([]);
 
 
     solid.onMount(() => {
@@ -43,6 +50,11 @@ const Loader: solid.Component = () => {
 
     solid.onCleanup(() => {
         rejectFunc();
+    });
+
+    solid.createEffect(() => {
+        const button = interactionList.filter(i => activeInteraction().includes(i.type)).map(j => { return { label: j.label, onClick: j.func } })
+        setActiveButton(button);
     })
 
     function startLoading() {
@@ -103,26 +115,11 @@ const Loader: solid.Component = () => {
 
     return (
         <div class={style.loader} classList={{ blackOut: fadeOut() }}>
-            <div class={style.modal}>
-                <h1>{title() || "Loading"}</h1>
-                <hr />
+            <ModernModal title={title()} interactions={activeButton()} show animate={"fade"} containerProps={{ style: { "background-color": "transparent" } }}>
                 <p>
-                    {description() || "Game system is initializing"}
+                    {description() || "Initializing game system"}
                 </p>
-                <hr />
-                <div class={style.interactions}>
-                    <solid.For each={activeInteraction()}>
-                        {
-                            (item) => {
-                                const btn = interactions.find(i => i.type == item);
-                                return (
-                                    <GradientButton onClick={btn?.func}>{btn?.label}</GradientButton>
-                                )
-                            }
-                        }
-                    </solid.For>
-                </div>
-            </div>
+            </ModernModal>
         </div>
     )
 }
