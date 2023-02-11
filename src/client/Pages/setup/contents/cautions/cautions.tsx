@@ -25,7 +25,7 @@ const SetupCautions: solid.Component = () => {
 
     return (
         <div class={style.caution} >
-            <h1><TranslateText content="setup.caution.title" /></h1>
+            <h1 class="shadowTitle"><TranslateText content="setup.caution.title" /></h1>
             <p><TranslateText content="setup.caution.description" /></p>
             <div class={style.contents}>
                 <solid.For each={cautionsContent}>

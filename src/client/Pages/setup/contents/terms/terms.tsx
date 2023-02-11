@@ -21,9 +21,15 @@ const SetupTerms: solid.Component = () => {
 
 
     solid.onMount(() => {
-        interval = setInterval(() => {
-            setTimer(t => t - 1);
-        }, 1000);
+        if (process.env.NODE_ENV == "production") {
+            interval = setInterval(() => {
+                setTimer(t => t - 1);
+            }, 1000);
+        } else {
+            setTimer(0);
+            setAgreeTerms(true);
+        }
+
     })
 
     solid.createEffect(() => {
@@ -36,7 +42,7 @@ const SetupTerms: solid.Component = () => {
 
     return (
         <div class={style.terms} >
-            <h1><TranslateText content="terms.title" /></h1>
+            <h1 class="shadowTitle"><TranslateText content="terms.title" /></h1>
             <div class={style.contents} tabIndex={0}>
                 <p><TranslateText content="terms.content" /></p>
                 <hr />
