@@ -4,7 +4,8 @@
     height: 100%;
     width: 100%;
 
-    p {
+    p,
+    button {
         display: table;
         margin: 0;
         background-color: $transparent-bg;
@@ -12,5 +13,16 @@
         font-size: 0.6em;
         padding: 2px 4px;
         font-family: 'Courier New', Courier, monospace;
+    }
+
+    button {
+        pointer-events: visible;
+        &:hover {
+            box-shadow: 0 0 4px 0 $accentColor;
+        }
+
+        &:focus-visible {
+            box-shadow: 0 0 4px 0 $activeColor;
+        }
     }
 }
