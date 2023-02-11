@@ -8,6 +8,12 @@ const JASetupTranslation = {
             "third": "プレイヤー同士で互いに実力を高め合い,楽しみましょう。"
         },
     },
+    "import": {
+        "title": "設定をインポート",
+        "description": "他の作品から設定を引き継ぎます。"
+    },
+    "settings":"設定",
+    "skip": "スキップ",
     "next": "続ける",
     "accept": "同意して続ける",
     "decline": "同意しないで終了"
