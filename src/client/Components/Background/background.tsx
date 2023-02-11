@@ -24,12 +24,10 @@ const Background: solid.Component = (props) => {
 
     return (
         <div class={style.background}>
-            <Transition onEnter={enter}
-                onExit={exit}>
-                {
-                    renderBackground() &&
+            <Transition onEnter={enter} onExit={exit}>
+                <solid.Show when={renderBackground()} >
                     <img src={fallbackImage} alt="Tidal Wreck" class={style.fallback} />
-                }
+                </solid.Show>
             </Transition>
 
         </div>
