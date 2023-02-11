@@ -91,11 +91,12 @@
 
         p {
             color: $secondaryText;
+            font-size: 0.8em;
         }
 
         .settings {
-            background-color: #424242;
-            box-shadow: 0 0 4px 2px rgb(255, 255, 255);
+            background-color: $inputBackgroundColor;
+            box-shadow: 0 0 4px 2px $borderColor;
             transition: 0.2s;
 
             .settingsIcon {
@@ -103,11 +104,19 @@
             }
 
             &:hover {
-                box-shadow: 0 0 4px 2px #1189da;
+                box-shadow: 0 0 4px 2px $accentColor;
 
                 .settingsIcon {
-                    transform: rotate(180deg) scale(0.9);
+                    transform: rotate(45deg) scale(0.9);
                 }
+            }
+
+            &:active {
+                filter: brightness(0.8);
+                transform: scale(0.98);
+            }
+            &:focus-visible{
+                box-shadow: 0 0 4px 2px $activeColor;
             }
         }
     }
