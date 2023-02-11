@@ -1,0 +1,26 @@
+@import "../../../../App/mixin.scss";
+
+.settings {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 64px 2px 1fr 2px auto;
+
+    hr {
+        width: 100%;
+        margin: 0;
+    }
+    .contents{
+        border-radius: 4px;
+        box-shadow: 0 0 4px 1px $borderColor;
+        &:focus-within{
+            box-shadow:  0 0 4px 2px $activeColor;
+        }
+    }
+
+    .interactions {
+        display: flex;
+        justify-content: center;
+        column-gap: 8px;
+    }
+}
