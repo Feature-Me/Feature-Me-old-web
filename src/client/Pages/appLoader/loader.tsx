@@ -115,7 +115,7 @@ const Loader: solid.Component = () => {
 
     return (
         <div class={style.loader} classList={{ blackOut: fadeOut() }}>
-            <ModernModal title={title()} interactions={activeButton()} show animate={"fade"} containerProps={{ style: { "background-color": "transparent" } }}>
+            <ModernModal title={title()} interactions={activeButton()} show noBlur animate={"fade"} containerProps={{ style: { "background-color": "transparent" } }}>
                 <p>
                     {description() || "Initializing game system"}
                 </p>
