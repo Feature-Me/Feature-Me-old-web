@@ -24,12 +24,15 @@
             font-size: 0.8em;
             column-gap: 16px;
 
-            p {
+            button {
+                appearance: none;
                 position: relative;
                 padding: 8px;
                 display: flex;
                 align-items: center;
                 transition: 0.2s;
+                @include font-title;
+                font-size: 1em;
 
                 &::before {
                     content: "";
@@ -54,7 +57,8 @@
                     filter: blur(1em);
                 }
 
-                &:hover {
+                &:hover,
+                &:focus-visible {
                     background-color: rgb(20, 150, 16);
                     box-shadow: 0 0 8px 4px rgb(20, 150, 16);
 
@@ -102,7 +106,7 @@
                 box-shadow: 0 0 4px 2px #1189da;
 
                 .settingsIcon {
-                    transform: rotate(45deg) scale(0.9);
+                    transform: rotate(180deg) scale(0.9);
                 }
             }
         }
@@ -118,7 +122,7 @@
     top: 0;
     left: 0;
     z-index: -1;
-    transform: scale(1.5);
+    transform: scale(1.1);
     animation: scrollBackgroundImage 5s ease-out forwards;
 }
 
