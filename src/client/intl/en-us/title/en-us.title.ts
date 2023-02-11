@@ -2,8 +2,9 @@ const ENUSTitleTranslation = {
     "language": "English-EN_US",
     "terms": "Terms of Service",
     "read": "Read",
-    "settingsWindow":{
+    "settings":{
         "title": "Settings",
+        "close": "Close",
         "selectLanguage": "Language",
         "delete": "Delete",
         "clear": "Clear All Data"
