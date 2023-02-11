@@ -3,12 +3,14 @@
 .generalOverlay {
     height: 100%;
     width: 100%;
+
     p {
-        display: inline-block;
+        display: table;
         margin: 0;
         background-color: $transparent-bg;
         color: $secondaryText;
         font-size: 0.6em;
+        padding: 2px 4px;
         font-family: 'Courier New', Courier, monospace;
     }
 }
