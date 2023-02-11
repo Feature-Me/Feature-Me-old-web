@@ -61,8 +61,8 @@ const GeneralOverlay: solid.Component = () => {
                 <p>Page Resolution : {screen()[0]} x {screen()[1]}</p>
                 <p>Aspect ratio : {screen()[0] / screen()[1]}</p>
                 <p>Mouse Position : ({mouse()[0]} , {mouse()[1]}) </p>
-                <button onDblClick={() => setShowOverlay(false)}>
-                    Double click to hide Overlay
+                <button onClick={() => setShowOverlay(false)}>
+                    Click Here or focus with Tab to hide Overlay
                 </button>
             </solid.Show>
         </div>
