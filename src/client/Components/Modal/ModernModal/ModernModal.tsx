@@ -9,6 +9,7 @@ interface modalProps {
     children: solid.JSXElement
     interactions?: modalInteractions
     show?: boolean
+    noBlur?: boolean
     animate?: boolean | "fade" | "scale"
     duration?: number
     containerProps?: solid.JSX.HTMLAttributes<HTMLDivElement>
@@ -86,8 +87,8 @@ const ModernModal: solid.Component<modalProps> = (props) => {
     return (
         <Transition onEnter={containerEnter} onExit={containerExit}>
             <solid.Show when={props.show ?? true}>
-                <div {...props.containerProps} class={`${style.modalWrapper} ${props.containerProps?.class || ""}`} ref={containerRef} onClick={clickBackground}>
-                    <div class={style.modal} ref={innerRef}>
+                <div {...props.containerProps} class={`${style.modalWrapper} ${props.noBlur && style.noBlur} ${props.containerProps?.class || ""}`} ref={containerRef} onClick={clickBackground}>
+                    <div class={style.modal} ref={innerRef} onclick={(e) => e.stopPropagation()}>
                         <h1>{props.title}</h1>
                         <hr />
                         <div class={style.content}>
