@@ -14,6 +14,7 @@
     outline: none;
     border: none;
     color: $textColor;
+    min-width: 128px;
 
     &:hover {
         box-shadow: 0 0 4px 0 whitesmoke;

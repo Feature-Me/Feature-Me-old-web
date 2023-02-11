@@ -5,6 +5,7 @@
     width: 100%;
     position: relative;
     background-color: $black;
+
     * {
         min-height: 0;
     }
@@ -46,6 +47,18 @@
         }
     }
 
+    code {
+        display: block;
+        background-color: $inputBackgroundColor;
+        font-family: "consolas", monospace, sans-serif;
+        line-height: 24px;
+        overflow: auto;
+    }
+
+    button {
+        min-width: 128px;
+    }
+
 }
 
 .modal {
@@ -80,7 +93,8 @@
                 justify-content: center;
                 padding: 4px;
                 transition: 0.2s;
-                &:hover{
+
+                &:hover {
                     background-color: $redSecondary;
                 }
             }
@@ -91,16 +105,4 @@
         display: flex;
         justify-content: flex-end;
     }
-}
-
-code {
-    display: block;
-    background-color: $inputBackgroundColor;
-    font-family: "consolas", monospace, sans-serif;
-    line-height: 24px;
-    overflow: auto;
-}
-
-button {
-    min-width: 128px;
 }
