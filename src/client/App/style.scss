@@ -16,6 +16,9 @@ label {
     cursor: inherit;
     outline: none;
     @include font-body;
+    color: $textColor;
+    background-color: transparent;
+    border: none;
 }
 
 h1,
@@ -28,11 +31,6 @@ p {
     margin: 0;
 }
 
-h1,
-h2,
-h3 {
-    @include font-header;
-}
 
 .hiddenVisibility {
     visibility: hidden;
@@ -62,6 +60,10 @@ h3 {
 .blackOut {
     transition: 1s;
     filter: brightness(0);
+}
+
+.shadowTitle {
+    text-shadow: 0 0 4px $secondaryText;
 }
 
 @keyframes fadeIn {
