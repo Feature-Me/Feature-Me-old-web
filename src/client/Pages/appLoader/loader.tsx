@@ -38,6 +38,14 @@ const Loader: solid.Component = () => {
     solid.onMount(() => {
         setRenderBackground(true);
         if (!navigator.onLine) setOfflineMode(true);
+        startLoading()
+    });
+
+    solid.onCleanup(() => {
+        rejectFunc();
+    })
+
+    function startLoading() {
         runLoaders().then(async () => {
             setTitle(t("appLoader.done"));
             setDescription(t("appLoader.ready"));
@@ -49,24 +57,20 @@ const Loader: solid.Component = () => {
         }).catch(err => {
             console.error(err);
         });
-    });
-
-    solid.onCleanup(() => {
-        rejectFunc();
-    })
+    }
 
     function retry() {
-        runLoaders();
+        startLoading();
     }
 
     function runOfflineMode() {
         setOfflineMode(true);
-        runLoaders();
+        startLoading();
     }
 
     function navigation() {
         const environment = JSON.parse(localStorage.getItem("environment") || "{}");
-        if (environment.initializedSettings) navigate("/title");
+        if (environment.initializedSettings && process.env.NODE_ENV == "production") navigate("/title");
         else navigate("/setup");
     }
 
