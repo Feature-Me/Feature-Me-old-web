@@ -14,6 +14,7 @@ import style from "./App.module.scss";
 import "./style.scss";
 import Background from "Components/Background/background";
 import { Howl } from "howler";
+import GeneralOverlay from "Components/Overlay/generalOverlay";
 
 const App: solid.Component = () => {
     const [loaded, setLoaded] = solid.createSignal(true);
@@ -37,8 +38,8 @@ const App: solid.Component = () => {
             <solid.Show when={loaded()} fallback={<Loading />}>
                 <I18nProvider i18n={i18next}>
                     {/* memory router */}
-                    <Router /* source={staticIntegration({ value: "" })} */>
-                        <div class={style.app} onContextMenu={(e)=>e.preventDefault()}>
+                    <Router source={staticIntegration({ value: "" })}>
+                        <div class={style.app} onContextMenu={(e) => e.preventDefault()}>
                             <div class={style.background}>
                                 <Background />
                             </div>
@@ -47,7 +48,7 @@ const App: solid.Component = () => {
                                 <Toaster />
                             </div>
                             <div class={style.overlay}>
-
+                                <GeneralOverlay />
                             </div>
                         </div>
                     </Router>

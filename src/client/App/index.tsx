@@ -17,6 +17,7 @@ function registerWorker() {
 }
 
 function init() {
+    console.log(`${process.env.NODE_ENV} mode`);
     console.log("Feature Me initialized. the Game is Ready!");
     console.log("%c Hold Up! \n Please be careful when you paste anything to console.\n Attackers may steal your information. ", "color:#ffa69f;background-color:#633023;font-size:16px;");
     console.log(`%c Running Feature Me ${version.version}.Build:${0}. `, "color:#a0d6a6;background-color:#2d3c2e;font-size:16px;");
