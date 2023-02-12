@@ -3,22 +3,32 @@ import * as solid from "solid-js";
 import { BsArrowUp, BsArrowUpLeft, BsGear } from "solid-icons/bs";
 
 import GlitchImage from "Components/GlitchImage/glitchImage";
+import ModernModal from "Components/Modal/ModernModal/ModernModal";
+import TranslateText from "Components/TranslateText/TranslateText";
+
+import { showModal, setShowModal } from "./titleState";
+
+import { useI18n } from "intl/intlContext";
+import SettingsModal from "./settingsModal";
 
 import version from "Assets/StaticInfo/version.json";
 
+import background from "Assets/Images/tidal_wreck_far_camera.png";
+
 import style from "./title.module.scss";
 
-import background from "Assets/Images/tidal_wreck_far_camera.png";
-import ModernModal from "Components/Modal/ModernModal/ModernModal";
-import TranslateText from "Components/TranslateText/TranslateText";
-import { useI18n } from "intl/intlContext";
+
+
 
 const Title: solid.Component = () => {
     const navigate = useNavigate();
-    const [showModal, setShowModal] = solid.createSignal(false);
     const [t, intl] = useI18n();
 
-    let containerRef: HTMLDivElement | undefined
+    let containerRef: HTMLDivElement | undefined;
+
+    const settingsContent = [
+        { label: t("title.settings.clear"), func: () => { } }
+    ]
 
     function closeWindow() {
         window.close();
@@ -59,12 +69,12 @@ const Title: solid.Component = () => {
             </div>
             <div class={style.footer}>
                 <p>Feature Me {version.version} Mksk and Rae the Feature Me Project <br /> ©{new Date().getFullYear()} Feature Me All rights reserved.</p>
+                <span><TranslateText content="title.language" /></span>
                 <button class={`iconWrapper ${style.settings}`} onClick={() => { setShowModal(m => !m) }}>
                     <BsGear class={style.settingsIcon} />
                 </button>
             </div>
-            <ModernModal title={t("title.settings.title").toString()} show={showModal()} interactions={[{ label: t("title.settings.close").toString(), onClick: () => setShowModal(false) }]} onClickBackground={() => setShowModal(false)} >
-            </ModernModal>
+            <SettingsModal />
         </div >
     )
 }
