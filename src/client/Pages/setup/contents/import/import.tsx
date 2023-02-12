@@ -33,7 +33,7 @@ const SetupImportConfig: solid.Component = () => {
             <solid.For each={imports}>
                 {
                     data => (
-                        <LargeButton class={style.content} onClick={data.func}>
+                        <LargeButton onClick={data.func}>
                             {data.label}
                         </LargeButton>
                     )
