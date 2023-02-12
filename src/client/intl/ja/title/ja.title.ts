@@ -7,8 +7,16 @@ const JATitleTranslation = {
         "close": "閉じる",
         "selectLanguage": "言語",
         "delete": "削除",
-        "clear": "すべてのデータを削除",
-        "export":"設定を書き出す"
+        "clear": "データを管理",
+        "export":"設定を書き出す",
+        "deleteDataModal":{
+            "title":"データを削除",
+            "description":"警告:データを削除すると元に戻せません。",
+            "cancel":"キャンセル",
+            "saveData":"セーブデータと設定を削除",
+            "resources":"リソースを削除",
+            "all":"すべて削除"
+        }
     }
 }
 
