@@ -9,12 +9,12 @@ import PageRouter from "Router/router";
 
 import Loading from "Components/LoadingCover/loading";
 import CrashHandler from "Components/ErrorBoundary/ApplicatonCrashHandler/crashHandler";
+import Background from "Components/Background/background";
+import GeneralOverlay from "Components/Overlay/generalOverlay";
 
 import style from "./App.module.scss";
 import "./style.scss";
-import Background from "Components/Background/background";
-import { Howl } from "howler";
-import GeneralOverlay from "Components/Overlay/generalOverlay";
+
 
 const App: solid.Component = () => {
     const [loaded, setLoaded] = solid.createSignal(true);
