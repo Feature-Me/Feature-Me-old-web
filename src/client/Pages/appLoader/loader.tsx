@@ -82,7 +82,7 @@ const Loader: solid.Component = () => {
 
     function navigation() {
         const environment = JSON.parse(localStorage.getItem("environment") || "{}");
-        if (environment.initializedSettings && process.env.NODE_ENV == "production") navigate("/title");
+        if (environment.initializedSettings && !solid.DEV) navigate("/title");
         else navigate("/setup");
     }
 

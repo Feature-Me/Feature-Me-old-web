@@ -18,7 +18,7 @@ const GeneralOverlay: solid.Component = () => {
 
     solid.onMount(() => {
         window.addEventListener("keydown", handleKey)
-        if (process.env.NODE_ENV == "development") setShowOverlay(true);
+        if (solid.DEV) setShowOverlay(true);
         window.addEventListener("resize", handleResize);
         window.addEventListener("mousemove", handleMouse);
 
@@ -49,7 +49,7 @@ const GeneralOverlay: solid.Component = () => {
             <solid.Show when={showOverlay()} ><p>Feature Me Debug Overlay (Press F1 to toggle)</p></solid.Show>
             <solid.Show when={offlineMode()}><p>Offline Mode</p></solid.Show>
             <solid.Show when={showOverlay()}>
-                <p>{process.env.NODE_ENV == "production" ? "Production Build" : "Development Build"}</p>
+                <p>{solid.DEV ? "Development Build":"Production Build"}</p>
                 <p>Version : {version.version}</p>
                 <p>URL {path.join(window.location.href, location.pathname)}</p>
                 <p>Session Started : {new Date().toLocaleString()}</p>

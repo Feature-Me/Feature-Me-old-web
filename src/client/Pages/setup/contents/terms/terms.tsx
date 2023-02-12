@@ -21,7 +21,7 @@ const SetupTerms: solid.Component = () => {
 
 
     solid.onMount(() => {
-        if (process.env.NODE_ENV == "production") {
+        if (!solid.DEV) {
             interval = setInterval(() => {
                 setTimer(t => t - 1);
             }, 1000);
