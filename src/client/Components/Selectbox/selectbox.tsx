@@ -37,7 +37,7 @@ const Selector: solid.Component<selectBoxSelectorPropsType> = (props) => {
 
     function enter() {
         if (!selectBoxRef) return;
-        const animation = selectBoxRef.animate([{ opacity: 0, top: "-50px" }, { opacity: 1, top: "calc(100% + 8px)" }], {
+        const animation = selectBoxRef.animate([{ opacity: 0, top: "calc(100% - 50px)" }, { opacity: 1, top: "calc(100% + 8px)" }], {
             duration: 300,
             fill: "forwards",
             easing: "ease-out"
@@ -46,7 +46,7 @@ const Selector: solid.Component<selectBoxSelectorPropsType> = (props) => {
 
     function exit() {
         if (!selectBoxRef) return;
-        const animation = selectBoxRef.animate([{ opacity: 1, top: "calc(100% + 8px)" }, { opacity: 0, top: "-50px" }], {
+        const animation = selectBoxRef.animate([{ opacity: 1, top: "calc(100% + 8px)" }, { opacity: 0, top: "calc(100% - 50px)" }], {
             duration: 300,
             fill: "forwards",
             easing: "ease-out"
