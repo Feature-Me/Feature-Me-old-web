@@ -5,6 +5,7 @@ import TranslateText from "Components/TranslateText/TranslateText";
 import GradientButton from "Components/Button/gradientButton/gradientButton";
 import { useNavigate } from "@solidjs/router";
 import { useI18n } from "intl/intlContext";
+import LargeButton from "Components/Button/largeButton/largeButton";
 
 const SetupImportConfig: solid.Component = () => {
     const navigate = useNavigate();
@@ -32,9 +33,9 @@ const SetupImportConfig: solid.Component = () => {
             <solid.For each={imports}>
                 {
                     data => (
-                        <button class={style.content} onClick={data.func}>
-                            <h2>{data.label}</h2>
-                        </button>
+                        <LargeButton class={style.content} onClick={data.func}>
+                            {data.label}
+                        </LargeButton>
                     )
                 }
             </solid.For>
