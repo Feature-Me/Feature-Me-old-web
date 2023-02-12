@@ -6,7 +6,7 @@ import GlitchImage from "Components/GlitchImage/glitchImage";
 import ModernModal from "Components/Modal/ModernModal/ModernModal";
 import TranslateText from "Components/TranslateText/TranslateText";
 
-import { showModal, setShowModal } from "./titleState";
+import { showModal, setShowModal, canBegin } from "./titleState";
 
 import { useI18n } from "intl/intlContext";
 import SettingsModal from "./settingsModal";
@@ -61,10 +61,12 @@ const Title: solid.Component = () => {
                         <BsArrowUpLeft />
                         Exit
                     </button>
-                    <button data-color="#149610" onClick={navigateHome}>
-                        <BsArrowUp />
-                        Begin
-                    </button>
+                    <solid.Show when={canBegin()} fallback={<button><TranslateText content="title.needReload"/></button>}>
+                        <button data-color="#149610" onClick={navigateHome}>
+                            <BsArrowUp />
+                            Begin
+                        </button>
+                    </solid.Show>
                 </div>
             </div>
             <div class={style.footer}>
