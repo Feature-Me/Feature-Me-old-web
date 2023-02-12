@@ -1,0 +1,71 @@
+@import "../../App/mixin.scss";
+
+.selectbox {
+    position: relative;
+    border: 1px solid $secondaryText;
+    background-color: transparent;
+    background-image: linear-gradient(to right, $inputBackgroundColor, $transparent-bg);
+    margin: 4px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    @include font-body;
+    transition: 0.2s;
+    outline: none;
+
+    &:hover {
+        background-color: $inputForegroundColor;
+        box-shadow: 0 0 4px 2px $borderColor;
+    }
+
+    &:active {
+        filter: brightness(0.8);
+        transform: scale(0.99);
+        box-shadow: 0 0 4px 2px $accentColor;
+    }
+
+    &:focus-within {
+        box-shadow: 0 0 4px 2px $activeColor;
+    }
+
+    .valuelabel {
+        padding: 0 4px;
+        height: 40px;
+        line-height: 40px;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .selector {
+        position: absolute;
+        background-color: $inputBackgroundColor;
+        border: 1px solid $darkBorder;
+        border-radius: 4px;
+        padding: 4px;
+        box-sizing: border-box;
+        width: 100%;
+        outline: none;
+        z-index: 100;
+        opacity: 0;
+
+        div {
+            transition: 0.2s;
+            margin: 4px 0;
+            padding: 4px;
+
+            &:hover {
+                background-color: $accentColor;
+            }
+        }
+    }
+
+    .inactive {
+        pointer-events: none;
+        opacity: 0;
+    }
+}
