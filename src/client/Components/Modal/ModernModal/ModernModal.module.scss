@@ -8,7 +8,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     opacity: 0;
@@ -29,7 +29,7 @@
     .modal {
         height: 50%;
         width: 50%;
-        min-height: 240px;
+        min-height: 280px;
         min-width: 480px;
         background-color: $mainBackgroundColor;
         box-shadow: 0 0 4px 1px $borderColor;
