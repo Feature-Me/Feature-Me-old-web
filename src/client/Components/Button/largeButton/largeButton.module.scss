@@ -10,7 +10,7 @@
     background-color: transparent;
     background-image: linear-gradient(to right, $inputBackgroundColor, $transparent-bg);
     border-radius: 4px;
-    border: 1px solid $secondaryText;
+    border: 1px solid $darkBorder;
     display: flex;
     align-items: center;
     transition: 0.2s;
