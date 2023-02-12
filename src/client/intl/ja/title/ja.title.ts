@@ -2,6 +2,7 @@ const JATitleTranslation = {
     "language": "日本語-JA",
     "terms": "利用規約",
     "read": "読む",
+    "needReload":"ゲームを開始するには再起動が必要です。",
     "settings": {
         "title": "設定",
         "close": "閉じる",
