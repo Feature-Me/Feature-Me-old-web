@@ -15,15 +15,15 @@ const GradientButton: solid.Component<buttonPropsType> = (props) => {
     solid.createEffect(() => {
     })
 
-    function setHoverAction(active: boolean) {
-
+    function vibration() {
+        navigator.vibrate(50);
     }
 
     const buttonProps = props;
     delete buttonProps.accentColor;
 
     return (
-        <button tabIndex={0} ref={buttonRef} {...buttonProps} class={`${style.gradientButton} ${props.class || ""}`} >
+        <button tabIndex={0} ref={buttonRef} onClick={vibration} {...buttonProps} class={`${style.gradientButton} ${props.class || ""}`} >
             {props.children}
         </button>
     )
