@@ -13,9 +13,13 @@ input,
 textarea,
 button,
 label {
+    all: unset;
+    box-sizing: border-box;
+    max-width: 100%;
     cursor: inherit;
     outline: none;
     @include font-body;
+    @include font-size;
     color: $textColor;
     background-color: transparent;
     border: none;
