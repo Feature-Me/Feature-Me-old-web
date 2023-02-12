@@ -14,8 +14,12 @@ const LargeButton: solid.Component<buttonPropsType> = (props) => {
     const buttonProps = props;
     delete buttonProps.accentColor;
 
+    function vibration() {
+        navigator.vibrate(50);
+    }
+
     return (
-        <button tabIndex={0} ref={buttonRef} {...buttonProps} class={`${style.largeButton} ${props.class || ""}`}>
+        <button tabIndex={0} ref={buttonRef} onClick={vibration} {...buttonProps} class={`${style.largeButton} ${props.class || ""}`}>
             <h2>{props.children}</h2>
         </button>
     )
