@@ -8,6 +8,7 @@ const JATitleTranslation = {
         "selectLanguage": "言語",
         "delete": "削除",
         "clear": "すべてのデータを削除",
+        "export":"設定を書き出す"
     }
 }
 
