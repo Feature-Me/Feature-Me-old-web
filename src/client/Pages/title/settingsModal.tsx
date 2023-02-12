@@ -19,7 +19,11 @@ const SettingsModal: solid.Component = (props) => {
     ]
 
     return (
-        <ModernModal title={t("title.settings.title").toString()} show={showModal()} interactions={[{ label: t("title.settings.close").toString(), onClick: () => setShowModal(false) }]} onClickBackground={() => setShowModal(false)} >
+        <ModernModal
+            title={t("title.settings.title").toString()}
+            show={showModal()}
+            interactions={[{ label: t("title.settings.close").toString(), onClick: () => setShowModal(false) }]}
+            onClickBackground={() => setShowModal(false)} >
             <div class={style.settingsWindowInner}>
                 <SelectBox class={style.lngSettings} contents={languages} value={languages[0]} />
                 <LargeButton><TranslateText content="title.settings.export" /></LargeButton>
