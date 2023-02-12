@@ -24,13 +24,6 @@
         column-gap: 16px;
     }
 
-    button {
-        transform: scale(1.1);
-        &:active{
-            transform: scale(1.08);
-        }
-    }
-
 }
 
 .cautionCard {

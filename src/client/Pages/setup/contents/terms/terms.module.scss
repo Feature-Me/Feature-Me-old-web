@@ -37,7 +37,6 @@
         }
 
         &:active {
-            transform: scale(1.1);
             box-shadow: none;
             background-color: transparent;
         }
@@ -70,14 +69,6 @@
                 outline: none;
                 box-shadow: 0 0 4px 1px darkorange;
             }
-        }
-    }
-
-    button {
-        transform: scale(1.1);
-
-        &:active {
-            transform: scale(1.08);
         }
     }
 }
