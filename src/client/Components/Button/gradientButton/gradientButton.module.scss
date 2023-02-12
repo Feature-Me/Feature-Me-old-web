@@ -1,7 +1,7 @@
 @import "../../../App/mixin.scss";
 
 .gradientButton {
-    display: inline-block;
+    display: flex;
     appearance: none;
     text-align: center;
     background-color: transparent;
@@ -11,6 +11,8 @@
     border-radius: 4px;
     padding: 4px;
     min-height: 32px;
+    align-items: center;
+    justify-content: center;
     outline: none;
     border: none;
     color: $textColor;
