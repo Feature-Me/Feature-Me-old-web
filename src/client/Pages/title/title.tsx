@@ -9,7 +9,7 @@ import TranslateText from "Components/TranslateText/TranslateText";
 import { showModal, setShowModal, canBegin } from "./titleState";
 
 import { useI18n } from "intl/intlContext";
-import SettingsModal from "./settingsModal";
+import SettingsModal from "./settingsModal/settingsModal";
 
 import version from "Assets/StaticInfo/version.json";
 
@@ -61,7 +61,7 @@ const Title: solid.Component = () => {
                         <BsArrowUpLeft />
                         Exit
                     </button>
-                    <solid.Show when={canBegin()} fallback={<button><TranslateText content="title.needReload"/></button>}>
+                    <solid.Show when={canBegin()} fallback={<button><TranslateText content="title.needReload" /></button>}>
                         <button data-color="#149610" onClick={navigateHome}>
                             <BsArrowUp />
                             Begin
