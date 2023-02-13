@@ -17,9 +17,6 @@ module.exports = {
     target: "web",
     module: {
         rules: [
-            /* { test: /\.tsx?$/, loader: 'ts-loader' },
-            { test: /\.ts?$/, loader: 'ts-loader' },
-            { test: /\.jsx?$/, loader: 'babel-loader' }, */
             {
                 test: /\.(js[x]?|ts[x]?)$/, loader: 'babel-loader',
                 options: {
@@ -58,9 +55,6 @@ module.exports = {
             { test: /\.(ttf|TTF|otf|OTF)$/, type: "asset/inline" },
             { test: /\.svg$/, type: "asset/inline" },
             { test: /\.mp3$/, type: "asset/inline" },
-
-            //{ test: /\.json$/, loader: 'json-loader' },
-
         ]
     }
 }
