@@ -25,10 +25,6 @@ function exportLocalStorage() {
         exportData.data[element] = JSON.parse(localStorage.getItem(element) || "{}");
     }
 
-    console.log(JSON.stringify(exportData));
-
-
-
     return JSON.stringify(exportData);
 }
 
