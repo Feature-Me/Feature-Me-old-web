@@ -3,7 +3,7 @@ import * as solid from "solid-js";
 import { useI18n } from "intl/intlContext";
 import GradientButton from "Components/Button/gradientButton/gradientButton";
 import ModernModal from "Components/Modal/ModernModal/ModernModal";
-import TranslateText from "Components/TranslateText/translateText";
+import TranslateText from "Components/TranslateText/TranslateText";
 import clearStorage from "Utils/Storage/clear/clearStorage";
 import deleteDatabase from "Utils/Storage/database/deleteDatabase";
 import { deleteLocalStorage } from "Utils/Storage/LocalStorage/deleteLocalStorage";
