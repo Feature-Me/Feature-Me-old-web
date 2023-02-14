@@ -25,7 +25,7 @@ module.exports = {
                 },
             },
             {
-                test: /\.module.[s]?css$/,
+                test: /\.module\.[s]?css$/,
                 use: [
                     'style-loader',
                     {
@@ -44,7 +44,7 @@ module.exports = {
                     },
                     'postcss-loader', 'sass-loader'
                 ],
-                exclude: /\.module.[s]?css/
+                exclude: /\.module\.[s]?css/
             },
             {
                 test: /\.cur?$/,
