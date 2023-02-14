@@ -8,7 +8,7 @@ import TranslateText from "Components/TranslateText/TranslateText";
 
 import { showModal, setShowModal, canBegin } from "./titleState";
 
-import { useI18n } from "intl/intlContext";
+import { useTransContext } from "@mbarzda/solid-i18next";
 import SettingsModal from "./settingsModal/settingsModal";
 
 import version from "Assets/StaticInfo/version.json";
@@ -22,13 +22,9 @@ import style from "./title.module.scss";
 
 const Title: solid.Component = () => {
     const navigate = useNavigate();
-    const [t, intl] = useI18n();
+    const [t, intl] = useTransContext();
 
     let containerRef: HTMLDivElement | undefined;
-
-    const settingsContent = [
-        { label: t("title.settings.clear"), func: () => { } }
-    ]
 
     function closeWindow() {
         window.close();
@@ -61,7 +57,7 @@ const Title: solid.Component = () => {
                         <BsArrowUpLeft />
                         Exit
                     </button>
-                    <solid.Show when={canBegin()} fallback={<button><TranslateText content="title.needReload" /></button>}>
+                    <solid.Show when={canBegin()} fallback={<button><TranslateText key="title.needReload" /></button>}>
                         <button data-color="#149610" onClick={navigateHome}>
                             <BsArrowUp />
                             Begin
@@ -71,7 +67,7 @@ const Title: solid.Component = () => {
             </div>
             <div class={style.footer}>
                 <p>Feature Me {version.version} Mksk and Rae the Feature Me Project <br /> ©{new Date().getFullYear()} Feature Me All rights reserved.</p>
-                <span><TranslateText content="title.language" /></span>
+                <span><TranslateText key="title.language" /></span>
                 <button class={`iconWrapper ${style.settings}`} onClick={() => { setShowModal(m => !m) }}>
                     <BsGear class={style.settingsIcon} />
                 </button>

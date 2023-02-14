@@ -10,8 +10,6 @@ import SetupSettings from "./contents/settings/settings";
 
 
 const Setup: solid.Component = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
 
     solid.onCleanup(() => {
         const environment = JSON.parse(localStorage.getItem("environment") || "{initializedSettings:false}");

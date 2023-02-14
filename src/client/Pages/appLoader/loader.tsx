@@ -1,8 +1,6 @@
 import { useNavigate } from "@solidjs/router";
 import * as solid from "solid-js";
 
-import { useI18n } from "intl/intlContext";
-
 import { setRenderBackground } from "State/backgroundState";
 import GradientButton from "Components/Button/gradientButton/gradientButton";
 
@@ -16,6 +14,7 @@ import uptdateResourcesFromLoader from "./loadingFunctions/updateResources";
 import defaultUrl from "Assets/StaticInfo/defaultUrl.json";
 import style from "./loader.module.scss"
 import ModernModal from "Components/Modal/ModernModal/ModernModal";
+import { useTransContext } from "@mbarzda/solid-i18next";
 
 interface activeButtonType {
     label: solid.JSXElement
@@ -24,7 +23,7 @@ interface activeButtonType {
 
 const Loader: solid.Component = () => {
     const navigate = useNavigate();
-    const [t, intl] = useI18n();
+    const [t, intl] = useTransContext();
     const [title, setTitle] = solid.createSignal<string>("");
     const [description, setDescription] = solid.createSignal<string>("");
     const [activeInteraction, setActiveInteraction] = solid.createSignal<Array<string>>(["cancel"]);
@@ -59,8 +58,8 @@ const Loader: solid.Component = () => {
 
     function startLoading() {
         runLoaders().then(async () => {
-            setTitle(t("appLoader.done"));
-            setDescription(t("appLoader.ready"));
+            setTitle(t("appLoader.done").toString());
+            setDescription(t("appLoader.ready").toString());
             setActiveInteraction([])
             await sleep(1500);
             setFadeOut(true)
@@ -104,7 +103,7 @@ const Loader: solid.Component = () => {
             });
         } catch (err) {
             const timeout = String(err).includes("timed out");
-            setTitle(t("appLoader.failed.title"));
+            setTitle(t("appLoader.failed.title").toString());
             setDescription(`${t("appLoader.failed.description")}\n${err || ""}`);
             setActiveInteraction(["retry", "report"]);
             if (timeout) setActiveInteraction(i => [...i, "offline"]);

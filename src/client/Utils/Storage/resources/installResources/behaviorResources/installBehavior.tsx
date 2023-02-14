@@ -19,14 +19,14 @@ import { installSoundEffect } from "./installSoundEffect";
 function installBehavior(zip: JSZip) {
     return new Promise<void | Error>(async (resolve, reject) => {
         if (!zip.file("FileMap.json")) {
-            toast.error(<TranslateText content={"resourcesManager.database.notifications.installFailed"} />);
+            toast.error(<TranslateText key={"resourcesManager.database.notifications.installFailed"} />);
             resolve(new Error("FileMap.json not found"));
         }
 
         const fileMapJsonData: behaviorContentMap = json5.parse(await zip.file("FileMap.json")!.async("string"));
 
         console.log(fileMapJsonData, zip);
-        
+
         const data: behaviorAssetContents["models"] = {
             tap: await zip.file(path.normalize(fileMapJsonData.models.tap))?.async("arraybuffer") || new ArrayBuffer(0),
             damageTap: await zip.file(path.normalize(fileMapJsonData.models.damageTap))?.async("arraybuffer") || new ArrayBuffer(0),
@@ -87,14 +87,14 @@ function installBehavior(zip: JSZip) {
             const ModelStore = db.transaction(databaseInfo.behaviorStore, "readwrite").objectStore(databaseInfo.behaviorStore);
 
             const behavior = {
-                version:fileMapJsonData.version,
+                version: fileMapJsonData.version,
                 name: fileMapJsonData.name,
-                made:fileMapJsonData.made,
+                made: fileMapJsonData.made,
                 models: data,
                 soundEffect: soundEffectName || "",
                 font: fontName || "",
                 type: "3d",
-                installedAt:  Date.now()
+                installedAt: Date.now()
             }
 
             const put = ModelStore.put(behavior);

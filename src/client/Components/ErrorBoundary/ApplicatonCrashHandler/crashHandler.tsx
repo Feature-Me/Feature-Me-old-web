@@ -17,24 +17,24 @@ const CrashHandler: solid.Component<{ error: any, reset?: Function }> = (props) 
         <div class={style.errorPage}>
             <div class={style.errorPage}>
                 <div class={style.errorDetails}>
-                    <h1><TranslateText defaultValue="Game Crashed." content="crashHandler.header" /></h1>
-                    <p><TranslateText defaultValue="An Critical Error has occured." content="crashHandler.description" /></p>
+                    <h1><TranslateText defaultValue="Game Crashed." key="crashHandler.header" /></h1>
+                    <p><TranslateText defaultValue="An Critical Error has occured." key="crashHandler.description" /></p>
                     <div class={style.interaction}>
-                        <ChamferedButton onClick={() => location.reload()} > <TranslateText content="crashHandler.interaction.relaunch" /></ChamferedButton>
-                        <ChamferedButton onClick={() => window.open("https://github.com/Feature-Me/Feature-Me/issues")}><TranslateText content="crashHandler.interaction.report" /></ChamferedButton>
+                        <ChamferedButton onClick={() => location.reload()} > <TranslateText key="crashHandler.interaction.relaunch" /></ChamferedButton>
+                        <ChamferedButton onClick={() => window.open("https://github.com/Feature-Me/Feature-Me/issues")}><TranslateText key="crashHandler.interaction.report" /></ChamferedButton>
                     </div>
                     <div class={style.errorMessage}>
-                        <p><TranslateText defaultValue="Error details" content="crashHandler.details" /></p>
+                        <p><TranslateText defaultValue="Error details" key="crashHandler.details" /></p>
                         <h2>{props.error.toString()}</h2>
                         <hr />
                         <div class={style.stackTraces}>
                             <div class={style.trace}>
-                                <h2><TranslateText defaultValue="Stack Trace" content="crashHandler.stackTrace" end=":" /></h2>
+                                <h2><TranslateText defaultValue="Stack Trace" key="crashHandler.stackTrace" end=":" /></h2>
                                 <StackTrace stack={props.error?.stack || ""} isComponent={false} />
                             </div>
                             <hr />
                             <details class={style.rawTrace}>
-                                <summary><TranslateText defaultValue="View raw Error" content="crashHandler.viewRawError" /></summary>
+                                <summary><TranslateText defaultValue="View raw Error" key="crashHandler.viewRawError" /></summary>
                                 <code>
                                     {props.error?.stack}
                                 </code>

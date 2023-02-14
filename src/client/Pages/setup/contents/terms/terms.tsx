@@ -42,18 +42,18 @@ const SetupTerms: solid.Component = () => {
 
     return (
         <div class={style.terms} >
-            <h1 class="shadowTitle"><TranslateText content="terms.title" /></h1>
+            <h1 class="shadowTitle"><TranslateText key="terms.title" /></h1>
             <div class={style.contents} tabIndex={0}>
-                <p><TranslateText content="terms.content" /></p>
+                <p><TranslateText key="terms.content" /></p>
                 <hr />
                 <label class={style.termsCheck}>
                     <input type="checkbox" onChange={(e) => setAgreeTerms(Boolean(e.currentTarget.checked))} tabIndex={0} />
-                    <TranslateText content="terms.agree" />
+                    <TranslateText key="terms.agree" />
                 </label>
             </div>
             <div class={style.interactions}>
                 <GradientButton onClick={navigation} class={style.button} disabled={Boolean(timer()) || !agreeTerms()}>
-                    <TranslateText content="setup.next" end={timer() && `(${timer()})`} />
+                    <TranslateText key="setup.next" end={timer() && `(${timer()})`} />
                 </GradientButton>
             </div>
         </div>

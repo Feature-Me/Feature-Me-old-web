@@ -1,6 +1,6 @@
 import * as solid from "solid-js";
 
-import { useI18n } from "intl/intlContext";
+import { useTransContext } from "@mbarzda/solid-i18next";
 import GradientButton from "Components/Button/gradientButton/gradientButton";
 import ModernModal from "Components/Modal/ModernModal/ModernModal";
 import TranslateText from "Components/TranslateText/TranslateText";
@@ -9,25 +9,25 @@ import deleteDatabase from "Utils/Storage/database/deleteDatabase";
 import { deleteLocalStorage } from "Utils/Storage/LocalStorage/deleteLocalStorage";
 import { showDeleteSettingsModal, setShowDeleteSettingsModal, setCanBegin } from "../titleState";
 
-const TitleDeleteModal:solid.Component = () => {
+const TitleDeleteModal: solid.Component = () => {
 
-    const [t,intl]= useI18n();
+    const [t, intl] = useTransContext();
 
     function deleteData(func: Function) {
         func();
         setCanBegin(false);
     }
 
-    return(
+    return (
         <ModernModal
             title={t("title.settings.deleteDataModal.title").toString()}
             show={showDeleteSettingsModal()}
             onClickBackground={() => setShowDeleteSettingsModal(false)}
             interactions={[{ label: t("title.settings.deleteDataModal.cancel").toString(), onClick: () => setShowDeleteSettingsModal(false) }]} >
-            <TranslateText content="title.settings.deleteDataModal.description" />
-            <GradientButton onClick={() => deleteData(deleteLocalStorage)}><TranslateText content="title.settings.deleteDataModal.saveData" /></GradientButton>
-            <GradientButton onClick={() => deleteData(deleteDatabase)}><TranslateText content="title.settings.deleteDataModal.resources" /></GradientButton>
-            <GradientButton onClick={() => deleteData(clearStorage)}><TranslateText content="title.settings.deleteDataModal.all" /></GradientButton>
+            <TranslateText key="title.settings.deleteDataModal.description" />
+            <GradientButton onClick={() => deleteData(deleteLocalStorage)}><TranslateText key="title.settings.deleteDataModal.saveData" /></GradientButton>
+            <GradientButton onClick={() => deleteData(deleteDatabase)}><TranslateText key="title.settings.deleteDataModal.resources" /></GradientButton>
+            <GradientButton onClick={() => deleteData(clearStorage)}><TranslateText key="title.settings.deleteDataModal.all" /></GradientButton>
         </ModernModal>
     )
 }

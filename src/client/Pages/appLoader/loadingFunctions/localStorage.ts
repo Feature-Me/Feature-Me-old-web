@@ -6,12 +6,12 @@ import initDatabase from "Utils/Storage/database/initDatabase";
 function initStorageFromLoader(setTitle: Setter<string>, setDescription: Setter<string>) {
     return new Promise<void>(async (resolve, reject) => {
         try {
-            setTitle(i18next.t("appLoader.storage.title"));
+            setTitle(i18next.t("appLoader.storage.title").toString());
 
-            setDescription(i18next.t("appLoader.storage.localStorage"));
+            setDescription(i18next.t("appLoader.storage.localStorage").toString());
             initLocalStorage();
 
-            setDescription(i18next.t("appLoader.storage.database"));
+            setDescription(i18next.t("appLoader.storage.database").toString());
             initDatabase().then(resolve).catch(reject);
 
         } catch (error) {

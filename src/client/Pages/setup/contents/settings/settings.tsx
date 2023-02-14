@@ -26,7 +26,7 @@ const SetupSettings: solid.Component = () => {
 
     return (
         <div class={style.settings} classList={{ blackOut: fadeOut() }}>
-            <h1 class="shadowTitle"><TranslateText content="setup.settings" /></h1>
+            <h1 class="shadowTitle"><TranslateText key="setup.settings" /></h1>
             <hr />
             <div class={style.contents}>
 
@@ -34,7 +34,7 @@ const SetupSettings: solid.Component = () => {
             <hr />
             <div class={style.interactions}>
                 <GradientButton onClick={navigation} class={style.button}>
-                    <TranslateText content="setup.next" />
+                    <TranslateText key="setup.next" />
                 </GradientButton>
             </div>
         </div>

@@ -14,19 +14,19 @@ const ErrorModal: solid.Component<{ message: string }> = (props) => {
         <div class={style.modal} classList={{ hide: !show() }}>
             <div class={style.inner}>
                 <div class={style.titleBar}>
-                    <p><TranslateText defaultValue="Game Crashed!" content="crashHandler.title" /></p>
+                    <p><TranslateText defaultValue="Game Crashed!" key="crashHandler.title" /></p>
                     <div class={style.closebtn}>
                     </div>
                 </div>
-                <h2><TranslateText defaultValue="Game Crashed!" content="crashHandler.header" /></h2>
+                <h2><TranslateText defaultValue="Game Crashed!" key="crashHandler.header" /></h2>
                 <p>
-                    <TranslateText content="crashHandler.modal.description" /> <br />
+                    <TranslateText key="crashHandler.modal.description" /> <br />
                     <code>{props.message}</code>
                 </p>
                 <div class={style.interaction}>
                     <ChamferedButton onClick={() => setShow(false)}>OK</ChamferedButton>
-                    <ChamferedButton onClick={() => location.reload()} > <TranslateText content="crashHandler.interaction.relaunch" /></ChamferedButton>
-                    <ChamferedButton onClick={() => window.open("https://github.com/Feature-Me/Feature-Me/issues")}><TranslateText content="crashHandler.interaction.report" /></ChamferedButton>
+                    <ChamferedButton onClick={() => location.reload()} > <TranslateText key="crashHandler.interaction.relaunch" /></ChamferedButton>
+                    <ChamferedButton onClick={() => window.open("https://github.com/Feature-Me/Feature-Me/issues")}><TranslateText key="crashHandler.interaction.report" /></ChamferedButton>
                 </div>
             </div>
         </div>

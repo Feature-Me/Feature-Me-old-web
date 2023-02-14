@@ -4,12 +4,12 @@ import style from "./import.module.scss"
 import TranslateText from "Components/TranslateText/TranslateText";
 import GradientButton from "Components/Button/gradientButton/gradientButton";
 import { useNavigate } from "@solidjs/router";
-import { useI18n } from "intl/intlContext";
+import { useTransContext } from "@mbarzda/solid-i18next";
 import LargeButton from "Components/Button/largeButton/largeButton";
 
 const SetupImportConfig: solid.Component = () => {
     const navigate = useNavigate();
-    const [t, intl] = useI18n();
+    const [t, intl] = useTransContext();
 
     const imports = [
         { label: "Feature Me Alpha (.fmcfg)", func: () => { } },
@@ -28,8 +28,8 @@ const SetupImportConfig: solid.Component = () => {
 
     return (
         <div class={style.import} >
-            <h1 class="shadowTitle"><TranslateText content="setup.import.title" /></h1>
-            <p><TranslateText content="setup.import.description" /></p>
+            <h1 class="shadowTitle"><TranslateText key="setup.import.title" /></h1>
+            <p><TranslateText key="setup.import.description" /></p>
             <solid.For each={imports}>
                 {
                     data => (

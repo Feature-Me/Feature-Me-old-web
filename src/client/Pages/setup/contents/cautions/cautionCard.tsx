@@ -12,7 +12,7 @@ const SetupCautionCard: solid.Component<{ icon: solid.JSXElement, textKey: strin
                 {props.icon}
             </div>
             <p>
-                <TranslateText content={`setup.caution.cards.${props.textKey}`} />
+                <TranslateText key={`setup.caution.cards.${props.textKey}`} />
             </p>
         </div>
     )

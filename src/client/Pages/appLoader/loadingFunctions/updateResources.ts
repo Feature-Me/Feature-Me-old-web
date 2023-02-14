@@ -27,8 +27,8 @@ function uptdateResourcesFromLoader(setTitle: solid.Setter<string>, setDescripti
             { key: "behavior", func: () => { } },
             { key: "music", func: () => { } }
         ]
-        setTitle(i18next.t("appLoader.resources.title"));
-        setDescription(i18next.t("appLoader.resources.fetchUpdate"));
+        setTitle(i18next.t("appLoader.resources.title").toString());
+        setDescription(i18next.t("appLoader.resources.fetchUpdate").toString());
         const versionMap = await fetchResourcesUpdate();
         versionMapInfo = getVersionMapInfo(versionMap);
         console.log(versionMapInfo);
