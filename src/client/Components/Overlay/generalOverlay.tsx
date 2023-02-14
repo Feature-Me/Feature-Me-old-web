@@ -1,6 +1,6 @@
 import * as solid from "solid-js";
 import { offlineMode } from "State/network/offlineMode";
-import { useI18n } from "intl/intlContext";
+import { useTransContext } from "@mbarzda/solid-i18next";
 import { useLocation } from "@solidjs/router";
 import path from "path-browserify";
 
@@ -12,7 +12,7 @@ import style from "./generalOverlay.module.scss";
 const GeneralOverlay: solid.Component = () => {
     const [showOverlay, setShowOverlay] = solid.createSignal(false);
     const location = useLocation();
-    const [_, intl] = useI18n()
+    const [_, intl] = useTransContext()
     const [screen, setScreen] = solid.createSignal([0, 0]);
     const [mouse, setMouse] = solid.createSignal([0, 0]);
 
@@ -49,15 +49,15 @@ const GeneralOverlay: solid.Component = () => {
             <solid.Show when={showOverlay()} ><p>Feature Me Debug Overlay (Press F1 to toggle)</p></solid.Show>
             <solid.Show when={offlineMode()}><p>Offline Mode</p></solid.Show>
             <solid.Show when={showOverlay()}>
-                <p>{solid.DEV ? "Development Build":"Production Build"}</p>
+                <p>{solid.DEV ? "Development Build" : "Production Build"}</p>
                 <p>Version : {version.version}</p>
                 <p>URL {path.join(window.location.href, location.pathname)}</p>
                 <p>Session Started : {new Date().toLocaleString()}</p>
                 <p>Network Status : {String(navigator.onLine)}</p>
                 <p>Service Worker Status : {navigator.serviceWorker.controller?.state}</p>
                 <p>Device languages : {navigator.languages.toString()}</p>
-                <p>Avaliable languages : {intl.languages.toString()}</p>
-                <p>Selected languages : {intl.language}</p>
+                <p>Avaliable languages : {intl.getI18next().languages.toString()}</p>
+                <p>Selected languages : {intl.getI18next().language}</p>
                 <p>Page Resolution : {screen()[0]} x {screen()[1]}</p>
                 <p>Aspect ratio : {screen()[0] / screen()[1]}</p>
                 <p>Mouse Position : ({mouse()[0]} , {mouse()[1]}) </p>
