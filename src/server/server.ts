@@ -122,6 +122,7 @@ app.use("/scripts", express.static(scriptsdir));
 app.use("/resources/background", express.static(path.join(resourcesdir, "Backgrounds")));
 app.use("/resources/behavior", express.static(path.join(resourcesdir, "Behaviors")));
 app.use("/resources/music", express.static(path.join(resourcesdir, "MusicResources")));
+app.use("/resources/sfx", express.static(path.join(resourcesdir, "SoundEffects")));
 app.use("/images", express.static(imagedir));
 
 app.get("/favicon", (req, res) => {
@@ -139,45 +140,33 @@ app.get("/", (req, res) => {
 
 
 app.get("/update/map", (req, res) => {
-    const modelUrl = "/resources/background/"
-    const behaviorUrl = "/resources/behavior/"
-    const musicUrl = "/resources/music/"
 
-    const model: { [key: string]: { url: string, size: number, hash: string } } = {}
-    const behavior: { [key: string]: { url: string, size: number, hash: string } } = {}
-    const music: { [key: string]: { url: string, size: number, hash: string } } = {}
-    fs.readdirSync(path.join(resourcesdir, "Backgrounds")).forEach(file => {
-        if (file.endsWith(".fmbg")) {
-            model[file.replace(".fmbg", "")] = {
-                url: modelUrl + file,
-                size: fs.statSync(path.join(resourcesdir, "Backgrounds", file)).size,
-                hash: crypto.createHash("sha256").update(fs.readFileSync(path.join(resourcesdir, "Backgrounds", file))).digest("hex")
+    
+
+    const keys: keyType = [
+        { name: "background", path: "Backgrounds", ext: ".fmbg", url: "/resources/background/", ref: {} },
+        { name: "behavior", path: "Behaviors", ext: ".fmbh", url: "/resources/behavior/", ref: {} },
+        { name: "music", path: "MusicResources", ext: ".fmmc", url: "/resources/music/", ref: {} },
+        { name: "sfx", path: "SoundEffects", ext: ".fmsf", url: "/resources/sfx/", ref: {} },
+    ]
+
+    const data: { [key: string]: refType } = {};
+
+    for (const key of keys) {
+        fs.readdirSync(path.join(resourcesdir, key.path)).forEach(file => {
+            if (file.endsWith(key.ext)) {
+                key.ref[file.replace(key.ext, "")] = {
+                    url: key.url + file,
+                    size: fs.statSync(path.join(resourcesdir, key.path, file)).size,
+                    hash: crypto.createHash("sha256").update(fs.readFileSync(path.join(resourcesdir, key.path, file))).digest("hex"),
+                }
             }
-        }
-    });
-    fs.readdirSync(path.join(resourcesdir, "Behaviors")).forEach(file => {
-        if (file.endsWith(".fmbh")) {
-            behavior[file.replace(".fmbh", "")] = {
-                url: behaviorUrl + file,
-                size: fs.statSync(path.join(resourcesdir, "Behaviors", file)).size,
-                hash: crypto.createHash("sha256").update(fs.readFileSync(path.join(resourcesdir, "Behaviors", file))).digest("hex")
-            }
-        }
-    });
-    fs.readdirSync(path.join(resourcesdir, "MusicResources")).forEach(file => {
-        if (file.endsWith(".fmmc")) {
-            music[file.replace(".fmmc", "")] = {
-                url: musicUrl + file,
-                size: fs.statSync(path.join(resourcesdir, "MusicResources", file)).size,
-                hash: crypto.createHash("sha256").update(fs.readFileSync(path.join(resourcesdir, "MusicResources", file))).digest("hex")
-            }
-        }
-    });
-    res.json({
-        background: model,
-        behavior: behavior,
-        music: music
-    })
+        });
+        data[key.name] = key.ref;
+    }
+
+    res.json(data);
+
 })
 
 
