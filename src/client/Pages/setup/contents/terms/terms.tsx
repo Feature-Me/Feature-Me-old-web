@@ -4,6 +4,10 @@ import style from "./terms.module.scss"
 import TranslateText from "Components/TranslateText/TranslateText";
 import GradientButton from "Components/Button/gradientButton/gradientButton";
 import { useNavigate } from "@solidjs/router";
+import playAudio from "Utils/PlayAudio/playAudio";
+
+import clickSound from "Assets/Sounds/uiFallBack/clickDown.m4a";
+import cancelSound from "Assets/Sounds/uiFallBack/cancel.m4a";
 
 
 const SetupTerms: solid.Component = () => {
@@ -17,6 +21,12 @@ const SetupTerms: solid.Component = () => {
     function navigation() {
         if (timer() !== 0) return;
         navigate("../import")
+    }
+
+    function handleChagneCheckBox(e: Event & { currentTarget: HTMLInputElement, target: Element }) {
+        setAgreeTerms(Boolean(e.currentTarget.checked));
+        if (e.currentTarget.checked) playAudio(clickSound);
+        else playAudio(cancelSound);
     }
 
 
@@ -47,7 +57,7 @@ const SetupTerms: solid.Component = () => {
                 <p><TranslateText key="terms.content" /></p>
                 <hr />
                 <label class={style.termsCheck}>
-                    <input type="checkbox" onChange={(e) => setAgreeTerms(Boolean(e.currentTarget.checked))} tabIndex={0} />
+                    <input type="checkbox" onChange={(e) => handleChagneCheckBox(e)} tabIndex={0} />
                     <TranslateText key="terms.agree" />
                 </label>
             </div>
