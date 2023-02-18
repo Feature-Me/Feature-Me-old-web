@@ -7,6 +7,7 @@ import SetupCautions from "./contents/cautions/cautions";
 import SetupTerms from "./contents/terms/terms";
 import SetupImportConfig from "./contents/import/import";
 import SetupSettings from "./contents/settings/settings";
+import SetupSetName from "./contents/setName/setName";
 
 
 const Setup: solid.Component = () => {
@@ -24,6 +25,7 @@ const Setup: solid.Component = () => {
                 <Route path={"/caution"} element={<SetupCautions />} />
                 <Route path={"/terms"} element={<SetupTerms />} />
                 <Route path={"/import"} element={<SetupImportConfig />} />
+                <Route path={"/setname"} element={<SetupSetName />} />
                 <Route path={"/settings"} element={<SetupSettings />} />
             </Routes>
         </div>

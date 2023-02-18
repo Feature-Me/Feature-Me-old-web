@@ -19,7 +19,7 @@ const SetupImportConfig: solid.Component = () => {
     ]
 
     function navigation() {
-        navigate("../settings");
+        navigate("../setname");
     }
 
     function importFile(callback: Function) {
