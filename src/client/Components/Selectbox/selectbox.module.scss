@@ -51,10 +51,12 @@
         z-index: 100;
         opacity: 0;
 
-        div {
+        .option {
+            display: block;
             transition: 0.2s;
             margin: 4px 0;
             padding: 4px;
+            width: 100%;
 
             &:hover {
                 background-color: $accentColor;
