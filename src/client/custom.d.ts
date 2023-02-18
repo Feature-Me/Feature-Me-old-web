@@ -5,6 +5,8 @@ declare module "*.gif";
 declare module "*.svg";
 declare module "*.ico";
 declare module "*.mp3";
+declare module "*.mp4";
+declare module "*.m4a";
 declare module '*.scss' {
     const exports: {
         [exportName: string]: string
