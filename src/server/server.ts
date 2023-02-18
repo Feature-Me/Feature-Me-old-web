@@ -141,13 +141,13 @@ app.get("/", (req, res) => {
 
 app.get("/update/map", (req, res) => {
 
-    
+
 
     const keys: keyType = [
         { name: "background", path: "Backgrounds", ext: ".fmbg", url: "/resources/background/", ref: {} },
         { name: "behavior", path: "Behaviors", ext: ".fmbh", url: "/resources/behavior/", ref: {} },
         { name: "music", path: "MusicResources", ext: ".fmmc", url: "/resources/music/", ref: {} },
-        { name: "sfx", path: "SoundEffects", ext: ".fmsf", url: "/resources/sfx/", ref: {} },
+        { name: "soundEffect", path: "SoundEffects", ext: ".fmsf", url: "/resources/sfx/", ref: {} },
     ]
 
     const data: { [key: string]: refType } = {};
