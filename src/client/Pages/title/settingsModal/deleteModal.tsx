@@ -20,8 +20,9 @@ const TitleDeleteModal: solid.Component = () => {
 
     return (
         <ModernModal
-            title={t("title.settings.deleteDataModal.title").toString()}
+            muted
             show={showDeleteSettingsModal()}
+            title={t("title.settings.deleteDataModal.title").toString()}
             onClickBackground={() => setShowDeleteSettingsModal(false)}
             interactions={[{ label: t("title.settings.deleteDataModal.cancel").toString(), onClick: () => setShowDeleteSettingsModal(false) }]} >
             <TranslateText key="title.settings.deleteDataModal.description" />

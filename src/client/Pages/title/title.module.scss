@@ -55,6 +55,7 @@
                     top: 100%;
                     transform: perspective(1em) rotateX(25deg) scaleY(0.35);
                     filter: blur(1em);
+                    pointer-events: none;
                 }
 
                 &:hover,

@@ -7,8 +7,11 @@ import TitleDeleteModal from "./deleteModal";
 import SelectBox from "Components/Selectbox/selectbox";
 import downloadLocalStorage from "Utils/Export/localStorage/downloadLocalStorage";
 import { useTransContext } from "@mbarzda/solid-i18next";
+import playAudio from "Utils/PlayAudio/playAudio";
 
 import style from "../title.module.scss";
+
+import openModal from "Assets/Sounds/uiFallBack/openModal.m4a";
 
 
 const SettingsModal: solid.Component = (props) => {
@@ -21,8 +24,13 @@ const SettingsModal: solid.Component = (props) => {
         { label: "Language : EN(US) - English(United States)", value: "en_us" },
     ]
 
+    solid.createEffect(() => {
+        if (showModal()) playAudio(openModal);
+    })
+
     return (
         <ModernModal
+            muted
             title={t("title.settings.title").toString()}
             show={showModal()}
             interactions={[{ label: t("title.settings.close").toString(), onClick: () => setShowModal(false) }]}
