@@ -1,0 +1,16 @@
+{
+    "version": "1.0.0",
+    "type": "SoundEffect",
+    "title": "Feature Me",
+    "made": "official",
+    "readonly": true,
+    "files": {
+        "select": "select.mp3",
+        "click": "clickDown.mp3",
+        "cancel": "cancel.mp3",
+        "openModal": "openModal.mp3",
+        "closeModal": "closeModal.mp3",
+        "start": "start.mp3"
+    },
+    "license": "2022 Mksk and Rae the Feature Me Project. All rights reserved."
+}

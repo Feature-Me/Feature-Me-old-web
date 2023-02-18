@@ -1,0 +1,10 @@
+{
+    "version": "1.0.0",
+    "type": "InterfaceSoundEffect",
+    "packageName": "UI SFX Resources Ver.1.0.0",
+    "add": [
+        "Feature Me"
+    ],
+    "modify": [],
+    "delete": []
+}
