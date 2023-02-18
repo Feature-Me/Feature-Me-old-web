@@ -1,0 +1,27 @@
+@import "../../../../App/mixin.scss";
+
+.setName {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-rows: 64px 1fr;
+    row-gap: 8px;
+    min-height: 0;
+    overflow: auto;
+
+    .content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media screen and (max-height:540px) {
+        grid-template-columns: repeat(2, 1fr);
+        align-items: end;
+        justify-items: stretch;
+
+        button {
+            width: initial !important;
+        }
+    }
+}
