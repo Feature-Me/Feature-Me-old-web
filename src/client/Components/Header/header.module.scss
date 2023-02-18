@@ -1,0 +1,40 @@
+@import "../../App/mixin.scss";
+
+.header {
+    padding: 0 16px;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    column-gap: 8px;
+    background-image: linear-gradient(to bottom, $transparent-bg,transparent);
+
+    @media screen and (max-height:540px),
+    (max-width:640px) {
+        h1 {
+            font-size: 24px;
+        }
+    }
+
+    .icons {
+        display: grid;
+        min-width: 0;
+        height: 36px;
+        width: 100%;
+        grid-auto-flow: column;
+        grid-auto-columns: 36px;
+        column-gap: 8px;
+        overflow: auto;
+        align-items: center;
+
+        svg {
+            height: 36px;
+            width: 36px;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
