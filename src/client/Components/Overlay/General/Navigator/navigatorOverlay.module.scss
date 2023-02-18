@@ -1,0 +1,46 @@
+@import "../../../../App/mixin.scss";
+
+.navigatorOverlay {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+
+    p,
+    button {
+        display: table;
+        margin: 0;
+        background-color: $transparent-bg;
+        color: $secondaryText;
+        font-size: 0.6em;
+        padding: 2px 4px;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    input {
+        height: auto;
+        font-size: 0.6em;
+        box-shadow: 0 0 4px 0 $borderColor;
+        pointer-events: visible;
+
+        &:hover {
+            box-shadow: 0 0 4px 0 $accentColor;
+        }
+
+        &:focus-visible {
+            box-shadow: 0 0 4px 0 $activeColor;
+        }
+    }
+
+    button {
+        pointer-events: visible;
+
+        &:hover {
+            box-shadow: 0 0 4px 0 $accentColor;
+        }
+
+        &:focus-visible {
+            box-shadow: 0 0 4px 0 $activeColor;
+        }
+    }
+}
