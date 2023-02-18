@@ -1,0 +1,46 @@
+@import "../../App/mixin.scss";
+
+.home {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 64px 1fr;
+    min-height: 0;
+
+    @media screen and (max-height:540px),
+    (max-width:640px) {
+        grid-template-rows: 48px 1fr;
+    }
+}
+
+.main {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 16px;
+    min-height: 0;
+
+    .news {
+        background-color: $transparent-bg;
+    }
+
+    .modeList {
+        min-height: 0;
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        row-gap: 16px;
+        padding: 4px;
+
+        .listContent {
+            height: 48px;
+            background-color: $mainBackgroundColor;
+            border-radius: 8px;
+            box-shadow: 0 0 4px 1px $borderColor;
+        }
+    }
+}
