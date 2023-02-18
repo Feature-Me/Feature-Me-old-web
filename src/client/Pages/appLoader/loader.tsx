@@ -81,8 +81,8 @@ const Loader: solid.Component = () => {
 
     function navigation() {
         const environment = JSON.parse(localStorage.getItem("environment") || "{}");
-        if (environment.initializedSettings && !solid.DEV) navigate("/title");
-        else navigate("/setup");
+        /* if (environment.initializedSettings && !solid.DEV) */ navigate("/title");
+        /* else navigate("/setup"); */
     }
 
     async function runLoaders() {
@@ -114,7 +114,7 @@ const Loader: solid.Component = () => {
 
     return (
         <div class={style.loader} classList={{ blackOut: fadeOut() }}>
-            <ModernModal title={title()} interactions={activeButton()} show noBlur animate={"fade"} containerProps={{ style: { "background-color": "transparent" } }}>
+            <ModernModal title={title()} interactions={activeButton()} show noBlur muted animate={"fade"} containerProps={{ style: { "background-color": "transparent" } }}>
                 <p>
                     {description() || "Initializing game system"}
                 </p>
