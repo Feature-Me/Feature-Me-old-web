@@ -1,5 +1,10 @@
 @import "./mixin.scss";
 
+
+* {
+    box-sizing: border-box;
+}
+
 a {
     text-decoration: none;
     color: whitesmoke;
@@ -63,11 +68,12 @@ p {
 
 .blackOut {
     transition: 1s;
-    filter: brightness(0);
+    animation: blackOut 1s ease forwards;
 }
 
 .shadowTitle {
-    text-shadow: 0 0 4px $secondaryText;
+    text-shadow: 1px 1px 24px $secondaryText;
+    filter: drop-shadow(0 0 4px $secondaryText);
 }
 
 @keyframes fadeIn {
@@ -101,5 +107,15 @@ p {
 
     100% {
         opacity: 0;
+    }
+}
+
+@keyframes blackOut {
+    from {
+        filter: brightness(1);
+    }
+
+    to {
+        filter: brightness(0);
     }
 }

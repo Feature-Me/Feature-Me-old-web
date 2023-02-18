@@ -48,7 +48,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: $borderColor
+    background: $borderColor;
 }
 
 .app {
@@ -77,9 +77,4 @@ body {
         z-index: 3;
         pointer-events: none;
     }
-}
-
-
-* {
-    box-sizing: border-box;
 }
