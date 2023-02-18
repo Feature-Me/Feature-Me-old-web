@@ -21,6 +21,10 @@ const resourcesDownloaded = {
     music: {
         initialized: false,
         version: "0.0.0"
+    },
+    soundEffect: {
+        initialized: false,
+        version: "0.0.0"
     }
 }
 
