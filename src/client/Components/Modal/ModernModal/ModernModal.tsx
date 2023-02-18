@@ -1,8 +1,12 @@
 import GradientButton from "Components/Button/gradientButton/gradientButton";
 import * as solid from "solid-js";
 import { Transition } from "solid-transition-group";
+import playAudio from "Utils/PlayAudio/playAudio";
 
 import style from "./ModernModal.module.scss";
+
+import openModal from "Assets/Sounds/uiFallBack/openModal.m4a";
+import closeModal from "Assets/Sounds/uiFallBack/closeModal.m4a";
 
 interface modalProps {
     title: solid.JSXElement
@@ -12,6 +16,7 @@ interface modalProps {
     noBlur?: boolean
     animate?: boolean | "fade" | "scale"
     duration?: number
+    muted?: boolean
     containerProps?: solid.JSX.HTMLAttributes<HTMLDivElement>
     onClickBackground?: solid.JSX.EventHandler<HTMLDivElement, MouseEvent>
 }
@@ -81,8 +86,18 @@ const ModernModal: solid.Component<modalProps> = (props) => {
     solid.createEffect(() => {
         if (!containerRef) return;
         if (props.show) containerRef.classList.add(style.opaque);
-    })
 
+    });
+
+    solid.onMount(() => {
+        if (props.muted) return;
+        playAudio(openModal);
+    });
+
+    solid.onCleanup(() => {
+        if (props.muted) return;
+        playAudio(closeModal);
+    })
 
     return (
         <Transition onEnter={containerEnter} onExit={containerExit}>
