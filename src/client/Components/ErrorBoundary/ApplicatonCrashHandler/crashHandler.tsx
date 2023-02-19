@@ -1,7 +1,7 @@
 import * as solid from "solid-js";
 
 import ChamferedButton from "Components/Button/chamferedButton/chamferedButton";
-import TranslateText from "Components/TranslateText/TranslateText";
+import TranslateText from "Components/TranslateText/translateText";
 import StackTrace from "./stackTrace";
 import ErrorModal from "./errorModal";
 

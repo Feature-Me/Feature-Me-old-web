@@ -1,6 +1,5 @@
 import ChamferedButton from "Components/Button/chamferedButton/chamferedButton";
-import TranslateText from "Components/TranslateText/TranslateText";
-import { VscClose } from "react-icons/vsc";
+import TranslateText from "Components/TranslateText/translateText";
 import * as solid from "solid-js";
 
 import style from "./crashHandler.module.scss";

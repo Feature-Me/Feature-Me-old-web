@@ -1,7 +1,7 @@
 import * as solid from "solid-js";
 
 import style from "./import.module.scss"
-import TranslateText from "Components/TranslateText/TranslateText";
+import TranslateText from "Components/TranslateText/translateText";
 import GradientButton from "Components/Button/gradientButton/gradientButton";
 import { useNavigate } from "@solidjs/router";
 import { useTransContext } from "@mbarzda/solid-i18next";

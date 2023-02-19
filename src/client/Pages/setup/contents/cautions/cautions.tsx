@@ -2,7 +2,7 @@ import * as solid from "solid-js";
 import { BsChatLeftHeartFill, BsEmojiSmileFill, BsMusicNote } from "solid-icons/bs";
 
 import style from "./cautions.module.scss"
-import TranslateText from "Components/TranslateText/TranslateText";
+import TranslateText from "Components/TranslateText/translateText";
 import SetupCautionCard from "./cautionCard";
 import GradientButton from "Components/Button/gradientButton/gradientButton";
 import { useNavigate } from "@solidjs/router";

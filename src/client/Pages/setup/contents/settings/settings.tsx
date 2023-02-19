@@ -1,6 +1,6 @@
 import { useBeforeLeave, useNavigate } from "@solidjs/router";
 import GradientButton from "Components/Button/gradientButton/gradientButton";
-import TranslateText from "Components/TranslateText/TranslateText";
+import TranslateText from "Components/TranslateText/translateText";
 import * as solid from "solid-js";
 import sleep from "Utils/sleep/sleep";
 

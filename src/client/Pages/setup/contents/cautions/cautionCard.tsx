@@ -1,7 +1,7 @@
 import * as solid from "solid-js";
 
 import style from "./cautions.module.scss"
-import TranslateText from "Components/TranslateText/TranslateText";
+import TranslateText from "Components/TranslateText/translateText";
 
 
 const SetupCautionCard: solid.Component<{ icon: solid.JSXElement, textKey: string }> = (props) => {

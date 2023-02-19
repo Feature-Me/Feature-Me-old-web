@@ -6,7 +6,7 @@ import { FontObject, TTFLoader } from "three/examples/jsm/loaders/TTFLoader";
 import json5 from "json5";
 import path from "path-browserify";
 
-import TranslateText from "Components/TranslateText/TranslateText";
+import TranslateText from "Components/TranslateText/translateText";
 import databaseInfo from "Config/databaseinfo.json";
 import getMime from "Utils/getMime/getMime";
 import { installFont } from "./installFont";

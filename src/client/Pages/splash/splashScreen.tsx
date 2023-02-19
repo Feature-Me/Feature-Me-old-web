@@ -8,7 +8,7 @@ import style from "./splashScreen.module.scss";
 
 import splashImage1 from "Assets/Images/splash-logo-1.png";
 import slpashImage2 from "Assets/Images/splash-logo-2.png";
-import TranslateText from "Components/TranslateText/TranslateText";
+import TranslateText from "Components/TranslateText/translateText";
 
 const SplashScreen: solid.Component = () => {
     const navigate = useNavigate();

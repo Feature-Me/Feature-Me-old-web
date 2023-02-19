@@ -1,6 +1,6 @@
 import LargeButton from "Components/Button/largeButton/largeButton";
 import ModernModal from "Components/Modal/ModernModal/ModernModal";
-import TranslateText from "Components/TranslateText/TranslateText";
+import TranslateText from "Components/TranslateText/translateText";
 import *  as solid from "solid-js";
 import { showModal, setShowModal, showDeleteSettingsModal, setShowDeleteSettingsModal, setCanBegin } from "../titleState";
 import TitleDeleteModal from "./deleteModal";

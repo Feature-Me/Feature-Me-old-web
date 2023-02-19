@@ -1,7 +1,7 @@
 import * as solid from "solid-js";
 
 import style from "./setName.module.scss"
-import TranslateText from "Components/TranslateText/TranslateText";
+import TranslateText from "Components/TranslateText/translateText";
 import GradientButton from "Components/Button/gradientButton/gradientButton";
 import { useNavigate } from "@solidjs/router";
 import { useTransContext } from "@mbarzda/solid-i18next";
@@ -26,7 +26,7 @@ const SetupSetName: solid.Component = () => {
             <h1 class="shadowTitle"><TranslateText key="setup.setName.title" /></h1>
             <div class={style.content}>
                 <p><TranslateText key="setup.setName.description" /></p><br />
-                
+
                 <GradientButton><TranslateText key="setup.next" /></GradientButton>
             </div>
         </div>

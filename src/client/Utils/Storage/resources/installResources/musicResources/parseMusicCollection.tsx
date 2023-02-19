@@ -3,7 +3,7 @@ import React from "react";
 import json5 from "json5";
 
 import { toast } from "react-toastify";
-import TranslateText from "Components/TranslateText/TranslateText";
+import TranslateText from "Components/TranslateText/translateText";
 import { installMusic } from "./installMusic";
 
 function parseMusicCollection(zip: JSZip) {
