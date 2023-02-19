@@ -1,7 +1,7 @@
 import I18nProvider from "Components/intlProvider/intlProvider";
 import i18next from "i18next";
 import * as solid from "solid-js";
-import { Router, staticIntegration } from "@solidjs/router";
+import { Router, staticIntegration, pathIntegration } from "@solidjs/router";
 import toast, { Toaster } from "solid-toast";
 import { TransProvider, useTransContext } from "@mbarzda/solid-i18next";
 
@@ -12,11 +12,12 @@ import LanguageHelper from "Components/intlProvider/languageHelper";
 import Loading from "Components/LoadingCover/loading";
 import CrashHandler from "Components/ErrorBoundary/ApplicatonCrashHandler/crashHandler";
 import Background from "Components/Background/background";
-import GeneralOverlay from "Components/Overlay/generalOverlay";
+import GeneralOverlay from "Components/Overlay/General/generalOverlay";
 
 import style from "./App.module.scss";
 import "./style.scss";
 import i18n from "intl/intl";
+import NavigatorOverlay from "Components/Overlay/Navigator/navigatorOverlay";
 
 const App: solid.Component = () => {
     const [loaded, setLoaded] = solid.createSignal(true);
@@ -30,7 +31,7 @@ const App: solid.Component = () => {
             <solid.Show when={loaded()} fallback={<Loading />}>
                 <TransProvider options={intlConfig}>
                     {/* memory router */}
-                    <Router source={staticIntegration({ value: "" })}>
+                    <Router source={solid.DEV ? staticIntegration({ value: "" }) : pathIntegration()}>
                         <div class={style.app} onContextMenu={(e) => e.preventDefault()}>
                             <div class={style.background}>
                                 <Background />
@@ -41,6 +42,7 @@ const App: solid.Component = () => {
                             </div>
                             <div class={style.overlay}>
                                 <GeneralOverlay />
+                                <NavigatorOverlay />
                             </div>
                         </div>
                     </Router>
