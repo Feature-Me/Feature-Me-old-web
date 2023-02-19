@@ -1,9 +1,5 @@
-import { useBeforeLeave, useLocation, useNavigate } from "@solidjs/router";
 import * as solid from "solid-js";
 import { BsArrowUp, BsArrowUpLeft, BsBatteryFull, BsChatLeftDots, BsGear, BsGithub, BsGrid3x3Gap, BsLink45deg, BsVolumeUp, BsWifi } from "solid-icons/bs";
-import { useTransContext } from "@mbarzda/solid-i18next";
-
-import TranslateText from "Components/TranslateText/TranslateText";
 
 import playAudio from "Utils/PlayAudio/playAudio";
 
@@ -11,6 +7,8 @@ import style from "./header.module.scss";
 
 import clickSound from "Assets/Sounds/uiFallBack/clickDown.m4a";
 import selectSound from "Assets/Sounds/uiFallBack/select.m4a";
+import timeDegitFormat from "Utils/timeFormat/timeDigitFormat";
+import TranslateText from "Components/TranslateText/translateText";
 
 
 const HomeHeader: solid.Component = () => {
@@ -45,19 +43,16 @@ const HomeHeader: solid.Component = () => {
 
     return (
         <header class={style.header} ref={containerRef} >
-            <h1 class="shadowTitle"><TranslateText key="menu.title" /></h1>
+            <h1 class="shadowTitle">{<TranslateText key="menu.title" />}</h1>
             <div>
                 {clock().getHours().toString().padStart(2, "0")}:{clock().getMinutes()}
                 (
-                {elapsedHours().toString().padStart(2, "0")}:{elapsedMinutes().toString().padStart(2, "0")}
+                {timeDegitFormat(elapsedHours())}:{timeDegitFormat(elapsedMinutes())}
                 <TranslateText key="head.sessionTime" />
                 )
             </div>
             <div class={style.icons}>
-                <BsWifi />
-                <BsChatLeftDots />
                 <BsVolumeUp />
-                <BsBatteryFull />
                 <BsGear />
                 <BsLink45deg />
                 <BsGithub />
