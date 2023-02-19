@@ -31,7 +31,7 @@ const App: solid.Component = () => {
             <solid.Show when={loaded()} fallback={<Loading />}>
                 <TransProvider options={intlConfig}>
                     {/* memory router */}
-                    <Router source={solid.DEV ? staticIntegration({ value: "" }) : pathIntegration()}>
+                    <Router source={solid.DEV ? pathIntegration() : staticIntegration({ value: "" })}>
                         <div class={style.app} onContextMenu={(e) => e.preventDefault()}>
                             <div class={style.background}>
                                 <Background />
