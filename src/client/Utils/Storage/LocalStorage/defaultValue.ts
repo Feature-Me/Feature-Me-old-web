@@ -3,10 +3,6 @@ const enviroment: enviroment = {
     termsVersion: "0.0.0",
     termsAccepted: false,
     initializedSettings: false,
-    userData: {
-        name: "",
-        id: ""
-    }
 }
 
 const resourcesDownloaded = {
@@ -117,6 +113,13 @@ const gameConfig: gameConfig = {
     }
 }
 
+const userConfig: userConfig = {
+    userInfo: {
+        name: "Guest",
+        id: ""
+    }
+}
 
 
-export { enviroment, resourcesDownloaded, DBVersion, gameConfig, musicSelect };
+
+export { enviroment, resourcesDownloaded, DBVersion, gameConfig, musicSelect, userConfig };
