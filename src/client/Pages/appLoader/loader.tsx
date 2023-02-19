@@ -81,7 +81,7 @@ const Loader: solid.Component = () => {
 
     function navigation() {
         const environment = JSON.parse(localStorage.getItem("environment") || "{}");
-        if (environment.initializedSettings && !solid.DEV) navigate("/title");
+        if (environment.initializedSettings) navigate("/title");
         else navigate("/setup");
     }
 
