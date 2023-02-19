@@ -3,9 +3,4 @@ interface enviroment {
     termsVersion:string
     termsAccepted:boolean
     initializedSettings: boolean
-    userData:{
-        name:string
-        id:string
-    }
-
 }
