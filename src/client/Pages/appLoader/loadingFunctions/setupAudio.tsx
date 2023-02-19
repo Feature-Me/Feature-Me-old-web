@@ -1,12 +1,13 @@
 import { Setter } from "solid-js";
 import { Howler } from "howler";
+import { gameConfig } from "Utils/Storage/LocalStorage/defaultValue";
 
 function connectToWebSocket(setTitle: Setter<string>, setDescription: Setter<string>) {
     return new Promise<void>((resolve, reject) => {
         setTitle("appLoader.audio.title");
         setDescription("appLoader.audio.description")
-        const data: gameConfig = JSON.parse(localStorage.getItem("gameConfig") || "{}");
-        let volume = 1;
+        const data: gameConfig = JSON.parse(localStorage.getItem("gameConfig") || JSON.stringify(gameConfig));
+        let volume = data.audio.masterVolume || 1;
         try {
             volume = data.audio.masterVolume;
         } catch (e) {
