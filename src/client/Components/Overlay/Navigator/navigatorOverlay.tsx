@@ -47,10 +47,13 @@ const NavigatorOverlay: solid.Component = () => {
                         Go
                     </button>
                     <button onClick={() => navigate(-1)}>
-                        ←
+                        &larr;
                     </button>
                     <button onClick={() => navigate(1)}>
-                        →
+                        &rarr;
+                    </button>
+                    <button onClick={() => window.location.reload()}>
+                        ↻
                     </button>
                 </div>
                 {/* <button onClick={() => setShowOverlay(false)}>
