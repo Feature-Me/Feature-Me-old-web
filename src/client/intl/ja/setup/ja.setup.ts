@@ -12,6 +12,10 @@ const JASetupTranslation = {
         "title": "設定をインポート",
         "description": "他の作品から設定を引き継ぎます。"
     },
+    "setName":{
+        "title":"プレイヤーネームを設定",
+        "description":"ゲーム内で表示する名前を設定します。名前は後から変更できます。"
+    },
     "settings":"設定",
     "skip": "スキップ",
     "next": "続ける",
