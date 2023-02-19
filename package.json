@@ -24,6 +24,7 @@
     "@types/uuid": "^8.3.4",
     "babel-loader": "^8.2.5",
     "babel-preset-solid": "^1.6.10",
+    "clsx": "^1.2.1",
     "compare-versions": "^4.1.4",
     "css-loader": "^6.7.1",
     "dexie": "^3.2.3",
