@@ -31,6 +31,7 @@ const GeneralOverlay: solid.Component = () => {
     })
 
     function handleKey(e: KeyboardEvent) {
+        if (!e.shiftKey) return;
         if (e.key == "F1") {
             e.preventDefault();
             e.stopPropagation();
@@ -46,7 +47,7 @@ const GeneralOverlay: solid.Component = () => {
 
     return (
         <div class={style.generalOverlay}>
-            <solid.Show when={showOverlay()} ><p>Feature Me Debug Overlay (Press F1 to toggle)</p></solid.Show>
+            <solid.Show when={showOverlay()} ><p>Feature Me Debug Overlay (Press Shift + F1 to toggle)</p></solid.Show>
             <solid.Show when={offlineMode()}><p>Offline Mode</p></solid.Show>
             <solid.Show when={showOverlay()}>
                 <p>{solid.DEV ? "Development Build" : "Production Build"}</p>
