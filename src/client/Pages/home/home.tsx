@@ -3,8 +3,6 @@ import * as solid from "solid-js";
 import { BsArrowUp, BsArrowUpLeft, BsGear } from "solid-icons/bs";
 import { useTransContext } from "@mbarzda/solid-i18next";
 
-import TranslateText from "Components/TranslateText/TranslateText";
-
 import playAudio from "Utils/PlayAudio/playAudio";
 
 import style from "./home.module.scss";
@@ -16,7 +14,6 @@ import Header from "../../Components/Header/header";
 
 const Home: solid.Component = () => {
     const navigate = useNavigate();
-    const [t, intl] = useTransContext();
     const [fadeOut, setFadeOut] = solid.createSignal<boolean>(false);
 
     let containerRef: HTMLDivElement | undefined;
