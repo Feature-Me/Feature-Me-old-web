@@ -1,0 +1,31 @@
+@import "../../../App/mixin.scss";
+
+.inputContainer {
+    position: relative;
+    display: inline-block;
+
+    .input {
+        //background-color: $inputBackgroundColor;
+        background-image: linear-gradient(to right, $inputBackgroundColor, $transparent-bg);
+        box-shadow: 0 0 4px 1px $borderColor;
+        border-radius: 4px;
+        transition: 0.2s;
+
+        &:hover {
+            box-shadow: 0 0 4px 2px $accentColor;
+        }
+
+        &:focus-visible {
+            box-shadow: 0 0 4px 2px $activeColor;
+        }
+    }
+
+    .textCount.active {
+        position: absolute;
+        top: 0;
+        right: 4px;
+        color: $secondaryText;
+        background-color: $transparent-bg;
+        font-size: 0.6em;
+    }
+}
