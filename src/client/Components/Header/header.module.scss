@@ -3,17 +3,23 @@
 .header {
     padding: 0 16px;
     display: grid;
-    grid-template-columns: 1fr auto auto;
+    grid-template-columns: auto 1fr auto auto minmax(0, auto);
     height: 100%;
     width: 100%;
     align-items: center;
     column-gap: 8px;
-    background-image: linear-gradient(to bottom, $transparent-bg,transparent);
+    background-image: linear-gradient(to bottom, $transparent-bg, transparent);
 
     @media screen and (max-height:540px),
     (max-width:640px) {
         h1 {
             font-size: 24px;
+        }
+    }
+
+    @media screen and (max-width:640px) {
+        .clock {
+            display: none;
         }
     }
 
@@ -23,18 +29,39 @@
         height: 36px;
         width: 100%;
         grid-auto-flow: column;
-        grid-auto-columns: 36px;
+        grid-auto-columns: 28px;
         column-gap: 8px;
-        overflow: auto;
+        overflow-x: auto;
+        overflow-y: visible;
         align-items: center;
+        padding: 4px;
 
-        svg {
-            height: 36px;
-            width: 36px;
-            padding: 4px;
+        .icon {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            height: 28px;
+            width: 28px;
+            transition: 0.2s;
+
+            svg {
+                height: 28px;
+                width: 28px;
+                padding: 4px;
+            }
+
+            &:hover {
+                background-color: $inputBackgroundColor ;
+                box-shadow: 0 0 4px 2px $accentColor;
+            }
+
+            &:active {
+                background-color: $inputForegroundColor ;
+                filter: brightness(0.8);
+                transform: scale(0.95);
+            }
+
+            &:focus-visible {
+                box-shadow: 0 0 4px 2px $activeColor;
+            }
         }
     }
 }

@@ -2,14 +2,23 @@ import * as solid from "solid-js";
 import { BsArrowUp, BsArrowUpLeft, BsBatteryFull, BsChatLeftDots, BsGear, BsGithub, BsGrid3x3Gap, BsLink45deg, BsVolumeUp, BsWifi } from "solid-icons/bs";
 
 import playAudio from "Utils/PlayAudio/playAudio";
+import timeDegitFormat from "Utils/timeFormat/timeDigitFormat";
+import TranslateText from "Components/TranslateText/translateText";
+
+import defaultUrl from "Assets/StaticInfo/defaultUrl.json";
 
 import style from "./header.module.scss";
 
 import clickSound from "Assets/Sounds/uiFallBack/clickDown.m4a";
 import selectSound from "Assets/Sounds/uiFallBack/select.m4a";
-import timeDegitFormat from "Utils/timeFormat/timeDigitFormat";
-import TranslateText from "Components/TranslateText/translateText";
 
+declare module "solid-js" {
+    namespace JSX {
+        interface Directives {
+            headerIconModel: boolean;
+        }
+    }
+}
 
 const HomeHeader: solid.Component = () => {
     let containerRef: HTMLDivElement | undefined;
@@ -21,6 +30,16 @@ const HomeHeader: solid.Component = () => {
     const [elapsedMinutes, setElapsedMinutes] = solid.createSignal(0);
 
     let clockInterval: NodeJS.Timer;
+
+    const userName = JSON.parse(localStorage.getItem("userData") || '{"userInfo":{"name":""}}').userInfo.name
+
+    const icons = [
+        { element: <BsVolumeUp />, onClick: () => { } },
+        { element: <BsGear />, onClick: () => { } },
+        { element: <BsLink45deg />, onClick: () => { } },
+        { element: <BsGithub />, onClick: () => { open(defaultUrl.github.repo) } },
+        { element: <BsGrid3x3Gap />, onClick: () => { } },
+    ]
 
     solid.onMount(() => {
         clockInterval = setInterval(updateClock, 1000);
@@ -41,22 +60,55 @@ const HomeHeader: solid.Component = () => {
 
     }
 
+    function handleClick() {
+        playAudio(clickSound);
+        navigator.vibrate(50);
+    }
+
+    function handleHover() {
+        playAudio(selectSound);
+    }
+
+    function headerIconModel(el: HTMLButtonElement) {
+        solid.onMount(() => {
+            el.addEventListener("click", handleClick);
+            el.addEventListener("pointerenter", handleHover);
+            el.addEventListener("focusin", handleHover);
+        });
+        solid.onCleanup(() => {
+            el.removeEventListener("click", handleClick);
+            el.removeEventListener("pointerenter", handleHover);
+            el.removeEventListener("focusin", handleHover);
+        })
+    }
+
     return (
         <header class={style.header} ref={containerRef} >
             <h1 class="shadowTitle">{<TranslateText key="menu.title" />}</h1>
-            <div>
-                {clock().getHours().toString().padStart(2, "0")}:{clock().getMinutes()}
+            <div class={style.spacer} />
+
+            <div class={style.userInfo}>
+                <span>@{userName}</span>
+            </div>
+            <div class={style.clock}>
+                {timeDegitFormat(clock().getHours())}:{timeDegitFormat(clock().getMinutes())}
                 (
                 {timeDegitFormat(elapsedHours())}:{timeDegitFormat(elapsedMinutes())}
                 <TranslateText key="head.sessionTime" />
                 )
             </div>
             <div class={style.icons}>
-                <BsVolumeUp />
-                <BsGear />
-                <BsLink45deg />
-                <BsGithub />
-                <BsGrid3x3Gap />
+                <solid.For each={icons}>
+                    {
+                        content => {
+                            return (
+                                <button class={style.icon} onClick={content.onClick} use:headerIconModel>
+                                    {content.element}
+                                </button>
+                            )
+                        }
+                    }
+                </solid.For>
             </div>
         </header >
     )
