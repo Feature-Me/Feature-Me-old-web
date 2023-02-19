@@ -5,7 +5,7 @@ import { useTransContext } from "@mbarzda/solid-i18next";
 
 import GlitchImage from "Components/GlitchImage/glitchImage";
 import ModernModal from "Components/Modal/ModernModal/ModernModal";
-import TranslateText from "Components/TranslateText/TranslateText";
+import TranslateText from "Components/TranslateText/translateText";
 
 import { showModal, setShowModal, canBegin } from "./titleState";
 
