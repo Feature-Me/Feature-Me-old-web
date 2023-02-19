@@ -11,7 +11,6 @@ interface TranslateProps {
 }
 
 const TranslateText: solid.Component<TranslateProps> = (props) => {
-    const [t, intl] = useTransContext();
     return (
         <>
             {props.start || ""}
