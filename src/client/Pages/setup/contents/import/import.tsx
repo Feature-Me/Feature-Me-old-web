@@ -1,11 +1,12 @@
 import * as solid from "solid-js";
-
-import style from "./import.module.scss"
-import TranslateText from "Components/TranslateText/translateText";
-import GradientButton from "Components/Button/gradientButton/gradientButton";
 import { useNavigate } from "@solidjs/router";
 import { useTransContext } from "@mbarzda/solid-i18next";
+
+import TranslateText from "Components/TranslateText/translateText";
 import LargeButton from "Components/Button/largeButton/largeButton";
+
+import style from "./import.module.scss"
+
 
 const SetupImportConfig: solid.Component = () => {
     const navigate = useNavigate();

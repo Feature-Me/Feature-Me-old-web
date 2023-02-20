@@ -1,14 +1,15 @@
 import * as solid from "solid-js";
+import { useNavigate } from "@solidjs/router";
 
-import style from "./terms.module.scss"
 import TranslateText from "Components/TranslateText/translateText";
 import GradientButton from "Components/Button/gradientButton/gradientButton";
-import { useNavigate } from "@solidjs/router";
+
 import playAudio from "Utils/PlayAudio/playAudio";
 
 import clickSound from "Assets/Sounds/uiFallBack/clickDown.m4a";
 import cancelSound from "Assets/Sounds/uiFallBack/cancel.m4a";
 
+import style from "./terms.module.scss"
 
 const SetupTerms: solid.Component = () => {
 
