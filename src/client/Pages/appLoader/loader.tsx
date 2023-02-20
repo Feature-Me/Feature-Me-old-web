@@ -15,6 +15,8 @@ import defaultUrl from "Assets/StaticInfo/defaultUrl.json";
 import style from "./loader.module.scss"
 import ModernModal from "Components/Modal/ModernModal/ModernModal";
 import { useTransContext } from "@mbarzda/solid-i18next";
+import loadConfigFromLoader from "./loadingFunctions/loadConfig";
+import setupAudioFromLoader from "./loadingFunctions/setupAudio";
 
 interface activeButtonType {
     label: solid.JSXElement
@@ -30,7 +32,7 @@ const Loader: solid.Component = () => {
     const [fadeOut, setFadeOut] = solid.createSignal<boolean>(false);
     let rejectFunc = () => { };
 
-    const functions: Array<FunctionWithType<solid.Setter<string>>> = [initStorageFromLoader, connectToWebSocket, /* uptdateResourcesFromLoader */];
+    const functions: Array<FunctionWithType<solid.Setter<string>>> = [initStorageFromLoader, connectToWebSocket, loadConfigFromLoader, setupAudioFromLoader /* uptdateResourcesFromLoader */];
     const interactionList = [
         { type: "cancel", label: t("appLoader.cancel"), func: () => rejectFunc() },
         { type: "ok", label: t("appLoader.ok"), func: () => { } },
