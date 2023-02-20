@@ -1,8 +1,8 @@
-import { enviroment, resourcesDownloaded, DBVersion, gameConfig, musicSelect, userConfig } from "./defaultValue";
+import { environment, resourcesDownloaded, DBVersion, gameConfig, musicSelect, userConfig } from "./defaultValue";
 
 function initLocalStorage(): void {
     try {
-        localStorage.setItem("environment", JSON.stringify({ ...enviroment, ...(JSON.parse(localStorage.getItem("environment") || "{}")) }));
+        localStorage.setItem("environment", JSON.stringify({ ...environment, ...(JSON.parse(localStorage.getItem("environment") || "{}")) }));
         localStorage.setItem("resourcesDownloaded", JSON.stringify({ ...resourcesDownloaded, ...(JSON.parse(localStorage.getItem("resourcesDownloaded") || "{}")) }));
         localStorage.setItem("DBVersion", JSON.stringify({ ...DBVersion, ...(JSON.parse(localStorage.getItem("DBVersion") || "{}")) }));
         localStorage.setItem("gameConfig", JSON.stringify({ ...gameConfig, ...(JSON.parse(localStorage.getItem("gameConfig") || "{}")) }));

@@ -1,6 +1,6 @@
-interface enviroment {
+interface environment {
     language: string
-    termsVersion:string
-    termsAccepted:boolean
+    termsVersion: string
+    termsAccepted: boolean
     initializedSettings: boolean
 }

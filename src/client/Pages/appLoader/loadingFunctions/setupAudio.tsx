@@ -2,7 +2,7 @@ import { Setter } from "solid-js";
 import { Howler } from "howler";
 import { gameConfig } from "Utils/Storage/LocalStorage/defaultValue";
 
-function connectToWebSocket(setTitle: Setter<string>, setDescription: Setter<string>) {
+function setupAudioFromLoader(setTitle: Setter<string>, setDescription: Setter<string>) {
     return new Promise<void>((resolve, reject) => {
         setTitle("appLoader.audio.title");
         setDescription("appLoader.audio.description")
@@ -19,4 +19,4 @@ function connectToWebSocket(setTitle: Setter<string>, setDescription: Setter<str
     })
 }
 
-export default connectToWebSocket;
+export default setupAudioFromLoader;

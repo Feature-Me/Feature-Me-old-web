@@ -1,4 +1,4 @@
-const enviroment: enviroment = {
+const environment: environment = {
     language: navigator.language.toLowerCase().replace(/-/g, "_"),
     termsVersion: "0.0.0",
     termsAccepted: false,
@@ -122,4 +122,4 @@ const userConfig: userConfig = {
 
 
 
-export { enviroment, resourcesDownloaded, DBVersion, gameConfig, musicSelect, userConfig };
+export { environment , resourcesDownloaded, DBVersion, gameConfig, musicSelect, userConfig };
