@@ -8,4 +8,5 @@ interface wsUser {
     tag?: string
     id: string
     connection: string
+    state: "online" | "idle" | "busy" | "offline"
 }
