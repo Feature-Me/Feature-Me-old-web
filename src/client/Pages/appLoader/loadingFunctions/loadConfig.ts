@@ -1,7 +1,7 @@
 import { Setter } from "solid-js";
 import i18next from "i18next";
 import { setGameConfigStore } from "State/gameCondigStore";
-import { gameConfig } from "Utils/Storage/LocalStorage/defaultValue";
+import { getGameConfig } from "Utils/getConfig/getConfig";
 
 interface loginData extends webSocketReturnValue {
     data: wsUser
@@ -14,7 +14,7 @@ function loadConfigFromLoader(setTitle: Setter<string>, setDescription: Setter<s
             setTitle(i18next.t("appLoader.loadConfig.title").toString());
             setDescription(i18next.t("appLoader.loadConfig.connecting").toString());
 
-            const config: gameConfig = JSON.parse(localStorage.getItem("gameConfig") || JSON.stringify(gameConfig));
+            const config = getGameConfig();
 
             setGameConfigStore("data", config);
             setGameConfigStore("ready", true);

@@ -1,6 +1,7 @@
 import { useTransContext } from "@mbarzda/solid-i18next";
 import i18next from "i18next";
 import * as solid from "solid-js";
+import { getEnvironment } from "Utils/getConfig/getConfig";
 
 const LanguageHelper: solid.Component = () => {
 
@@ -10,7 +11,7 @@ const LanguageHelper: solid.Component = () => {
         console.log(`Language : ${intl.getI18next().language}`);
         console.log(`All avaliable languages : ${intl.getI18next().languages}`);
 
-        const environment = JSON.parse(localStorage.getItem("environment") || "{}");
+        const environment = getEnvironment();
         environment.language = intl.getI18next().language;
         localStorage.setItem("environment", JSON.stringify(environment));
     }

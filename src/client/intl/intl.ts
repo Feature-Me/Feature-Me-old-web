@@ -3,9 +3,10 @@ import en_uk from "./en-uk/en-uk";
 import ja from "./ja/ja"
 import zh_cn from "./zh-cn/zh-cn";
 import i18next from 'i18next';
+import { getEnvironment } from "Utils/getConfig/getConfig";
 
 
-const language: string = (localStorage.getItem("environment") && JSON.parse(localStorage.getItem("environment")!).language) || navigator.language.toLowerCase().replace(/-/g, "_");
+const language: string = (getEnvironment().language) || navigator.language.toLowerCase().replace(/-/g, "_");
 
 const intlConfig = {
     lng: language,

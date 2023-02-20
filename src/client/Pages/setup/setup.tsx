@@ -1,19 +1,20 @@
 import { Navigate, Route, Routes, useBeforeLeave, useLocation, useMatch, useNavigate } from "@solidjs/router";
 import * as solid from "solid-js";
 
-import style from "./setup.module.scss"
-import sleep from "Utils/sleep/sleep";
+import { getEnvironment } from "Utils/getConfig/getConfig";
+
 import SetupCautions from "./contents/cautions/cautions";
 import SetupTerms from "./contents/terms/terms";
 import SetupImportConfig from "./contents/import/import";
 import SetupSettings from "./contents/settings/settings";
 import SetupSetName from "./contents/setName/setName";
 
+import style from "./setup.module.scss"
 
 const Setup: solid.Component = () => {
 
     solid.onCleanup(() => {
-        const environment = JSON.parse(localStorage.getItem("environment") || "{initializedSettings:false}");
+        const environment = getEnvironment();
         environment.initializedSettings = true;
         localStorage.setItem("environment", JSON.stringify(environment));
     })
