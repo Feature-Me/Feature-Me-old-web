@@ -1,17 +1,20 @@
+import *  as solid from "solid-js";
+import { useTransContext } from "@mbarzda/solid-i18next";
+
 import LargeButton from "Components/Button/largeButton/largeButton";
 import ModernModal from "Components/Modal/ModernModal/ModernModal";
 import TranslateText from "Components/TranslateText/translateText";
-import *  as solid from "solid-js";
+import SelectBox from "Components/Selectbox/selectbox";
+
 import { showModal, setShowModal, showDeleteSettingsModal, setShowDeleteSettingsModal, setCanBegin } from "../titleState";
 import TitleDeleteModal from "./deleteModal";
-import SelectBox from "Components/Selectbox/selectbox";
+
 import downloadLocalStorage from "Utils/Export/localStorage/downloadLocalStorage";
-import { useTransContext } from "@mbarzda/solid-i18next";
 import playAudio from "Utils/PlayAudio/playAudio";
 
-import style from "../title.module.scss";
-
 import openModal from "Assets/Sounds/uiFallBack/openModal.m4a";
+
+import style from "../title.module.scss";
 
 
 const SettingsModal: solid.Component = (props) => {

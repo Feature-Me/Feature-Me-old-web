@@ -1,13 +1,16 @@
 import * as solid from "solid-js";
-
 import { useTransContext } from "@mbarzda/solid-i18next";
+
 import GradientButton from "Components/Button/gradientButton/gradientButton";
 import ModernModal from "Components/Modal/ModernModal/ModernModal";
 import TranslateText from "Components/TranslateText/translateText";
+
 import clearStorage from "Utils/Storage/clear/clearStorage";
 import deleteDatabase from "Utils/Storage/database/deleteDatabase";
 import { deleteLocalStorage } from "Utils/Storage/LocalStorage/deleteLocalStorage";
+
 import { showDeleteSettingsModal, setShowDeleteSettingsModal, setCanBegin } from "../titleState";
+
 
 const TitleDeleteModal: solid.Component = () => {
 

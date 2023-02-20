@@ -1,26 +1,23 @@
+import * as solid from "solid-js"; 
 import { useBeforeLeave, useLocation, useNavigate } from "@solidjs/router";
-import * as solid from "solid-js";
 import { BsArrowUp, BsArrowUpLeft, BsGear } from "solid-icons/bs";
 import { useTransContext } from "@mbarzda/solid-i18next";
 
 import GlitchImage from "Components/GlitchImage/glitchImage";
-import ModernModal from "Components/Modal/ModernModal/ModernModal";
 import TranslateText from "Components/TranslateText/translateText";
 
 import { showModal, setShowModal, canBegin } from "./titleState";
+import SettingsModal from "./settingsModal/settingsModal";
 
 import playAudio from "Utils/PlayAudio/playAudio";
-
-import SettingsModal from "./settingsModal/settingsModal";
 
 import version from "Assets/StaticInfo/version.json";
 
 import background from "Assets/Images/tidal_wreck_far_camera.png";
-
-import style from "./title.module.scss";
-
 import clickSound from "Assets/Sounds/uiFallBack/clickDown.m4a";
 import selectSound from "Assets/Sounds/uiFallBack/select.m4a";
+
+import style from "./title.module.scss";
 
 
 declare module "solid-js" {
