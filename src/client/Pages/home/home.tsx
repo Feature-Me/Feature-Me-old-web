@@ -31,12 +31,6 @@ const Home: solid.Component = () => {
         <div class={style.home} ref={containerRef} classList={{ blackOut: fadeOut() }}>
             <Header />
             <main class={style.main}>
-                <div class={style.news}>News</div>
-                <div class={style.modeList}>
-                    <div class={style.listContent}>
-                        Mode Name
-                    </div>
-                </div>
             </main>
         </div >
     )
