@@ -29,7 +29,7 @@ const JAtranslation = {
     multiPlay: JAMultiPlayerTranslation,
     crashHandler: JACrashHandlerTranslation,
     appLoader: JAAppLoaderTranslation,
-    setup:JASetupTranslation
+    setup: JASetupTranslation
 }
 
 export default JAtranslation;
