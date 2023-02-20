@@ -38,7 +38,8 @@ user.on("connection", (socket) => {
                     name: data.name || "Guest",
                     tag: "",
                     id: data.id || id,
-                    connection: socket.id
+                    connection: socket.id,
+                    state: "online"
                 }
             }
             users.push(user);
@@ -48,9 +49,14 @@ user.on("connection", (socket) => {
             callback({ success: false, data: undefined });
         }
     });
+    socket.on("changeState", (state: wsUser["state"], callback: Function) => {
+        if (!user) return callback({ success: false });
+        user.state = state;
+    })
     socket.on("disconnect", () => {
         const index = users.findIndex(u => u == user);
         if (index < 0) return;
+        user.state = "offline";
         users.splice(index, 1);
     })
 });
@@ -109,7 +115,6 @@ multiPlayer.on("connection", (socket) => {
 });
 
 
-
 server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
     console.log(`Node version:${process.version}`);
@@ -140,7 +145,6 @@ app.get("/", (req, res) => {
 
 
 app.get("/update/map", (req, res) => {
-
 
 
     const keys: keyType = [
