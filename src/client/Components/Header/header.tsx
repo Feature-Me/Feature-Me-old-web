@@ -11,6 +11,7 @@ import style from "./header.module.scss";
 
 import clickSound from "Assets/Sounds/uiFallBack/clickDown.m4a";
 import selectSound from "Assets/Sounds/uiFallBack/select.m4a";
+import { userData } from "State/network/webSocket/userSocker";
 
 declare module "solid-js" {
     namespace JSX {
@@ -31,7 +32,7 @@ const HomeHeader: solid.Component = () => {
 
     let clockInterval: NodeJS.Timer;
 
-    const userName = JSON.parse(localStorage.getItem("userData") || '{"userInfo":{"name":""}}').userInfo.name
+    const userInfo = userData();
 
     const icons = [
         { element: <BsVolumeUp />, onClick: () => { } },
@@ -88,7 +89,7 @@ const HomeHeader: solid.Component = () => {
             <div class={style.spacer} />
 
             <div class={style.userInfo}>
-                <span>@{userName}</span>
+                <span>@{userInfo.name}#{userInfo.tag}</span>
             </div>
             <div class={style.clock}>
                 {timeDegitFormat(clock().getHours())}:{timeDegitFormat(clock().getMinutes())}
