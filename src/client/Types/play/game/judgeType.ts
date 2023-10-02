@@ -1,1 +1,0 @@
-type judgeText = "stunning" | "glossy" | "moderate" | "lost";
