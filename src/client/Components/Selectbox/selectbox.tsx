@@ -60,6 +60,7 @@ const SelectBox: solid.Component<selectBoxPropsType> = (props) => {
 const Selector: solid.Component<selectBoxSelectorPropsType> = (props) => {
 
     let selectBoxRef: HTMLDivElement | undefined;
+    let initial = true;
 
     function enter() {
         if (!selectBoxRef) return;
@@ -81,8 +82,11 @@ const Selector: solid.Component<selectBoxSelectorPropsType> = (props) => {
 
     solid.createEffect(() => {
         if (props.isOpen) enter();
-        else exit();
-    })
+        else {
+            if (initial) initial = false;
+            else exit();
+        }
+    });
 
 
     function handleHover() {
