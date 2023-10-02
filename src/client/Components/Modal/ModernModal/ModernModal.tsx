@@ -1,12 +1,15 @@
 import GradientButton from "Components/Button/gradientButton/gradientButton";
 import * as solid from "solid-js";
 import { Transition } from "solid-transition-group";
+import clsx from "clsx";
+
 import playAudio from "Utils/PlayAudio/playAudio";
 
 import style from "./ModernModal.module.scss";
 
 import openModal from "Assets/Sounds/uiFallBack/openModal.m4a";
 import closeModal from "Assets/Sounds/uiFallBack/closeModal.m4a";
+
 
 interface modalProps {
     title: solid.JSXElement
@@ -27,9 +30,8 @@ const ModernModal: solid.Component<modalProps> = (props) => {
     let innerRef: HTMLDivElement | undefined;
 
     function containerEnter(el: Element, done: () => void) {
-        if (props.animate === false) return;
         const animation = el.animate([{ opacity: 0 }, { opacity: 1 }], {
-            duration: props.duration ?? 300,
+            duration: props.animate === false ? 0 : props.duration ?? 300,
             fill: "forwards",
             easing: "ease"
         });
@@ -37,9 +39,8 @@ const ModernModal: solid.Component<modalProps> = (props) => {
 
     }
     function containerExit(el: Element, done: () => void) {
-        if (props.animate === false) return;
         const animation = el.animate([{ opacity: 1 }, { opacity: 0 }], {
-            duration: props.duration ?? 300,
+            duration: props.animate === false ? 0 : props.duration ?? 300,
             fill: "forwards",
             easing: "ease"
         });
@@ -102,7 +103,7 @@ const ModernModal: solid.Component<modalProps> = (props) => {
     return (
         <Transition onEnter={containerEnter} onExit={containerExit}>
             <solid.Show when={props.show ?? true}>
-                <div {...props.containerProps} class={`${style.modalWrapper} ${props.noBlur && style.noBlur} ${props.containerProps?.class || ""}`} ref={containerRef} onClick={clickBackground}>
+                <div {...props.containerProps} class={clsx(style.modalWrapper, props.noBlur, props.containerProps?.class)} ref={containerRef} onClick={clickBackground}>
                     <div class={style.modal} ref={innerRef} onclick={(e) => e.stopPropagation()}>
                         <h1>{props.title}</h1>
                         <hr />
