@@ -18,7 +18,7 @@
         &:focus-visible {
             border-radius: 4px;
             outline: none;
-            box-shadow: 0 0 4px 2px darkorange;
+            box-shadow: 0 0 4px 2px $activeColor;
         }
     }
 

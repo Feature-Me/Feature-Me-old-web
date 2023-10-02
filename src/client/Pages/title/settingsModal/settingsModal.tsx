@@ -39,7 +39,7 @@ const SettingsModal: solid.Component = (props) => {
             interactions={[{ label: t("title.settings.close").toString(), onClick: () => setShowModal(false) }]}
             onClickBackground={() => setShowModal(false)} >
             <div class={style.settingsWindowInner}>
-                <SelectBox class={style.lngSettings} contents={languages} value={languages[0]} onInput={value => intl.changeLanguage(value.value)} />
+                <SelectBox class={style.lngSettings} contents={languages} value={languages.find(l => l.value == intl.getI18next().language) || languages[0]} onInput={value => intl.changeLanguage(value.value)} />
                 <LargeButton onClick={downloadLocalStorage}><TranslateText key="title.settings.export" /></LargeButton>
                 <LargeButton onClick={() => setShowDeleteSettingsModal(true)}><TranslateText key="title.settings.clear" /></LargeButton>
                 <LargeButton><TranslateText key="title.terms" /></LargeButton>
