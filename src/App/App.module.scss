@@ -1,0 +1,28 @@
+@import "../Global/Styles/mixin.scss";
+
+.app {
+    height: 100dvh;
+    width: 100vw;
+    background-color: $pageBackground;
+    color: $textColor;
+    @include font-body;
+    overflow: hidden;
+
+    .scene {
+        height: 100%;
+        width: 100%;
+
+        &>div {
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
+.enter {
+    animation: $fadeIn 0.5s ease;
+}
+
+.exit {
+    animation: $fadeOut 0.5s ease;
+}

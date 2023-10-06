@@ -1,8 +1,52 @@
-function App() {
+import { Router, hashIntegration } from "@solidjs/router"
+import AppRouter from "Global/Router/AppRouter"
+import * as solid from "solid-js"
+import { Transition } from "solid-transition-group";
+
+import TypesafeI18n from "Global/Intl/i18n-solid";
+import { loadAllLocales } from "Global/Intl/i18n-util.sync";
+import PointerTrail from "Global/Components/PointerUtils/PointerTrail/PointerTrail";
+
+import "./style.scss";
+import style from "./App.module.scss";
+
+
+const App = () => {
+
+    const [loaded, setLoaded] = solid.createSignal(false);
+
+    solid.onMount(() => {
+        loadAllLocales();
+        setLoaded(true);
+    })
+
+    function enter(el: Element, done: () => void) {
+        el.classList.add(style.enter);
+        setTimeout(done, 500);
+    }
+    function exit(el: Element, done: () => void) {
+        el.classList.add(style.exit);
+        setTimeout(done, 500);
+    }
+
     return (
-        <div class="app">
-        </div>
+        <solid.Show when={loaded()}>
+            <div class={style.app}>
+                <solid.ErrorBoundary fallback={"An error has occured"}>
+                    <TypesafeI18n locale="ja">
+                        <Router source={hashIntegration()}>
+                            <div class={style.scene}>
+                                <Transition onEnter={enter} onExit={exit}>
+                                    <AppRouter />
+                                </Transition>
+                            </div>
+                        </Router>
+                    </TypesafeI18n>
+                    <PointerTrail />
+                </solid.ErrorBoundary>
+            </div>
+        </solid.Show>
     )
 }
 
-export default App
+export default App;
