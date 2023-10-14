@@ -19,9 +19,6 @@
         "jsxImportSource": "solid-js",
         /* Linting */
         "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true,
         /*Module resolution*/
         "baseUrl": "./src"
     },
