@@ -36,9 +36,8 @@ const App = () => {
                     <TypesafeI18n locale="ja">
                         <Router source={hashIntegration()}>
                             <div class={style.scene}>
-                                <Transition onEnter={enter} onExit={exit}>
                                     <AppRouter />
-                                </Transition>
+
                             </div>
                         </Router>
                     </TypesafeI18n>
