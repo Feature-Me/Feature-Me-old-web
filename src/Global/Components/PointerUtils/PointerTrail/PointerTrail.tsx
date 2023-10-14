@@ -1,7 +1,7 @@
 import * as solid from "solid-js";
 import * as PIXI from "pixi.js";
 
-import style from "./PointerTracer.module.scss";
+import style from "./PointerTrail.module.scss";
 
 import image from "Global/Assets/Images/mouseTrail.png";
 
