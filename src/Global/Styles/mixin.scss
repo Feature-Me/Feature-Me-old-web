@@ -31,10 +31,42 @@ $fontBody: "IBM Plex Sans JP";
     }
 }
 
+@keyframes blackIn {
+    from {
+        filter: brightness(0);
+    }
+
+    to {
+        filter: brightness(1);
+    }
+}
+
+@keyframes blackOut {
+    from {
+        filter: brightness(1);
+    }
+
+    to {
+        filter: brightness(0);
+    }
+}
+
 $fadeIn: fadeIn;
 $fadeOut: fadeOut;
+$blackIn: blackIn;
+$blackOut: blackOut;
 
 //color palette
 $pageBackground: rgb(20, 20, 20);
 $textColor: rgb(240, 240, 240);
 $grayText: rgb(200, 200, 200);
+
+$shadowColor: rgb(220, 220, 220);
+
+$borderColor: rgb(220,220,220);
+
+$accentColor: rgb(64,225,239);
+
+$focusColor: rgb(231, 149, 47);
+
+$inputBackground: rgb(26, 27, 29);
