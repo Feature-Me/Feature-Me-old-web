@@ -1,6 +1,6 @@
 import * as solid from "solid-js";
 import { createMotion } from "@motionone/solid";
-import { useNavigate } from "@solidjs/router";
+import { useBeforeLeave, useNavigate } from "@solidjs/router";
 
 import { useI18nContext } from "Global/Intl/i18n-solid";
 
@@ -73,6 +73,13 @@ const Splash = () => {
             navigate("/title");
         }, 5750)
     }
+
+    useBeforeLeave(async e => {
+        e.preventDefault();        
+        containerRef?.classList.add(style.exit);
+        await sleep(500);
+        e.retry(true);
+    })
 
     return (
         <div class={style.splash} ref={containerRef} onClick={() => navigate("/title")}>

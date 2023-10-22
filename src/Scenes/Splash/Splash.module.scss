@@ -3,6 +3,10 @@
 .splash {
     background-image: linear-gradient(135deg, rgb(2, 7, 49), rgb(1, 0, 12));
 
+    &.exit {
+        animation: $blackOut 0.5s ease forwards;
+    }
+
     .title {
         height: 100%;
         width: 100%;
