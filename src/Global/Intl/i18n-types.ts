@@ -33,6 +33,18 @@ type RootTranslation = {
 				content: string
 			}
 		}
+		Title: {
+			/**
+			 * ク​リ​ッ​ク​し​て​開​始
+			 */
+			start: string
+		}
+	}
+	Global: {
+		/**
+		 * F​e​a​t​u​r​e​ ​M​e
+		 */
+		title: string
 	}
 }
 
@@ -56,6 +68,18 @@ export type TranslationFunctions = {
 				content: () => LocalizedString
 			}
 		}
+		Title: {
+			/**
+			 * クリックして開始
+			 */
+			start: () => LocalizedString
+		}
+	}
+	Global: {
+		/**
+		 * Feature Me
+		 */
+		title: () => LocalizedString
 	}
 }
 
