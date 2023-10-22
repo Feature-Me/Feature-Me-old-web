@@ -1,4 +1,4 @@
-import { Router, hashIntegration } from "@solidjs/router"
+import { Router, hashIntegration, memoryIntegration } from "@solidjs/router"
 import AppRouter from "Global/Router/AppRouter"
 import * as solid from "solid-js"
 import { Transition } from "solid-transition-group";
@@ -6,6 +6,8 @@ import { Transition } from "solid-transition-group";
 import TypesafeI18n from "Global/Intl/i18n-solid";
 import { loadAllLocales } from "Global/Intl/i18n-util.sync";
 import PointerTrail from "Global/Components/PointerUtils/PointerTrail/PointerTrail";
+
+import NavigatorOverlay from "Global/Components/DevUtils/NavigatorOverlay/NavigatorOverlay";
 
 import "./style.scss";
 import style from "./App.module.scss";
@@ -34,11 +36,11 @@ const App = () => {
             <div class={style.app}>
                 <solid.ErrorBoundary fallback={"An error has occured"}>
                     <TypesafeI18n locale="ja">
-                        <Router source={hashIntegration()}>
+                        <Router source={import.meta.env.DEV ? hashIntegration() : memoryIntegration()}>
                             <div class={style.scene}>
-                                    <AppRouter />
-
+                                <AppRouter />
                             </div>
+                            <NavigatorOverlay />
                         </Router>
                     </TypesafeI18n>
                     <PointerTrail />
