@@ -1,3 +1,97 @@
-.title{
-    
+@import "../../Global/Styles/mixin.scss";
+
+.title {
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../../Global/Assets/Images/tidal_wreck_far_camera.png");
+    background-position: center;
+
+    animation: $blackIn 0.5s ease forwards;
+
+    .text {
+        @include font-header;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+
+        h1 {
+            font-size: 3.5em;
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            margin: 0;
+            text-shadow: 0 0 8px $textColor;
+            filter: drop-shadow(0 0 4px black);
+        }
+
+        p {
+            font-size: 1.25rem;
+            position: absolute;
+            width: 100%;
+            bottom: 10%;
+            margin: 0;
+            padding: 8px 0;
+            transform: translateY(-50%);
+            background-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5), transparent);
+        }
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 8px;
+        display: grid;
+        grid-template-columns: auto 1fr repeat(2, auto);
+        align-items: center;
+        column-gap: 16px;
+
+        p {
+            color: $grayText;
+        }
+
+        button {
+            background-color: transparent;
+
+            padding: 4px;
+            height: 36px;
+            width: 36px;
+            transition: 0.2s;
+
+            svg {
+                height: 20px;
+                width: 20px;
+
+            }
+
+            &:hover,
+            &:focus-visible {
+                background-color: $inputBackground;
+                box-shadow: 0 0 4px $shadowColor;
+                outline: none;
+            }
+        }
+
+        .gear {
+            svg {
+                transition: 0.2s;
+            }
+
+            &:hover,
+            &:focus-visible {
+                svg {
+                    transform: rotate(30deg);
+                }
+            }
+        }
+    }
+
+    .canvasWrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 }
