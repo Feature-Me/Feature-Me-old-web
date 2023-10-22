@@ -13,20 +13,19 @@ const PointerTracer: solid.Component = () => {
         height: window.innerHeight,
         width: window.innerWidth,
         backgroundAlpha: 0,
-        antialias: true
+        antialias: true,
     });
     const trailTexture = PIXI.Texture.from(image);
-    const historyX: Array<number> = [];
-    const historyY: Array<number> = [];
+    let historyX: Array<number> = [];
+    let historyY: Array<number> = [];
     // historySize determines how long the trail will be.
     const historySize = 20;
     // ropeSize determines how smooth the trail will be.
     const ropeSize = 100;
-    const points: Array<PIXI.Point> = [];
+    let points: Array<PIXI.Point> = [];
     // Create the rope
     let rope;
     let mouseposition = { x: Infinity, y: Infinity };
-
 
     function initRenderer() {
         // Create history array.
@@ -98,24 +97,27 @@ const PointerTracer: solid.Component = () => {
             mouseposition.y = e.y;
         });
 
+        window.addEventListener("resize", e => {
+            app.view.width = window.innerWidth;
+            app.view.height = window.innerHeight;
+            console.log(window.innerWidth, window.innerHeight);
+            app.resize();
+        });
+
         app.ticker.add(update);
-        /* window.addEventListener("pointermove", e => {
-            if (wrapperRef) {
-                let elem = document.createElement("div");
-                elem.style.height = "2px";
-                elem.style.width = "2px";
-                elem.style.backgroundColor = "white";
-                elem.style.position = "fixed";
-                elem.style.top = e.y + "px"
-                elem.style.left = e.x + "px"
-                wrapperRef.appendChild(elem);
- 
-                setTimeout(() => {
-                    wrapperRef?.removeChild(elem)
-                }, 500)
-            }
-        }); */
     });
+
+    solid.onCleanup(() => {
+        window.removeEventListener("pointermove", e => {
+            mouseposition.x = e.x;
+            mouseposition.y = e.y;
+        });
+        window.removeEventListener("resize", e => {
+            app.view.width = window.innerWidth;
+            app.view.height = window.innerHeight;
+            app.resize();
+        })
+    })
 
     return (
         <div class={style.wrapper} ref={wrapperRef}>
